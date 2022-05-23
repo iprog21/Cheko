@@ -8,6 +8,8 @@ class DeviseCreateAdmins < ActiveRecord::Migration[6.0]
       t.string :encrypted_password, null: false, default: ""
       t.string :first_name
       t.string :last_name
+      t.integer :role
+      t.integer :status
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
