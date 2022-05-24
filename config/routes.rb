@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   namespace :admins do
     resources :homeworks, as: :collection
+    get '/', to: 'dashboard#home'
   end
 
   namespace :managers do

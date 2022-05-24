@@ -3,7 +3,7 @@
     .card 
       .card-body
         %h2 Log in
-        = form_for(resource, as: resource_name, url: admin_session_path(resource_name)) do |f|
+        = form_for(resource, as: resource_name, url: admin_session_path) do |f|
           .mb-3
             .field
               = f.label :email, class: "form-label"
