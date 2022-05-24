@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if resource.class == Admin
       stored_location_for(resource) || admins_path
+    elsif resource.class == Manager
+      stored_location_for(resource) || managers_path
+    elsif resource.class == Tutor
+      stored_location_for(resource) || tutors_path
+    elsif resource.class == User
+      stored_location_for(resource) || users_path
     else
       root_path
     end
