@@ -30,27 +30,27 @@ Rails.application.routes.draw do
   }
 
   namespace :admins do
-    resources :homeworks, as: :collection
+    resources :homeworks, only: [:index, :show, :destroy, :update], on: :collection
     get '/', to: 'dashboard#home'
   end
 
   namespace :managers do
-    resources :homeworks, as: :collection
+    resources :homeworks, only: [:index, :show, :update], on: :collection
     get '/', to: 'dashboard#home'
   end
 
   namespace :tutors do
-    resources :homeworks, as: :collection
+    resources :homeworks, only: [:index, :show, :update], on: :collection
     get '/', to: 'dashboard#home'
   end
 
   namespace :users do 
-    resources :homeworks, as: :collection
+    resources :homeworks, on: :collection
     get '/', to: 'dashboard#home'
   end
 
   namespace :accountants do 
-    resources :homeworks, as: :collection
+    resources :homeworks, only: [:index, :show, :update], on: :collection
     get '/', to: 'dashboard#home'
   end
 

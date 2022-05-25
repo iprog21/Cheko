@@ -4,4 +4,8 @@ class Manager < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_many :homeworks
+
+  def name
+    return "#{self.first_name} #{self.last_name}"
+  end
 end

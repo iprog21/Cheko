@@ -1,0 +1,31 @@
+= render 'admins/shared/header'
+.row 
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    .container.mt-5
+      %h3 Homeworks
+      .table-responsive
+        %table.table
+          %thead
+            %tr
+              %th.text-start id
+              %th.text-center Client
+              %th.text-center Type
+              %th.text-center Status
+              %th.text-center Lead
+              %th.text-center Tutor
+              %th.text-end Action
+          %tbody
+            - unless @homeworks.blank?
+              - @homeworks.each do |home|
+                %tr
+                  %td= home.id
+                  %td= home.user.name
+                  %td= home.type 
+                  %td= home.status 
+                  %td= home.manager 
+                  %td= home.tutor 
+                  %td
+                    test 
+            -else
+              %td No Data found
+          

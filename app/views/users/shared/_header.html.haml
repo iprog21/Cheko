@@ -1,0 +1,26 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
+    %a.navbar-brand{href: users_path} Cheko
+    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", type: "button"}
+      %span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %li.nav-item
+          %a.nav-link.active{"aria-current" => "page", href: "#"} Homeworks
+        %li.nav-item
+          %a.nav-link{href: "#"} Link
+        %li.nav-item
+          %a.nav-link.disabled Disabled
+      %ul.navbar-nav.ms-auto.mb-2.mb-lg-0
+        %li.nav-item.dropdown
+          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}= current_user.first_name
+          %ul.dropdown-menu.dropdown-menu-end{"aria-labelledby" => "navbarDropdown"}
+            %li
+              %a.dropdown-item{href: "#"} Profile
+            %li
+              %hr.dropdown-divider/
+            %li
+              %a.dropdown-item{href: "#"} Log out
+      -# %form.d-flex
+      -#   %input.form-control.me-2{"aria-label" => "Search", placeholder: "Search", type: "search"}/
+      -#   %button.btn.btn-outline-success{type: "submit"} Search
