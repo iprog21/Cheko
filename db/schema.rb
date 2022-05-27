@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_24_021446) do
+ActiveRecord::Schema.define(version: 2022_05_26_082550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2022_05_24_021446) do
     t.string "first_name"
     t.string "last_name"
     t.integer "role"
-    t.integer "status"
+    t.integer "status", default: 1
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -61,6 +61,11 @@ ActiveRecord::Schema.define(version: 2022_05_24_021446) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "manager_id"
+    t.integer "status"
+    t.integer "type"
+    t.integer "payment_status"
+    t.integer "payment_type"
+    t.datetime "deadline"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -68,7 +73,7 @@ ActiveRecord::Schema.define(version: 2022_05_24_021446) do
     t.string "encrypted_password", default: "", null: false
     t.string "first_name"
     t.string "last_name"
-    t.integer "status"
+    t.integer "status", default: 1
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -76,6 +81,14 @@ ActiveRecord::Schema.define(version: 2022_05_24_021446) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "tutor_id"
+    t.text "details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|
@@ -90,7 +103,7 @@ ActiveRecord::Schema.define(version: 2022_05_24_021446) do
     t.string "encrypted_password", default: "", null: false
     t.string "first_name"
     t.string "last_name"
-    t.integer "status"
+    t.integer "status", default: 0
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -99,6 +112,7 @@ ActiveRecord::Schema.define(version: 2022_05_24_021446) do
     t.datetime "confirmation_sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "school"
     t.index ["email"], name: "index_tutors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_tutors_on_reset_password_token", unique: true
   end
@@ -110,7 +124,7 @@ ActiveRecord::Schema.define(version: 2022_05_24_021446) do
     t.string "last_name"
     t.string "birthday"
     t.string "school"
-    t.integer "status"
+    t.integer "status", default: 1
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

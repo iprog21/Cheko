@@ -30,7 +30,13 @@ Rails.application.routes.draw do
   }
 
   namespace :admins do
-    resources :homeworks, only: [:index, :show, :destroy, :update], on: :collection
+    resources :homeworks, except: [:new, :create], on: :collection
+    resources :documents, only: [:index], on: :collection
+    resources :managers, on: :collection
+    resources :users, on: :collection
+    resources :tutors, on: :collection
+    resources :accountants, on: :collection
+    resources :admins
     get '/', to: 'dashboard#home'
   end
 

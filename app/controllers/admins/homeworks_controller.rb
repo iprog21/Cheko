@@ -10,12 +10,17 @@ class Admins::HomeworksController < ApplicationController
   end
 
   def destroy
+    @homework.destroy!
+    redirect_to admins_homeworks_path
   end
 
   def edit
+    @leads = Manager.all
   end
 
   def update
+    @homework.update(manager_id: params[:homework][:manager_id])
+    redirect_to admins_homeworks_path
   end
 
   private 

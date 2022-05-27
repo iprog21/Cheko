@@ -1,0 +1,35 @@
+= render 'admins/shared/header'
+.row 
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    .container.mt-5
+      .card 
+        .card-body
+          .row 
+            .col-6.text-start
+              %h3 Tutors
+            .col-6.text-end 
+              = link_to "New Tutor", new_admins_tutor_path, class: "btn btn-primary"
+          .table-responsive
+            %table.table
+              %thead
+                %tr
+                  %th.text-start id
+                  %th.text-center Name
+                  %th.text-center Email
+                  %th.text-center Status
+                  %th.text-end Action
+              %tbody
+                - unless @tutors.blank?
+                  - @tutors.each do |tutor|
+                    %tr
+                      %td.text-start= tutor.id
+                      %td.text-center= tutor.name
+                      %td.text-center= tutor.email 
+                      %td.text-center= tutor.status.capitalize
+                      %td.text-end
+                        = link_to :show, admins_tutor_path(tutor)
+                        = link_to :edit, edit_admins_tutor_path(tutor)
+                        = link_to :delete, admins_tutor_path(tutor), method: :delete
+                -else
+                  %td No Data found
+              

@@ -1,0 +1,18 @@
+= render 'admins/shared/header'
+.row 
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    .container.mt-5
+      .card 
+        .card-body
+          .row 
+            .col-12.text-start 
+              %h5 Assign Team Lead
+            .col-6.ms-auto.me-auto
+              = form_for @homework, url: admins_homework_path, method: :put do |f|
+                .mb-3
+                  .field
+                    = f.label "Team Lead", class: "form-label"
+                    = f.select(:manager_id, @leads.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-control")
+                .mb-3
+                  .actions
+                    = f.submit "Assign", class: "btn btn-primary"

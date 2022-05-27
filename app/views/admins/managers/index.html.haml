@@ -1,0 +1,35 @@
+= render 'admins/shared/header'
+.row 
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    .container.mt-5
+      .card 
+        .card-body
+          .row 
+            .col-6.text-start
+              %h3 Managers
+            .col-6.text-end 
+              = link_to "New Manager", new_admins_manager_path, class: "btn btn-primary"
+          .table-responsive
+            %table.table
+              %thead
+                %tr
+                  %th.text-start id
+                  %th.text-center Name
+                  %th.text-center Email
+                  %th.text-center Status
+                  %th.text-end Action
+              %tbody
+                - unless @managers.blank?
+                  - @managers.each do |manager|
+                    %tr
+                      %td.text-start= manager.id
+                      %td.text-center= manager.name
+                      %td.text-center= manager.email 
+                      %td.text-center= manager.status.capitalize
+                      %td.text-end
+                        = link_to :show, admins_manager_path(manager)
+                        = link_to :edit, edit_admins_manager_path(manager)
+                        = link_to :delete, admins_manager_path(manager), method: :delete
+                -else
+                  %td No Data found
+              

@@ -20,10 +20,10 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource)
     if resource == :admin
       new_admin_session_path
-    elsif resource == :sponsor
-      new_sponsor_session_path
-    elsif resource == :sales_rep
-      new_sales_rep_session_path
+    # elsif resource == :sponsor
+    #   new_sponsor_session_path
+    # elsif resource == :sales_rep
+    #   new_sales_rep_session_path
     else
       root_path
     end
@@ -38,6 +38,6 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:logo])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name])
   end
 end

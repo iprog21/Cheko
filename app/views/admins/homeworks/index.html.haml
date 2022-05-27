@@ -2,30 +2,38 @@
 .row 
   .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
     .container.mt-5
-      %h3 Homeworks
-      .table-responsive
-        %table.table
-          %thead
-            %tr
-              %th.text-start id
-              %th.text-center Client
-              %th.text-center Type
-              %th.text-center Status
-              %th.text-center Lead
-              %th.text-center Tutor
-              %th.text-end Action
-          %tbody
-            - unless @homeworks.blank?
-              - @homeworks.each do |home|
+      .card 
+        .card-body
+          .row 
+            .col-6.text-start
+              %h3 Homeworks
+          .table-responsive
+            %table.table
+              %thead
                 %tr
-                  %td= home.id
-                  %td= home.user.name
-                  %td= home.type 
-                  %td= home.status 
-                  %td= home.manager 
-                  %td= home.tutor 
-                  %td
-                    test 
-            -else
-              %td No Data found
-          
+                  %th.text-start id
+                  %th.text-center Client
+                  %th.text-center Type
+                  %th.text-center Status
+                  %th.text-center Lead
+                  %th.text-center Tutor
+                  %th.text-center Deadline
+                  %th.text-end Action
+              %tbody
+                - unless @homeworks.blank?
+                  - @homeworks.each do |home|
+                    %tr
+                      %td.text-start= home.id
+                      %td.text-center= home.user.name
+                      %td.text-center= home.type 
+                      %td.text-center= home.status 
+                      %td.text-center= home.manager.name if home.manager_id.present?
+                      %td.text-center= home.tutor
+                      %td.text-center= home.deadline.strftime("%B %d, %Y") 
+                      %td.text-end
+                        = link_to :show, admins_homework_path(home)
+                        = link_to :edit, edit_admins_homework_path(home)
+                        = link_to :delete, admins_homework_path(home), method: :delete
+                -else
+                  %td No Data found
+              

@@ -1,0 +1,35 @@
+= render 'admins/shared/header'
+.row 
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    .container.mt-5
+      .card 
+        .card-body
+          .row 
+            .col-6.text-start
+              %h3 Clients
+          .table-responsive
+            %table.table
+              %thead
+                %tr
+                  %th.text-start id
+                  %th.text-center Name
+                  %th.text-center Email
+                  %th.text-center School
+                  %th.text-center Status
+                  %th.text-end Action
+              %tbody
+                - unless @users.blank?
+                  - @users.each do |user|
+                    %tr
+                      %td.text-start= user.id
+                      %td.text-center= user.name
+                      %td.text-center= user.email 
+                      %td.text-center= user.school
+                      %td.text-center= user.status.capitalize
+                      %td.text-end
+                        = link_to :show, admins_user_path(user)
+                        = link_to :edit, edit_admins_user_path(user)
+                        = link_to :delete, admins_user_path(user), method: :delete
+                -else
+                  %td No Data found
+              
