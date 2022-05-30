@@ -30,7 +30,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admins do
-    resources :homeworks, except: [:new, :create], on: :collection
+    resources :homeworks, except: [:new, :create], on: :collection do
+      put :assign
+    end
     resources :documents, only: [:index], on: :collection
     resources :managers, on: :collection
     resources :users, on: :collection

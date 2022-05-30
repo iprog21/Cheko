@@ -1,0 +1,12 @@
+= form_for @homework, url: admins_homework_path, method: :put do |f|
+  .mb-3
+    .field
+      = f.label "Task Manager", class: "form-label"
+      = f.select(:manager_id, @managers.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-control")
+  .mb-3
+    .field
+      = f.label "Tutor", class: "form-label"
+      = f.select(:tutor_id, @tutors.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-control")
+  .mb-3
+    .actions
+      = f.submit "Assign", class: "btn btn-primary"

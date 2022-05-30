@@ -6,13 +6,21 @@
         .card-body
           .row 
             .col-12.text-start 
-              %h5 Assign Team Lead
+              %h5 Assign Personnel
             .col-6.ms-auto.me-auto
-              = form_for @homework, url: admins_homework_path, method: :put do |f|
-                .mb-3
-                  .field
-                    = f.label "Team Lead", class: "form-label"
-                    = f.select(:manager_id, @leads.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-control")
-                .mb-3
-                  .actions
-                    = f.submit "Assign", class: "btn btn-primary"
+              - if current_admin.role == 'super_admin'
+                = render 'admins/homeworks/super_edit'
+              -else
+                = render 'admins/homeworks/lead_edit'
+              -# = form_for @homework, url: admins_homework_path, method: :put do |f|
+              -#   .mb-3
+              -#     .field
+              -#       = f.label "Team Lead", class: "form-label"
+              -#       = f.select(:manager_id, @leads.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-control")
+              -#   .mb-3
+              -#     .field
+              -#       = f.label "Tutor", class: "form-label"
+              -#       = f.select(:tutor_id, @tutors.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-control")
+              -#   .mb-3
+              -#     .actions
+              -#       = f.submit "Assign", class: "btn btn-primary"

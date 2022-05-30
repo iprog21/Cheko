@@ -15,17 +15,24 @@ class Admins::HomeworksController < ApplicationController
   end
 
   def edit
-    @leads = Manager.all
+    @leads = Admin.all
+    @managers = Manager.all
+    @tutors = Tutor.all
   end
 
   def update
-    @homework.update(manager_id: params[:homework][:manager_id])
+    @homework.update(manager_id: params[:homework][:manager_id], tutor_id: params[:homework][:tutor_id])
+    redirect_to admins_homeworks_path
+  end
+
+  def assign
+    @homework.update(admin_id: current_admin.id)
     redirect_to admins_homeworks_path
   end
 
   private 
 
   def find_homework
-    @homework = Homework.find(params[:id])
+    @homework = Homework.find(params[:id] || params[:homework_id])
   end
 end

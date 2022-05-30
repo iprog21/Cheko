@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_26_082550) do
+ActiveRecord::Schema.define(version: 2022_05_30_055115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,27 @@ ActiveRecord::Schema.define(version: 2022_05_26_082550) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_accountants_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accountants_on_reset_password_token", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "admins", force: :cascade do |t|
@@ -61,11 +82,18 @@ ActiveRecord::Schema.define(version: 2022_05_26_082550) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "manager_id"
-    t.integer "status"
+    t.integer "status", default: 0
     t.integer "type"
     t.integer "payment_status"
     t.integer "payment_type"
     t.datetime "deadline"
+    t.text "details"
+    t.integer "subject_id"
+    t.integer "words"
+    t.datetime "tutor_deadline"
+    t.integer "price"
+    t.integer "grade"
+    t.integer "admin_id"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -87,6 +115,20 @@ ActiveRecord::Schema.define(version: 2022_05_26_082550) do
     t.integer "user_id"
     t.integer "tutor_id"
     t.text "details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.integer "tutor_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -122,7 +164,7 @@ ActiveRecord::Schema.define(version: 2022_05_26_082550) do
     t.string "encrypted_password", default: "", null: false
     t.string "first_name"
     t.string "last_name"
-    t.string "birthday"
+    t.date "birthday"
     t.string "school"
     t.integer "status", default: 1
     t.string "reset_password_token"
@@ -134,4 +176,5 @@ ActiveRecord::Schema.define(version: 2022_05_26_082550) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
 end

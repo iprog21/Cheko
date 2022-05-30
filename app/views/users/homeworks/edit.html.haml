@@ -1,0 +1,26 @@
+= render 'users/shared/header'
+.row 
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    .container.mt-5
+      .card 
+        .card-body
+          .row 
+            .col-12.text-start 
+              %h5 Update Homework
+            .col-6.ms-auto.me-auto
+              = form_for @homework, url: users_homework_path, method: :put do |f|
+                .mb-3
+                  .field
+                    = f.label :details, class: "form-label"
+                    = f.text_area :details, class: "form-control",  :rows => 10, value: @homework.details
+                .mb-3
+                  .field
+                    = f.label :payment_type, class: "form-label"
+                    = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: @homework.payment_type), {include_blank: false} , class: "form-control"
+                .mb-3
+                  .field
+                    = f.label :deadline, class: "form-label"
+                    = f.date_field :deadline, class: "form-control"
+                .mb-3
+                  .actions
+                    = f.submit "Update", class: "btn btn-primary"

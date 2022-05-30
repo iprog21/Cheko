@@ -3,6 +3,8 @@ class Tutor < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
+  has_many :bids, dependent: :destroy
+
   enum status: { pending: 0, active: 1 }
 
   def name
