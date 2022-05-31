@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_30_055115) do
+ActiveRecord::Schema.define(version: 2022_05_31_084402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,20 @@ ActiveRecord::Schema.define(version: 2022_05_30_055115) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "bids", force: :cascade do |t|
+    t.integer "homework_id"
+    t.integer "tutor_id"
+    t.integer "ammount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.string "chat_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "documents", force: :cascade do |t|
     t.integer "homework_id"
     t.integer "name"
@@ -94,6 +108,7 @@ ActiveRecord::Schema.define(version: 2022_05_30_055115) do
     t.integer "price"
     t.integer "grade"
     t.integer "admin_id"
+    t.string "name"
   end
 
   create_table "managers", force: :cascade do |t|

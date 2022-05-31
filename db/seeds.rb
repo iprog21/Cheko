@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+subjects = [
+  {name: "English", status: 1},
+  {name: "Physics", status: 1},
+  {name: "Philosophy", status: 1},
+  {name: "Math", status: 1},
+]
+
+puts "\n --- creating subjects desuwa --- \n"
+subjects.each do |subj|
+  Subject.create!(subj)
+end
+puts "\n --- subjects okay desuwa ---\n\n"

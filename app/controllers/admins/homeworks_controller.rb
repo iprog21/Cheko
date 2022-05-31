@@ -22,7 +22,10 @@ class Admins::HomeworksController < ApplicationController
   end
 
   def update
-    @homework.update(manager_id: params[:homework][:manager_id], tutor_id: params[:homework][:tutor_id])
+   work = @homework.update(manager_id: params[:homework][:manager_id], tutor_id: params[:homework][:tutor_id])
+    if work && @homework.tutor_id.present?
+      @homework.finalize_name
+    end
     redirect_to admins_homeworks_path
   end
 

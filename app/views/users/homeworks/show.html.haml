@@ -15,7 +15,7 @@
             %p= @homework.deadline
           .col-6
             %h5 Subject:
-            %p= @homework.subject_id.present? ? @homework.subject.name : "None Provided"
+            %p= @homework.subject.present? ? @homework.subject.name : "None Provided"
           .col-6
             %h5 Words:
             %p= @homework.words
