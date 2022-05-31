@@ -1,0 +1,36 @@
+= render 'tutors/shared/header'
+.row 
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    .container.mt-5
+      .card 
+        .card-body
+          .row 
+            .col-6.text-start
+              %h3 Homeworks
+          .table-responsive
+            %table.table
+              %thead
+                %tr
+                  %th.text-start id
+                  %th.text-center Client
+                  -# %th.text-center Type
+                  %th.text-center Status
+                  %th.text-center Manager
+                  %th.text-center Tutor
+                  %th.text-center Deadline
+                  %th.text-end Action
+              %tbody
+                - unless @homeworks.blank?
+                  - @homeworks.each do |home|
+                    %tr
+                      %td.text-start= home.id
+                      %td.text-center= home.user.name
+                      -# %td.text-center= home.type
+                      %td.text-center= home.status.capitalize
+                      %td.text-center= home.manager.name if home.manager_id.present?
+                      %td.text-center= home.tutor.name if home.tutor_id.present?
+                      %td.text-center= home.deadline.strftime("%B %d, %Y") 
+                      %td.text-end
+                        = link_to :show, tutors_homework_path(home)
+                -else
+                  %td No Data found

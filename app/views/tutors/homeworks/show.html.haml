@@ -1,13 +1,13 @@
-= render 'admins/shared/header'
+= render 'tutors/shared/header'
 .row 
-  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
-    .container.mt-5
-      %h4= @homework.user.name
-  .col-6.ms-auto.me-auto 
+  -# .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+  -#   .container.mt-5
+  -#     %h4= @homework.user.name
+  .col-6.ms-auto.me-auto.mt-5
     .card
       .card-body
         .row.mt-3
-          .col-12 
+          .col-12
             %h5 Details:
             %p= @homework.details
           .col-6
@@ -28,24 +28,25 @@
       .card-body
         .row.mt-3
           .col-6 
-            %h5= "Tutors Interested: #{@bids.present? ? @bids.count : 0}"
+            %h5= "Tutors Interested: #{@bids.count}"
           .col-6.text-end
-            - if @homework.tutor_id.nil?
-              = link_to "Assign", edit_admins_homework_path(@homework), class: "btn btn-primary"
+            - if @bid.present?
+              = link_to "Update Bid - #{@bid.ammount}", tutors_homework_edit_bid_path(@homework.id), class: "btn btn-primary"
+            - else 
+              = link_to "Add Bid", tutors_homework_add_bid_path(@homework.id), class: "btn btn-success"
           .col-12
             .table-responsive
               %table.table
                 %thead
                   %tr
-                    %th.text-start Tutor
+                    -# %th.text-start Deadline
                     %th.text-start Offer
                 %tbody
                   - unless @bids.blank?
                     - @bids.each do |bid|
                       %tr
-                        %td.text-start= bid.tutor.name
+                        -# %td.text-start= bid.id
                         %td.text-start= bid.ammount
                   -else
                     %td No Data found
-          
           

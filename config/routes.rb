@@ -48,7 +48,12 @@ Rails.application.routes.draw do
   end
 
   namespace :tutors do
-    resources :homeworks, only: [:index, :show, :update], on: :collection
+    resources :homeworks, only: [:index, :show], on: :collection do 
+      get :add_bid
+      get :edit_bid
+      post :bid
+      put :update_bid
+    end
     get '/', to: 'dashboard#home'
   end
 

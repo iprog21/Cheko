@@ -1,0 +1,26 @@
+= render 'managers/shared/header'
+.row 
+  -# .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+  -#   .container.mt-5
+  -#     %h4= @homework.user.name
+  .col-6.ms-auto.me-auto.mt-5
+    .card
+      .card-body
+        .row.mt-3
+          .col-12
+            %h5 Details:
+            %p= @homework.details
+          .col-6
+            %h5 Deadline:
+            %p= @homework.deadline
+          .col-6
+            %h5 Subject:
+            %p= @homework.subject_id.present? ? @homework.subject.name : "None Provided"
+          .col-6
+            %h5 Words:
+            %p= @homework.words
+          .col-6
+            %h5 Target Grade:
+            %p= @homework.grade
+
+          

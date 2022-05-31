@@ -7,6 +7,7 @@ class Admins::HomeworksController < ApplicationController
   end
 
   def show
+    @bids = Bid.where(homework_id: @homework.id).order(ammount: :asc)
   end
 
   def destroy

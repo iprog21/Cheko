@@ -1,0 +1,18 @@
+= render 'tutors/shared/header'
+.row 
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    .container.mt-5
+      .card 
+        .card-body
+          .row 
+            .col-12.text-start 
+              %h5 Add Homework
+            .col-6.ms-auto.me-auto
+              = form_tag(tutors_homework_update_bid_path, method: :put) do
+                .mb-3
+                  .field
+                    = label_tag "ammount", 'Ammount', class: "form-label"
+                    = text_field_tag 'ammount', @bid.ammount, {class: "form-control"}
+                .mb-3
+                  .actions
+                    = submit_tag "Update", class: "btn btn-primary"
