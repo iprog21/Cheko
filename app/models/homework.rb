@@ -3,7 +3,7 @@ class Homework < ApplicationRecord
   belongs_to :tutor, optional: true
   belongs_to :manager, optional: true
   belongs_to :admin, optional: :true
-  belongs_to :subject
+  # belongs_to :subject
 
   has_many :documents, dependent: :destroy
   has_many :bids, dependent: :destroy
