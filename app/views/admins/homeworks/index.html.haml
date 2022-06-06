@@ -10,7 +10,7 @@
             .col-6.text-start
               %h3 Pending
           .table-responsive
-            %table.homeworks.display.nowrap
+            %table.homeworks-scrollX.display.nowrap
               %thead
                 %tr
                   %th Order created
@@ -35,7 +35,7 @@
             .col-6.text-start
               %h3 Ongoing
           .table-responsive
-            %table.homeworks.display.nowrap
+            %table.homeworks-scrollX.display.nowrap
               %thead
                 %tr
                   %th id
@@ -67,7 +67,7 @@
             .col-6.text-start
               %h3 History
           .table-responsive
-            %table.homeworks.display.nowrap
+            %table.homeworks-scrollX.display.nowrap
               %thead
                 %tr
                   %th Name
@@ -92,4 +92,4 @@
                 =render partial: 'admins/homeworks/history-table', collection: @history, as: :home
 
 
-= javascript_pack_tag 'admin/homework/index'
+= javascript_pack_tag 'datatable_basic'

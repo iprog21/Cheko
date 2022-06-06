@@ -58,4 +58,8 @@ class Admins::HomeworksController < ApplicationController
   def find_homework
     @homework = Homework.find(params[:id] || params[:homework_id])
   end
+
+  def homework_params
+    params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :price, :additional)
+  end
 end

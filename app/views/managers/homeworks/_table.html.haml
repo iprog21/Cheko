@@ -1,0 +1,22 @@
+%tr
+  %td.text-start= home.name
+  %td.text-center= home.created_at.strftime("%B %d, %Y") 
+  %td.text-center= home.order_type.titleize
+  %td.text-center= home.sub_type.titleize
+  %td.text-center= home.deadline.strftime("%B %d, %Y")
+  %td.text-center= home.subject
+  %td.text-center= home.details
+  %td.text-center= home.tutor_category.titleize
+  %td.text-center= home.words
+  %td.text-center= home.priority
+  %td.text-center= home.login_school
+  %td.text-center= home.user.name
+  %td.text-center= home.tutor.name
+  %td.text-center= home.sub_tutor.name if home.sub_tutor.present?
+  %td.text-center= home.id
+  %td.text-center= home.hours_late
+  %td.text-center= home.prof
+  %td.text-center= home.grade
+  %td.text-center= home.status
+  %td.text-end
+    = link_to :show, managers_homework_path(home)

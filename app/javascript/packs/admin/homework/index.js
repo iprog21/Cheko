@@ -1,4 +1,4 @@
 require( 'datatables.net-dt' );
-$('.homeworks').DataTable({
+$('.homeworks-scrollX').DataTable({
     scrollX: true,
 });
