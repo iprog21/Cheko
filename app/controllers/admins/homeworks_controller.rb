@@ -3,7 +3,9 @@ class Admins::HomeworksController < ApplicationController
   before_action :find_homework, except: [:index]
 
   def index
-    @homeworks = Homework.all
+    @history = Homework.where(status: "done").order(created_at: :asc)
+    @pending = current_admin.role == "admin" ? Homework.where(status: "reviewing", admin_id: current_admin.id) : Homework.where(status: "reviewing") 
+    @ongoing = Homework.where(status: "ongoing")
   end
 
   def show
@@ -22,15 +24,32 @@ class Admins::HomeworksController < ApplicationController
   end
 
   def update
-   work = @homework.update(manager_id: params[:homework][:manager_id], tutor_id: params[:homework][:tutor_id])
-    if work && @homework.tutor_id.present?
-      @homework.finalize_name
+    if current_admin.role == "super_admin"
+      work = @homework.update(admin_id: params[:homework][:admin_id], manager_id: params[:homework][:manager_id], tutor_id: params[:homework][:tutor_id])
+    else
+      work = @homework.update(manager_id: params[:homework][:manager_id], tutor_id: params[:homework][:tutor_id])
     end
+
+    if work && @homework.admin_id.present? && @homework.status == "reviewing"
+      @homework.accept_order
+    end
+
+    # if work && @homework.tutor_id.present? 
+      
+    #   @homework.
+    # end
     redirect_to admins_homeworks_path
   end
 
   def assign
     @homework.update(admin_id: current_admin.id)
+    redirect_to admins_homeworks_path
+  end
+
+  def assign_tutor
+    bid = Bid.find(params[:bid_id])
+    @homework.assign_tutor(bid)
+    #.update(tutor_id: params[:tutor_id])
     redirect_to admins_homeworks_path
   end
 

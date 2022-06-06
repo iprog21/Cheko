@@ -1,12 +1,15 @@
 class Users::HomeworksController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_homework, except: [:index, :create, :new]
+  before_action :find_homework, except: [:index, :create, :new, :pick_type]
   
   def index
     @homeworks = current_user.homeworks
   end
 
   def show
+  end
+
+  def pick_type
   end
 
   def new
@@ -43,6 +46,6 @@ class Users::HomeworksController < ApplicationController
   end
 
   def homework_params
-    params.require(:homework).permit(:details, :payment_type, :deadline)
+    params.require(:homework).permit(:details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
   end
 end

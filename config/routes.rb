@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   namespace :admins do
     resources :homeworks, except: [:new, :create], on: :collection do
       put :assign
+      put :assign_tutor
     end
     resources :documents, only: [:index], on: :collection
     resources :managers, on: :collection
@@ -58,7 +59,9 @@ Rails.application.routes.draw do
   end
 
   namespace :users do 
-    resources :homeworks, on: :collection
+    resources :homeworks, on: :collection do
+      get :pick_type, on: :collection
+    end
     get '/', to: 'dashboard#home'
   end
 

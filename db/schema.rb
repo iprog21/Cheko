@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_31_084402) do
+ActiveRecord::Schema.define(version: 2022_06_03_090805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2022_05_31_084402) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "manager_id"
     t.integer "status", default: 0
-    t.integer "type"
+    t.integer "order_type"
     t.integer "payment_status"
     t.integer "payment_type"
     t.datetime "deadline"
@@ -109,6 +109,26 @@ ActiveRecord::Schema.define(version: 2022_05_31_084402) do
     t.integer "grade"
     t.integer "admin_id"
     t.string "name"
+    t.string "subject"
+    t.string "sub_type"
+    t.string "sub_subject"
+    t.boolean "priority"
+    t.boolean "tutor_skills"
+    t.boolean "tutor_samples"
+    t.boolean "view_bidders"
+    t.boolean "login_school"
+    t.datetime "received"
+    t.integer "hours_late"
+    t.text "notes"
+    t.string "prof"
+    t.integer "grade_get"
+    t.integer "sub_tutor_id"
+    t.integer "tutor_category"
+    t.integer "budget"
+    t.text "updates"
+    t.datetime "payment_received"
+    t.datetime "file_received"
+    t.integer "tutor_price"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -170,6 +190,7 @@ ActiveRecord::Schema.define(version: 2022_05_31_084402) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "school"
+    t.integer "category"
     t.index ["email"], name: "index_tutors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_tutors_on_reset_password_token", unique: true
   end
@@ -187,6 +208,7 @@ ActiveRecord::Schema.define(version: 2022_05_31_084402) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "level"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

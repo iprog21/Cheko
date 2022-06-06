@@ -31,8 +31,8 @@
           .col-6 
             %h5= "Tutors Interested: #{@bids.present? ? @bids.count : 0}"
           .col-6.text-end
-            - if @homework.tutor_id.nil?
-              = link_to "Assign", edit_admins_homework_path(@homework), class: "btn btn-primary"
+            - if @homework.tutor_id.present?
+              %h5= "Assigned: #{@homework.tutor.name}"
           .col-12
             .table-responsive
               %table.table
@@ -40,12 +40,19 @@
                   %tr
                     %th.text-start Tutor
                     %th.text-start Offer
+                    %th.text-end
                 %tbody
                   - unless @bids.blank?
                     - @bids.each do |bid|
                       %tr
                         %td.text-start= bid.tutor.name
                         %td.text-start= bid.ammount
+                        %td.text-end
+                          - if @homework.tutor_id = bid.tutor_id
+                            %a{href: admins_homework_assign_tutor_path(homework_id: @homework.id, bid_id: bid.id), data: {method: :put}, class: "btn btn-primary disabled", disabled: true} Assigned
+                          - else 
+                            %a{href: admins_homework_assign_tutor_path(homework_id: @homework.id, bid_id: bid.id), data: {method: :put}, class: "btn btn-primary"} Assign
+                          
                   -else
                     %td No Data found
           

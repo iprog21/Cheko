@@ -11,6 +11,7 @@ require("channels")
 require("@popperjs/core")
 
 import "bootstrap"
+import "datatables.net-dt/css/jquery.dataTables.css"
 
 // Import the specific modules you may need (Modal, Alert, etc)
 import { Tooltip, Popover } from "bootstrap"

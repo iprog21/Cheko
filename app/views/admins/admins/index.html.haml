@@ -7,11 +7,11 @@
         .card-body
           .row 
             .col-6.text-start
-              %h3 Admins
+              %h3 Leads
             .col-6.text-end 
               = link_to "New admin", new_admins_admin_path, class: "btn btn-primary"
           .table-responsive
-            %table.table
+            %table.table#datatable
               %thead
                 %tr
                   %th.text-start id
@@ -33,4 +33,5 @@
                         = link_to :delete, admins_admin_path(admin), method: :delete
                 -else
                   %td No Data found
-              
+
+= javascript_pack_tag 'datatable_basic'

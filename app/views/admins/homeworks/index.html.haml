@@ -3,43 +3,93 @@
 .row 
   .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
     .container.mt-5
+      %h3 Homeworks
       .card 
         .card-body
           .row 
             .col-6.text-start
-              %h3 Homeworks
+              %h3 Pending
           .table-responsive
-            %table.table
+            %table.homeworks.display.nowrap
               %thead
                 %tr
-                  %th.text-start id
-                  %th.text-center Client
-                  -# %th.text-center Type
-                  %th.text-center Status
-                  %th.text-center Lead
-                  %th.text-center Manager
-                  %th.text-center Tutor
-                  %th.text-center Deadline
-                  %th.text-end Action
+                  %th Order created
+                  %th Order Type
+                  %th Type
+                  %th Deadline
+                  %th Subject
+                  %th Tutor Category
+                  %th Word Count
+                  %th View Samples
+                  %th View Skills
+                  %th View Bidders
+                  %th Priority
+                  %th Login
+                  %th Action
               %tbody
-                - unless @homeworks.blank?
-                  - @homeworks.each do |home|
-                    %tr
-                      %td.text-start= home.id
-                      %td.text-center= home.user.name
-                      -# %td.text-center= home.type
-                      %td.text-center= home.status.capitalize
-                      %td.text-center= home.admin.name if home.admin_id.present?
-                      %td.text-center= home.manager.name if home.manager_id.present?
-                      %td.text-center= home.tutor.name if home.tutor_id.present?
-                      %td.text-center= home.deadline.strftime("%B %d, %Y") 
-                      %td.text-end
-                        = link_to :show, admins_homework_path(home)
-                        - if home.admin_id == current_admin.id || current_admin.role == 'super_admin'
-                          = link_to :edit, edit_admins_homework_path(home)
-                        - elsif home.admin_id.nil?
-                          = link_to :assign, admins_homework_assign_path(homework_id: home.id), method: :put
-                        - if current_admin.role == 'super_admin'
-                          = link_to :delete, admins_homework_path(home), method: :delete
-                -else
-                  %td No Data found
+                =render partial: 'admins/homeworks/pending-table', collection: @pending, as: :home
+               
+      .card.mt-5
+        .card-body
+          .row 
+            .col-6.text-start
+              %h3 Ongoing
+          .table-responsive
+            %table.homeworks.display.nowrap
+              %thead
+                %tr
+                  %th id
+                  %th Client
+                  %th Tutor
+                  %th Sub Tutor
+                  %th TL
+                  %th TM
+                  %th Order Number
+                  %th Payment to Tutor
+                  %th Client's payment
+                  %th Profit
+                  %th Additional
+                  %th Updates
+                  %th Deadline
+                  %th Subject
+                  %th Time Received
+                  %th Hours Late
+                  %th Notes
+                  %th Prof
+                  %th Grade
+                  %th Status
+                  %th Action
+              %tbody
+                =render partial: 'admins/homeworks/ongoing-table', collection: @ongoing, as: :home
+      .card.mt-5.mb-5
+        .card-body
+          .row 
+            .col-6.text-start
+              %h3 History
+          .table-responsive
+            %table.homeworks.display.nowrap
+              %thead
+                %tr
+                  %th Name
+                  %th Client
+                  -# %th Type
+                  %th Status
+                  %th Lead
+                  %th Manager
+                  %th Tutor
+                  %th Deadline
+                  %th Code
+                  %th Subject
+                  %th Tutor Category
+                  %th Word Count
+                  %th View Samples
+                  %th View Skills
+                  %th View Bidders
+                  %th Priority
+                  %th Login
+                  %th Action
+              %tbody
+                =render partial: 'admins/homeworks/history-table', collection: @history, as: :home
+
+
+= javascript_pack_tag 'admin/homework/index'
