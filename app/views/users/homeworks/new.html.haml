@@ -25,6 +25,18 @@
                 = render 'users/homeworks/law'
               - when 'science'
                 = render 'users/homeworks/science'
+              - when 'economics'
+                = render 'users/homeworks/economics'
+              - when 'robotics'
+                = render 'users/homeworks/robotics'
+              - when 'sketchup'
+                = render 'users/homeworks/sketchup'
+              - when 'foreign_language'
+                = render 'users/homeworks/foreign_language'
+              - when 'thesis'
+                = render 'users/homeworks/thesis'
+              - when 'module'
+                = render 'users/homeworks/module'
               - else
                 .mb-3
                   %h5 Type of homework is not yet supported

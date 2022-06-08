@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root to: 'pages#home'
+  get '/pick_type', to: 'pages#pick_type'
+  get '/new', to: 'pages#new'
+
   devise_for :admins, path: 'admins', controllers: {
     sessions: 'admins/auth/sessions',
     registrations: 'admins/auth/registrations',
@@ -40,11 +44,13 @@ Rails.application.routes.draw do
     resources :tutors, on: :collection
     resources :accountants, on: :collection
     resources :admins
+    resources :chats, only: [:index]
     get '/', to: 'dashboard#home'
   end
 
   namespace :managers do
     resources :homeworks, only: [:index, :show, :update], on: :collection
+    resources :chats, only: [:index]
     get '/', to: 'dashboard#home'
   end
 
@@ -55,6 +61,7 @@ Rails.application.routes.draw do
       post :bid
       put :update_bid
     end
+    resources :chats, only: [:index]
     get '/', to: 'dashboard#home'
   end
 
@@ -62,6 +69,8 @@ Rails.application.routes.draw do
     resources :homeworks, on: :collection do
       get :pick_type, on: :collection
     end
+    get 'profile', to: 'users#show'
+    resources :chats, only: [:index]
     get '/', to: 'dashboard#home'
   end
 

@@ -3,6 +3,9 @@ class Users::HomeworksController < ApplicationController
   before_action :find_homework, except: [:index, :create, :new, :pick_type]
   
   def index
+    # @pending = current_user.homeworks.where(status: "reviewing")
+    # @ongoing = current_user.homeworks.where(status: "ongoing")
+    # @history = current_user.homeworks.where(status: "done")
     @homeworks = current_user.homeworks
   end
 

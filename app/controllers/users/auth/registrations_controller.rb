@@ -3,6 +3,7 @@
 class Users::Auth::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :homework_params
 
   # GET /resource/sign_up
   # def new
@@ -11,20 +12,32 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    raise "test"
+    logger.info "\n\n #{params[:homeworks].present?} \n\n"
     build_resource(sign_up_params)
-
+    logger.info "\n\n #{sign_up_params} \n\n"
     resource.save
     yield resource if block_given?
     if resource.persisted?
+      logger.info "\n\n resurce persisted \n\n"
       if resource.active_for_authentication?
+        logger.info "\n\n if signed up \n\n"
         set_flash_message! :notice, :signed_up
-        respond_with resource, location: new_user_session_path
+        if params[:homeworks].present?
+          resource.homeworks.create(homework_params)
+          sign_up(resource_name, resource)
+          respond_with resource, location: after_sign_up_path_for(resource)
+        else
+          respond_with resource, location: new_user_session_path
+        end
       else
+        logger.info "\n\n else signed up \n\n"
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
+      logger.info "\n\n resource not persisted \n\n"
       clean_up_passwords resource
       set_minimum_password_length
       respond_with resource
@@ -55,7 +68,13 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def homework_params
+    if params[:homeworks].present?
+      params.require(:homeworks).permit(:details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

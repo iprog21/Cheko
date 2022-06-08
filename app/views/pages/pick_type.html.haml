@@ -1,4 +1,4 @@
-= render 'users/shared/header'
+= render 'pages/header'
 .row 
   .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
     .container.mt-5
@@ -8,14 +8,14 @@
             %img.card-img-top{alt: "...", src: "..."}/
             .card-body
               %h5.card-title Essay
-              %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "essay")} Go somewhere
+              %a.btn.btn-primary.stretched-link{href: new_path(type: "essay")} Go somewhere
         .col-3
           .card{style: "width: 18rem;"}
             %img.card-img-top{alt: "...", src: "..."}/
             .card-body
               %h5.card-title Math
               
-              %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "math")} Go somewhere
+              %a.btn.btn-primary.stretched-link{href: new_path(type: "math")} Go somewhere
         .col-3
           .card{style: "width: 18rem;"}
             %img.card-img-top{alt: "...", src: "..."}/

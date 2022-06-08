@@ -1,4 +1,4 @@
-%nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.sticky-top
   .container-fluid
     %a.navbar-brand{href: users_path}
       = image_tag "logo-white.png"
@@ -8,6 +8,11 @@
       %ul.navbar-nav.me-auto.mb-2.mb-lg-0
         %li.nav-item
           %a.nav-link{href: users_homeworks_path} Homeworks
+        %li.nav-item
+          %a.nav-link{href: users_chats_path} Messages
+        %li.nav-item
+          %a.nav-link{href: pick_type_users_homeworks_path} I need help!
+ 
         -# %li.nav-item
         -#   %a.nav-link{href: "#"} Professor Pick
       %ul.navbar-nav.ms-auto.mb-2.mb-lg-0
@@ -23,3 +28,5 @@
       -# %form.d-flex
       -#   %input.form-control.me-2{"aria-label" => "Search", placeholder: "Search", type: "search"}/
       -#   %button.btn.btn-outline-success{type: "submit"} Search
+
+      

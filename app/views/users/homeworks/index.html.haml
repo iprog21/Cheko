@@ -10,34 +10,42 @@
             .col-6.text-end 
               = link_to "New Homework", pick_type_users_homeworks_path, class: "btn btn-primary"
           .table-responsive
-            %table.table
+            %table.homeworks-scrollX.nowrap
               %thead
                 %tr
-                  %th.text-start id
-                  %th.text-center Client
-                  -# %th.text-center Type
-                  %th.text-center Status
+                  %th.text-start ID
+                  %th.text-start Code
+                  %th.text-center Homework Type
+                  %th.text-center Type
+                  %th.text-center Subject
                   %th.text-center Lead
                   %th.text-center Manager
                   %th.text-center Tutor
+                  %th.text-center Price
                   %th.text-center Deadline
+                  %th.text-center Status
                   %th.text-end Action
               %tbody
                 - unless @homeworks.blank?
                   - @homeworks.each do |home|
                     %tr
-                      %td.text-start= home.id
-                      %td.text-center= home.user.name
-                      -# %td.text-center= home.type
-                      %td.text-center= home.status.capitalize
+                      %td.text-start= home.name
+                      %td.text-center= home.id
+                      %td.text-center= home.order_type.titleize
+                      %td.text-center= home.sub_type.titleize
+                      %td.text-center= home.subject.capitalize
                       %td.text-center= home.admin.name if home.admin_id.present?
                       %td.text-center= home.manager.name if home.manager_id.present?
                       %td.text-center= home.tutor.name if home.tutor_id.present?
-                      %td.text-center= home.deadline.strftime("%B %d, %Y") 
+                      %td.text-center= home.price
+                      %td.text-center= home.deadline.strftime("%B %d, %Y")
+                      %td.text-center= home.status.titleize
                       %td.text-end
                         = link_to :show, admins_homework_path(home)
                         = link_to :edit, edit_users_homework_path(home)
                         = link_to :delete, users_homework_path(home), method: :delete
                 -else
                   %td No Data found
+
+= javascript_pack_tag 'datatable_basic'
               
