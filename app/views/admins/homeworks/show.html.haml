@@ -3,14 +3,14 @@
 .row 
   .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
     .container.mt-5
-      %h4= @homework.user.name
+      %h4= @homework.order_type.titleize
   .col-6.ms-auto.me-auto 
     .card
       .card-body
         .row.mt-3
-          .col-12 
-            %h5 Details:
-            %p= @homework.details
+          .col-12
+            %h5 User:
+            %p= @homework.user.name
           .col-6
             %h5 Deadline:
             %p= @homework.deadline
@@ -23,6 +23,28 @@
           .col-6
             %h5 Target Grade:
             %p= @homework.grade
+        %hr
+        .row.mt-3
+          .col-2
+            %h6 Priority
+            %p= @homework.priority
+          .col-2
+            %h6 Tutor skills
+            %p= @homework.tutor_skills
+          .col-2
+            %h6 Tutor Samples
+            %p= @homework.tutor_samples
+          .col-2
+            %h6 View Bidders
+            %p= @homework.view_bidders
+          .col-2
+            %h6 Login School
+            %p= @homework.login_school
+        %hr
+        .row
+          .col-12 
+            %h5 Details:
+            %p= @homework.details
 .row.mt-5
   .col-6.ms-auto.me-auto 
     .card

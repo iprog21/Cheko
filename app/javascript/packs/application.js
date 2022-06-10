@@ -13,6 +13,7 @@ require("@popperjs/core")
 import "bootstrap"
 import "datatables.net-dt/css/jquery.dataTables.css"
 import "../stylesheets/steps.css"
+import "@fortawesome/fontawesome-free/css/all"
 
 // Import the specific modules you may need (Modal, Alert, etc)
 import { Tooltip, Popover } from "bootstrap"

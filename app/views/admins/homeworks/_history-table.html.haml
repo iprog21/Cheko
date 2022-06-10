@@ -2,6 +2,7 @@
   %td= home.name
   %td= home.user.name
   -# %td= home.type
+  %td= home.tutor_category.titleize
   %td= home.status.capitalize
   %td= home.admin.name if home.admin_id.present?
   %td= home.manager.name if home.manager_id.present?
