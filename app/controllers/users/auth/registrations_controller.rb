@@ -12,16 +12,12 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    raise "test"
-    logger.info "\n\n #{params[:homeworks].present?} \n\n"
     build_resource(sign_up_params)
-    logger.info "\n\n #{sign_up_params} \n\n"
+    
     resource.save
     yield resource if block_given?
     if resource.persisted?
-      logger.info "\n\n resurce persisted \n\n"
       if resource.active_for_authentication?
-        logger.info "\n\n if signed up \n\n"
         set_flash_message! :notice, :signed_up
         if params[:homeworks].present?
           resource.homeworks.create(homework_params)
@@ -31,13 +27,11 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
           respond_with resource, location: new_user_session_path
         end
       else
-        logger.info "\n\n else signed up \n\n"
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
-      logger.info "\n\n resource not persisted \n\n"
       clean_up_passwords resource
       set_minimum_password_length
       respond_with resource

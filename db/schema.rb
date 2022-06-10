@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_03_090805) do
+ActiveRecord::Schema.define(version: 2022_06_09_021856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,11 +112,11 @@ ActiveRecord::Schema.define(version: 2022_06_03_090805) do
     t.string "subject"
     t.string "sub_type"
     t.string "sub_subject"
-    t.boolean "priority"
-    t.boolean "tutor_skills"
-    t.boolean "tutor_samples"
-    t.boolean "view_bidders"
-    t.boolean "login_school"
+    t.boolean "priority", default: false
+    t.boolean "tutor_skills", default: false
+    t.boolean "tutor_samples", default: false
+    t.boolean "view_bidders", default: false
+    t.boolean "login_school", default: false
     t.datetime "received"
     t.integer "hours_late"
     t.text "notes"
@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(version: 2022_06_03_090805) do
     t.integer "grade_get"
     t.integer "sub_tutor_id"
     t.integer "tutor_category"
-    t.integer "budget"
     t.text "updates"
     t.datetime "payment_received"
     t.datetime "file_received"

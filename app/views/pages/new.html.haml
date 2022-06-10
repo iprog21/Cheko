@@ -5,9 +5,7 @@
       .card 
         .card-body
           .row 
-            .col-12.text-start 
-              %h5= "Ask for help! - #{params[:type].titleize}"
-            .col-6.ms-auto.me-auto
+            .col-8.ms-auto.me-auto
               - case params[:type]
               - when 'essay'
                 = render 'pages/essay'
@@ -40,3 +38,4 @@
               - else
                 .mb-3
                   %h5 Type of homework is not yet supported
+= javascript_pack_tag 'homeworks/new'

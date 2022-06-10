@@ -3,9 +3,9 @@ class Admins::HomeworksController < ApplicationController
   before_action :find_homework, except: [:index]
 
   def index
-    @history = Homework.where(status: "done").order(created_at: :asc)
-    @pending = current_admin.role == "admin" ? Homework.where(status: "reviewing", admin_id: current_admin.id) : Homework.where(status: "reviewing") 
-    @ongoing = Homework.where(status: "ongoing")
+    @history = current_admin.role == "admin" ? Homework.where(status: "done", admin_id: current_admin.id).order(created_at: :asc) : Homework.where(status: "done").order(created_at: :asc)
+    @pending = Homework.where(status: "reviewing") 
+    @ongoing = current_admin.role == "admin" ? Homework.where(status: "ongoing", admin_id: current_admin.id) : Homework.where(status: "ongoing")
   end
 
   def show
@@ -43,6 +43,7 @@ class Admins::HomeworksController < ApplicationController
 
   def assign
     @homework.update(admin_id: current_admin.id)
+    @homework.accept_order
     redirect_to admins_homeworks_path
   end
 

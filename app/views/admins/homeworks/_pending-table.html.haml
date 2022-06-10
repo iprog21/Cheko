@@ -2,7 +2,7 @@
   %td= home.created_at.strftime("%b %d, %Y")
   %td= home.order_type.titleize
   %td= home.sub_type.titleize
-  %td= home.deadline.strftime("%b %d, %Y - %l:%M %p")
+  %td= home.deadline.strftime("%b %d, %Y - %l:%M %p") if home.deadline.present?
   %td= home.subject.titleize
   %td= home.tutor_category.titleize
   %td= home.words
