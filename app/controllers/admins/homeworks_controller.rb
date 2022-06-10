@@ -34,6 +34,8 @@ class Admins::HomeworksController < ApplicationController
       @homework.accept_order
     end
 
+    @homework.assign_tutor(nil, params[:homework][:price].to_i)
+
     # if work && @homework.tutor_id.present? 
       
     #   @homework.

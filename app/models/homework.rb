@@ -28,9 +28,11 @@ class Homework < ApplicationRecord
     self.save
   end
 
-  def assign_tutor(bid)
+  def assign_tutor(bid, price_given=nil)
+    logger.info "\n\n #{price_given}\n\n"
+    price = price_given.nil? ? bid.ammount : price_given
     # bid = Bid.find_by(homework_id: self.id, tutor_id: tutor_id)
-    self.update!(tutor_id: bid.tutor_id, tutor_price: bid.ammount)
+    self.tutor_id.present? ? self.update!(tutor_price: price) : self.update!(tutor_id: bid.tutor_id, tutor_price: price)
     # self.tutor_id = tutor_id
     # self.tutor_price = bid.ammount
     # self.save
