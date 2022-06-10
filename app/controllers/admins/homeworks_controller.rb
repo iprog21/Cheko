@@ -25,16 +25,16 @@ class Admins::HomeworksController < ApplicationController
 
   def update
     if current_admin.role == "super_admin"
-      work = @homework.update(admin_id: params[:homework][:admin_id], manager_id: params[:homework][:manager_id], tutor_id: params[:homework][:tutor_id])
+      work = @homework.update(admin_id: params[:homework][:admin_id], manager_id: params[:homework][:manager_id], tutor_id: params[:homework][:tutor_id], price: params[:homework][:price])
     else
-      work = @homework.update(manager_id: params[:homework][:manager_id], tutor_id: params[:homework][:tutor_id])
+      work = @homework.update(manager_id: params[:homework][:manager_id], tutor_id: params[:homework][:tutor_id], price: params[:homework][:price])
     end
 
     if work && @homework.admin_id.present? && @homework.status == "reviewing"
       @homework.accept_order
     end
 
-    @homework.assign_tutor(nil, params[:homework][:price].to_i)
+    @homework.assign_tutor(nil, params[:homework][:tutor_price].to_i)
 
     # if work && @homework.tutor_id.present? 
       
