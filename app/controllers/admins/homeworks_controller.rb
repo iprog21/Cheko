@@ -54,6 +54,11 @@ class Admins::HomeworksController < ApplicationController
     redirect_to admins_homeworks_path
   end
 
+  def finish_homework
+    @homework.finish_order
+    redirect_to admins_homeworks_path
+  end
+
   private 
 
   def find_homework

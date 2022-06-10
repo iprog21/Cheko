@@ -8,9 +8,11 @@
     .card
       .card-body
         .row.mt-3
-          .col-12
+          .col-6
             %h5 User:
             %p= @homework.user.name
+          .col-6
+            %a.btn.btn-success.float-end{href: admins_homework_finish_homework_path(@homework.id), data: {method: :put}} Finish order!
           .col-6
             %h5 Deadline:
             %p= @homework.deadline

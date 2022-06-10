@@ -23,6 +23,11 @@ class Homework < ApplicationRecord
     self.save
   end
 
+  def finish_order
+    self.status = "done"
+    self.save
+  end
+
   def assign_tutor(bid)
     # bid = Bid.find_by(homework_id: self.id, tutor_id: tutor_id)
     self.update!(tutor_id: bid.tutor_id, tutor_price: bid.ammount)

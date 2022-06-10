@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   namespace :admins do
     resources :homeworks, except: [:new, :create], on: :collection do
       put :assign
+      put :finish_homework
       put :assign_tutor
     end
     resources :documents, only: [:index], on: :collection
