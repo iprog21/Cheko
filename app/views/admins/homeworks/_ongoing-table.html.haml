@@ -11,6 +11,7 @@
   %td= home.price
   %td 0
   %td 0
+  %td= home.internal_deadline.strftime("%b %d, %Y - %l:%M %p") if home.internal_deadline.present?
   %td= home.updates
   %td= home.deadline.strftime("%b %d, %Y - %l:%M %p")
   %td= home.subject

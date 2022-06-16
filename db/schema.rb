@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_13_091936) do
+ActiveRecord::Schema.define(version: 2022_06_14_073150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,41 @@ ActiveRecord::Schema.define(version: 2022_06_13_091936) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
+  end
+
+  create_table "prof_reviews", force: :cascade do |t|
+    t.integer "professor_id"
+    t.integer "user_id"
+    t.integer "status"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "professors", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "school"
+    t.integer "easiness"
+    t.integer "effectiveness"
+    t.integer "life_changing"
+    t.integer "light_workload"
+    t.integer "leniency"
+    t.float "average"
+    t.integer "a_able"
+    t.integer "b_pls_able"
+    t.integer "b_able"
+    t.integer "c_able"
+    t.integer "batch1_able"
+    t.integer "batch2_able"
+    t.integer "batch3_able"
+    t.integer "batch4_able"
+    t.integer "bad_comments"
+    t.text "our_comments"
+    t.integer "status"
+    t.string "subject"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reviews", force: :cascade do |t|

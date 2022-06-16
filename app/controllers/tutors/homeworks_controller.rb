@@ -3,13 +3,21 @@ class Tutors::HomeworksController < ApplicationController
   before_action :find_homework, except: [:index]
   
   def index
-    @homeworks = Homework.where("(tutor_id IS NULL OR tutor_id = ? )AND manager_id IS NOT NULL", current_tutor.id)
-    # status: 'reviewing', tutor_id: nil
+    @pending = Homework.where("(tutor_id IS NULL OR tutor_id = ? )AND manager_id IS NOT NULL AND status = 2", current_tutor.id)
+    @history = Homework.where("(tutor_id IS NULL OR tutor_id = ? )AND manager_id IS NOT NULL AND status = 3", current_tutor.id)
   end
 
   def show
     @bids = Bid.where(homework_id: @homework.id).order(ammount: :asc)
     @bid = Bid.find_by(homework_id: @homework.id, tutor_id: current_tutor.id)
+  end
+
+  def edit
+  end
+
+  def upload
+    raise "test"
+    @homework.documents.create()
   end
 
   def bid

@@ -1,0 +1,2 @@
+class ProfReview < ApplicationRecord
+end

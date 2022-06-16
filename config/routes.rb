@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       put :finish_homework
       put :assign_tutor
     end
+    resources :professors
     resources :documents, only: [:index], on: :collection
     resources :managers, on: :collection
     resources :users, on: :collection
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
       get :edit_bid
       post :bid
       put :update_bid
+      post :upload, on: :collection
     end
     resources :chats, only: [:index]
     get '/', to: 'dashboard#home'
@@ -70,6 +72,11 @@ Rails.application.routes.draw do
     resources :homeworks, on: :collection do
       get :pick_type, on: :collection
     end
+
+    resources :professors, only: [:index, :show, :new, :create] do
+      get :search, on: :collection
+    end
+
     get 'profile', to: 'users#show'
     resources :chats, only: [:index]
     get '/', to: 'dashboard#home'

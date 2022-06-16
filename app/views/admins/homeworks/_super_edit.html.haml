@@ -14,11 +14,15 @@
   .mb-3 
     .field
       = f.label :tutor_price, class: "form-label"
-      = f.text_field :tutor_price, class: "form-control"
+      = f.text_field :tutor_price, class: "form-control", value: @homework.tutor_price
   .mb-3 
     .field
       = f.label :price, class: "form-label"
-      = f.text_field :price, class: "form-control"
+      = f.text_field :price, class: "form-control", value: @homework.price
+  .mb-3 
+    .field
+      = f.label :internal_deadline, class: "form-label"
+      = f.datetime_field :internal_deadline, class: "form-control"
   .mb-3
     .actions
       = f.submit "Assign", class: "btn btn-primary"

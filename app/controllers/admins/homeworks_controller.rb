@@ -37,9 +37,9 @@ class Admins::HomeworksController < ApplicationController
 
     @homework.assign_tutor(nil, params[:homework][:tutor_price].to_i)
     
-    if @homework.price.present? && @homework.tutor_price.present?
-      @homework.calculate_profit
-    end
+    # if @homework.price.present? && @homework.tutor_price.present?
+    #   @homework.calculate_profit
+    # end
 
     redirect_to admins_homeworks_path
   end

@@ -1,5 +1,5 @@
 class Homework < ApplicationRecord
-  include HTTParty
+  # include HTTParty
   
   belongs_to :user
   belongs_to :tutor, optional: true

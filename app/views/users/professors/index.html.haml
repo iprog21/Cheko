@@ -1,0 +1,9 @@
+= render 'users/shared/header'
+.row.mt-5
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    -# = form_tag "/test" do
+    -#   = text_field_tag "name", nil, {class: "form-control", autocomplete: "off"}
+    %form{action: "/test", autocomplete: "off"}
+      .autocomplete
+        %input#myInput.form-control{name: "prof", type: "text"}/
+= javascript_pack_tag 'professors/index'

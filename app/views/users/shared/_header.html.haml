@@ -1,4 +1,4 @@
-%nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.sticky-top
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-cheko.sticky-top
   .container-fluid
     %a.navbar-brand{href: root_path}
       = image_tag "logo-white.png"
@@ -10,8 +10,10 @@
 
           %li.nav-item
             %a.nav-link{href: users_homeworks_path} Homeworks
+          -# %li.nav-item
+          -#   %a.nav-link{href: users_chats_path} Messages
           %li.nav-item
-            %a.nav-link{href: users_chats_path} Messages
+            %a.nav-link{href: users_professors_path} Profs to Pick
           %li.nav-item
             %a.nav-link{href: pick_type_users_homeworks_path} New order!
         -else 
