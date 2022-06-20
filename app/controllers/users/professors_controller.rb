@@ -1,5 +1,5 @@
 class Users::ProfessorsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:search]
   
   def index
   end
@@ -9,10 +9,13 @@ class Users::ProfessorsController < ApplicationController
   end
 
   def new
+    @professor = ProfReview.new
+    @school = School.all
   end
 
   def create
-    
+    @professor = current_user.prof_reviews.create(professor_params)
+    redirect_to users_professors_path
   end
 
   def search
@@ -23,5 +26,6 @@ class Users::ProfessorsController < ApplicationController
 
   private
   def professor_params
+    params.require(:prof_review).permit(:first_name, :last_name, :school_id, :school_name, :easiness, :effectiveness, :life_changing, :light_workload, :leniency, :average, :a_able, :b_pls_able, :b_able, :c_able, :batch1_able, :batch2_able, :batch3_able, :batch4_able, :content, :subject)
   end
 end

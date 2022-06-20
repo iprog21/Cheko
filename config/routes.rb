@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get '/pick_type', to: 'pages#pick_type'
   get '/new', to: 'pages#new'
+  get '/professors', to: 'pages#professors'
+  get '/professors/:id', to: 'pages#professor_show'
 
   devise_for :admins, path: 'admins', controllers: {
     sessions: 'admins/auth/sessions',
@@ -39,7 +41,10 @@ Rails.application.routes.draw do
       put :finish_homework
       put :assign_tutor
     end
-    resources :professors
+    resources :professors 
+    resources :prof_reviews, only: [:show, :update] do 
+      post :approve
+    end
     resources :documents, only: [:index], on: :collection
     resources :managers, on: :collection
     resources :users, on: :collection

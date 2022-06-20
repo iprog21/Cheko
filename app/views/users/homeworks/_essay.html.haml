@@ -7,11 +7,11 @@
   .mb-3
     .field
       = label_tag :type, "Type", class: "form-label"
-      = select_tag "homeworks[sub_type]", options_for_select([["Short Essay" , "short_essay" ], ["Essay" , "essay" ], ["Research Paper" , "ressearch_paper" ], ["Script" , "script" ], ["Admissions Essay" , "admission_essay" ]], selected: :payment_type), class: "form-control"
+      = select_tag "homeworks[sub_type]", options_for_select([["Short Essay" , "short_essay" ], ["Essay" , "essay" ], ["Research Paper" , "ressearch_paper" ], ["Script" , "script" ], ["Admissions Essay" , "admission_essay" ]], selected: :payment_type), class: "form-select"
   .mb-3
     .field
       = label_tag :payment_type, "Payment Type", class: "form-label"
-      = select_tag "homeworks[payment_type]", options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), class: "form-control"
+      = select_tag "homeworks[payment_type]", options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), class: "form-select"
   .mb-3
     .field
       = label_tag :deadline, "Deadline", class: "form-label", required: true

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_many :homeworks, dependent: :destroy
+  has_many :prof_reviews
 
   enum status: { inactive: 0, active: 1 }
   def name

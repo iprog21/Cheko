@@ -10,7 +10,7 @@
     .mb-3
       .field
         = f.label :payment_type, class: "form-label"
-        = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), {include_blank: false} , class: "form-control"
+        = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), {include_blank: false} , class: "form-select"
     .mb-3
       .field
         = f.label :deadline, class: "form-label"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_14_073150) do
+ActiveRecord::Schema.define(version: 2022_06_20_024727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,16 +150,36 @@ ActiveRecord::Schema.define(version: 2022_06_14_073150) do
   create_table "prof_reviews", force: :cascade do |t|
     t.integer "professor_id"
     t.integer "user_id"
-    t.integer "status"
+    t.integer "status", default: 1
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "school_id"
+    t.string "school"
+    t.integer "easiness"
+    t.integer "effectiveness"
+    t.integer "life_changing"
+    t.integer "light_workload"
+    t.integer "leniency"
+    t.integer "average"
+    t.integer "a_able"
+    t.integer "b_pls_able"
+    t.integer "b_able"
+    t.integer "c_able"
+    t.integer "batch1_able"
+    t.integer "batch2_able"
+    t.integer "batch3_able"
+    t.integer "batch4_able"
+    t.string "subject"
+    t.string "school_name"
   end
 
   create_table "professors", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.integer "school"
+    t.integer "school_id"
     t.integer "easiness"
     t.integer "effectiveness"
     t.integer "life_changing"
@@ -186,6 +206,12 @@ ActiveRecord::Schema.define(version: 2022_06_14_073150) do
     t.integer "user_id"
     t.integer "tutor_id"
     t.text "details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -4,6 +4,7 @@ class Admins::ProfessorsController < ApplicationController
 
   def index
     @professors = Professor.all
+    @pending = ProfReview.where(status: "pending")
   end
 
   def show

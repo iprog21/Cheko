@@ -14,7 +14,26 @@ subjects = [
 ]
 
 puts "\n --- creating subjects desuwa --- \n"
-subjects.each do |subj|
-  Subject.create!(subj)
+if Subject.all.count == 0
+  subjects.each do |subj|
+    Subject.create!(subj)
+  end
 end
-puts "\n --- subjects okay desuwa ---\n\n"
+puts "\n --- subjects okay desuwa ---\n"
+
+puts "\n --- creating schools desuwa --- \n"
+schools = [
+  {name: "UPD"},
+  {name: "DLSU"},
+  {name: "CSB"},
+  {name: "ADMU"},
+  {name: "UA&P"},
+  {name: "Enderun"}
+]
+
+if School.all.count == 0
+  schools.each do |school|
+    School.create!(school)
+  end
+end
+puts "\n --- schools okay desuwa --- \n"

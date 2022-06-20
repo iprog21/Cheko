@@ -12,13 +12,21 @@
             %a.nav-link{href: users_homeworks_path} Homeworks
           -# %li.nav-item
           -#   %a.nav-link{href: users_chats_path} Messages
-          %li.nav-item
-            %a.nav-link{href: users_professors_path} Profs to Pick
+          
+          %li.nav-item.dropdown
+            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"} Profs to Pick
+            %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+              %li
+                %a.dropdown-item{href: users_professors_path} Search Prof
+              %li
+                %a.dropdown-item{href: new_users_professor_path} Add a prof review
           %li.nav-item
             %a.nav-link{href: pick_type_users_homeworks_path} New order!
         -else 
           %li.nav-item
             %a.nav-link{href: pick_type_path} New order!
+          %li.nav-item
+            %a.nav-link{href: professors_path} Profs to pick!
       
       -if user_signed_in?
         %ul.navbar-nav.ms-auto.mb-2.mb-lg-0

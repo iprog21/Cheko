@@ -1,3 +1,23 @@
+$("#prof_review_school_id").on("change", function() {
+  if( !$('#prof_review_school_id').val() ) {
+    console.log("empty")
+    $("#school_string").removeClass("d-none")
+    $('#prof_review_school_name').prop('required',true);
+  } else {
+    console.log("not empty")
+    $("#school_string").addClass("d-none")
+    $('#prof_review_school_name').val("")
+    $('#prof_review_school_name').prop('required',false);
+  }
+})
+
+getAve()
+
+//////////////////
+// MAIN METRICS //
+//////////////////
+
+
 function getAve(){
   var eas = parseInt($("#professor_easiness").val());
   var eff = parseInt($("#professor_effectiveness").val());
@@ -16,7 +36,6 @@ function getAve(){
   $("#professor_average").val(average)
 }
 
-// MAIN METRICS
 $("#professor_easiness").on("input", function(){
   getAve()
   $("#percent").empty()

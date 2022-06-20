@@ -9,4 +9,11 @@ class PagesController < ApplicationController
     @homework = Homework.new
     @user = User.new
   end
+
+  def professors
+  end
+
+  def professor_show
+    @professor = Professor.find(params[:id])
+  end
 end

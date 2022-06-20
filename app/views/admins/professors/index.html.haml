@@ -7,11 +7,35 @@
         .card-body
           .row 
             .col-6.text-start
+              %h3 Pending
+          .table-responsive
+            %table.table.datatableBasic
+              %thead
+                %tr
+                  %th.text-start id
+                  %th.text-center Name
+                  %th.text-center School
+                  %th.text-end Action
+              %tbody
+                - @pending.each do |prof|
+                  %tr
+                    %td.text-start= prof.id
+                    %td.text-center= prof.name
+                    %td.text-center= prof.school_id.present? ? prof.school.name : prof.school_name
+                    %td.text-end
+                      %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_prof_review_path(prof)}
+.row 
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    .container.mt-5
+      .card 
+        .card-body
+          .row 
+            .col-6.text-start
               %h3 Professors
             .col-6.text-end 
               = link_to "New Prof", new_admins_professor_path, class: "btn btn-primary"
           .table-responsive
-            %table.table#datatable
+            %table.table.datatableBasic
               %thead
                 %tr
                   %th.text-start id
@@ -23,7 +47,7 @@
                   %tr
                     %td.text-start= prof.id
                     %td.text-center= prof.name
-                    %td.text-center= prof.school 
+                    %td.text-center= prof.school.name
                     %td.text-end
                       %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_professor_path(prof)}
                       %a.fas.fa-pen.text-primary.font-16.mr-3{href: edit_admins_professor_path(prof)}
