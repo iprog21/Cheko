@@ -38,4 +38,30 @@ class Professor < ApplicationRecord
 
     self.update(hash)
   end
+
+  def admu_email
+    fname = self.first_name
+
+    fname.split(" ").each do |name|
+      fcharacter = name.first.downcase
+      next if Professor.find_by(email: "#{fcharacter}#{self.last_name.downcase}@admu.edu")
+      self.update!(email: "#{fcharacter}.#{self.last_name.gsub(/\s+/, "").downcase}@admu.edu")
+      break
+    end
+  end
+
+  def dlsu_email
+    new_name = ""
+    fname = self.first_name
+    fname.split(" ").each_with_index do |name, ind|
+      if ind == 0
+        new_name.concat(name.downcase)
+        else
+        new_name.concat(".#{name.downcase}")
+      end
+    end
+
+    email = "#{new_name}.#{self.last_name.gsub(/\s+/, "").downcase}@dlsu.edu.ph"
+    self.update(email: email)
+  end
 end

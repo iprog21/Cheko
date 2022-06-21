@@ -16,15 +16,23 @@ class Admins::ProfReviewsController < ApplicationController
       redirect_to admins_professor_path(params[:prof_id])
     else
       hash = JSON.parse(@prof_review.to_json)
-      hash = hash.except("id", "professor_id", "user_id", "created_at", "updated_at", "status", "content", "school_id", "school_name")
+      hash = hash.except("id", "professor_id", "user_id", "created_at", "updated_at", "status", "content", "school", "school_name")
       new_prof = Professor.create(hash)
-      new_prof.update(subject: params[:subject])
+      new_prof.update(subject: params[:subject], our_comments: params[:our_comment])
       @prof_review.update(status: "approved", professor_id: new_prof)
 
       if @prof_review.school_id.nil? && @prof_review.school_name.present?
         unless School.where("LOWER(name) = LOWER(?)", @prof_review.school).first
           new_school = School.create(name: @prof_review.school_name)
           new_prof.update(school_id: new_school.id)
+        end
+      end
+
+      if @prof_review.school_id.present?
+        if @prof_review.school.name == "ADMU" 
+          new_prof.admu_email
+        elsif @prof_review.school.name == "DLSU"
+          new_prof.dlsu_email
         end
       end
 
