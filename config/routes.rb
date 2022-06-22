@@ -35,6 +35,12 @@ Rails.application.routes.draw do
     passwords: 'users/auth/passwords'
   }
 
+  devise_for :quality_officers, path: 'quality_officers', controllers: {
+    sessions: 'quality_officers/auth/sessions'
+    # registrations: 'quality_officers/auth/registrations',
+    # passwords: 'quality_officers/auth/passwords'
+  }
+
   namespace :admins do
     resources :homeworks, except: [:new, :create], on: :collection do
       put :assign
@@ -52,6 +58,14 @@ Rails.application.routes.draw do
     resources :accountants, on: :collection
     resources :admins
     resources :chats, only: [:index]
+    resources :quality_officers, on: :collection
+    get '/', to: 'dashboard#home'
+  end
+  
+  namespace :quality_officers do 
+    resources :homeworks, only: [:index, :show] do
+      post :upload
+    end
     get '/', to: 'dashboard#home'
   end
 

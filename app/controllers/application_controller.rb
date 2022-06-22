@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
       stored_location_for(resource) || users_path
     elsif resource.class == Accountant
       stored_location_for(resource) || accountants_path
+    elsif resource.class == QualityOfficer
+      stored_location_for(resource) || quality_officers_path
     else
       root_path
     end

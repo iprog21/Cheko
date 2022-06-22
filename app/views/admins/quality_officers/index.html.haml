@@ -1,0 +1,28 @@
+= render 'admins/shared/header'
+= render 'admins/shared/sidebar'
+.row 
+  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
+    .container.mt-5
+      .card 
+        .card-body
+          .row 
+            .col-6.text-start
+              %h3 Quality Officers
+            .col-6.text-end 
+              = link_to "New Prof", new_admins_quality_officer_path, class: "btn btn-primary"
+          .table-responsive
+            %table.table.datatableBasic
+              %thead
+                %tr
+                  %th.text-start id
+                  %th.text-center Name
+                  %th.text-end Action
+              %tbody
+                - @officers.each do |qo|
+                  %tr
+                    %td.text-start= qo.id
+                    %td.text-center= qo.name
+                    %td.text-end
+                      %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_quality_officer_path(qo)}
+
+= javascript_pack_tag 'datatable_basic'
