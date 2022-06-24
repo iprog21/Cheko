@@ -41,7 +41,7 @@
                       %td.text-center= home.deadline.strftime("%B %d, %Y")
                       %td.text-center= home.status.titleize
                       %td.text-end
-                        = link_to :show, admins_homework_path(home)
+                        = link_to :show, users_homework_path(home)
                         = link_to :edit, edit_users_homework_path(home)
                         = link_to :delete, users_homework_path(home), method: :delete
                 -else

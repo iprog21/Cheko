@@ -26,7 +26,7 @@ function autocomplete(inp, arr) {
           b.innerHTML += arr[i][0].substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
           b.innerHTML += "<input type='hidden' value='" + arr[i][0] + "'>";
-          b.innerHTML += "<input type='hidden' value='" + arr[i][1] + "'>";
+          b.innerHTML += "<input id='selected_name' type='hidden' value='" + arr[i][1] + "'>";
           /*execute a function when someone clicks on the item value (DIV element):*/
               b.addEventListener("click", function(e) {
               /*insert the value for the autocomplete text field:*/
@@ -36,6 +36,7 @@ function autocomplete(inp, arr) {
               hidden.value = this.getElementsByTagName("input")[1].value;
               /*close the list of autocompleted values,
               (or any other open lists of autocompleted values:*/
+              $('#subject').removeAttr('required')
               closeAllLists();
           });
           a.appendChild(b);
@@ -125,7 +126,12 @@ $('#myInput').on("change", function(){
     $('#subject').val(null)
     $('#prof_review_content').val(null)
   }
-
 })
 
+$('#resetBtn').on('click', function (){
+  $('#myInput').val("")
+  $('#hiddenProfId').val("")
+  $('#subject').attr('required')
+  $('#prof_review_content_div').removeClass("d-none")
+})
 

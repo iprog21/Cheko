@@ -7,7 +7,7 @@
         .card-body
           .row.mb-3
             .col-6.text-start.ms-auto.me-auto 
-              %h5 Add Professor
+              %h5 Update Professor
           .row
             .col-6.ms-auto.me-auto
               = form_for @professor, url: admins_professor_path, method: :put do |f|
@@ -22,7 +22,7 @@
                 .mb-3
                   .field
                     = f.label :school, class: "form-label"
-                    = f.text_field :school, class: "form-control", required: true, value: @professor.last_name
+                    = f.select :school_id, School.all.collect {|p| [ p.name, p.id ] }, { selected: @professor.school_id }, class: "form-select"
                 .mb-3
                   .field
                     = f.label :easiness, class: "form-label"

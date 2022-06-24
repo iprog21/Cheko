@@ -6,6 +6,7 @@ class Users::ProfessorsController < ApplicationController
 
   def show
     @professor = Professor.find(params[:id])
+    @reviews = @professor.prof_reviews.where(status: "approved")
   end
 
   def new

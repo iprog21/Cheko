@@ -44,8 +44,8 @@ class Professor < ApplicationRecord
 
     fname.split(" ").each do |name|
       fcharacter = name.first.downcase
-      next if Professor.find_by(email: "#{fcharacter}#{self.last_name.downcase}@admu.edu")
-      self.update!(email: "#{fcharacter}.#{self.last_name.gsub(/\s+/, "").downcase}@admu.edu")
+      next if Professor.find_by(email: "#{fcharacter}#{self.last_name.downcase}@ateneo.edu")
+      self.update!(email: "#{fcharacter}#{self.last_name.downcase}@ateneo.edu")
       break
     end
   end
@@ -56,7 +56,7 @@ class Professor < ApplicationRecord
     fname.split(" ").each_with_index do |name, ind|
       if ind == 0
         new_name.concat(name.downcase)
-        else
+      else
         new_name.concat(".#{name.downcase}")
       end
     end

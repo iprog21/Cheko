@@ -81,7 +81,7 @@ Rails.application.routes.draw do
       get :edit_bid
       post :bid
       put :update_bid
-      post :upload, on: :collection
+      post :upload
     end
     resources :chats, only: [:index]
     get '/', to: 'dashboard#home'

@@ -23,12 +23,12 @@ puts "\n --- subjects okay desuwa ---\n"
 
 puts "\n --- creating schools desuwa --- \n"
 schools = [
-  {name: "UPD"},
-  {name: "DLSU"},
-  {name: "CSB"},
-  {name: "ADMU"},
-  {name: "UA&P"},
-  {name: "Enderun"}
+  {name: "University of the Philippines Diliman"},
+  {name: "De La Salle University"},
+  {name: "College of Saint Benilde"},
+  {name: "Ateneo de Manila University"},
+  {name: "University of Asia & Pacific"},
+  {name: "Enderun Colleges"}
 ]
 
 if School.all.count == 0

@@ -4,6 +4,7 @@ class Tutor < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_many :bids, dependent: :destroy
+  has_many :documents, as: :documentable, dependent: :destroy
 
   enum status: { pending: 0, active: 1 }
 

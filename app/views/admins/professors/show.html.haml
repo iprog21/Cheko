@@ -29,7 +29,7 @@
                   %h5.mt-2.ms-3.text-start.text-dark= "Light Workload: #{@professor.light_workload}%"
             .col-12.mt-3.mb-3
               .progress.bg-cheko{style: "height: 30px"}
-                .progress-bar.bg-warning{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "100", role: "progressbar", style: "width: #{@professor.light_workload}%;"}
+                .progress-bar.bg-warning{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "100", role: "progressbar", style: "width: #{@professor.leniency}%;"}
                   %h5.mt-2.ms-3.text-start.text-dark= "Leniency: #{@professor.leniency}%"
             .col-6.mb-3
               %h3.text-start Average

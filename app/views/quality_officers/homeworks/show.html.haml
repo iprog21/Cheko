@@ -10,6 +10,10 @@
         .row.mt-3
           .col-6
             %h5= "Client: #{@homework.user.name}"
+          .col-6.text-end
+            %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
+              Files
+        .row.mt-3
           .col-6
             %h5 Deadline:
             %p= @homework.deadline
@@ -59,4 +63,44 @@
           .col-12 
             %h5 Details:
             %p= @homework.details
+
+.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", tabindex: "-1", id: "exampleModal"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title= @homework.name
+        %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
+      =form_for @homework.documents.new, url: quality_officers_homework_upload_path(homework_id: @homework.id) do |f|
+        .modal-body
+          .row.d-flex.justify-content-between
+            .col-12
+              %h5 Upload File
+            .col-10
+              = f.file_field "file", class: "form-control"
+            .col-2.text-end
+              = submit_tag "Upload", class: "btn btn-primary"
+          .row.mt-3
+            %h5 Uploaded files:
+            .container-flex.mt-2
+              %h6 
+                %strong Tutor files:
+              - @tutor.each do |docu|
+                .row.d-flex.justify-content-between
+                  .col-3
+                    = docu.file.filename
+                  .col-3.text-end
+                    = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'),class: "btn btn-success"
+                %hr
+            .container-flex.mt-2
+              %h6 
+                %strong Quality Control Officer files:
+              - @qco.each do |docu|
+                .row.d-flex.justify-content-between
+                  .col-3
+                    = docu.file.filename
+                  .col-3.text-end
+                    = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'),class: "btn btn-success"
+                %hr
+        .modal-footer
+          %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Close
 

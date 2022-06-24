@@ -10,6 +10,8 @@ class Users::HomeworksController < ApplicationController
   end
 
   def show
+    @tutor = @homework.documents.where(documentable_type: "Tutor")
+    @qco = @homework.documents.where(documentable_type: "QualityOfficer")
   end
 
   def pick_type
@@ -49,6 +51,6 @@ class Users::HomeworksController < ApplicationController
   end
 
   def homework_params
-    params.require(:homework).permit(:details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
+    params.require(:homeworks).permit(:details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
   end
 end

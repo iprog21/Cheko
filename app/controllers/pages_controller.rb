@@ -15,5 +15,6 @@ class PagesController < ApplicationController
 
   def professor_show
     @professor = Professor.find(params[:id])
+    @reviews = @professor.prof_reviews.where(status: "approved")
   end
 end

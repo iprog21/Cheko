@@ -8,9 +8,13 @@ class QualityOfficers::HomeworksController < ApplicationController
   end
 
   def show
+    @tutor = @homework.documents.where(documentable_type: "Tutor")
+    @qco = @homework.documents.where(documentable_type: "QualityOfficer")
   end
 
   def upload
+    @homework.documents.create(file: params[:document][:file], documentable_id: current_quality_officer.id, documentable_type: current_quality_officer.class.name)
+    redirect_to quality_officers_homework_path(@homework.id)
   end
 
   private
