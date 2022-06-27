@@ -10,17 +10,13 @@
             .col-6.text-end 
               = link_to "New Order", pick_type_users_homeworks_path, class: "btn btn-primary"
           .table-responsive
-            %table.homeworks-scrollX.nowrap
+            %table.datatableBasic
               %thead
                 %tr
                   %th.text-start ID
-                  %th.text-start Code
                   %th.text-center Homework Type
                   %th.text-center Type
                   %th.text-center Subject
-                  %th.text-center Lead
-                  %th.text-center Manager
-                  %th.text-center Tutor
                   %th.text-center Price
                   %th.text-center Deadline
                   %th.text-center Status
@@ -30,20 +26,14 @@
                   - @homeworks.each do |home|
                     %tr
                       %td.text-start= home.name
-                      %td.text-center= home.id
                       %td.text-center= home.order_type.titleize
                       %td.text-center= home.sub_type.titleize
                       %td.text-center= home.subject.capitalize
-                      %td.text-center= home.admin.name if home.admin_id.present?
-                      %td.text-center= home.manager.name if home.manager_id.present?
-                      %td.text-center= home.tutor.name if home.tutor_id.present?
                       %td.text-center= home.price
                       %td.text-center= home.deadline.strftime("%B %d, %Y")
                       %td.text-center= home.status.titleize
                       %td.text-end
-                        = link_to :show, users_homework_path(home)
-                        = link_to :edit, edit_users_homework_path(home)
-                        = link_to :delete, users_homework_path(home), method: :delete
+                        %a.fas.fa-eye.text-success.font-16.mr-3{href: users_homework_path(home)}
                 -else
                   %td No Data found
 

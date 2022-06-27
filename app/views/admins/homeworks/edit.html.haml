@@ -8,7 +8,45 @@
           .row 
             .col-12.text-start 
               %h5 Assign Personnel
-            .col-6.ms-auto.me-auto
+            .col-6
+              .mb-3
+                .field
+                  =label_tag "client", "Client", class: "form-label"
+                  =text_field_tag "client", @homework.user.name, disabled: true, class: "form-control"
+              .mb-3
+                .field
+                  =label_tag "subject", "Subject", class: "form-label"
+                  =text_field_tag "subject", @homework.subject, disabled: true, class: "form-control"
+              .mb-3
+                .field
+                  =label_tag "deadline", "Deadline", class: "form-label"
+                  =text_field_tag "deadline", @homework.deadline.strftime("%b %d, %Y - %l:%M %p"), disabled: true, class: "form-control"
+              .mb-3
+                .field
+                  =label_tag "details", "Details", class: "form-label"
+                  =text_area_tag "details", @homework.details, disabled: true, class: "form-control"
+              .row
+                .col-4
+                  = label_tag :priority, "Priority? +30%"
+                  .form-check.form-switch
+                    = check_box_tag "homeworks[priority]", true, false, class: "form-check-input", checked: @homework.priority? ?  true : false, disabled: true
+                .col-4
+                  = label_tag :tutor_skills, "Tutor Skills? P100"
+                  .form-check.form-switch
+                    = check_box_tag "homeworks[priority]", true, false, class: "form-check-input", checked: @homework.tutor_skills? ?  true : false, disabled: true
+                .col-4
+                  = label_tag :tutor_skills, "Tutor Samples? P100"
+                  .form-check.form-switch
+                    = check_box_tag "homeworks[priority]", true, false, class: "form-check-input", checked: @homework.tutor_samples? ?  true : false, disabled: true
+                .col-4
+                  = label_tag :tutor_skills, "View Bidders? P300"
+                  .form-check.form-switch
+                    = check_box_tag "homeworks[priority]", true, false, class: "form-check-input", checked: @homework.view_bidders? ?  true : false, disabled: true
+                .col-4
+                  = label_tag :tutor_skills, "Login School? P200"
+                  .form-check.form-switch
+                    = check_box_tag "homeworks[priority]", true, false, class: "form-check-input", checked: @homework.login_school? ?  true : false, disabled: true
+            .col-6
               - if current_admin.role == 'super_admin'
                 = render 'admins/homeworks/super_edit'
               -else

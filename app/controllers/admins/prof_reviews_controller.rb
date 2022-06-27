@@ -29,11 +29,7 @@ class Admins::ProfReviewsController < ApplicationController
       end
 
       if @prof_review.school_id.present?
-        if @prof_review.school.name == "ADMU" 
-          new_prof.admu_email
-        elsif @prof_review.school.name == "DLSU"
-          new_prof.dlsu_email
-        end
+        new_prof.set_up_email
       end
 
       redirect_to admins_professor_path(new_prof.id)

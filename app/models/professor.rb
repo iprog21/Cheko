@@ -39,6 +39,16 @@ class Professor < ApplicationRecord
     self.update(hash)
   end
 
+  def set_up_email
+    professor = self.professor
+
+    if professor.school.name == "DLSU"
+      self.dlsu_email
+    elsif professor.school.name == "ADMU" 
+      self.admu_email
+    end
+  end
+
   def admu_email
     fname = self.first_name
 
