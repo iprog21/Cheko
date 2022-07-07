@@ -5,10 +5,19 @@ class Tutor < ApplicationRecord
 
   has_many :bids, dependent: :destroy
   has_many :documents, as: :documentable, dependent: :destroy
+  has_many :chats, as: :chattable, dependent: :destroy
 
   enum status: { pending: 0, active: 1 }
 
   def name
     return "#{self.first_name} #{self.last_name}"
+  end
+
+  def create_identifier
+    key = "PmKdMh8hYDwk7doWjkQzoVYr"
+    message = "#{self.id}-client"
+    idd = OpenSSL::HMAC.hexdigest('sha256', key, message)
+
+    self.update(identifier_string: idd)
   end
 end

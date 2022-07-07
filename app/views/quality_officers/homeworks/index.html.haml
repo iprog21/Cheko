@@ -22,10 +22,6 @@
                       %th TL
                       %th TM
                       %th Order Number
-                      %th Payment to Tutor
-                      %th Client's payment
-                      %th Profit
-                      %th Additional
                       %th Internal Deadline
                       %th Updates
                       %th Deadline
@@ -33,10 +29,6 @@
                       %th Subject 2
                       %th Time Received
                       %th Hours Late
-                      %th Notes
-                      %th Prof
-                      %th Grade
-                      %th Status
                       %th Action
                   %tbody
                     =render partial: 'quality_officers/homeworks/ongoing-table', collection: @ongoing, as: :home
@@ -62,11 +54,6 @@
                       %th Subject
                       %th Tutor Category
                       %th Word Count
-                      %th View Samples
-                      %th View Skills
-                      %th View Bidders
-                      %th Priority
-                      %th Login
                       %th Action
                   %tbody
                     =render partial: 'quality_officers/homeworks/history-table', collection: @history, as: :home

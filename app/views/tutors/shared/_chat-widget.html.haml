@@ -1,15 +1,18 @@
-= render 'tutors/shared/header'
 :javascript
   window.addEventListener("chatwoot:ready", function () { 
-    window.$chatwoot.setUser('#{current_tutor.email}', {
-      name: '#{current_tutor.name}',
-      email: '#{current_tutor.email}'
-      identifier_hash: '#{current_tutor.identifier_string}'
-    }, console.log("#{current_tutor.identifier_string}"));
+    var emailUser = '#{current_tutor.email}'
+    var nameUser = '#{current_tutor.name}'
+    var hasssh = '#{current_tutor.identifier_string}'
+    var identifier = '#{current_tutor.id}-tutor'
+
+    window.$chatwoot.setUser(identifier, {
+      email: emailUser,
+      name: nameUser,
+      identifier_hash: hasssh,
+    });
 
     window.$chatwoot.setCustomAttributes({
-      accountId: '#{current_tutor.id}-client',
-      note: "THIS IS A TEST NOTE",
+      accountId: '#{current_tutor.id}-tutor',
     });
   });
 
@@ -27,7 +30,7 @@
     s.parentNode.insertBefore(g,s);
     g.onload=function(){
       window.chatwootSDK.run({
-        websiteToken: 'ocpf6AS4iMEVzfJT5QE8QSAE',
+        websiteToken: '6nVfMuVjSpNJ7SVbmoRXkVQk',
         baseUrl: BASE_URL
       });
     }

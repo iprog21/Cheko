@@ -17,6 +17,7 @@ class Admins::AdminsController < ApplicationController
     @admin = Admin.new(admin_params)
     if @admin.save
       @admin.update!(role: 1)
+      # @admin.create_agent
       redirect_to admins_admins_path
     else
       render 'new'

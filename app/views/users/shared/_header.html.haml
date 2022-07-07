@@ -1,6 +1,6 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-cheko.sticky-top
   .container-fluid
-    %a.navbar-brand{href: root_path}
+    %a.navbar-brand{href: users_path}
       = image_tag "logo-white.png"
     %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", type: "button"}
       %span.navbar-toggler-icon
@@ -38,15 +38,16 @@
               %li
                 %hr.dropdown-divider/
               %li
-                %a.dropdown-item{href: destroy_user_session_path, data: {method: :delete}} Log out
+                %a.dropdown-item{onclick: "resetLogOut()", href: destroy_user_session_path, data: {method: :delete}} Log out
+                -# {href: destroy_user_session_path, data: {method: :delete}}
       -else
         %ul.navbar-nav.ms-auto.mb-2.mb-lg-0
           %li.nav-item
             %a.nav-link{href: new_user_session_path} Login
           %li.nav-item
             %a.nav-link{href: new_user_registration_path} Sign up
-      -# %form.d-flex
-      -#   %input.form-control.me-2{"aria-label" => "Search", placeholder: "Search", type: "search"}/
-      -#   %button.btn.btn-outline-success{type: "submit"} Search
 
-      
+:javascript
+  function resetLogOut() {
+    window.$chatwoot.reset()
+  }

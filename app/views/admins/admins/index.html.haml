@@ -28,9 +28,9 @@
                       %td.text-center= admin.email 
                       %td.text-center= admin.role.titleize
                       %td.text-end
-                        = link_to :show, admins_admin_path(admin)
-                        = link_to :edit, edit_admins_admin_path(admin)
-                        = link_to :delete, admins_admin_path(admin), method: :delete
+                        %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_admin_path(admin)}
+                        %a.fas.fa-pen.text-primary.font-16.mr-3{href: edit_admins_admin_path(admin)}
+                        %a.fas.fa-trash.text-danger.font-16.mr-3{href: admins_admin_path(admin), data: {method: :delete}}
                 -else
                   %td No Data found
 

@@ -39,7 +39,7 @@
       .modal-header
         %h5#exampleModalLabel.modal-title= @homework.name
         %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
-      =form_for @homework.documents.new, url: quality_officers_homework_upload_path(homework_id: @homework.id) do |f|
+      =form_for @homework.documents.new, url: tutors_homework_upload_path(homework_id: @homework.id) do |f|
         .modal-body
           .row.d-flex.justify-content-between
             .col-12

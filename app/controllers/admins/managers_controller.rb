@@ -17,6 +17,7 @@ class Admins::ManagersController < ApplicationController
   def create
     @manager = Manager.new(manager_params)
     if @manager.save
+      @manager.create_agent
       redirect_to admins_managers_path
     else
       render 'new'
@@ -35,6 +36,7 @@ class Admins::ManagersController < ApplicationController
   end
 
   def destroy
+    @manager.remove_agent
     @manager.destroy!
     redirect_to admins_managers_path
   end

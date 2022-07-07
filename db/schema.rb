@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_22_100252) do
+ActiveRecord::Schema.define(version: 2022_07_04_063127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2022_06_22_100252) do
     t.datetime "confirmation_sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "agent_id"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
@@ -81,6 +82,12 @@ ActiveRecord::Schema.define(version: 2022_06_22_100252) do
     t.string "chat_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "conversation_id"
+    t.integer "chattable_id"
+    t.string "chattable_type"
+    t.integer "admin_id"
+    t.integer "manager_id"
+    t.string "name"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -145,6 +152,7 @@ ActiveRecord::Schema.define(version: 2022_06_22_100252) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "agent_id"
     t.index ["email"], name: "index_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
   end
@@ -271,6 +279,7 @@ ActiveRecord::Schema.define(version: 2022_06_22_100252) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "school"
     t.integer "category"
+    t.string "identifier_string"
     t.index ["email"], name: "index_tutors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_tutors_on_reset_password_token", unique: true
   end
@@ -289,6 +298,8 @@ ActiveRecord::Schema.define(version: 2022_06_22_100252) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "level"
+    t.string "contact_id"
+    t.string "identifier_string"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
