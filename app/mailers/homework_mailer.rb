@@ -8,6 +8,11 @@ class HomeworkMailer < ApplicationMailer
 
   def notify_user
     @homework = params[:homework]
-    mail(to: @homework.user.email, subject: 'New Order')
+    mail(to: @homework.user.email, subject: 'Tutor has uploaded')
+  end
+
+  def finish_notify
+    @homework = params[:homework]
+    mail(to: @homework.user.email, subject: 'Order has been completed')
   end
 end

@@ -63,6 +63,7 @@ class Admins::HomeworksController < ApplicationController
 
   def finish_homework
     @homework.finish_order
+    HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Finish")
     redirect_to admins_homeworks_path
   end
 

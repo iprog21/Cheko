@@ -20,7 +20,8 @@ class Tutors::HomeworksController < ApplicationController
 
   def upload
     @homework.documents.create(file: params[:document][:file], documentable_id: current_tutor.id, documentable_type: current_tutor.class.name)
-    HomeworkMailer.with(homework: @homework).notify_user.deliver_now
+    # HomeworkMailer.with(homework: @homework).notify_user.deliver_now
+    HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "User")
     redirect_to tutors_homework_path(@homework.id)
   end
 

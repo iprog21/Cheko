@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   root to: 'pages#home'
   get '/pick_type', to: 'pages#pick_type'
   get '/new', to: 'pages#new'

@@ -24,7 +24,8 @@ class Users::HomeworksController < ApplicationController
   def create
     @homework = current_user.homeworks.new(homework_params)
     if @homework.save
-      HomeworkMailer.with(homework: @homework).notify_admin.deliver_now
+      # HomeworkMailer.with(homework: @homework).notify_admin.deliver_now
+      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Admin")
       redirect_to users_homeworks_path
     else
       render 'new'
