@@ -59,3 +59,35 @@
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
+.btn-xl {
+  padding: 40px 50px !important;
+  font-size: 20px !important;
+  border-radius: 10px !important;
+}
+
+body.light {
+  color: black;
+  background-color: white;
+}
+body.dark {
+  color: white;
+  background-color: #212121;
+}
+
+.card-dark{
+  --bs-bg-opacity: 1;
+  background-color: #3d3d3d !important;
+}
+
+@media(min-width: 1200px){
+  .admin-col-xl{
+    width: 15.6667% !important;
+  }
+}
+
+@media(min-width: 996px){
+  .admin-col-lg{
+    width: 18.6667% !important;
+  }
+}

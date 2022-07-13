@@ -1,4 +1,4 @@
-class Users::ProfessorsController < ApplicationController
+class Users::ProfessorsController < Users::UserAppController
   before_action :authenticate_user!, except: [:search]
   
   def index

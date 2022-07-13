@@ -1,4 +1,4 @@
-class Users::HomeworksController < ApplicationController
+class Users::HomeworksController < Users::UserAppController
   before_action :authenticate_user!
   before_action :find_homework, except: [:index, :create, :new, :pick_type]
   

@@ -12,8 +12,8 @@
             %h5 User:
             %p= @homework.user.name
           .col-6
-            -if @homework.status == "ongoing"
-              %a.btn.btn-success.float-end{href: admins_homework_finish_homework_path(@homework.id), data: {method: :put}} Finish order!
+            -if @homework.documents.count >= 1 || current_admin.role == "super_admin"
+              %a.btn.btn-success.float-end{href: admins_homework_finish_homework_path(@homework.id), data: {method: :put}} Finish order
           .col-6
             %h5 Deadline:
             %p= @homework.deadline
@@ -88,7 +88,7 @@
                         %td.text-start= bid.tutor.name
                         %td.text-start= bid.ammount
                         %td.text-end
-                          - if @homework.tutor_id = bid.tutor_id
+                          - if @homework.tutor_id == bid.tutor_id
                             %a{href: admins_homework_assign_tutor_path(homework_id: @homework.id, bid_id: bid.id), data: {method: :put}, class: "btn btn-primary disabled", disabled: true} Assigned
                           - else 
                             %a{href: admins_homework_assign_tutor_path(homework_id: @homework.id, bid_id: bid.id), data: {method: :put}, class: "btn btn-primary"} Assign

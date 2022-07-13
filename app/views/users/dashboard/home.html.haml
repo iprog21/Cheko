@@ -1,9 +1,21 @@
 = render 'users/shared/header'
-.row
-  .col-4.ms-auto.me-auto
-    %h1 test 
-  .col-6.ms-auto.me-auto
-    %h1 test 
+.container.mt-5
+  .row
+    .col-sm-12.col-md-12.col-lg-6.ms-auto.me-auto.mt-2.p-4
+      .d-grid.gap-5
+        %a.btn.bg-cheko.text-white.btn-xl{href: users_homeworks_path}
+          .h2 HW Help
+        %button.btn.bg-cheko.text-white.position-relative.btn-xl{type: "button"}
+          .h2 Past Documents
+          %span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-danger
+            Coming Soon
+            %span.visually-hidden unread messages
+    .col-sm-12.col-md-12.col-lg-6.ms-auto.me-auto.mt-2.p-4
+      .d-grid.gap-5
+        %a.btn.bg-cheko.text-white.btn-xl{href: professors_path}
+          .h2 Profs to Pick
+        %a.btn.bg-cheko.text-white.btn-xl
+          .h2 Tutor QA
 :javascript
   window.addEventListener("chatwoot:ready", function () { 
     var emailUser = '#{current_user.email}'

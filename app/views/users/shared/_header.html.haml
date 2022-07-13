@@ -1,13 +1,12 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-cheko.sticky-top
   .container-fluid
-    %a.navbar-brand{href: users_path}
+    %a.navbar-brand{href: user_signed_in? ? users_path : root_path}
       = image_tag "logo-white.png"
     %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", type: "button"}
       %span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
       %ul.navbar-nav.me-auto.mb-2.mb-lg-0
         -if user_signed_in?
-
           %li.nav-item
             %a.nav-link{href: users_homeworks_path} Homeworks
           -# %li.nav-item
@@ -30,11 +29,24 @@
       
       -if user_signed_in?
         %ul.navbar-nav.ms-auto.mb-2.mb-lg-0
+          -# - if current_user.theme == "light" || cookies[:theme] == "light"
+          -#   %li.nav-item
+          -#     %a.nav-link.fas.fa-moon{href: users_path(theme: "dark")} 
+          -# - else
+          -#   %li.nav-item
+          -#     %a.nav-link.fas.fa-sun{href: users_path(theme: "light")} 
+
           %li.nav-item.dropdown
             %a#navbarDropdown.nav-link.dropdown-toggle.active{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}= current_user.first_name
             %ul.dropdown-menu.dropdown-menu-end{"aria-labelledby" => "navbarDropdown"}
               %li
                 %a.dropdown-item{href: "#"} Profile
+              - if current_user.theme == "light" || cookies[:theme] == "light"
+                %li.nav-item
+                  %a.dropdown-item{href: users_path(theme: "dark")} Change theme
+              - else
+                %li.nav-item
+                  %a.dropdown-item{href: users_path(theme: "light")} Change theme
               %li
                 %hr.dropdown-divider/
               %li

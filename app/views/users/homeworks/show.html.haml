@@ -1,69 +1,68 @@
 = render 'users/shared/header'
 = render 'users/shared/chat-widget'
-.row 
-  .col-6.ms-auto.me-auto 
-    .mt-5
-      %h4= @homework.order_type.titleize
-.row
-  .col-6.ms-auto.me-auto 
-    .card
-      .card-body
-        .row.mt-3
-          .col-6
-            %h5= "Client: #{@homework.user.name}"
-          .col-6.text-end
-            %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
-              Files
-        .row.mt-3
-          .col-6
-            %h5 Deadline:
-            %p= @homework.deadline
-          .col-6
-            %h5 Subject:
-            %p= @homework.subject_id.present? ? @homework.subject.name : "None Provided"
-          .col-6
-            %h5 Words:
-            %p= @homework.words
-          .col-6
-            %h5 Target Grade:
-            %p= @homework.grade
-        %hr
-        .row.mt-3.d-flex.justify-content-center
-          .col-2
-            %h6 Priority
-            - if @homework.priority?
-              %button.btn.btn-success.btn-sm{type: "button"}= @homework.priority.to_s.capitalize
-            -else 
-              %button.btn.btn-danger.btn-sm{type: "button"}= @homework.priority.to_s.capitalize
-          .col-2
-            %h6 Tutor skills
-            - if @homework.tutor_skills?
-              %button.btn.btn-success.btn-sm{type: "button"}= @homework.tutor_skills.to_s.capitalize
-            -else 
-              %button.btn.btn-danger.btn-sm{type: "button"}= @homework.tutor_skills.to_s.capitalize
-          .col-2
-            %h6 Tutor Samples
-            - if @homework.tutor_samples?
-              %button.btn.btn-success.btn-sm{type: "button"}= @homework.tutor_samples.to_s.capitalize
-            -else 
-              %button.btn.btn-danger.btn-sm{type: "button"}= @homework.tutor_samples.to_s.capitalize
-          .col-2
-            %h6 View Bidders
-            - if @homework.view_bidders?
-              %button.btn.btn-success.btn-sm{type: "button"}= @homework.view_bidders.to_s.capitalize
-            -else 
-              %button.btn.btn-danger.btn-sm{type: "button"}= @homework.view_bidders.to_s.capitalize
-          .col-2
-            %h6 Login School
-            - if @homework.login_school?
-              %button.btn.btn-success.btn-sm{type: "button"}= @homework.login_school.to_s.capitalize
-            -else 
-              %button.btn.btn-danger.btn-sm{type: "button"}= @homework.login_school.to_s.capitalize
-        %hr
-        .row
-          .col-12 
-            %h5 Details:
-            %p= @homework.details
+
+.container.mt-5
+  .card{class: "bg-#{cookies[:theme]}"}
+    .card-body
+      .row 
+        .col-6.text-start
+          %h4= @homework.order_type.titleize
+        .col-6.text-end
+          %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
+            Files
+      .row.mt-3
+        .col-6
+          %h5= "Client: #{@homework.user.name}"
+      .row.mt-3
+        .col-6
+          %h5 Deadline:
+          %p= @homework.deadline
+        .col-6
+          %h5 Subject:
+          %p= @homework.subject_id.present? ? @homework.subject.name : "None Provided"
+        .col-6
+          %h5 Words:
+          %p= @homework.words
+        .col-6
+          %h5 Target Grade:
+          %p= @homework.grade
+      %hr
+      .row.mt-3.d-flex.justify-content-center
+        .col-2
+          %h6 Priority
+          - if @homework.priority?
+            %button.btn.btn-success.btn-sm{type: "button"}= @homework.priority.to_s.capitalize
+          -else 
+            %button.btn.btn-danger.btn-sm{type: "button"}= @homework.priority.to_s.capitalize
+        .col-2
+          %h6 Tutor skills
+          - if @homework.tutor_skills?
+            %button.btn.btn-success.btn-sm{type: "button"}= @homework.tutor_skills.to_s.capitalize
+          -else 
+            %button.btn.btn-danger.btn-sm{type: "button"}= @homework.tutor_skills.to_s.capitalize
+        .col-2
+          %h6 Tutor Samples
+          - if @homework.tutor_samples?
+            %button.btn.btn-success.btn-sm{type: "button"}= @homework.tutor_samples.to_s.capitalize
+          -else 
+            %button.btn.btn-danger.btn-sm{type: "button"}= @homework.tutor_samples.to_s.capitalize
+        .col-2
+          %h6 View Bidders
+          - if @homework.view_bidders?
+            %button.btn.btn-success.btn-sm{type: "button"}= @homework.view_bidders.to_s.capitalize
+          -else 
+            %button.btn.btn-danger.btn-sm{type: "button"}= @homework.view_bidders.to_s.capitalize
+        .col-2
+          %h6 Login School
+          - if @homework.login_school?
+            %button.btn.btn-success.btn-sm{type: "button"}= @homework.login_school.to_s.capitalize
+          -else 
+            %button.btn.btn-danger.btn-sm{type: "button"}= @homework.login_school.to_s.capitalize
+      %hr
+      .row
+        .col-12 
+          %h5 Details:
+          %p= @homework.details
 
 .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", tabindex: "-1", id: "exampleModal"}
   .modal-dialog.modal-lg

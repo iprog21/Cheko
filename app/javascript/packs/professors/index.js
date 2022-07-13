@@ -13,6 +13,7 @@ function autocomplete(inp, arr) {
       a = document.createElement("DIV");
       a.setAttribute("id", this.id + "autocomplete-list");
       a.setAttribute("class", "autocomplete-items");
+      a.setAttribute("style", "color: black !important;");
       /*append the DIV element as a child of the autocomplete container:*/
       this.parentNode.appendChild(a);
       /*for each item in the array...*/
@@ -21,7 +22,7 @@ function autocomplete(inp, arr) {
         if (arr[i][0].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
           /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
-          /*make the matching letters bold:*/
+          b.setAttribute("class", "text-start");
           b.innerHTML = "<strong>" + arr[i][0].substr(0, val.length) + "</strong>";
           b.innerHTML += arr[i][0].substr(val.length);
           /*insert a input field that will hold the current array item's value:*/

@@ -4,6 +4,12 @@
     .card 
       .card-body
         %h2 Users Log in
+        -if flash.any?
+          .row.text-center
+            -# %ul.alert.alert-danger
+            - flash.each do |type, msg|
+              .col-lg-12.col-md-12.col-sm-12.alert.alert-danger.mt-3.mb-3
+                = msg
         = form_for(resource, as: resource_name, url: user_session_path) do |f|
           .mb-3
             .field

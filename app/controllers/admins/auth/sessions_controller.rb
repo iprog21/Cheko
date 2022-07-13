@@ -9,9 +9,10 @@ class Admins::Auth::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    logger.info "\n \n#{flash.blank?}\n\n"
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy

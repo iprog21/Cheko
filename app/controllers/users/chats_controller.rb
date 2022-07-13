@@ -1,4 +1,4 @@
-class Users::ChatsController < ApplicationController
+class Users::ChatsController < Users::UserAppController
   before_action :authenticate_user!
   
   def index

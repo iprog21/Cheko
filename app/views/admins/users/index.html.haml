@@ -1,8 +1,11 @@
 = render 'admins/shared/header'
-= render 'admins/shared/sidebar'
-.row 
-  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
-    .container.mt-5
+
+
+.container-fluid.mt-5
+  .row.flex-nowrap
+    .col-auto.col-lg-2.col-md-2.col-xl-2.px-sm-2.px-0.admin-col-xl
+      = render 'admins/shared/sidebar'  
+    .col.px-3
       .card 
         .card-body
           .row 
