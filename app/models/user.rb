@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :homeworks, dependent: :destroy
   has_many :prof_reviews
   has_many :chats, as: :chattable, dependent: :destroy
+  has_many :qnas, dependent: :destroy
+  has_many :messages, as: :sendable, dependent: :destroy
 
   after_create :create_identifier
 

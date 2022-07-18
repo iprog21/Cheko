@@ -1,84 +1,82 @@
 = render 'users/shared/header'
-.row 
-  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
-    .container.mt-5
-      .row
-        .col-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Essay
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "essay")} Order now!
-        .col-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Math
-              
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "math")} Order now!
-        .col-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Translation
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "translation")} Order now!
-        .col-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Code
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "code")} Order now!
-        .col-3.mt-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Art
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "art")} Order now!
-        .col-3.mt-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Group Assignment
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "group_project")} Order now!
-        .col-3.mt-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Law Related Tasks
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "law_related_tasks")} Order now!
-        .col-3.mt-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Science
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "science")} Order now!
-        .col-3.mt-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Economics
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "economics")} Order now!
-        .col-3.mt-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Sketchup & Autocad tasks
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "sketchup")} Order now!
-        .col-3.mt-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Foreign Language
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "foreign_language")} Order now!
-        .col-3.mt-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Robotics/Machine Learning
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "robotics")} Order now!
-        .col-3.mt-3
-          .card{style: "width: 18rem;"}
-            %img.card-img-top{alt: "...", src: "..."}/
-            .card-body
-              %h5.card-title Module
-              %a.btn.btn-primary.stretched-link{href: new_path(type: "module")} Order now!
+
+.container.mt-5
+  .row
+    .col-3
+      .card.bg-dark.text-white
+        = image_tag "Essay2.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Essay
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "essay")} Order
+    .col-3
+      .card.bg-dark.text-white
+        = image_tag "Math2.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Math
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "math")} Order
+    .col-3
+      .card.bg-dark.text-white
+        = image_tag "Translations2.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Translation
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "translation")} Order
+    .col-3
+      .card.bg-dark.text-white
+        = image_tag "Coding2.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Code
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "code")} Order
+    .col-3.mt-3
+      .card.bg-dark.text-white
+        = image_tag "Art2.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Art
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "art")} Order
+    .col-3.mt-3
+      .card.bg-dark.text-white
+        = image_tag "Group-Assignments.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Group Assignment
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "group")} Order
+    .col-3.mt-3
+      .card.bg-dark.text-white
+        = image_tag "Law.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Law Related Tasks
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "law_related_tasks")} Order
+    .col-3.mt-3
+      .card.bg-dark.text-white
+        = image_tag "Sciences.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Science
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "science")} Order
+    .col-3.mt-3
+      .card.bg-dark.text-white
+        = image_tag "Economics.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Economics
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "economics")} Order
+    .col-3.mt-3
+      .card.bg-dark.text-white
+        = image_tag "Autocad.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Sketchup & Autocad
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "sketchup")} Order
+    .col-3.mt-3
+      .card.bg-dark.text-white
+        = image_tag "Foreign-languages.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Foreign Language
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "foreign_language")} Order
+    .col-3.mt-3
+      .card.bg-dark.text-white
+        = image_tag "Robotics.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Robotics/Machine Learning
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "robotics")} Order
+    .col-3.mt-3
+      .card.bg-dark.text-white
+        = image_tag "Module.png", class: "card-img-top" 
+        .card-pick-type
+          %h5.card-title Module
+          %a.btn.btn-primary.stretched-link{href: new_path(type: "module")} Order

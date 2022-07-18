@@ -1,0 +1,16 @@
+= render 'users/shared/header'
+.container.mt-5
+  .row
+    .card{class: "bg-#{cookies[:theme]}"}
+      .card-body
+        .row 
+          .col-12.text-start 
+            %h5= "#{@qna.subject.titleize}"
+          .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
+            %p= @qna.question
+  .row.mt-3
+    .card{class: "bg-#{cookies[:theme]}"}
+      .card-body
+        - if @qna.tutor_id.present?
+          = form_tag users_qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chats.first.id) do
+            = text_field_tag "content"

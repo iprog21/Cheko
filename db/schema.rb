@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_11_073421) do
+ActiveRecord::Schema.define(version: 2022_07_14_041529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,15 +81,9 @@ ActiveRecord::Schema.define(version: 2022_07_11_073421) do
   end
 
   create_table "chats", force: :cascade do |t|
-    t.string "chat_id"
+    t.integer "qna_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "conversation_id"
-    t.integer "chattable_id"
-    t.string "chattable_type"
-    t.integer "admin_id"
-    t.integer "manager_id"
-    t.string "name"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -160,6 +154,15 @@ ActiveRecord::Schema.define(version: 2022_07_11_073421) do
     t.index ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "chat_id"
+    t.text "content"
+    t.integer "sendable_id"
+    t.string "sendable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "prof_reviews", force: :cascade do |t|
     t.integer "professor_id"
     t.integer "user_id"
@@ -214,6 +217,26 @@ ActiveRecord::Schema.define(version: 2022_07_11_073421) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email"
+  end
+
+  create_table "q_n_as", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "tutor_id"
+    t.text "question"
+    t.string "subject"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "qnas", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "tutor_id"
+    t.text "question"
+    t.string "subject"
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "quality_officers", force: :cascade do |t|

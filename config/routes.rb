@@ -87,6 +87,16 @@ Rails.application.routes.draw do
       put :update_bid
       post :upload
     end
+
+    resources :qnas, only: [:index, :show] do
+      put :assign
+      put :cancel
+
+      resources :chats do
+        resources :messages, only: [:create]
+      end
+    end
+
     resources :chats, only: [:index]
     get '/', to: 'dashboard#home'
   end
@@ -98,6 +108,12 @@ Rails.application.routes.draw do
 
     resources :professors, only: [:index, :show, :new, :create] do
       get :search, on: :collection
+    end
+
+    resources :qnas do 
+      resources :chats, only: [:show] do
+        resources :messages, only: [:create], on: :collection
+      end
     end
 
     get 'profile', to: 'users#show'

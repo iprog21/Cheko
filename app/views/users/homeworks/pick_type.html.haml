@@ -3,80 +3,145 @@
 .container.mt-5
   .row
     .col-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Essay.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Essay.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Essay
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "essay")} Order
+      .card.bg-dark.text-white
+        = image_tag "Essay2.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Essay
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "essay")} Order
     .col-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Math.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Math.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Math
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "math")} Order
+      .card.bg-dark.text-white
+        = image_tag "Math2.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Math
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "math")} Order
     .col-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Translations.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Translations.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Translation
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "translation")} Order
+      .card.bg-dark.text-white
+        = image_tag "Translations2.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Translation
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "translation")} Order
     .col-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Coding.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Coding.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Code
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "code")} Order
+      .card.bg-dark.text-white
+        = image_tag "Coding2.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Code
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "code")} Order
     .col-3.mt-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Art-Project.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Art-Project.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Art
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "art")} Order
+      .card.bg-dark.text-white
+        = image_tag "Art2.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Art
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "art")} Order
     .col-3.mt-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Group-Assignments.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Group-Assignments.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Group Assignment
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "group")} Order
+      .card.bg-dark.text-white
+        = image_tag "Group-Assignments.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Group Assignment
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "group")} Order
     .col-3.mt-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Law.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Law.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Law Related Tasks
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "law_related_tasks")} Order
+      .card.bg-dark.text-white
+        = image_tag "Law.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Law Related Tasks
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "law_related_tasks")} Order
     .col-3.mt-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Sciences.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Sciences.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Science
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "science")} Order
+      .card.bg-dark.text-white
+        = image_tag "Sciences.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Science
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "science")} Order
     .col-3.mt-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Economics.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Economics.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Economics
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "economics")} Order
+      .card.bg-dark.text-white
+        = image_tag "Economics.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Economics
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "economics")} Order
     .col-3.mt-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Autocad.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Autocad.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Sketchup & Autocad
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "sketchup")} Order
+      .card.bg-dark.text-white
+        = image_tag "Autocad.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Sketchup & Autocad
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "sketchup")} Order
     .col-3.mt-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Foreign-languages.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Foreign-languages.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Foreign Language
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "foreign_language")} Order
+      .card.bg-dark.text-white
+        = image_tag "Foreign-languages.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Foreign Language
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "foreign_language")} Order
     .col-3.mt-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Robotics.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Robotics.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Robotics/Machine Learning
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "robotics")} Order
+      .card.bg-dark.text-white
+        = image_tag "Robotics.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Robotics/Machine Learning
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "robotics")} Order
     .col-3.mt-3
-      .card{class: "card-#{cookies[:theme]}"}
-        = image_tag "Module.jpeg", class: "card-img-top"
-        .card-body
+      -# .card{class: "card-#{cookies[:theme]}"}
+      -#   = image_tag "Module.jpeg", class: "card-img-top"
+      -#   .card-body
+      -#     %h5.card-title Module
+      -#     %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "module")} Order
+      .card.bg-dark.text-white
+        = image_tag "Module.png", class: "card-img-top" #, style: "filter: brightness(70%);"
+        .card-pick-type
           %h5.card-title Module
           %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "module")} Order

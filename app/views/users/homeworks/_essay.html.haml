@@ -1,67 +1,73 @@
 = form_for @homework, url: users_homeworks_path, method: :post do |f|
   = hidden_field_tag "homeworks[order_type]", params[:type]
-  .mb-3
-    .field
-      = label_tag :subject, "Subject", class: "form-label"
-      = text_field_tag "homeworks[subject]", '', class: "form-control"
-  .mb-3
-    .field
-      = label_tag :type, "Type", class: "form-label"
-      = select_tag "homeworks[sub_type]", options_for_select([["Short Essay" , "short_essay" ], ["Essay" , "essay" ], ["Research Paper" , "ressearch_paper" ], ["Script" , "script" ], ["Admissions Essay" , "admission_essay" ]], selected: :payment_type), class: "form-select"
-  .mb-3
-    .field
-      = label_tag :payment_type, "Payment Type", class: "form-label"
-      = select_tag "homeworks[payment_type]", options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), class: "form-select"
-  .mb-3
-    .field
-      = label_tag :deadline, "Deadline", class: "form-label", required: true
-      = date_field_tag "homeworks[deadline]", "", class: "form-control"
-  .mb-3 
-    .field 
-      = label_tag :tutor_category, "Pick a type of writer"
+  %h3 Subject
+  %stuff
+    .mb-3
+      .field
+        = label_tag :subject, "Subject", class: "form-label"
+        = text_field_tag "homeworks[subject]", '', class: "form-control"
+    .mb-3
+      .field
+        = label_tag :type, "Type", class: "form-label"
+        = select_tag "homeworks[sub_type]", options_for_select([["Short Essay" , "short_essay" ], ["Essay" , "essay" ], ["Research Paper" , "ressearch_paper" ], ["Script" , "script" ], ["Admissions Essay" , "admission_essay" ]], selected: :payment_type), class: "form-select"
+  %h3 Details
+  %stuff
+    .mb-3
+      .field
+        = label_tag :deadline, "Deadline", class: "form-label", required: true
+        = date_field_tag "homeworks[deadline]", "", class: "form-control"
+    .mb-3
+      .field
+        = label_tag :target_words, "Target Words", class: "form-label"
+        = text_field_tag "homeworks[words]", "", class: "form-control", placeholder: "Input an amount"
+    .mb-3
+      .field
+        = label_tag :details, "Details", class: "form-label"
+        = text_area_tag "homeworks[details]", '', rows: 10, class: "form-control"
+  %h3 Payment
+  %stuff
+    .mb-3
+      .field
+        = label_tag :payment_type, "Payment Type", class: "form-label"
+        = select_tag "homeworks[payment_type]", options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), class: "form-select"
+    .mb-3 
+      .field 
+        = label_tag :tutor_category, "Pick a type of writer"
+        
+        .form-check
+          = radio_button_tag "homeworks[tutor_category]", "a_plus", class: "form-check-input"
+          = label_tag :tutor_category, "A-List Writes ; B+ to A - P3 per word", :value => 0, class: "form-check-label"
+        .form-check
+          = radio_button_tag "homeworks[tutor_category]", "cheko", class: "form-check-input"
+          = label_tag :tutor_category, "Cheko+ Writers ; B to A - P2 per word", :value => 1, class: "form-check-label"
+        .form-check
+          = radio_button_tag "homeworks[tutor_category]", "standard", class: "form-check-input"
+          = label_tag :tutor_category, "Standard Writers ; C to A - P1 per word", :value => 2, class: "form-check-label"
+    .mb-3.d-flex.flex-row
+      .container.p-1
+        = label_tag :view_skill, "View tutors skill profile for P100"
+        .form-check.form-switch
+          = check_box_tag "homeworks[tutor_skills]", true, false, class: "form-check-input"
       
-      .form-check
-        = radio_button_tag "homeworks[tutor_category]", "a_plus", class: "form-check-input"
-        = label_tag :tutor_category, "A-List Writes ; B+ to A - P3 per word", :value => 0, class: "form-check-label"
-      .form-check
-        = radio_button_tag "homeworks[tutor_category]", "cheko", class: "form-check-input"
-        = label_tag :tutor_category, "Cheko+ Writers ; B to A - P2 per word", :value => 1, class: "form-check-label"
-      .form-check
-        = radio_button_tag "homeworks[tutor_category]", "standard", class: "form-check-input"
-        = label_tag :tutor_category, "Standard Writers ; C to A - P1 per word", :value => 2, class: "form-check-label"
-  .mb-3
-    .field
-      = label_tag :details, "Details", class: "form-label"
-      = text_area_tag "homeworks[details]", '', rows: 10, class: "form-control"
-  .mb-3
-    .field
-      = label_tag :target_words, "Target Words", class: "form-label"
-      = text_field_tag "homeworks[words]", "", class: "form-control", placeholder: "Input an amount"
-  .mb-3.d-flex.flex-row
-    .container.p-1
-      = label_tag :view_skill, "View tutors skill profile for P100"
-      .form-check.form-switch
-        = check_box_tag "homeworks[tutor_skills]", true, false, class: "form-check-input"
-    
-    .container.p-1
-      = label_tag :view_sample, "View tutors sample works for P100"
-      .form-check.form-switch
-        = check_box_tag "homeworks[tutor_samples]", true, false, class: "form-check-input"
+      .container.p-1
+        = label_tag :view_sample, "View tutors sample works for P100"
+        .form-check.form-switch
+          = check_box_tag "homeworks[tutor_samples]", true, false, class: "form-check-input"
 
-    .container.p-1
-      = label_tag :view_bidders, "View all bidders, their skill profiles and their sample works for P300"
-      .form-check.form-switch
-        = check_box_tag "homeworks[view_bidders]", true, false, class: "form-check-input"
-        
-    .container.p-1
-      = label_tag :login_school, "Want us to login to your school account for P200"
-      .form-check.form-switch
-        = check_box_tag "homeworks[login_school]", true, false, class: "form-check-input"
-        
-    .container.p-1
-      = label_tag :priority, "Make it a priority? +30%"
-      .form-check.form-switch
-        = check_box_tag "homeworks[priority]", true, false, class: "form-check-input"
-  .mb-3
-    .actions
-      = f.submit "Create", class: "btn btn-primary"
+      .container.p-1
+        = label_tag :view_bidders, "View all bidders, their skill profiles and their sample works for P300"
+        .form-check.form-switch
+          = check_box_tag "homeworks[view_bidders]", true, false, class: "form-check-input"
+          
+      .container.p-1
+        = label_tag :login_school, "Want us to login to your school account for P200"
+        .form-check.form-switch
+          = check_box_tag "homeworks[login_school]", true, false, class: "form-check-input"
+          
+      .container.p-1
+        = label_tag :priority, "Make it a priority? +30%"
+        .form-check.form-switch
+          = check_box_tag "homeworks[priority]", true, false, class: "form-check-input"
+  -# .mb-3
+  -#   .actions
+  -#     = f.submit "Create", class: "btn btn-primary"

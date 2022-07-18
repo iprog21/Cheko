@@ -1,6 +1,9 @@
-class Users::ChatsController < Users::UserAppController
+class Users::ChatsController < ApplicationController
   before_action :authenticate_user!
   
-  def index
+  def show
+  end
+
+  def destroy
   end
 end

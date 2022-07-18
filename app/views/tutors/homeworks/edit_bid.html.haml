@@ -11,7 +11,7 @@
               = form_tag(tutors_homework_update_bid_path, method: :put) do
                 .mb-3
                   .field
-                    = label_tag "ammount", 'Ammount', class: "form-label"
+                    = label_tag "amount", 'Amount', class: "form-label"
                     = text_field_tag 'ammount', @bid.ammount, {class: "form-control"}
                 .mb-3
                   .actions

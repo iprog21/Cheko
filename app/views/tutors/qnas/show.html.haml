@@ -1,0 +1,15 @@
+= render 'tutors/shared/header'
+.container.mt-5
+  .row
+    .card{class: "bg-#{cookies[:theme]}"}
+      .card-body
+        .row 
+          .col-12.text-start 
+            %h5= "#{@qna.subject.titleize}"
+          .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
+            %p= @qna.question
+  .row.mt-3
+    .card{class: "bg-#{cookies[:theme]}"}
+      .card-body
+        = form_tag users_qna_chat_messages_path(qna_id: @qna.id, @qna.chats.first.id)
+          = text_field_tag "content"
