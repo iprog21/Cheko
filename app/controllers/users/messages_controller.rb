@@ -7,7 +7,7 @@ class Users::MessagesController < ApplicationController
 
     if current_user.id == qna.user_id
       message = chat.messages.create(content: params[:content], sendable_id: current_user.id, sendable_type: "User")
-      SendMessageJob.perform_now(message)
+      SendMessageJob.perform_now(message, "User")
     end
   end
 

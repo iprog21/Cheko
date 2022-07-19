@@ -2,7 +2,8 @@ class Users::QnasController < Users::UserAppController
   before_action :authenticate_user!
   
   def index
-    @qna = current_user.qnas
+    @qnas = current_user.qnas.where("status = 0 OR status = 1")
+    @finish = current_user.qnas.where(status: "done")
   end
 
   def new
@@ -16,6 +17,9 @@ class Users::QnasController < Users::UserAppController
 
   def show 
     @qna = Qna.find(params[:id])
+  end
+
+  def finish
   end
 
   private

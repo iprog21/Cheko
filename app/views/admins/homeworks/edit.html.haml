@@ -29,23 +29,23 @@
                 .col-4
                   = label_tag :priority, "Priority? +30%"
                   .form-check.form-switch
-                    = check_box_tag "homeworks[priority]", true, false, class: "form-check-input", checked: @homework.priority? ?  true : false, disabled: true
+                    = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.priority? ?  true : false, disabled: true
                 .col-4
                   = label_tag :tutor_skills, "Tutor Skills? P100"
                   .form-check.form-switch
-                    = check_box_tag "homeworks[priority]", true, false, class: "form-check-input", checked: @homework.tutor_skills? ?  true : false, disabled: true
+                    = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.tutor_skills? ?  true : false, disabled: true
                 .col-4
                   = label_tag :tutor_skills, "Tutor Samples? P100"
                   .form-check.form-switch
-                    = check_box_tag "homeworks[priority]", true, false, class: "form-check-input", checked: @homework.tutor_samples? ?  true : false, disabled: true
+                    = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.tutor_samples? ?  true : false, disabled: true
                 .col-4
                   = label_tag :tutor_skills, "View Bidders? P300"
                   .form-check.form-switch
-                    = check_box_tag "homeworks[priority]", true, false, class: "form-check-input", checked: @homework.view_bidders? ?  true : false, disabled: true
+                    = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.view_bidders? ?  true : false, disabled: true
                 .col-4
                   = label_tag :tutor_skills, "Login School? P200"
                   .form-check.form-switch
-                    = check_box_tag "homeworks[priority]", true, false, class: "form-check-input", checked: @homework.login_school? ?  true : false, disabled: true
+                    = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.login_school? ?  true : false, disabled: true
             .col-6
               - if current_admin.role == 'super_admin'
                 = render 'admins/homeworks/super_edit'

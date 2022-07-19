@@ -53,6 +53,6 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def homework_params
-    params.require(:homeworks).permit(:details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
+    params.require(:homework).permit(:hw_attachment, :details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
   end
 end

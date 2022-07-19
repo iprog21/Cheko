@@ -1,12 +1,10 @@
 = render 'users/shared/header'
-.row.mt-5
-  .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
-    .container
-      = image_tag "prof-pick-beta.png", class: "img-fluid mx-auto d-block"
-    .container.text-center.mt-2.mb-5
-      %p Cheko Profs-To-Pick is a database that contains up-to-date and complete reviews of professors with metrics specific to different universities. Researching 36 professors on Profs to Pick Facebook pages will take you 2 days. With Cheko Profs-to-Pick, you can do it in 1 hour!
-
+.container-fluid.mt-2
+  = image_tag "prof-pick-beta-dark.png", class: "img-fluid mx-auto d-block"
+.container.text-center.mt-2.mb-5
+  .row.mt-5
+    %p Cheko Profs-To-Pick is a database that contains up-to-date and complete reviews of professors with metrics specific to different universities. Researching 36 professors on Profs to Pick Facebook pages will take you 2 days. With Cheko Profs-to-Pick, you can do it in 1 hour!
     %form{action: "/test", autocomplete: "off"}
       .autocomplete
-        %input#myInput.form-control{name: "prof", type: "text"}/
+        %input#myInput.form-control{name: "prof", type: "text", placeholder:"Search the name of your Prof"}/
 = javascript_pack_tag 'professors/index'

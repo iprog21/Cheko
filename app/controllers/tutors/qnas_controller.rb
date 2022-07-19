@@ -15,11 +15,12 @@ class Tutors::QnasController < ApplicationController
 
   def cancel
     @qna = Qna.find(params[:qna_id])
-    @qna.update(tutor_id: current_tutor.id, status: "assigned")
-    
+    @qna.update(tutor_id: current_tutor.id, status: "pending")
+    @qna.chats.first.destroy
     redirect_to tutors_qnas_path
   end
 
   def show
+    @qna = Qna.find(params[:id])
   end
 end

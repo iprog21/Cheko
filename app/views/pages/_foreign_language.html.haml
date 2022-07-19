@@ -1,15 +1,13 @@
 = form_for @homework, url: users_homeworks_path, method: :post do |f|
-  %h3= "Ask for help! - #{params[:type].titleize}"
+  = f.hidden_field :order_type, :value => params[:type]
+  %h3 Type
   %stuff
-    = f.hidden_field :order_type, :value => params[:type]
     .mb-3
       .field
         = f.label :sub_type, "Type", class: "form-label"
         = f.text_field :sub_type, class: "form-control"
-    .mb-3
-      .field
-        = f.label :payment_type, class: "form-label"
-        = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), {include_blank: false} , class: "form-select"
+  %h3 Details
+  %stuff
     .mb-3
       .field
         = f.label :deadline, class: "form-label"
@@ -18,36 +16,42 @@
       .field
         = f.label :details, class: "form-label"
         = f.text_area :details, class: "form-control",  :rows => 10
+  %h3 Payment
+  %stuff
+    .mb-3
+      .field
+        = f.label :payment_type, class: "form-label"
+        = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), {include_blank: false} , class: "form-select"
     .mb-3.d-flex.flex-row
       .container.p-1
         = label_tag :view_skill, "View tutors skill profile for P100"
         .form-check.form-switch
-          = check_box_tag "homeworks[tutor_skills]", true, false, class: "form-check-input"
+          = check_box_tag "homework[tutor_skills]", true, false, class: "form-check-input"
       
       .container.p-1
         = label_tag :view_sample, "View tutors sample works for P100"
         .form-check.form-switch
-          = check_box_tag "homeworks[tutor_samples]", true, false, class: "form-check-input"
+          = check_box_tag "homework[tutor_samples]", true, false, class: "form-check-input"
 
       .container.p-1
         = label_tag :view_bidders, "View all bidders, their skill profiles and their sample works for P300"
         .form-check.form-switch
-          = check_box_tag "homeworks[view_bidders]", true, false, class: "form-check-input"
+          = check_box_tag "homework[view_bidders]", true, false, class: "form-check-input"
           
       .container.p-1
         = label_tag :login_school, "Want us to login to your school account for P200"
         .form-check.form-switch
-          = check_box_tag "homeworks[login_school]", true, false, class: "form-check-input"
+          = check_box_tag "homework[login_school]", true, false, class: "form-check-input"
           
       .container.p-1
         = label_tag :priority, "Make it a priority? +30%"
         .form-check.form-switch
-          = check_box_tag "homeworks[priority]", true, false, class: "form-check-input"
+          = check_box_tag "homework[priority]", true, false, class: "form-check-input"
     -# .mb-3
     -#   .field
     -#     = label_tag "file", "Files", class: "form-label"
     -#     = file_field_tag "files", class: "form-control"
-  %h3 Register as a User
+  %h3 Register
   %stuff
     .mb-3
       .field

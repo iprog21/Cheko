@@ -1,4 +1,6 @@
 = render 'users/shared/header'
+= hidden_field_tag "chat_id", @qna.chats.last.id, id: "chat_id" if @qna.chats.count >= 1
+= hidden_field_tag "type", "user", id: "type"
 .container.mt-5
   .row
     .card{class: "bg-#{cookies[:theme]}"}
@@ -11,6 +13,13 @@
   .row.mt-3
     .card{class: "bg-#{cookies[:theme]}"}
       .card-body
-        - if @qna.tutor_id.present?
-          = form_tag users_qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chats.first.id) do
-            = text_field_tag "content"
+        - if @qna.chats.present?
+          .container#messages
+            - @qna.chats.last.messages.each do |msg|
+              - if msg.sendable_type == "User"
+                %p.text-end= msg.content
+              - else 
+                %p.text-start= msg.content
+          - if @qna.chats.count >= 1
+            = form_tag users_qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chats.first.id) do
+              = text_field_tag "content", "", class: "form-control"

@@ -7,9 +7,10 @@ class Tutor < ApplicationRecord
   has_many :documents, as: :documentable, dependent: :destroy
   has_many :chats, as: :chattable, dependent: :destroy
   has_many :qnas
-  has_many :message, as: :sendable, dependent: :destroy
+  has_many :messages, as: :sendable, dependent: :destroy
 
   enum status: { pending: 0, active: 1 }
+  enum category: { a_list: 0, cheko_plus: 1, standard: 2 }
 
   def name
     return "#{self.first_name} #{self.last_name}"

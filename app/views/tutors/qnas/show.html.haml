@@ -1,4 +1,6 @@
 = render 'tutors/shared/header'
+= hidden_field_tag "chat_id", @qna.chats.last.id, id: "chat_id"
+= hidden_field_tag "type", "tutor", id: "type"
 .container.mt-5
   .row
     .card{class: "bg-#{cookies[:theme]}"}
@@ -11,5 +13,12 @@
   .row.mt-3
     .card{class: "bg-#{cookies[:theme]}"}
       .card-body
-        = form_tag users_qna_chat_messages_path(qna_id: @qna.id, @qna.chats.first.id)
-          = text_field_tag "content"
+        .container#messages
+          - @qna.chats.last.messages.each do |msg|
+            - if msg.sendable_type == "Tutor"
+              %p.text-end= msg.content
+            - else 
+              %p.text-start= msg.content
+        - if @qna.tutor_id.present?
+          = form_tag tutors_qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chats.first.id) do
+            = text_field_tag "content", "", class: "form-control"

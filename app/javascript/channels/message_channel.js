@@ -11,12 +11,24 @@ document.addEventListener('turbolinks:load', () => {
 
     disconnected() {
       // Called when the subscription has been terminated by the server
+      console.log("Channel Disconnected!!!");
     },
 
     received(data) {
-      // Called when there's incoming data on the websocket for this channel
-      document.getElementById("messages").innerHTML += data.html
-      
+      $('#content').val("");
+      if ($('#type').val() == "user"){
+        if (data.type == "User"){
+          $('#messages').append('<div class="text-end">' + data.html + '</div>')
+        } else {
+          $('#messages').append('<div class="text-start">' + data.html + '</div>')
+        }
+      } else {
+        if (data.type == "Tutor"){
+          $('#messages').append('<div class="text-end">' + data.html + '</div>')
+        } else {
+          $('#messages').append('<div class="text-start">' + data.html + '</div>')
+        }
+      }
     }
   });
 });

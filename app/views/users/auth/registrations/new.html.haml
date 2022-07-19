@@ -1,37 +1,38 @@
 = render 'users/shared/header'
-.row 
-  .col-3.ms-auto.me-auto.mt-5
-    .card 
-      .card-body
-        %h2 User Sign up
-        = form_for(resource, as: resource_name, url: user_registration_path) do |f|
-          .mb-3
-            .field
-              = f.label :first_name
-              = f.text_field :first_name, class: "form-control", required: true
-          .mb-3
-            .field
-              = f.label :last_name
-              = f.text_field :last_name, class: "form-control", required: true
-          .mb-3
-            .field
-              = f.label :email
-              = f.email_field :email, class: "form-control", required: true
-          .mb-3
-            .field
-              = f.label :school
-              = f.text_field :school, class: "form-control"
-          .mb-3
-            .field
-              = f.label :password
-              - if @minimum_password_length
-                %em
-                  (#{@minimum_password_length} characters minimum)
-              = f.password_field :password, class: "form-control", required: true
-          .mb-3  
-            .field
-              = f.label :password_confirmation
-              = f.password_field :password_confirmation, class: "form-control", required: true
-          .mb-3  
-            .actions
-              = f.submit "Sign up", class: "btn btn-primary"
+.container
+  .row 
+    .col-6.ms-auto.me-auto.mt-5
+      .card 
+        .card-body
+          %h2 User Sign up
+          = form_for(resource, as: resource_name, url: user_registration_path) do |f|
+            .mb-3
+              .field
+                = f.label :first_name
+                = f.text_field :first_name, class: "form-control", required: true
+            .mb-3
+              .field
+                = f.label :last_name
+                = f.text_field :last_name, class: "form-control", required: true
+            .mb-3
+              .field
+                = f.label :email
+                = f.email_field :email, class: "form-control", required: true
+            .mb-3
+              .field
+                = f.label :school
+                = f.text_field :school, class: "form-control"
+            .mb-3
+              .field
+                = f.label :password
+                - if @minimum_password_length
+                  %em
+                    (#{@minimum_password_length} characters minimum)
+                = f.password_field :password, class: "form-control", required: true
+            .mb-3  
+              .field
+                = f.label :password_confirmation
+                = f.password_field :password_confirmation, class: "form-control", required: true
+            .mb-3  
+              .actions
+                = f.submit "Sign up", class: "btn btn-primary"

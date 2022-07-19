@@ -1,9 +1,8 @@
 class SendMessageJob < ApplicationJob
   queue_as :default
 
-  def perform(message)
-    html = "<p>#{message.content}</p>"
+  def perform(message, type)
     chat_id = message.chat_id
-    ActionCable.server.broadcast("message_channel_#{chat_id}", html: html)
+    ActionCable.server.broadcast("message_channel_#{chat_id}", html: message.content, type: type)
   end
 end
