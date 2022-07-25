@@ -89,12 +89,10 @@ Rails.application.routes.draw do
     end
 
     resources :qnas, only: [:index, :show] do
-      put :assign
-      put :cancel
+      get :assign
+      get :cancel
 
-      resources :chats do
-        resources :messages, only: [:create]
-      end
+      resources :messages, only: [:create]
     end
 
     resources :chats, only: [:index]
@@ -103,6 +101,7 @@ Rails.application.routes.draw do
 
   namespace :users do 
     resources :homeworks, on: :collection do
+      get :success
       get :pick_type, on: :collection
     end
 

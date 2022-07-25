@@ -10,15 +10,32 @@
             %h5= "#{@qna.subject.titleize}"
           .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
             %p= @qna.question
-  .row.mt-3
+  .row.mt-3.mb-5
     .card{class: "bg-#{cookies[:theme]}"}
       .card-body
         .container#messages
-          - @qna.chats.last.messages.each do |msg|
+          - @qna.chats.first.messages.each do |msg|
             - if msg.sendable_type == "Tutor"
-              %p.text-end= msg.content
+              .row.mt-3
+                .col-6.ms-auto.text-white.rounded.pt-2
+                  -# {style: "background: #24a64d"}
+                  %div.ms-auto.rounded{style: "padding: 10px; width: 20em; background: #24a64d"}
+                    %div.ms-auto{style: "width: -moz-fit-content; width: fit-content"}You
+                    %div.ms-auto{style: "width: -moz-fit-content; width: fit-content"}= msg.content
             - else 
-              %p.text-start= msg.content
-        - if @qna.tutor_id.present?
-          = form_tag tutors_qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chats.first.id) do
-            = text_field_tag "content", "", class: "form-control"
+              .row.mt-3
+                .col-6.me-auto.text-white.rounded.pt-2
+                  -# {style: "background: #24a64d"}
+                  %div.me-auto.rounded{style: "padding: 10px; width: 20em; background: #24a64d"}
+                    %div.me-auto{style: "width: -moz-fit-content; width: fit-content"}User012345
+                    %div.me-auto{style: "width: -moz-fit-content; width: fit-content"}= msg.content
+        .container#text-box.mt-3
+          - if @qna.tutor_id.present?
+            = form_tag tutors_qna_messages_path(qna_id: @qna.id, chat_id: @qna.chats.first.id) do
+              = text_field_tag "content", "", class: "form-control"
+            -# = form_for @message, url: tutors_qna_messages_path(qna_id: @qna.id, chat_id: @qna.chats.first.id) do |f|
+            -#   .row
+            -#     .col-4
+            -#       = f.file_field :document, class: "form-control"
+            -#     .col-6
+            -#       = f.text_field :content, class: "form-control"

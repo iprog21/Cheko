@@ -32,6 +32,9 @@ class Users::HomeworksController < Users::UserAppController
     end
   end
 
+  def success
+  end
+
   def edit
   end
 
@@ -49,7 +52,7 @@ class Users::HomeworksController < Users::UserAppController
   private 
 
   def find_homework
-    @homework = Homework.find(params[:id])
+    @homework = Homework.find(params[:id] || params[:homework_id])
   end
 
   def homework_params

@@ -10,7 +10,7 @@ class Tutors::QnasController < ApplicationController
     @qna = Qna.find(params[:qna_id])
     @qna.update(tutor_id: current_tutor.id, status: "assigned")
     @qna.chats.create
-    redirect_to tutors_qnas_path
+    redirect_to tutors_qna_path(@qna)
   end
 
   def cancel
@@ -22,5 +22,6 @@ class Tutors::QnasController < ApplicationController
 
   def show
     @qna = Qna.find(params[:id])
+    @message = Message.new
   end
 end

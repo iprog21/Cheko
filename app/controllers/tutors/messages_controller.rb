@@ -10,4 +10,10 @@ class Tutors::MessagesController < ApplicationController
       SendMessageJob.perform_now(message, "Tutor")
     end
   end
+
+  private
+
+  def msg_params
+    params.require(:message).permit(:content, :document)
+  end
 end
