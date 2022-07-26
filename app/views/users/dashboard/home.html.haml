@@ -14,8 +14,12 @@
       .d-grid.gap-5
         %a.btn.bg-cheko.text-white.btn-xl{href: professors_path}
           .h2 Profs to Pick
-        %a.btn.bg-cheko.text-white.btn-xl{href: users_qnas_path}
-          .h2 Tutor QA
+        - if current_user.qnas.last.status == "done"
+          %a.btn.bg-cheko.text-white.btn-xl{href: new_users_qna_path}
+            .h2 Tutor QA
+        - else 
+          %a.btn.bg-cheko.text-white.btn-xl{href: users_qna_path(current_user.qnas.last.id)}
+            .h2 Tutor QA
 :javascript
   window.addEventListener("chatwoot:ready", function () { 
     var emailUser = '#{current_user.email}'

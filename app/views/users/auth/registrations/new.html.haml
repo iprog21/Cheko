@@ -20,8 +20,24 @@
                 = f.email_field :email, class: "form-control", required: true
             .mb-3
               .field
+                = f.label :phone_number
+                = f.text_field :phone_number, class: "form-control"
+            .mb-3
+              .field
                 = f.label :school
                 = f.text_field :school, class: "form-control"
+            .mb-3
+              .field
+                = f.label :college
+                = f.text_field :college, class: "form-control"
+            .mb-3
+              .field
+                = f.label :year
+                = f.text_field :year, class: "form-control"
+            .mb-3
+              .field
+                = f.label :address
+                = f.text_field :address, class: "form-control"
             .mb-3
               .field
                 = f.label :password

@@ -1,27 +1,34 @@
 = render 'users/shared/header'
-= hidden_field_tag "chat_id", @qna.chats.last.id, id: "chat_id" if @qna.chats.count >= 1
+= hidden_field_tag "chat_id", @qna.chat.id, id: "chat_id" if @qna.chat.present?
 = hidden_field_tag "type", "user", id: "type"
 .container.mt-5
   .row
     .card{class: "bg-#{cookies[:theme]}"}
       .card-body
         .row 
-          .col-12.text-start 
+          .col-10.text-start 
             %h5= "#{@qna.subject.titleize}"
+          .col-2
+            -if @qna.status == "assigned"
+              = link_to  "Finish", users_qna_finish_path(qna_id: @qna.id), class: "btn btn-success"
           .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
             %p= @qna.question
   .row.mt-3.mb-5
     .card{class: "bg-#{cookies[:theme]}"}
       .card-body
-        .container#messages
-          - @qna.chats.first.messages.each do |msg|
+        .container#messages{style: "overflow: auto; height: 550px;"}
+          - @qna.chat.messages.order(id: :asc).each do |msg|
             - if msg.sendable_type == "User"
               .row.mt-3
                 .col-6.ms-auto.text-white.rounded.pt-2
                   -# {style: "background: #24a64d"}
                   %div.ms-auto.rounded{style: "padding: 10px; width: 20em; background: #24a64d"}
-                    %div.ms-auto{style: "width: -moz-fit-content; width: fit-content"}You
+                    %div.ms-auto{style: "width: -moz-fit-content; width: fit-content; font-size: 0.9rem"}You
                     %div.ms-auto{style: "width: -moz-fit-content; width: fit-content"}= msg.content
+                    - if msg.document.attached?
+                      %div.ms-auto{style: "width: -moz-fit-content; width: fit-content"}
+                        -# %a{href: msg.document} Document
+                        = link_to  "Download", rails_blob_path(msg.document, disposition: 'attachment')
             - else 
               .row.mt-3
                 .col-6.me-auto.text-white.rounded.pt-2
@@ -29,12 +36,23 @@
                   %div.me-auto.rounded{style: "padding: 10px; width: 20em; background: #24a64d"}
                     %div.me-auto{style: "width: -moz-fit-content; width: fit-content"}Tutor012345
                     %div.me-auto{style: "width: -moz-fit-content; width: fit-content"}= msg.content
+                    - if msg.document.attached?
+                      %div.me-auto{style: "width: -moz-fit-content; width: fit-content"}
+                        -# %a{href: msg.content} Document
+                        = link_to "Download", rails_blob_path(msg.document, disposition: 'attachment')
         .container#text-box.mt-3
-          - if @qna.chats.count >= 1
-            = form_tag users_qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chats.first.id) do
-              = text_field_tag "content", "", class: "form-control"
+          - if @qna.chat.present?
+            = form_for @message, url: users_qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chat.id) do |f|
+              .row
+                .col-4
+                  = f.file_field :document, class: "form-control"
+                .col-8
+                  = f.text_field :content, class: "form-control"
               -# .row
               -#   .col-4
               -#     = file_field_tag "document", class: "form-control"
               -#   .col-8
               -#     = text_field_tag "content", "", class: "form-control"
+:javascript
+  var element = document.getElementById("messages");
+  element.scrollTop = element.scrollHeight;

@@ -7,6 +7,7 @@ $('#new_homework').steps({
 
   // enableKeyNavigation: false,
   onStepChanging: function(event, currentIndex, newIndex){
+    console.log($("#new_homework"))
     $("#new_homework").validate().settings.ignore = ":disabled,:hidden";
     return $("#new_homework").valid();
   },

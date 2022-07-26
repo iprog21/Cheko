@@ -12,6 +12,7 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    # raise "Test"
     build_resource(sign_up_params)
     
     resource.save
@@ -19,8 +20,11 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
-        if params[:homeworks].present?
-          resource.homeworks.create(homework_params)
+        if params[:homework].present?
+          hw = resource.homeworks.create(homework_params)
+
+          logger.info "\n\n\n#{hw}\n\n\n"
+
           sign_up(resource_name, resource)
           respond_with resource, location: after_sign_up_path_for(resource)
         else
@@ -65,8 +69,8 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
   protected
 
   def homework_params
-    if params[:homeworks].present?
-      params.require(:homeworks).permit(:details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
+    if params[:homework].present?
+      params.require(:homework).permit(:details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
     end
   end
 

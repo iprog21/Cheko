@@ -110,6 +110,7 @@ Rails.application.routes.draw do
     end
 
     resources :qnas do 
+      get :finish
       resources :chats, only: [:show] do
         resources :messages, only: [:create], on: :collection
       end

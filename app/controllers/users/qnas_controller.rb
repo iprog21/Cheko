@@ -17,14 +17,19 @@ class Users::QnasController < Users::UserAppController
 
   def show 
     @qna = Qna.find(params[:id])
+    @message = Message.new
   end
 
   def finish
+    @qna = Qna.find(params[:qna_id])
+    @qna.update(status: "done")
+
+    redirect_to users_path
   end
 
   private
 
   def qna_params
-    params.require(:qna).permit(:question, :subject)
+    params.require(:qna).permit(:question, :subject, :document)
   end
 end
