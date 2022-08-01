@@ -1,11 +1,10 @@
 
-document.addEventListener("turbolinks:load", function () {
-  require( 'datatables.net-dt' );
-  $('#datatable').DataTable();
 
-  $('.datatableBasic').DataTable();
+require( 'datatables.net-dt' );
+$('#datatable').DataTable();
 
-  $('.homeworks-scrollX').DataTable({
-    scrollX: true,
-  });
-})
+$('.datatableBasic').DataTable();
+
+$('.homeworks-scrollX').DataTable({
+  scrollX: true,
+});

@@ -7,7 +7,7 @@ class Tutors::MessagesController < ApplicationController
 
     if current_tutor.id == qna.tutor_id
       message = current_tutor.messages.create(content: params[:message][:content], chat_id: chat.id, document: params[:message][:document])
-      SendMessageJob.perform_now(message, "Tutor", { document_url: rails_blob_path(message.document, disposition: 'attachment') })
+      SendMessageJob.perform_now(message, "Tutor", { document_url: message.document.attached? ? rails_blob_path(message.document, disposition: 'attachment') : nil })
     end
   end
 

@@ -6,8 +6,8 @@ class Users::MessagesController < ApplicationController
     qna = Qna.find(params[:qna_id])
 
     if current_user.id == qna.user_id
-      message = chat.messages.create(content: params[:content], sendable_id: current_user.id, sendable_type: "User")
-      SendMessageJob.perform_now(message, "User", { document_url: rails_blob_path(message.document, disposition: 'attachment') })
+      message = current_user.messages.create(content: params[:message][:content], chat_id: chat.id, document: params[:message][:document])
+      SendMessageJob.perform_now(message, "User", { document_url: message.document.attached? ? rails_blob_path(message.document, disposition: 'attachment') : nil })
     end
   end
 

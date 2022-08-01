@@ -7,12 +7,17 @@ class Users::QnasController < Users::UserAppController
   end
 
   def new
-    @qna = current_user.qnas.new
+    if qna_old = Qna.find_by(auth: cookies[:tutor_qna])
+      redirect_to users_qna_path(qna_old.id)
+    else
+      @qna = current_user.qnas.new
+    end
   end
 
   def create
-    @qna = current_user.qnas.create(qna_params)
-    redirect_to users_path  # users_qna_path(@qna.id)
+    @qna = Qna.create(qna_params)
+    cookies[:tutor_qna] = @qna
+    redirect_to users_path 
   end
 
   def show 

@@ -1,19 +1,19 @@
 = render 'users/shared/header'
 .container
   .row 
-    .col-6.ms-auto.me-auto.mt-5
+    .col-10.ms-auto.me-auto.mt-5
       .card 
         .card-body
           %h2 User Sign up
           = form_for(resource, as: resource_name, url: user_registration_path) do |f|
             .mb-3
-              .field
-                = f.label :first_name
-                = f.text_field :first_name, class: "form-control", required: true
-            .mb-3
-              .field
-                = f.label :last_name
-                = f.text_field :last_name, class: "form-control", required: true
+              .row.field
+                .col-6
+                  = f.label :first_name
+                  = f.text_field :first_name, class: "form-control", required: true
+                .col-6
+                  = f.label :last_name
+                  = f.text_field :last_name, class: "form-control", required: true
             .mb-3
               .field
                 = f.label :email
@@ -21,23 +21,27 @@
             .mb-3
               .field
                 = f.label :phone_number
-                = f.text_field :phone_number, class: "form-control"
+                = f.text_field :phone_number, class: "form-control", required: true
             .mb-3
               .field
                 = f.label :school
-                = f.text_field :school, class: "form-control"
+                = f.text_field :school, class: "form-control", required: true
             .mb-3
               .field
                 = f.label :college
-                = f.text_field :college, class: "form-control"
+                = f.text_field :college, class: "form-control", required: true
             .mb-3
-              .field
-                = f.label :year
-                = f.text_field :year, class: "form-control"
+              .row.field
+                .col-6
+                  = f.label :course
+                  = f.text_field :course, class: "form-control", required: true
+                .col-6
+                  = f.label :year
+                  = f.text_field :year, class: "form-control", required: true
             .mb-3
               .field
                 = f.label :address
-                = f.text_field :address, class: "form-control"
+                = f.text_field :address, class: "form-control", required: true
             .mb-3
               .field
                 = f.label :password

@@ -8,6 +8,20 @@ Rails.application.routes.draw do
   get '/new', to: 'pages#new'
   get '/professors', to: 'pages#professors'
   get '/professors/:id', to: 'pages#professor_show'
+  get '/about_us', to: 'pages#about_us'
+  get '/services', to: 'pages#services'
+  get '/testimonies', to: 'pages#testimonies'
+  get '/how_it_works', to: 'pages#how_it_works'
+  get '/contact-us', to: 'pages#contact_us'
+  get '/check-email', to: 'pages#check_email'
+  resources :contacts, only: [:create]
+
+  resources :qnas do 
+    get :finish
+    resources :chats, only: [:show] do
+      resources :messages, only: [:create], on: :collection
+    end
+  end
 
   devise_for :admins, path: 'admins', controllers: {
     sessions: 'admins/auth/sessions',
@@ -109,12 +123,12 @@ Rails.application.routes.draw do
       get :search, on: :collection
     end
 
-    resources :qnas do 
-      get :finish
-      resources :chats, only: [:show] do
-        resources :messages, only: [:create], on: :collection
-      end
-    end
+    # resources :qnas do 
+    #   get :finish
+    #   resources :chats, only: [:show] do
+    #     resources :messages, only: [:create], on: :collection
+    #   end
+    # end
 
     get 'profile', to: 'users#show'
     resources :chats, only: [:index]

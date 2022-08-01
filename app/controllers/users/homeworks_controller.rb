@@ -33,6 +33,9 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def success
+    unless @homework.user_id == current_user.id
+      redirect_to users_homeworks_path
+    end
   end
 
   def edit

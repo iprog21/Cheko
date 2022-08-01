@@ -9,9 +9,8 @@
         -if user_signed_in?
           %li.nav-item
             %a.nav-link{href: users_homeworks_path} Homeworks
-          -# %li.nav-item
-          -#   %a.nav-link{href: users_chats_path} Messages
-          
+          %li.nav-item
+            %a.nav-link{href: new_qna_path} Tutor Q&A
           %li.nav-item.dropdown
             %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"} Profs to Pick
             %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
@@ -26,16 +25,19 @@
             %a.nav-link{href: pick_type_path} New order
           %li.nav-item
             %a.nav-link{href: professors_path} Profs to pick
+          %li.nav-item
+            %a.nav-link{href: new_qna_path} Tutor Q&A
+          -# %li.nav-item
+          -#   %a.nav-link{href: about_us_path} About us
+          -# %li.nav-item
+          -#   %a.nav-link{href: how_it_works_path} How it works
+          -# %li.nav-item
+          -#   %a.nav-link{href: testimonies_path} Testimonials
+          -# %li.nav-item
+          -#   %a.nav-link{href: contact_us_path} Contact
       
       -if user_signed_in?
         %ul.navbar-nav.ms-auto.mb-2.mb-lg-0
-          -# - if current_user.theme == "light" || cookies[:theme] == "light"
-          -#   %li.nav-item
-          -#     %a.nav-link.fas.fa-moon{href: users_path(theme: "dark")} 
-          -# - else
-          -#   %li.nav-item
-          -#     %a.nav-link.fas.fa-sun{href: users_path(theme: "light")} 
-
           %li.nav-item.dropdown
             %a#navbarDropdown.nav-link.dropdown-toggle.active{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}= current_user.first_name
             %ul.dropdown-menu.dropdown-menu-end{"aria-labelledby" => "navbarDropdown"}

@@ -6,8 +6,10 @@
     .card{class: "bg-#{cookies[:theme]}"}
       .card-body
         .row 
-          .col-12.text-start 
+          .col-10.text-start 
             %h5= "#{@qna.subject.titleize}"
+          .col-2
+            = link_to  "Cancel", tutors_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger"
           .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
             %p= @qna.question
   .row.mt-3.mb-5
@@ -44,13 +46,14 @@
                 .col-4
                   = f.file_field :document, class: "form-control"
                 .col-8
-                  = f.text_field :content, class: "form-control"
+                  = f.text_field :content, class: "form-control", autocomplete: 'off'
             -# = form_for @message, url: tutors_qna_messages_path(qna_id: @qna.id, chat_id: @qna.chats.first.id) do |f|
             -#   .row
             -#     .col-4
             -#       = f.file_field :document, class: "form-control"
             -#     .col-6
             -#       = f.text_field :content, class: "form-control"
+= javascript_pack_tag 'messages/new'
 :javascript
   var element = document.getElementById("messages");
   element.scrollTop = element.scrollHeight;

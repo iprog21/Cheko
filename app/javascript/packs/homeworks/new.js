@@ -7,15 +7,32 @@ $('#new_homework').steps({
 
   // enableKeyNavigation: false,
   onStepChanging: function(event, currentIndex, newIndex){
-    console.log($("#new_homework"))
-    $("#new_homework").validate().settings.ignore = ":disabled,:hidden";
+    if (currentIndex > newIndex) {
+      return true;
+    }
+    $("#new_homework").validate({
+      rules: {
+        email: {
+          required: true,
+          email: true,
+          remote: "/check-email"
+        }
+      }
+    }).settings.ignore = ":disabled,:hidden";
     return $("#new_homework").valid();
   },
-  onFinishing: function (event, currentIndex)
-    {
-      $("#new_homework").validate().settings.ignore = ":disabled";
-      return $("#new_homework") .valid();
-    },
+  onFinishing: function (event, currentIndex){
+    $("#new_homework").validate({
+      rules: {
+        email: {
+          required: true,
+          email: true,
+          remote: "/check-email"
+        }
+      }
+    }).settings.ignore = ":disabled";
+    return $("#new_homework") .valid();
+  },
   onFinished: function (event, currentIndex) {
     $("#new_homework").submit();
   }
