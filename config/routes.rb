@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   get '/check-email', to: 'pages#check_email'
   resources :contacts, only: [:create]
 
-  resources :qnas do 
+  resources :qnas do
+    get :pick_type, on: :collection
     get :finish
     resources :chats, only: [:show] do
       resources :messages, only: [:create], on: :collection

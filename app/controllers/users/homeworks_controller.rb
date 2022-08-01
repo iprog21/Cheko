@@ -14,9 +14,6 @@ class Users::HomeworksController < Users::UserAppController
     @qco = @homework.documents.where(documentable_type: "QualityOfficer")
   end
 
-  def pick_type
-  end
-
   def new
     @homework = current_user.homeworks.new
   end

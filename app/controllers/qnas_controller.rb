@@ -16,6 +16,14 @@ class QnasController < ApplicationController
     end
   end
 
+  def pick_type
+    qna_old = Qna.find_by(auth: cookies[:tutor_qna])
+    if qna_old
+      logger.info "\n\n\n #{qna_old.id}"
+      redirect_to qna_path(qna_old.id)
+    end
+  end
+
   def create
     @qna = Qna.create(qna_params)
     cookies[:tutor_qna] = @qna.auth
@@ -36,6 +44,6 @@ class QnasController < ApplicationController
   private
 
   def qna_params
-    params.require(:qna).permit(:question, :subject, :document)
+    params.require(:qna).permit(:type, :question, :subject, :document)
   end
 end
