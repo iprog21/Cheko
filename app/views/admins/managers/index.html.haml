@@ -28,9 +28,9 @@
                       %td.text-center= manager.email 
                       %td.text-center= manager.status.capitalize
                       %td.text-end
-                        = link_to :show, admins_manager_path(manager)
-                        = link_to :edit, edit_admins_manager_path(manager)
-                        = link_to :delete, admins_manager_path(manager), method: :delete
+                        %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_manager_path(manager)}
+                        %a.fas.fa-pen.text-primary.font-16.mr-3{href: edit_admins_manager_path(manager)}
+                        %a.fas.fa-trash.text-danger.font-16.mr-3{href: admins_manager_path(manager), data: {method: :delete}}
                 -else
                   %td No Data found
               

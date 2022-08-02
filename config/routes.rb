@@ -78,6 +78,9 @@ Rails.application.routes.draw do
     resources :admins
     resources :chats, only: [:index]
     resources :quality_officers, on: :collection
+    resources :qnas, only: [:index, :show], on: :collection do
+      get :finish
+    end
     get '/', to: 'dashboard#home'
   end
   

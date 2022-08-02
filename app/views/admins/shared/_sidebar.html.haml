@@ -6,6 +6,11 @@
         %svg.bi.me-2{height: "16", width: "16"}
           %use{"xlink:href" => "#home"}
         Homeworks
+    %li.nav-item
+      %a.nav-link.text-white{href: admins_qnas_path} 
+        %svg.bi.me-2{height: "16", width: "16"}
+          %use{"xlink:href" => "#home"}
+        Q&A
     - if current_admin.role == "super_admin"
       %li
         %a.nav-link.text-white{href: admins_users_path} 

@@ -28,10 +28,8 @@
                       %td.text-center= acc.email 
                       -# %td.text-center= manager.status.capitalize
                       %td.text-end
-                        = link_to :show, admins_accountant_path(acc)
-                        = link_to :edit, edit_admins_accountant_path(acc)
-                        = link_to :delete, admins_accountant_path(acc), method: :delete
-                -else
-                  %td No Data found
+                        %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_accountant_path(acc)}
+                        %a.fas.fa-pen.text-primary.font-16.mr-3{href: edit_admins_accountant_path(acc)}
+                        %a.fas.fa-trash.text-danger.font-16.mr-3{href: admins_accountant_path(acc), data: {method: :delete}}
               
 = javascript_pack_tag 'datatable_basic'

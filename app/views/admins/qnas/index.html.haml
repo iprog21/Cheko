@@ -1,0 +1,35 @@
+= render 'admins/shared/header'
+-# = render 'admins/shared/sidebar'
+.row
+  .col-1
+    = render 'admins/shared/sidebar'
+  .col-11
+    .row 
+      .col-xl-10.col-lg-10.col-sm-12.ms-auto.me-auto 
+        .container-flex.mt-5
+          %h3 Q&A
+          .card 
+            .card-body
+              .row 
+                .col-6.text-start
+                  %h3 Active
+              .table-responsive
+                %table.datatableBasic.display.nowrap
+                  %thead
+                    %tr
+                      %th Order created
+                      %th Order Type
+                      -# %th Deadline
+                      %th Subject
+                      %th Question
+                      %th Action
+                  %tbody
+                    - @qnas.each do |qna|
+                      %tr
+                        %td= qna.created_at.strftime("%b %d, %Y - %l:%M %p")
+                        %td= qna.qna_type.titleize
+                        %td= truncate(qna.subject.titleize)
+                        %td= truncate(qna.question)
+                        %td action
+
+= javascript_pack_tag 'datatable_basic'

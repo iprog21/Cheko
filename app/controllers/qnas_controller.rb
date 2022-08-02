@@ -44,6 +44,6 @@ class QnasController < ApplicationController
   private
 
   def qna_params
-    params.require(:qna).permit(:type, :question, :subject, :document)
+    params.require(:qna).permit(:qna_type, :question, :subject, :document)
   end
 end
