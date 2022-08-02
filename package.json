@@ -2,6 +2,7 @@
   "name": "cheko",
   "private": true,
   "dependencies": {
+    "@eonasdan/tempus-dominus": "^6.0.0-beta9",
     "@fortawesome/fontawesome-free": "^6.1.1",
     "@popperjs/core": "^2.11.5",
     "@rails/actioncable": "^6.0.0",
@@ -9,6 +10,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
     "bootstrap": "^5.1.3",
+    "bootstrap-datepicker": "^1.9.0",
     "datatables.net-dt": "^1.12.1",
     "jquery": "^3.6.0",
     "jquery-validation": "^1.19.5",

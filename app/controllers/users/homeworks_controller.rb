@@ -20,6 +20,7 @@ class Users::HomeworksController < Users::UserAppController
 
   def create
     @homework = current_user.homeworks.new(homework_params)
+
     if @homework.save
       # HomeworkMailer.with(homework: @homework).notify_admin.deliver_now
       HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Admin")
@@ -56,6 +57,7 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def homework_params
-    params.require(:homework).permit(:hw_attachment, :details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
+    deadline = DateTime.strptime(params[:homework][:deadline], "%m/%d/%Y, %I:%M %p")
+    params.require(:homework).permit(:hw_attachment, :details, :payment_type, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category).merge(deadline: deadline)
   end
 end

@@ -14,6 +14,8 @@ import "bootstrap"
 import "datatables.net-dt/css/jquery.dataTables.css"
 import "../stylesheets/steps.css"
 import "@fortawesome/fontawesome-free/css/all"
+import "stylesheets/bootstrap-datepicker.css"
+import "stylesheets/tempus-dominus.css"
 
 // Import the specific modules you may need (Modal, Alert, etc)
 import { Tooltip, Popover } from "bootstrap"
