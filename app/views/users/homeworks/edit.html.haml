@@ -12,7 +12,7 @@
                 .mb-3
                   .field
                     = f.label :details, class: "form-label"
-                    = f.text_area :details, class: "form-control",  :rows => 10, value: @homework.details
+                    = f.text_area :details, class: "form-control",  :rows => 10, required: true, value: @homework.details
                 .mb-3
                   .field
                     = f.label :payment_type, class: "form-label"

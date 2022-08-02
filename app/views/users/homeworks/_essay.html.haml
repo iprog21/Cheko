@@ -27,7 +27,7 @@
     .mb-3
       .field
         = label_tag :details, "Details", class: "form-label"
-        = text_area_tag "homework[details]", '', rows: 10, class: "form-control"
+        = text_area_tag "homework[details]", '', rows: 10, class: "form-control", required: true
     .mb-3
       .field
         = label_tag :hw_attachments, "Files", class: "form-label"
