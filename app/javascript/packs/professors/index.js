@@ -25,17 +25,17 @@ function autocomplete(inp, arr) {
           b.setAttribute("class", "text-start");
           b.innerHTML = "<strong>" + arr[i][0].substr(0, val.length) + "</strong>";
           b.innerHTML += arr[i][0].substr(val.length);
-          /*insert a input field that will hold the current array item's value:*/
+          
           b.innerHTML += "<input type='hidden' value='" + arr[i][1] + "'>";
-          /*execute a function when someone clicks on the item value (DIV element):*/
-              b.addEventListener("click", function(e) {
-              /*insert the value for the autocomplete text field:*/
-              // inp.value = this.getElementsByTagName("input")[0].value;
-              window.location.href = window.location.href + "/" + this.getElementsByTagName("input")[0].value
-              /*close the list of autocompleted values,
-              (or any other open lists of autocompleted values:*/
-              closeAllLists();
+          b.addEventListener("click", function(e) {
+            window.location.href = window.location.href + "/" + this.getElementsByTagName("input")[0].value
+            closeAllLists();
           });
+          a.appendChild(b);
+        } else {
+          b = document.createElement("DIV");
+          b.setAttribute("class", "text-start");
+          b.innerHTML = "<strong> No Results Found </strong>";
           a.appendChild(b);
         }
       }
