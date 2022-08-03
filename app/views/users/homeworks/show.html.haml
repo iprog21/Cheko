@@ -29,7 +29,10 @@
                 %p= @homework.grade
               .col-xl-3.col-lg-6.col-md-6.col-sm-6.ms-auto.me-auto
                 %h5 Payment
-                = image_tag "qr.jpg", class: "img-thumbnail ms-auto me-auto"
+                -if @homework.payment_type == "gcash"
+                  = image_tag "qr.jpg", class: "img-thumbnail ms-auto me-auto"
+                -else
+                  %h5 1234567889
             %hr
             -# .row.mt-3.d-flex.justify-content-center
             -#   .col-2
