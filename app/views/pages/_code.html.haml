@@ -15,7 +15,7 @@
     .mb-3
       .field
         = f.label :details, class: "form-label"
-        = f.text_area :details, class: "form-control",  :rows => 10, required: true, required: true
+        = f.text_area :details, class: "form-control",  :rows => 10, required: true
   %h3 Payment
   %stuff
     .mb-3
@@ -29,7 +29,7 @@
           -# %input#datetimepicker1Input.form-control{"data-td-target" => "#datetimepicker1", type: "text"}/
           = text_field_tag "homework[deadline]", "", class: "form-control", id: "datetimepicker1Input", "data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker", readonly: true, required: true, style: "background: white"
           %span.input-group-text{"data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker"}
-            %span.fas.fa-calendar, required: true
+            %span.fas.fa-calendar
     .mb-3 
       .field 
         = f.label :tutor_category, "Pick a type of writer"

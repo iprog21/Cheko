@@ -1,6 +1,26 @@
 class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_theme
+
+  def set_theme
+    # logger.info "\n \n #{current_user.theme} \n \n #{params[:theme]} \n \n"
+    if user_signed_in?
+      if params[:theme].present?
+        current_user.update(theme: params[:theme])
+        theme = params[:theme].to_sym
+
+        cookies[:theme] = theme
+        redirect_to(request.referer || root_path)
+      else
+        theme = current_user.theme.to_sym
+
+        cookies[:theme] = theme
+      end
+    else
+      cookies[:theme] = "light"
+    end
+  end
 
   private
   def after_sign_in_path_for(resource)
