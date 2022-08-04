@@ -5,11 +5,11 @@
     .mb-3
       .field
         = f.label :sub_type, "Type", class: "form-label"
-        = f.text_field :sub_type, class: "form-control"
+        = f.text_field :sub_type, class: "form-control", required: true
     .mb-3
       .field
         = f.label :subject, class: "form-label"
-        = f.text_field :subject, class: "form-control"
+        = f.text_field :subject, class: "form-control", required: true
   %h3 Details
   %stuff
     .mb-3
@@ -24,6 +24,10 @@
       .field
         = f.label :details, class: "form-label"
         = f.text_area :details, class: "form-control",  :rows => 10, required: true
+    .mb-3
+      .field
+        = label_tag :hw_attachments, "Files", class: "form-label"
+        = f.file_field :hw_attachment, class: "form-control", required: true
   %h3 Payment 
   %stuff
     .mb-3
@@ -55,7 +59,3 @@
         = label_tag :priority, "Make it a priority? +30%"
         .form-check.form-switch
           = check_box_tag "homework[priority]", true, false, class: "form-check-input"
-
-  -# .mb-3
-  -#   .actions
-  -#     = f.submit "Create", class: "btn btn-primary"

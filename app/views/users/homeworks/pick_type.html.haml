@@ -67,7 +67,7 @@
         = image_tag "Group-Assignments.png", class: "card-img-top" #, style: "filter: brightness(70%);"
         .card-pick-type
           %h5.card-title Group Assignment
-          %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "group")} Order
+          %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "group_project")} Order
     .col-3.mt-3
       -# .card{class: "card-#{cookies[:theme]}"}
       -#   = image_tag "Law.jpeg", class: "card-img-top"
@@ -78,7 +78,7 @@
         = image_tag "Law.png", class: "card-img-top" #, style: "filter: brightness(70%);"
         .card-pick-type
           %h5.card-title Law Related Tasks
-          %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "law_related_tasks")} Order
+          %a.btn.btn-primary.stretched-link{href: new_users_homework_path(type: "law")} Order
     .col-3.mt-3
       -# .card{class: "card-#{cookies[:theme]}"}
       -#   = image_tag "Sciences.jpeg", class: "card-img-top"

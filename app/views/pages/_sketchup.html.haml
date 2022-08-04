@@ -1,7 +1,7 @@
-= form_for @homework, url: user_registration_path, method: :post do |f|
-  %h3= "Ask for help! - #{params[:type].titleize}"
+= form_for @homework, url: users_homeworks_path, method: :post do |f|
+  = f.hidden_field :order_type, :value => params[:type]
+  %h3 Type
   %stuff
-    = f.hidden_field :order_type, :value => params[:type]
     .mb-3
       .field
         = f.label :sub_type, "Type", class: "form-label"
@@ -10,10 +10,8 @@
       .field
         = f.label :subject, class: "form-label"
         = f.text_field :subject, class: "form-control", required: true
-    .mb-3
-      .field
-        = f.label :payment_type, class: "form-label"
-        = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), {include_blank: false} , class: "form-select"
+  %h3 Details
+  %stuff
     .mb-3
       .field
         = f.label :deadline, class: "form-label"
@@ -26,6 +24,16 @@
       .field
         = f.label :details, class: "form-label"
         = f.text_area :details, class: "form-control",  :rows => 10, required: true
+    .mb-3
+      .field
+        = label_tag :hw_attachments, "Files", class: "form-label"
+        = f.file_field :hw_attachment, class: "form-control", required: true
+  %h3 Payment 
+  %stuff
+    .mb-3
+      .field
+        = f.label :payment_type, class: "form-label"
+        = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), {include_blank: false} , class: "form-select"
     .mb-3.d-flex.flex-row
       .container.p-1
         = label_tag :view_skill, "View tutors skill profile for P100"
@@ -51,10 +59,7 @@
         = label_tag :priority, "Make it a priority? +30%"
         .form-check.form-switch
           = check_box_tag "homework[priority]", true, false, class: "form-check-input"
-  -# .mb-3
-  -#   .field
-  -#     = label_tag "file", "Files", class: "form-label"
-  -#     = file_field_tag "files", class: "form-control"
+
   %h3 Register
   %stuff
     .row

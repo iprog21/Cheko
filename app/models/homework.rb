@@ -13,7 +13,7 @@ class Homework < ApplicationRecord
 
   has_one_attached :hw_attachment
 
-  enum order_type:     { essay: 0, thesis: 1, art: 2, group_project: 3, law: 4, math: 5, science: 6, translation: 7, code: 8, economics: 9 }
+  enum order_type:     { essay: 0, thesis: 1, art: 2, group_project: 3, law: 4, math: 5, science: 6, translation: 7, code: 8, economics: 9, sketchup: 10, foreign_language: 11, robotics: 12, module: 13 }
   enum payment_type:   { gcash: 0, bank: 1 }
   enum payment_status: { unpaid: 0, paid: 1 }
   enum status:         { reviewing: 0, cancel: 1, ongoing: 2, done: 3 }

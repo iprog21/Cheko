@@ -23,7 +23,7 @@
     .mb-3
       .field
         = label_tag :target_words, "Target Words", class: "form-label"
-        = text_field_tag "homework[words]", "", class: "form-control", placeholder: "Input an amount", required: true
+        = f.number_field :words, class: "form-control", placeholder: "Input an amount", required: true
     .mb-3
       .field
         = label_tag :details, "Details", class: "form-label"
@@ -31,7 +31,7 @@
     .mb-3
       .field
         = label_tag :hw_attachments, "Files", class: "form-label"
-        = f.file_field :hw_attachment, class: "form-control"
+        = f.file_field :hw_attachment, class: "form-control", required: true
   %h3 Payment
   %stuff
     .mb-3

@@ -26,12 +26,16 @@
       .field
         = f.label :details, class: "form-label"
         = f.text_area :details, class: "form-control",  :rows => 10, required: true
+    .mb-3
+      .field
+        = label_tag :hw_attachments, "Files", class: "form-label"
+        = f.file_field :hw_attachment, class: "form-control", required: true
   %h3 Payment
   %stuff
     .mb-3
       .field
         = f.label "Target Words", class: "form-label"
-        = f.text_field :words, class: "form-control", placeholder: "Input an amount"
+        = f.number_field :words, class: "form-control", placeholder: "Input an amount", required: true
     .mb-3
       .field
         = f.label :payment_type, class: "form-label"
