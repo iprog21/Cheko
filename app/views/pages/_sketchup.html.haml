@@ -1,4 +1,4 @@
-= form_for @homework, url: users_homeworks_path, method: :post do |f|
+= form_for @homework, url: user_registration_path, method: :post do |f|
   %h3= "Ask for help! - #{params[:type].titleize}"
   %stuff
     = f.hidden_field :order_type, :value => params[:type]

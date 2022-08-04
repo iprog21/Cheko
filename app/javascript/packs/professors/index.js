@@ -33,10 +33,12 @@ function autocomplete(inp, arr) {
           });
           a.appendChild(b);
         } else {
+          
           b = document.createElement("DIV");
           b.setAttribute("class", "text-start");
           b.innerHTML = "<strong> No Results Found </strong>";
           a.appendChild(b);
+          break;
         }
       }
   });
