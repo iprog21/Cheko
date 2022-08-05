@@ -3,6 +3,7 @@
 class Users::Auth::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  require "yaml"
   before_action :homework_params
 
   # GET /resource/sign_up
@@ -20,22 +21,29 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
-        if params[:homework].present?
+        if params[:homework].present? || cookies[:homework_params].present?
+          logger.info "\n\n\n #{homework_params} \n\n\n"
           hw = resource.homeworks.create(homework_params)
 
-          logger.info "\n\n\n#{hw}\n\n\n"
+          logger.info "\n\n\n IT REACHED HERE PART 1 \n\n\n"
 
           sign_up(resource_name, resource)
           respond_with resource, location: after_sign_up_path_for(resource)
         else
+          logger.info "\n\n\n IT REACHED HERE PART 2 \n\n\n"
           respond_with resource, location: new_user_session_path
         end
       else
+        logger.info "\n\n\n IT REACHED HERE PART 3 \n\n\n"
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
+      logger.info "\n\n\n IT REACHED HERE PART 4 \n\n\n"
+      if params[:homework].present?
+        cookies[:homework_params] = YAML::dump params[:homework]
+      end
       clean_up_passwords resource
       set_minimum_password_length
       respond_with resource
@@ -71,6 +79,8 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
   def homework_params
     if params[:homework].present?
       params.require(:homework).permit(:details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
+    elsif cookies[:homework_params].present?
+      YAML::dump cookies[:homework_params]
     end
   end
 

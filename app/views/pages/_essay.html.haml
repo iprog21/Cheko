@@ -5,7 +5,7 @@
     .mb-3
       .field
         = label_tag :subject, "Subject", class: "form-label"
-        = text_field_tag "homework[subject]", '', class: "form-control", required: true
+        = text_field_tag "homework[subject]", '', class: "form-control"
     .mb-3
       .field
         = label_tag :type, "Type", class: "form-label"
@@ -126,11 +126,11 @@
         = label_tag :password, "Password"
         %em
           (6 characters minimum)
-        = password_field_tag "user[password]", "", class: "form-control", required: true
+        = password_field_tag "user[password]", "", class: "form-control"
     .mb-3  
       .field
         = label_tag :password, "Password Confirmation"
-        = password_field_tag "user[password_confirmation]", "", class: "form-control", required: true
+        = password_field_tag "user[password_confirmation]", "", class: "form-control"
   -# .mb-3  
   -#   .actions
   -#     = submit_tag "Sign up", class: "btn btn-primary"

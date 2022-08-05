@@ -56,25 +56,28 @@ $('#new_homework').steps({
     }
     $("#new_homework").validate({
       rules: {
-        email: {
-          required: true,
-          email: true,
-          remote: "/check-email"
+        "user[email]": {
+          remote: {
+            url: window.location.origin + "/check-email"
+          }
+        },
+        "user[password]": {
+          minlength: 6
+        },
+        "user[password_confirmation]": {
+          equalTo: "#user_password"
         }
+      },
+
+      messages: {
+        "user[email]": "Email is already been used"
       }
     }).settings.ignore = ":disabled,:hidden";
     return $("#new_homework").valid();
   },
   onFinishing: function (event, currentIndex){
-    $("#new_homework").validate({
-      rules: {
-        email: {
-          required: true,
-          email: true,
-          remote: "/check-email"
-        }
-      }
-    }).settings.ignore = ":disabled";
+    
+    console.log($("#new_homework") .valid())
     return $("#new_homework") .valid();
   },
   onFinished: function (event, currentIndex) {

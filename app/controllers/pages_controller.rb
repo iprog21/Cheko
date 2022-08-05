@@ -31,7 +31,7 @@ class PagesController < ApplicationController
 
   def check_email
     check = User.find_by(email: params[:user][:email])
-    render :plain => check.present?
+    render :plain => check.nil?
   end
 
   def professor_show
