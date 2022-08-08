@@ -3,6 +3,11 @@
     .card 
       .card-body
         %h2 Admin Log in
+        -if flash.any?
+          .row.text-center
+            - flash.each do |type, msg|
+              .col-lg-12.col-md-12.col-sm-12.alert.mt-3.mb-3{class: type == "alert" ? "alert-danger" : "alert-success"}
+                = msg
         = form_for(resource, as: resource_name, url: admin_session_path) do |f|
           .mb-3
             .field
