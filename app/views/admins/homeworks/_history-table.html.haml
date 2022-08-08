@@ -9,8 +9,8 @@
   %td= home.tutor.name if home.tutor_id.present?
   %td= home.deadline.strftime("%B %d, %Y")
   %td= home.id
-  %td= home.subject
-  %td= home.tutor_category
+  %td= home.subject if home.tutor_category.present?
+  %td= home.tutor_category if home.tutor_category.present?
   %td= home.words
   %td= home.tutor_samples
   %td= home.tutor_skills

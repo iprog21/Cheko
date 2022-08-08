@@ -12,6 +12,10 @@
         = f.number_field :words, class: "form-control", required: true
     .mb-3
       .field
+        = f.label :subject, class: "form-label"
+        = f.text_field :subject, class: "form-control", required: true
+    .mb-3
+      .field
         = f.label :deadline, class: "form-label"
         #datetimepicker1.input-group{"data-td-target-input" => "nearest", "data-td-target-toggle" => "nearest"}
           -# %input#datetimepicker1Input.form-control{"data-td-target" => "#datetimepicker1", type: "text"}/

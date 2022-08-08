@@ -4,7 +4,7 @@
   %td= home.sub_type.titleize
   %td= home.deadline.strftime("%b %d, %Y - %l:%M %p") if home.deadline.present?
   %td= home.subject.titleize
-  %td= home.tutor_category.titleize
+  %td= home.tutor_category.titleize if home.tutor_category.present?
   %td= home.words
   %td= home.tutor_samples.to_s.capitalize
   %td= home.tutor_skills.to_s.capitalize
