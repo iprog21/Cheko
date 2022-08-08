@@ -2,7 +2,7 @@
   %td.text-start= home.name
   %td.text-center= home.created_at.strftime("%B %d, %Y") 
   %td.text-center= home.order_type.titleize
-  %td.text-center= home.sub_type.titleize
+  %td.text-center= home.sub_type.titleize if home.sub_type.present?
   %td.text-center= home.deadline.strftime("%B %d, %Y")
   %td.text-center= home.subject
   %td.text-center= home.words

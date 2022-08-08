@@ -1,9 +1,9 @@
 %tr
   %td= home.created_at.strftime("%b %d, %Y")
   %td= home.order_type.titleize
-  %td= home.sub_type.titleize
+  %td= home.sub_type.titleize if home.sub_type.present?
   %td= home.deadline.strftime("%b %d, %Y - %l:%M %p") if home.deadline.present?
-  %td= home.subject.titleize
+  %td= home.subject.titleize if home.subject.present?
   %td= home.tutor_category.titleize if home.tutor_category.present?
   %td= home.words
   %td= home.tutor_samples.to_s.capitalize
