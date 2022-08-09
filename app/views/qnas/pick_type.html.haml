@@ -1,82 +1,113 @@
 = render 'users/shared/header'
 
+-# .container.mt-5
+-#   .row
+-#     .col-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Essay2.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Essay
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "essay")} Order
+-#     .col-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Math2.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Math
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "math")} Order
+-#     .col-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Translations2.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Translation
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "translation")} Order
+-#     .col-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Coding2.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Code
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "code")} Order
+-#     .col-3.mt-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Art2.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Art
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "art")} Order
+-#     .col-3.mt-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Group-Assignments.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Group Assignment
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "group")} Order
+-#     .col-3.mt-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Law.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Law Related Tasks
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "law_related_tasks")} Order
+-#     .col-3.mt-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Sciences.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Science
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "science")} Order
+-#     .col-3.mt-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Economics.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Economics
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "economics")} Order
+-#     .col-3.mt-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Autocad.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Sketchup & Autocad
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "sketchup")} Order
+-#     .col-3.mt-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Foreign-languages.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Foreign Language
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "foreign_language")} Order
+-#     .col-3.mt-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Robotics.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Robotics/Machine Learning
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "robotics")} Order
+-#     .col-3.mt-3
+-#       .card.bg-dark.text-white
+-#         = image_tag "Module.png", class: "card-img-top" 
+-#         .card-pick-type
+-#           %h5.card-title Module
+-#           %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "module")} Order
+
 .container.mt-5
   .row
-    .col-3
-      .card.bg-dark.text-white
-        = image_tag "Essay2.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Essay
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "essay")} Order
-    .col-3
-      .card.bg-dark.text-white
-        = image_tag "Math2.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Math
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "math")} Order
-    .col-3
-      .card.bg-dark.text-white
-        = image_tag "Translations2.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Translation
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "translation")} Order
-    .col-3
-      .card.bg-dark.text-white
-        = image_tag "Coding2.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Code
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "code")} Order
-    .col-3.mt-3
-      .card.bg-dark.text-white
-        = image_tag "Art2.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Art
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "art")} Order
-    .col-3.mt-3
-      .card.bg-dark.text-white
-        = image_tag "Group-Assignments.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Group Assignment
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "group")} Order
-    .col-3.mt-3
-      .card.bg-dark.text-white
-        = image_tag "Law.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Law Related Tasks
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "law_related_tasks")} Order
-    .col-3.mt-3
-      .card.bg-dark.text-white
-        = image_tag "Sciences.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Science
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "science")} Order
-    .col-3.mt-3
-      .card.bg-dark.text-white
-        = image_tag "Economics.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Economics
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "economics")} Order
-    .col-3.mt-3
-      .card.bg-dark.text-white
-        = image_tag "Autocad.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Sketchup & Autocad
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "sketchup")} Order
-    .col-3.mt-3
-      .card.bg-dark.text-white
-        = image_tag "Foreign-languages.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Foreign Language
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "foreign_language")} Order
-    .col-3.mt-3
-      .card.bg-dark.text-white
-        = image_tag "Robotics.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Robotics/Machine Learning
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "robotics")} Order
-    .col-3.mt-3
-      .card.bg-dark.text-white
-        = image_tag "Module.png", class: "card-img-top" 
-        .card-pick-type
-          %h5.card-title Module
-          %a.btn.btn-primary.stretched-link{href: new_qna_path(type: "module")} Order
+    .col-sm-12.col-md-12.col-lg-6.ms-auto.me-auto.mt-2.p-4
+      .d-grid.gap-5
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "math")}
+          .h2 Math
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "econ")}
+          .h2 Econ
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "accounting")}
+          .h2 Accounting
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "engineering")}
+          .h2 Engineering
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "machine learning")}
+          .h2 Machine Learning
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "law")}
+          .h2 Law
+    .col-sm-12.col-md-12.col-lg-6.ms-auto.me-auto.mt-2.p-4
+      .d-grid.gap-5
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "essay")}
+          .h2 Essay
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "programming")}
+          .h2 Programming
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "robotics")}
+          .h2 Robotics
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "stat")}
+          .h2 Stat
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "tech")}
+          .h2 Tech
+        %a.btn.bg-cheko.text-white.btn-lg{href: new_qna_path(type: "others")}
+          .h2 Others

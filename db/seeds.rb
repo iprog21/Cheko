@@ -37,3 +37,26 @@ if School.all.count == 0
   end
 end
 puts "\n --- schools okay desuwa --- \n"
+
+puts "\n --- creating qna types desuwa --- \n"
+types = [
+  {name: "math"},
+  {name: "econ"},
+  {name: "accounting"},
+  {name: "engineering"},
+  {name: "machine learning"},
+  {name: "law"},
+  {name: "essay"},
+  {name: "programming"},
+  {name: "robotics"},
+  {name: "stat"},
+  {name: "tech"},
+  {name: "others"}
+]
+
+if QnaType.all.count == 0
+  types.each do |type|
+    QnaType.create!(type)
+  end
+end
+puts "\n --- qna types okay desuwa --- \n"

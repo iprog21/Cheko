@@ -5,12 +5,12 @@ class QnasController < ApplicationController
   # end
 
   def new
-    # qna_old = Qna.find_by(auth: cookies[:tutor_qna])
-    # logger.info "\n\n\n #{cookies[:tutor_qna]}\n\n\n"
     qna_old = Qna.find_by(auth: cookies[:tutor_qna])
+
     if qna_old
-      logger.info "\n\n\n #{qna_old.id}"
       redirect_to qna_path(qna_old.id)
+    elsif params[:type].nil?
+      redirect_to pick_type_qnas_path
     else
       @qna = Qna.new
     end
@@ -44,6 +44,8 @@ class QnasController < ApplicationController
   private
 
   def qna_params
-    params.require(:qna).permit(:qna_type, :question, :subject, :document)
+    type = QnaType.find_by(name: params[:qna][:qna_type])
+    
+    params.require(:qna).permit(:question, :subject, :document).merge(qna_type_id: type.id)
   end
 end
