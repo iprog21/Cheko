@@ -27,9 +27,11 @@
                     - @qnas.each do |qna|
                       %tr
                         %td= qna.created_at.strftime("%b %d, %Y - %l:%M %p")
-                        %td= qna.qna_type.titleize
+                        %td= qna.qna_type.name.titleize
                         %td= truncate(qna.subject.titleize)
                         %td= truncate(qna.question)
-                        %td action
+                        %td 
+                          %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_qna_path(qna.id)}
+                          
 
 = javascript_pack_tag 'datatable_basic'

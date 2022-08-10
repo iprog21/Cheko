@@ -30,13 +30,17 @@
                 %tbody
                   - unless @homeworks.blank?
                     - @homeworks.each do |home|
+                      -# - d = DateTime.parse(home.deadline.to_s)
+                      -# - l = d.new_offset('+0800')
+                      -# - u = l.new_offset('UTC')
+
                       %tr
                         %td.text-start= home.name
                         %td.text-center= home.order_type.titleize
                         %td.text-center= home.sub_type.titleize if home.sub_type.present?
                         %td.text-center= home.subject.present? ? home.subject.capitalize : "No subject provided"
                         %td.text-center= home.price
-                        %td.text-center= home.deadline.strftime("%B %d, %Y")
+                        %td.text-center= home.deadline.strftime("%B %d, %Y - %I:%M %P") if home.deadline.present?
                         %td.text-center= home.status.titleize
                         %td.text-end
                           %a{href: users_homework_path(home)}
