@@ -76,6 +76,6 @@ class Admins::HomeworksController < ApplicationController
   end
 
   def homework_params
-    params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :price, :additional, :internal_deadline)
+    params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :price, :additional, :internal_deadline, :subject, :deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples)
   end
 end

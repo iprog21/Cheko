@@ -5,61 +5,102 @@
     .container.mt-5
       .card 
         .card-body
-          .row 
-            .col-12.text-start 
-              %h5 Assign Personnel
-            .col-6
-              .mb-3
-                .field
-                  =label_tag "client", "Client", class: "form-label"
-                  =text_field_tag "client", @homework.user.name, disabled: true, class: "form-control"
-              .mb-3
-                .field
-                  =label_tag "subject", "Subject", class: "form-label"
-                  =text_field_tag "subject", @homework.subject, disabled: true, class: "form-control"
-              .mb-3
-                .field
-                  =label_tag "deadline", "Deadline", class: "form-label"
-                  =text_field_tag "deadline", @homework.deadline.strftime("%b %d, %Y - %l:%M %p"), disabled: true, class: "form-control"
-              .mb-3
-                .field
-                  =label_tag "details", "Details", class: "form-label"
-                  =text_area_tag "details", @homework.details, disabled: true, class: "form-control"
-              .row
-                .col-4
-                  = label_tag :priority, "Priority? +30%"
-                  .form-check.form-switch
-                    = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.priority? ?  true : false, disabled: true
-                .col-4
-                  = label_tag :tutor_skills, "Tutor Skills? P100"
-                  .form-check.form-switch
-                    = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.tutor_skills? ?  true : false, disabled: true
-                .col-4
-                  = label_tag :tutor_skills, "Tutor Samples? P100"
-                  .form-check.form-switch
-                    = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.tutor_samples? ?  true : false, disabled: true
-                .col-4
-                  = label_tag :tutor_skills, "View Bidders? P300"
-                  .form-check.form-switch
-                    = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.view_bidders? ?  true : false, disabled: true
-                .col-4
-                  = label_tag :tutor_skills, "Login School? P200"
-                  .form-check.form-switch
-                    = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.login_school? ?  true : false, disabled: true
-            .col-6
-              - if current_admin.role == 'super_admin'
-                = render 'admins/homeworks/super_edit'
-              -else
-                = render 'admins/homeworks/lead_edit'
-              -# = form_for @homework, url: admins_homework_path, method: :put do |f|
-              -#   .mb-3
-              -#     .field
-              -#       = f.label "Team Lead", class: "form-label"
-              -#       = f.select(:manager_id, @leads.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-control")
-              -#   .mb-3
-              -#     .field
-              -#       = f.label "Tutor", class: "form-label"
-              -#       = f.select(:tutor_id, @tutors.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-control")
-              -#   .mb-3
-              -#     .actions
-              -#       = f.submit "Assign", class: "btn btn-primary"
+          = form_for @homework, url: admins_homework_path, method: :put do |f|
+            .row 
+              .col-12.text-start 
+                %h5 Assign Personnel
+              .col-6
+                
+                .mb-3
+                  .field
+                    =label_tag "client", "Client", class: "form-label"
+                    =text_field_tag "client", @homework.user.name, disabled: true, class: "form-control"
+                .mb-3
+                  .field
+                    =label_tag "subject", "Subject", class: "form-label"
+                    =f.text_field :subject, value: @homework.subject, class: "form-control"
+                .mb-3
+                  .field
+                    =label_tag "deadline", "Deadline", class: "form-label"
+                    =f.text_field :deadline, value: @homework.deadline.strftime("%b %d, %Y - %l:%M %p"), class: "form-control"
+                .mb-3
+                  .field
+                    =label_tag "details", "Details", class: "form-label"
+                    =f.text_area :details, value: @homework.details, class: "form-control"
+                .row
+                  .col-4
+                    = label_tag :priority, "Priority? +30%"
+                    .form-check.form-switch
+                      = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.priority? ?  true : false
+                  .col-4
+                    = label_tag :tutor_skills, "Tutor Skills? P100"
+                    .form-check.form-switch
+                      = check_box_tag "homework[tutor_skills]", true, false, class: "form-check-input", checked: @homework.tutor_skills? ?  true : false
+                  .col-4
+                    = label_tag :tutor_samples, "Tutor Samples? P100"
+                    .form-check.form-switch
+                      = check_box_tag "homework[tutor_samples]", true, false, class: "form-check-input", checked: @homework.tutor_samples? ?  true : false
+                  .col-4
+                    = label_tag :view_bidders, "View Bidders? P300"
+                    .form-check.form-switch
+                      = check_box_tag "homework[view_bidders]", true, false, class: "form-check-input", checked: @homework.view_bidders? ?  true : false
+                  .col-4
+                    = label_tag :login_school, "Login School? P200"
+                    .form-check.form-switch
+                      = check_box_tag "homework[login_school]", true, false, class: "form-check-input", checked: @homework.login_school? ?  true : false
+              .col-6
+                - if current_admin.role == 'super_admin'
+                  -# = render 'admins/homeworks/super_edit'
+                  .mb-3
+                    .field
+                      = f.label "Team Lead", class: "form-label"
+                      = f.select(:admin_id, @leads.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-select")
+                  .mb-3
+                    .field
+                      = f.label "Task Manager", class: "form-label"
+                      = f.select(:manager_id, @managers.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-select")
+                  .mb-3
+                    .field
+                      = f.label "Tutor", class: "form-label"
+                      = f.select(:tutor_id, @tutors.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-select")
+                  .mb-3 
+                    .field
+                      = f.label :tutor_price, class: "form-label"
+                      = f.text_field :tutor_price, class: "form-control", value: @homework.tutor_price
+                  .mb-3 
+                    .field
+                      = f.label :price, class: "form-label"
+                      = f.text_field :price, class: "form-control", value: @homework.price
+                  .mb-3 
+                    .field
+                      = f.label :internal_deadline, class: "form-label"
+                      = f.datetime_field :internal_deadline, class: "form-control"
+                  .mb-3
+                    .actions
+                      = f.submit "Assign", class: "btn btn-primary"
+                -else
+                  -# = render 'admins/homeworks/lead_edit'
+                  .mb-3
+                    .field
+                      = f.label "Task Manager", class: "form-label"
+                      = f.select(:manager_id, @managers.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-select")
+                  .mb-3 
+                    .field
+                      = f.label :price, class: "form-label"
+                      = f.text_field :price, class: "form-control"
+                  .mb-3 
+                    .field
+                      = f.label :internal_deadline, class: "form-label"
+                      = f.datetime_field :internal_deadline, class: "form-control"
+                  - if @homework.tutor_id.present?
+                    .mb-3
+                      .field
+                        = f.label "Tutor", class: "form-label"
+                        = f.select(:tutor_id, @tutors.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-select")
+                    .mb-3 
+                      .field
+                        = f.label :tutor_price, class: "form-label"
+                        = f.text_field :tutor_price, class: "form-control"
+                  .mb-3
+                    .actions
+                      = f.submit "Update", class: "btn btn-primary"

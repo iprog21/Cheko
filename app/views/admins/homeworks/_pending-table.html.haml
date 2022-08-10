@@ -12,12 +12,15 @@
   %td= home.priority.to_s.capitalize
   %td= home.login_school.to_s.capitalize
   %td
-    %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_homework_path(home)}
+    %a{href: admins_homework_path(home)}
+      .fas.fa-eye.text-primary.font-16.mr-3
     - if home.admin_id == current_admin.id || current_admin.role == 'super_admin'
-      %a.fas.fa-pen.text-primary.font-16.mr-3{href: edit_admins_homework_path(home)}
+      %a{href: edit_admins_homework_path(home)}
+        .fas.fa-pen.text-secondary.font-16.mr-3
       -# = link_to :edit, edit_admins_homework_path(home)
     - elsif home.admin_id.nil?
-      %a.fas.fa-pen.text-primary.font-16.mr-3{href: admins_homework_assign_path(homework_id: home.id), data: {method: :put}}
+      %a{href: admins_homework_assign_path(homework_id: home.id), data: {method: :put}}
+        .fas.fa-circle-check.text-success.font-16.mr-3
       -# = link_to :assign, admins_homework_assign_path(homework_id: home.id), method: :put
     - if current_admin.role == 'super_admin'
       %a.fas.fa-trash.text-danger.font-16.mr-3{href: admins_homework_path(home), data: {method: :delete}}

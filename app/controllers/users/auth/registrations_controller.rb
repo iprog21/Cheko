@@ -78,7 +78,8 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
 
   def homework_params
     if params[:homework].present?
-      params.require(:homework).permit(:details, :payment_type, :deadline, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category)
+      deadline = DateTime.strptime(params[:homework][:deadline], "%m/%d/%Y, %I:%M %p")
+      params.require(:homework).permit(:details, :payment_type, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category).merge(deadline: deadline)
     elsif cookies[:homework_params].present?
       YAML::dump cookies[:homework_params]
     end
