@@ -22,7 +22,7 @@
               - @qnas.each do |qna|
                 %tr
                   %td.text-start= qna.id
-                  %td.text-center= qna.question
+                  %td.text-center= truncate(qna.question)
                   %td.text-center= qna.subject.titleize
                   %td.text-end
                     %a{href: users_qna_path(qna)}
@@ -47,7 +47,7 @@
               - @finish.each do |qna|
                 %tr
                   %td.text-start= qna.id
-                  %td.text-center= qna.question
+                  %td.text-center= truncate(qna.question)
                   %td.text-center= qna.subject.titleize
                   %td.text-end
                     %a{href: users_qna_path(qna)}

@@ -21,7 +21,7 @@
                   - @pending.each do |qna|
                     %tr
                       %td.text-start= qna.id
-                      %td.text-center= qna.question
+                      %td.text-center= truncate(qna.question)
                       %td.text-center= qna.subject.titleize
                       %td.text-end
                         %a{href: tutors_qna_assign_path(qna)}
@@ -46,7 +46,7 @@
                   - @assigned.each do |qna|
                     %tr
                       %td.text-start= qna.id
-                      %td.text-center= qna.question
+                      %td.text-center= truncate(qna.question)
                       %td.text-center= qna.subject.titleize
                       %td.text-end
                         %a{href: tutors_qna_path(qna)}
