@@ -1,5 +1,6 @@
 = render 'tutors/shared/header'
 = hidden_field_tag "chat_id", @qna.chat.id, id: "chat_id"
+= hidden_field_tag "qna_id", @qna.id, id: "qna_id"
 = hidden_field_tag "type", "tutor", id: "type"
 .container.mt-5
   .row

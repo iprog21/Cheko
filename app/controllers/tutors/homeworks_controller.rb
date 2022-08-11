@@ -35,7 +35,10 @@ class Tutors::HomeworksController < ApplicationController
   end
 
   def update_bid
-
+    @bid = Bid.find_by(homework_id: @homework.id, tutor_id: current_tutor.id)
+    if @bid.update(ammount: params[:ammount])
+      redirect_to tutors_homework_path(@homework)
+    end
   end
 
   private

@@ -1,6 +1,7 @@
 = render 'users/shared/header'
 = hidden_field_tag "chat_id", @qna.chat.id, id: "chat_id" if @qna.chat.present?
 = hidden_field_tag "type", "user", id: "type"
+= hidden_field_tag "qna_id", @qna.id, id: "qna_id"
 .container.mt-5
   .row
     .card{class: "card-#{cookies[:theme]}"}
@@ -43,12 +44,18 @@
                           = link_to "Download", rails_blob_path(msg.document, disposition: 'attachment')
         .container#text-box.mt-3
           - if @qna.chat.present?
-            = form_for @message, url: qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chat.id) do |f|
+            = form_for @message, url: "#", method: :get do |f|
               .row
                 .col-4
                   = f.file_field :document, class: "form-control"
                 .col-8
                   = f.text_field :content, class: "form-control", autocomplete: 'off'
+            -# = form_tag( "#", method: :get, id: "new_message", multipart: true) do
+            -#   .row
+            -#     .col-4
+            -#       = file_field_tag "message[document]", class: "form-control"
+            -#     .col-8
+            -#       = text_field_tag "message[content]", "", class: "form-control", autocomplete: 'off'
               -# .row
               -#   .col-4
               -#     = file_field_tag "document", class: "form-control"

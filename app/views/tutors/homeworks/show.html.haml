@@ -10,9 +10,10 @@
         .row.mt-3
           .col-6
             %h5= "Client: #{@homework.user.name}"
-          .col-6.text-end
-            %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
-              Files
+          -if @homework.tutor_id == current_tutor.id
+            .col-6.text-end
+              %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
+                Files
         .row.mt-3
           .col-6
             %h5 Deadline:
