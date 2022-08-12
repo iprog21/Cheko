@@ -18,7 +18,7 @@ class Admins::AdminsController < ApplicationController
     if @admin.save
       @admin.update!(role: 1)
       # @admin.create_agent
-      redirect_to admins_admins_path
+      redirect_to admins_admins_path, notice: "Admin successfully created"
     else
       render 'new'
     end
@@ -29,7 +29,7 @@ class Admins::AdminsController < ApplicationController
 
   def update
     if @admin.update(admin_params)
-      redirect_to admins_admin_path(@admin)
+      redirect_to admins_admin_path(@admin), notice: "Admin successfully updated"
     else
       render 'edit'
     end

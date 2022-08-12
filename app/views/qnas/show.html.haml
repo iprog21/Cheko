@@ -20,6 +20,7 @@
         .container-fluid#messages{style: "overflow: auto; height: 550px;"}
           -if @qna.chat.present?
             - @qna.chat.messages.order(id: :asc).each do |msg|
+              - next if msg.sendable_type == nil
               - if msg.sendable_type == "User"
                 .row.mt-3
                   .col-6.ms-auto.text-white.rounded.pt-2
@@ -43,8 +44,8 @@
                           -# %a{href: msg.content} Document
                           = link_to "Download", rails_blob_path(msg.document, disposition: 'attachment')
         .container#text-box.mt-3
-          - if @qna.chat.present?
-            = form_for @message, url: "#", method: :get do |f|
+          - if @qna.status == "assigned"
+            = form_for @message, url: qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chat.id) do |f|
               .row
                 .col-4
                   = f.file_field :document, class: "form-control"

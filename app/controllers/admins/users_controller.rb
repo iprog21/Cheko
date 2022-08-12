@@ -14,7 +14,7 @@ class Admins::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to admins_user_path(@user)
+      redirect_to admins_user_path(@user), notice: "User successfully updated"
     else
       render 'edit'
     end
@@ -22,7 +22,7 @@ class Admins::UsersController < ApplicationController
 
   def destroy
     @user.destroy!
-    redirect_to admins_users_path
+    redirect_to admins_users_path, notice: "User successfully deleted"
   end
 
   private

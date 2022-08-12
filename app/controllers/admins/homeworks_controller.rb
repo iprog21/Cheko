@@ -14,7 +14,7 @@ class Admins::HomeworksController < ApplicationController
 
   def destroy
     @homework.destroy!
-    redirect_to admins_homeworks_path
+    redirect_to admins_homeworks_path, alert: "Homework successfully deleted"
   end
 
   def edit
@@ -43,13 +43,13 @@ class Admins::HomeworksController < ApplicationController
     #   @homework.calculate_profit
     # end
 
-    redirect_to admins_homeworks_path
+    redirect_to admins_homeworks_path, notice: "Homework successfully updated"
   end
 
   def assign
     @homework.update(admin_id: current_admin.id)
     @homework.accept_order
-    redirect_to admins_homeworks_path
+    redirect_to admins_homeworks_path #, notice: "Successfully assigned"
   end
 
   def assign_tutor

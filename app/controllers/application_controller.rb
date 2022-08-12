@@ -46,8 +46,10 @@ class ApplicationController < ActionController::Base
       new_admin_session_path
     elsif resource == :user
       new_user_session_path
-    # elsif resource == :sales_rep
-    #   new_sales_rep_session_path
+    elsif resource == :manager
+      new_manager_session_path
+    elsif resource == :tutor
+      new_tutor_session_path
     else
       root_path
     end

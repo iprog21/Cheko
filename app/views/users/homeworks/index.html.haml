@@ -35,7 +35,7 @@
                       -# - u = l.new_offset('UTC')
 
                       %tr
-                        %td.text-start= home.name
+                        %td.text-start= home.id
                         %td.text-center= home.order_type.titleize
                         %td.text-center= home.sub_type.titleize if home.sub_type.present?
                         %td.text-center= home.subject.present? ? home.subject.capitalize : "No subject provided"

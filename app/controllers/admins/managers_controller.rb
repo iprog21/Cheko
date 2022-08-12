@@ -18,7 +18,7 @@ class Admins::ManagersController < ApplicationController
     @manager = Manager.new(manager_params)
     if @manager.save
       @manager.create_agent
-      redirect_to admins_managers_path
+      redirect_to admins_managers_path, notice: "Manager successfully created"
     else
       render 'new'
     end
@@ -29,7 +29,7 @@ class Admins::ManagersController < ApplicationController
 
   def update
     if @manager.update(manager_params)
-      redirect_to admins_manager_path(@manager)
+      redirect_to admins_manager_path(@manager), notice: "Manager successfully updated"
     else
       render 'edit'
     end

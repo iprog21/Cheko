@@ -5,7 +5,7 @@ class Tutor < ApplicationRecord
 
   has_many :bids, dependent: :destroy
   has_many :documents, as: :documentable, dependent: :destroy
-  # has_many :chats, as: :chattable, dependent: :destroy
+  # has_many :chats, dependent: :destroy
   has_many :qnas
   has_many :messages, as: :sendable, dependent: :destroy
 

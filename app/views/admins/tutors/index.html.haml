@@ -13,6 +13,11 @@
                   %h3 Tutors
                 .col-6.text-end 
                   = link_to "New Tutor", new_admins_tutor_path, class: "btn btn-primary"
+              -if flash.any?
+                .row.text-center
+                  - flash.each do |type, msg|
+                    .col-lg-12.col-md-12.col-sm-12.alert.mt-3.mb-3{class: type == "alert" ? "alert-danger" : "alert-success"}
+                      = msg
               .table-responsive
                 %table.table#datatable
                   %thead
@@ -33,5 +38,12 @@
                           %td.text-end
                             %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_tutor_path(tutor)}
                             %a.fas.fa-pen.text-primary.font-16.mr-3{href: edit_admins_tutor_path(tutor)}
-                            %a.fas.fa-trash.text-danger.font-16.mr-3{href: admins_tutor_path(tutor), data: {method: :delete}}
+                            %a.fas.fa-trash.text-danger.font-16.mr-3{href: admins_tutor_path(tutor), data: {method: :delete}, onclick: "deleteTutor()"}
 = javascript_pack_tag 'datatable_basic'
+
+:javascript
+  function deleteTutor(){
+    if (!confirm("Do you want to delete")){
+        return false;
+      }
+  }

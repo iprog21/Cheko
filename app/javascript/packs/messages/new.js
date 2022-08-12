@@ -6,25 +6,34 @@ var qnaId = $("#qna_id").val()
 var chatId = $("#chat_id").val()
 
 $( '#new_message' ).on("submit", function(event){
+  event.preventDefault();
   if ( $("#type").val() == "user" ){
 
     $.ajax({
       type: "POST",
-      url: "/qnas/" + qnaId + "/chats/" + chatId + "/messages?" + $( '#new_message' ).serialize(),
-      data: "",
+      url: "/qnas/" + qnaId + "/chats/" + chatId + "/messages",
+      data: new FormData(document.getElementById("new_message")),
+      processData: false,
+      contentType: false,
       success: function(data){
         $( '#new_message' ).each(function(){
           this.reset();
         });
       }
     })
-
-    // $.post("/qnas/" + qnaId + "/chats/" + chatId + "/messages", $( '#new_message' ).serialize(), function(data){
-    //   $( '#new_message' ).each(function(){
-    //     this.reset();
-    //   });
-    // })
-
+  } else if ($("#type").val() == "tutor") {
+    $.ajax({
+      type: "POST",
+      url: "/tutors/qnas/" + qnaId + "/messages?chat_id=" + chatId,  //+ "&" + $( '#new_message' ).serialize(),
+      data: new FormData(document.getElementById("new_message")),
+      processData: false,
+      contentType: false,
+      success: function(data){
+        $( '#new_message' ).each(function(){
+          this.reset();
+        });
+      }
+    })
   } 
 })
 

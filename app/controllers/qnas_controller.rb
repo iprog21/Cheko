@@ -26,6 +26,7 @@ class QnasController < ApplicationController
 
   def create
     @qna = Qna.create(qna_params)
+    Chat.create(qna_id: @qna.id)
     cookies[:tutor_qna] = @qna.auth
     redirect_to root_path 
   end
@@ -37,6 +38,8 @@ class QnasController < ApplicationController
 
   def finish
     @qna = Qna.find(params[:qna_id])
+    message = Message.create(content: "Client has finished the question", chat_id: @qna.chat.id)
+    SendMessageJob.perform_now(message, "Finish")
     @qna.update(status: "done", auth: "finish")
     redirect_to root_path
   end

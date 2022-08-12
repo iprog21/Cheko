@@ -17,8 +17,9 @@ class Admins::TutorsController < ApplicationController
     @tutor = Tutor.new(tutor_params)
     if @tutor.save
       @tutor.update!(status: 1)
-      redirect_to admins_tutors_path
+      redirect_to admins_tutors_path, notice: "Tutor successfully created"
     else
+      flash.now[:alert] = "Email is already been used"
       render 'new'
     end
   end
@@ -28,7 +29,7 @@ class Admins::TutorsController < ApplicationController
 
   def update
     if @tutor.update(tutor_params)
-      redirect_to admins_tutor_path(@tutor)
+      redirect_to admins_tutor_path(@tutor), notice: "Tutor successfully updated"
     else
       render 'edit'
     end
@@ -36,7 +37,7 @@ class Admins::TutorsController < ApplicationController
 
   def destroy
     @tutor.destroy!
-    redirect_to admins_tutors_path
+    redirect_to admins_tutors_path, notice: "Tutor successfully deleted"
   end
 
   private 
