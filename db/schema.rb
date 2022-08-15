@@ -84,6 +84,12 @@ ActiveRecord::Schema.define(version: 2022_08_09_041454) do
     t.integer "qna_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "conversation_id"
+    t.integer "chattable_id"
+    t.string "chattable_type"
+    t.integer "admin_id"
+    t.integer "manager_id"
+    t.string "name"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -228,16 +234,6 @@ ActiveRecord::Schema.define(version: 2022_08_09_041454) do
     t.string "email"
   end
 
-  create_table "q_n_as", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "tutor_id"
-    t.text "question"
-    t.string "subject"
-    t.integer "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "qna_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -346,7 +342,6 @@ ActiveRecord::Schema.define(version: 2022_08_09_041454) do
     t.string "contact_id"
     t.string "identifier_string"
     t.string "theme", default: "light"
-    t.string "course"
     t.integer "year"
     t.string "college"
     t.string "address"

@@ -12,10 +12,19 @@ class Admins::ProfessorsController < ApplicationController
   
   def new
     @professor = Professor.new
+    @school = School.all
   end
 
   def create
     @professor = Professor.create(professor_params)
+
+    if @professor.school_id.nil? && params[:school_name].present?
+      unless School.where("LOWER(name) = LOWER(?)", params[:school_name]).first
+        new_school = School.create(name: params[:school_name])
+        @professor.update(school_id: new_school.id)
+      end
+    end
+
     redirect_to admins_professors_path
   end
 
@@ -43,6 +52,6 @@ class Admins::ProfessorsController < ApplicationController
   end
 
   def professor_params
-    params.require(:professor).permit(:first_name, :last_name, :school, :easiness, :effectiveness, :life_changing, :light_workload, :leniency, :average, :a_able, :b_pls_able, :b_able, :c_able, :batch1_able, :batch2_able, :batch3_able, :batch4_able, :our_comments)
+    params.require(:professor).permit(:first_name, :last_name, :school_id, :easiness, :effectiveness, :life_changing, :light_workload, :leniency, :average, :a_able, :b_pls_able, :b_able, :c_able, :batch1_able, :batch2_able, :batch3_able, :batch4_able, :our_comments)
   end
 end

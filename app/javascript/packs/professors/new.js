@@ -11,6 +11,19 @@ $("#prof_review_school_id").on("change", function() {
   }
 })
 
+$("#professor_school_id").on("change", function() {
+  if( !$('#professor_school_id').val() ) {
+    console.log("empty")
+    $("#school_string").removeClass("d-none")
+    $('#professor_school_name').prop('required',true);
+  } else {
+    console.log("not empty")
+    $("#school_string").addClass("d-none")
+    $('#professor_school_name').val("")
+    $('#professor_school_name').prop('required',false);
+  }
+})
+
 getAve()
 
 //////////////////

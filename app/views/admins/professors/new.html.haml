@@ -22,7 +22,10 @@
                 .mb-3
                   .field
                     = f.label :school, class: "form-label"
-                    = f.text_field :school, class: "form-control", required: true
+                    = f.select :school_id, School.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, class: "form-select"
+                    #school_string.mt-3
+                      %h6 *if school is not in selection, type the school
+                      = text_field_tag :school_name, "", class: "form-control", id: "professor_school_name", required: true
                 .mb-3
                   .field
                     = f.label :easiness, class: "form-label"

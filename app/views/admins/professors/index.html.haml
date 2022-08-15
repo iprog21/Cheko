@@ -21,7 +21,7 @@
                   %tr
                     %td.text-start= prof.id
                     %td.text-center= prof.name
-                    %td.text-center= prof.school_id.present? ? prof.school.name : prof.school_name
+                    %td.text-center= prof.school_id.present? ? prof.school.name : ""
                     %td.text-end
                       %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_prof_review_path(prof)}
 .row 
@@ -47,7 +47,7 @@
                   %tr
                     %td.text-start= prof.id
                     %td.text-center= prof.name
-                    %td.text-center= prof.school.name
+                    %td.text-center= prof.school_id.present? ? prof.school.name : ""
                     %td.text-end
                       %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_professor_path(prof)}
                       %a.fas.fa-pen.text-primary.font-16.mr-3{href: edit_admins_professor_path(prof)}
