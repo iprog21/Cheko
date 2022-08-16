@@ -42,7 +42,7 @@
             %a#navbarDropdown.nav-link.dropdown-toggle.active{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}= current_user.first_name
             %ul.dropdown-menu.dropdown-menu-end{"aria-labelledby" => "navbarDropdown"}
               %li
-                %a.dropdown-item{href: "#"} Profile
+                -# %a.dropdown-item{href: "#"} Profile
               - if current_user.theme == "light" || cookies[:theme] == "light"
                 %li.nav-item
                   %a.dropdown-item{href: users_path(theme: "dark")} Change theme

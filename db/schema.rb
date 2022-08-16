@@ -342,6 +342,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_041454) do
     t.string "contact_id"
     t.string "identifier_string"
     t.string "theme", default: "light"
+    t.string "course"
     t.integer "year"
     t.string "college"
     t.string "address"

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_theme
 
+  private
   def set_theme
     # logger.info "\n \n #{current_user.theme} \n \n #{params[:theme]} \n \n"
     if user_signed_in?
@@ -11,7 +12,8 @@ class ApplicationController < ActionController::Base
         theme = params[:theme].to_sym
 
         cookies[:theme] = theme
-        redirect_to(request.referer || root_path)
+        logger.info "\n \n #{current_user.theme} \n \n #{params[:theme]} \n \n #{request} \n \n"
+        redirect_to users_path
       else
         theme = current_user.theme.to_sym
 
@@ -22,7 +24,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
   def after_sign_in_path_for(resource)
     if resource.class == Admin
       stored_location_for(resource) || admins_path
