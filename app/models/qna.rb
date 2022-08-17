@@ -1,5 +1,5 @@
 class Qna < ApplicationRecord
-  # belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :tutor, optional: true
   belongs_to :qna_type
 

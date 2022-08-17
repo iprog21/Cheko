@@ -17,7 +17,12 @@ class QnasController < ApplicationController
   end
 
   def pick_type
-    qna_old = Qna.find_by(auth: cookies[:tutor_qna])
+    if user_signed_in?
+      qna_old = current_user.qnas.where(status: :pending).last
+    else
+      qna_old = Qna.find_by(auth: cookies[:tutor_qna])
+    end
+    
     if qna_old
       logger.info "\n\n\n #{qna_old.id}"
       redirect_to qna_path(qna_old.id)
@@ -25,9 +30,18 @@ class QnasController < ApplicationController
   end
 
   def create
-    @qna = Qna.create(qna_params)
+    if user_signed_in? 
+      @qna = current_user.qnas.create(qna_params)
+    else
+      @qna = Qna.create(qna_params)
+    end
+
     Chat.create(qna_id: @qna.id)
-    cookies[:tutor_qna] = @qna.auth
+    
+    unless user_signed_in?
+      cookies[:tutor_qna] = @qna.auth
+    end
+
     redirect_to root_path 
   end
 
