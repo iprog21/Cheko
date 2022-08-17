@@ -35,7 +35,7 @@
               .mb-3
                 .field
                   = label_tag "amount", 'Amount', class: "form-label"
-                  = number_field_tag 'ammount', nil, {class: "form-control"}
+                  = number_field_tag 'ammount', nil, {class: "form-control", min: 0}
               .mb-3
                 .actions
                   = submit_tag "Create", class: "btn btn-primary"

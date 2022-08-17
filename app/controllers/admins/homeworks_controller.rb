@@ -56,9 +56,9 @@ class Admins::HomeworksController < ApplicationController
     bid = Bid.find(params[:bid_id])
     @homework.assign_tutor(bid)
     
-    if @homework.price.present? && @homework.tutor_price.present?
-      @homework.calculate_profit
-    end
+    # if @homework.price.present? && @homework.tutor_price.present?
+    #   @homework.calculate_profit
+    # end
     
     redirect_to admins_homeworks_path
   end

@@ -8,6 +8,9 @@
     .card
       .card-body
         .row.mt-3
+          .col-12.text-end
+            %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
+              Files
           .col-12
             %h5 Details:
             %p= @homework.details
@@ -24,4 +27,36 @@
             %h5 Target Grade:
             %p= @homework.grade
 
-          
+.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", tabindex: "-1", id: "exampleModal"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title= @homework.name
+        %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
+      .modal-body
+        .row.mt-3
+          %h5 Uploaded files
+          .container-flex.mt-2
+            %h6 
+              %strong Tutor files:
+            - @tutor.each do |docu|
+              .row.d-flex.justify-content-between
+                .col-3
+                  = docu.file.filename
+                .col-3.text-end
+                  = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'),class: "btn btn-success"
+              %hr
+          .container-flex.mt-2
+            %h6 
+              %strong Quality Control Officer files:
+            - @qco.each do |docu|
+              .row.d-flex.justify-content-between
+                .col-3
+                  = docu.file.filename
+                .col-3.text-end
+                  = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'),class: "btn btn-success"
+              %hr
+      .modal-footer
+        %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Close
+
+    

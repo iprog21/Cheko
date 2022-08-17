@@ -7,7 +7,8 @@ class Managers::HomeworksController < ApplicationController
   end
 
   def show
-
+    @tutor = @homework.documents.where(documentable_type: "Tutor")
+    @qco = @homework.documents.where(documentable_type: "QualityOfficer")
   end
 
   private

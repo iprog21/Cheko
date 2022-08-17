@@ -12,7 +12,7 @@
             %h5 User:
             %p= @homework.user.name
           .col-6
-            -if @homework.documents.count >= 1 || current_admin.role == "super_admin"
+            -if @homework.status == "ongoing"
               %a.btn.btn-success.float-end{href: admins_homework_finish_homework_path(@homework.id), data: {method: :put}} Finish order
           .col-6
             %h5 Deadline:
@@ -63,37 +63,37 @@
           .col-12 
             %h5 Details:
             %p= @homework.details
-.row.mt-5
-  .col-6.ms-auto.me-auto 
-    .card
-      .card-body
-        .row.mt-3
-          .col-6 
-            %h5= "Tutors Interested: #{@bids.present? ? @bids.count : 0}"
-          .col-6.text-end
-            - if @homework.tutor_id.present?
-              %h5= "Assigned: #{@homework.tutor.name}"
-          .col-12
-            .table-responsive
-              %table.table
-                %thead
-                  %tr
-                    %th.text-start Tutor
-                    %th.text-start Offer
-                    %th.text-end
-                %tbody
-                  - unless @bids.blank?
-                    - @bids.each do |bid|
-                      %tr
-                        %td.text-start= bid.tutor.name
-                        %td.text-start= bid.ammount
-                        %td.text-end
-                          - if @homework.tutor_id == bid.tutor_id
-                            %a{href: admins_homework_assign_tutor_path(homework_id: @homework.id, bid_id: bid.id), data: {method: :put}, class: "btn btn-primary disabled", disabled: true} Assigned
-                          - else 
-                            %a{href: admins_homework_assign_tutor_path(homework_id: @homework.id, bid_id: bid.id), data: {method: :put}, class: "btn btn-primary"} Assign
-                          
-                  -else
-                    %td No Data found
           
-          
+-unless @homework.status == "done"
+  .row.mt-5
+    .col-6.ms-auto.me-auto 
+      .card
+        .card-body
+          .row.mt-3
+            .col-6 
+              %h5= "Tutors Interested: #{@bids.present? ? @bids.count : 0}"
+            .col-6.text-end
+              - if @homework.tutor_id.present?
+                %h5= "Assigned: #{@homework.tutor.name}"
+            .col-12
+              .table-responsive
+                %table.table
+                  %thead
+                    %tr
+                      %th.text-start Tutor
+                      %th.text-start Offer
+                      %th.text-end
+                  %tbody
+                    - unless @bids.blank?
+                      - @bids.each do |bid|
+                        %tr
+                          %td.text-start= bid.tutor.name
+                          %td.text-start= bid.ammount
+                          %td.text-end
+                            - if @homework.tutor_id == bid.tutor_id
+                              %a{href: admins_homework_assign_tutor_path(homework_id: @homework.id, bid_id: bid.id), data: {method: :put}, class: "btn btn-primary disabled", disabled: true} Assigned
+                            - else 
+                              %a{href: admins_homework_assign_tutor_path(homework_id: @homework.id, bid_id: bid.id), data: {method: :put}, class: "btn btn-primary"} Assign
+                            
+                    -else
+                      %td No Data found

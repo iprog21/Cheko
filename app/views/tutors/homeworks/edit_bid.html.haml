@@ -35,7 +35,7 @@
               .mb-3
                 .field
                   = label_tag "amount", 'Amount', class: "form-label"
-                  = text_field_tag 'ammount', @bid.ammount, {class: "form-control"}
+                  = number_field_tag 'ammount', @bid.ammount, {class: "form-control", min: 0}
               .mb-3
                 .actions
                   = submit_tag "Update", class: "btn btn-primary"
