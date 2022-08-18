@@ -41,7 +41,11 @@ class Homework < ApplicationRecord
     logger.info "\n\n #{price_given}\n\n"
     price = price_given.nil? ? bid.ammount : price_given
     # bid = Bid.find_by(homework_id: self.id, tutor_id: tutor_id)
-    self.tutor_id == bid.tutor_id ? self.update!(tutor_price: price) : self.update!(tutor_id: bid.tutor_id, tutor_price: price)
+    if bid.nil?
+      self.update!(tutor_price: price)
+    else
+      self.tutor_id == bid.tutor_id ? self.update!(tutor_price: price) : self.update!(tutor_id: bid.tutor_id, tutor_price: price)
+    end
     # self.tutor_id = tutor_id
     # self.tutor_price = bid.ammount
     # self.save

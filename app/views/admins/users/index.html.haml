@@ -26,6 +26,8 @@
                       %th.text-center Name
                       %th.text-center Email
                       %th.text-center School
+                      %th.text-center Course
+                      %th.text-center Year
                       %th.text-center Status
                       %th.text-end Action
                   %tbody
@@ -34,8 +36,10 @@
                         %tr
                           %td.text-start= user.id
                           %td.text-center= user.name
-                          %td.text-center= user.email 
+                          %td.text-center= user.email
                           %td.text-center= user.school
+                          %td.text-center= user.course
+                          %td.text-center= user.year 
                           %td.text-center= user.status.capitalize
                           %td.text-end
                             %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_user_path(user)}

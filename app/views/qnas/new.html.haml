@@ -6,7 +6,7 @@
     .card-body
       .row 
         .col-12.text-start 
-          %h5= "Tutor Q&A"
+          %h5= "Q&A"
         .col-xl-8.col-lg-10.col-md-12.ms-auto.me-auto
           = form_for @qna, url: qnas_path, method: :post do |f|
             = f.hidden_field :qna_type, value: params[:type]

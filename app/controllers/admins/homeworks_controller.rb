@@ -10,6 +10,8 @@ class Admins::HomeworksController < ApplicationController
 
   def show
     @bids = Bid.where(homework_id: @homework.id).order(ammount: :asc)
+    @tutor = @homework.documents.where(documentable_type: "Tutor")
+    @qco = @homework.documents.where(documentable_type: "QualityOfficer")
   end
 
   def destroy
