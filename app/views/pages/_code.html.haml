@@ -19,7 +19,7 @@
     .mb-3
       .field
         = label_tag :hw_attachments, "Files", class: "form-label"
-        = f.file_field :hw_attachment, class: "form-control", required: true
+        = f.file_field :hw_attachment, class: "form-control"
   %h3 Payment
   %stuff
     .mb-3
@@ -65,7 +65,7 @@
           = check_box_tag "homework[view_bidders]", true, false, class: "form-check-input"
           
       .container.p-1
-        = label_tag :login_school, "Want us to login to your school account for P200"
+        = label_tag :login_school, "VIP Services P200"
         .form-check.form-switch
           = check_box_tag "homework[login_school]", true, false, class: "form-check-input"
           
