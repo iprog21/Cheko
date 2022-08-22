@@ -3,9 +3,9 @@ class Tutors::HomeworksController < ApplicationController
   before_action :find_homework, except: [:index]
   
   def index
-    @ongoing = Homework.where("tutor_id = ? AND manager_id IS NOT NULL AND status = 2", current_tutor.id)
+    @ongoing = Homework.where("tutor_id = ? AND status = 2", current_tutor.id)
     @pending = Homework.where("tutor_id IS NULL AND status = 2", current_tutor.id)
-    @history = Homework.where("tutor_id = ? AND manager_id IS NOT NULL AND status = 3", current_tutor.id)
+    @history = Homework.where("tutor_id = ? AND status = 3", current_tutor.id)
   end
 
   def show

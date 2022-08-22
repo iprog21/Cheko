@@ -11,9 +11,11 @@
           .col-6
             %h5 User:
             %p= @homework.user.name
-          .col-6
+          .col-6.text-end
             -if @homework.status == "ongoing"
               %a.btn.btn-success.float-end{href: admins_homework_finish_homework_path(@homework.id), data: {method: :put}} Finish order
+            %button.btn.btn-primary.me-3{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
+              Files
           .col-6
             %h5 Deadline:
             %p= @homework.deadline
@@ -26,6 +28,11 @@
           .col-6
             %h5 Target Grade:
             %p= @homework.grade
+        - if @homework.hw_attachment.attached?
+          .row
+            .col-12
+              %h6 Download file
+              =link_to @homework.hw_attachment.filename, rails_blob_path(@homework.hw_attachment, disposition: 'attachment'),class: "btn btn-success" 
         %hr
         .row.mt-3.d-flex.justify-content-center
           .col-2

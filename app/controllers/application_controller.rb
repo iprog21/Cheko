@@ -28,15 +28,15 @@ class ApplicationController < ActionController::Base
     if resource.class == Admin
       stored_location_for(resource) || admins_homeworks_path
     elsif resource.class == Manager
-      stored_location_for(resource) || managers_path
+      stored_location_for(resource) || managers_homeworks_path
     elsif resource.class == Tutor
-      stored_location_for(resource) || tutors_path
+      stored_location_for(resource) || tutors_homeworks_path
     elsif resource.class == User
       stored_location_for(resource) || users_path
     elsif resource.class == Accountant
-      stored_location_for(resource) || accountants_path
+      stored_location_for(resource) || accountants_homeworks_path
     elsif resource.class == QualityOfficer
-      stored_location_for(resource) || quality_officers_path
+      stored_location_for(resource) || quality_officers_homeworks_path
     else
       root_path
     end

@@ -33,6 +33,11 @@
                   = image_tag "qr.jpg", class: "img-thumbnail ms-auto me-auto"
                 -else
                   %h5 1234567889
+            - if @homework.hw_attachment.attached?
+              .row
+                .col-12
+                  %h6 Download file
+                  =link_to @homework.hw_attachment.filename, rails_blob_path(@homework.hw_attachment, disposition: 'attachment'),class: "btn btn-success" 
             %hr
             -# .row.mt-3.d-flex.justify-content-center
             -#   .col-2

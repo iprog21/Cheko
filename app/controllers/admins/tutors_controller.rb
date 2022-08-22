@@ -7,6 +7,8 @@ class Admins::TutorsController < ApplicationController
   end
 
   def show
+    @ongoing = Homework.where("tutor_id = ? AND status = 2", @tutor.id)
+    @history = Homework.where("tutor_id = ? AND status = 3", @tutor.id)
   end
 
   def new

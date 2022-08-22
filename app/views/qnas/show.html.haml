@@ -12,6 +12,11 @@
           .col-2
             -if @qna.status == "assigned"
               = link_to  "Finish", qna_finish_path(qna_id: @qna.id), class: "btn btn-success"
+          - if @qna.document.attached?
+            .col-12
+              %h6 Download file
+              =link_to @qna.document.filename, rails_blob_path(@qna.document, disposition: 'attachment'),class: "btn btn-success" 
+          %hr.mt-3
           .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
             %p= @qna.question
   .row.mt-3.mb-5

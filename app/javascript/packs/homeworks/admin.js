@@ -9,6 +9,18 @@ function getCookie(name) {
 
 $(function(){
   window.datetimepicker1 = new tempusDominus.TempusDominus(
+    document.getElementById('homework_deadline'),
+    {
+      restrictions: {
+        minDate: new Date().toDateString()
+      },
+      display: {
+        theme: getCookie("theme"),
+      }
+    }    
+  );
+
+  window.datetimepicker2 = new tempusDominus.TempusDominus(
     document.getElementById('homework_internal_deadline'),
     {
       restrictions: {
@@ -17,6 +29,17 @@ $(function(){
       display: {
         theme: getCookie("theme"),
       }
-    }
+    }    
   );
 })
+
+
+// document.getElementById('homework_deadline'),
+//     {
+//       restrictions: {
+//         minDate: new Date().toDateString()
+//       },
+//       display: {
+//         theme: getCookie("theme"),
+//       }
+//     }

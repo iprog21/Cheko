@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_09_041454) do
+ActiveRecord::Schema.define(version: 2022_08_22_092640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_041454) do
     t.integer "tutor_price"
     t.integer "profit"
     t.datetime "internal_deadline"
+    t.string "internal_subject"
   end
 
   create_table "managers", force: :cascade do |t|
