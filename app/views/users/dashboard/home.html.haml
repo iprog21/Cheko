@@ -52,7 +52,7 @@
   };
   
   (function(d,t) {
-    var BASE_URL="http://localhost:4000";
+    var BASE_URL="http://0.0.0.0:3000";
     var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=BASE_URL+"/packs/js/sdk.js";
     g.defer = true;
@@ -60,9 +60,9 @@
     s.parentNode.insertBefore(g,s);
     g.onload=function(){
       window.chatwootSDK.run({
-        websiteToken: '6nVfMuVjSpNJ7SVbmoRXkVQk',
+        websiteToken: 'bpjSbW1AYgZDMj7VZotXqRoU',
         baseUrl: BASE_URL
-      });
+      })
     }
   })(document,"script");
 

@@ -18,6 +18,9 @@
         .form-check
           = f.radio_button :sub_type, false, class: "form-check-input"
           = f.label :sub_type, "Painting", :value => "painting", class: "form-check-label"
+        .form-check
+          = f.radio_button :sub_type, false, class: "form-check-input"
+          = f.label :sub_type, "Others", :value => "others", class: "form-check-label"
     .mb-3 
       .field 
         = f.label :sub_type, "Type of Art"

@@ -27,6 +27,10 @@ class Homework < ApplicationRecord
     self.save
   end
 
+  def profit
+    return self.price.to_i - self.tutor_price.to_i
+  end
+
   def finish_order
     self.status = "done"
     self.save

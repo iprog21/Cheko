@@ -4,21 +4,21 @@
     .card-body
       .row 
         .col-12.text-start 
-          %h5= "Add Homework - #{params[:type].titleize}"
+          %h5= "Add Homework - #{params[:title].present? ? params[:title].titleize : params[:type].titleize}"
         .col-xl-8.col-lg-10.col-md-12.ms-auto.me-auto
           - case params[:type]
           - when 'essay'
             = render 'pages/essay'
-          - when 'group_project'
-            = render 'pages/group'
+            -# - when 'group_project'
+            -#   = render 'pages/group'
           - when 'code'
             = render 'pages/code'
           - when 'math'
             = render 'pages/math'
           - when 'art'
             = render 'pages/art'
-          - when 'translation'
-            = render 'pages/translation'
+            -# - when 'translation'
+            -#   = render 'pages/translation'
           - when 'law'
             = render 'pages/law'
           - when 'science'
@@ -33,8 +33,8 @@
             = render 'pages/foreign_language'
           - when 'thesis'
             = render 'pages/thesis'
-          - when 'module'
-            = render 'pages/module'
+            -# - when 'module'
+            -#   = render 'pages/module'
           - else
             .mb-3
               %h5 Type of homework is not yet supported

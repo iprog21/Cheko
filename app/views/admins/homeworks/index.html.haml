@@ -1,104 +1,132 @@
 = render 'admins/shared/header'
-.row
-  .col-1
-    = render 'admins/shared/sidebar'
-  .col-11
-    .row 
-      .col-xl-10.col-lg-10.col-sm-12.ms-auto.me-auto 
-        .container-flex.mt-5
-          %h3 HW-Help
-          .card 
-            .card-body
-              .row 
-                .col-6.text-start
-                  %h3 Pending
-              .table-responsive
-                %table.homeworks-scrollX.display.nowrap
-                  %thead
-                    %tr
-                      %th Order created
-                      %th Order Type
-                      %th Type
-                      %th Deadline
-                      %th Subject
-                      %th Tutor Category
-                      %th Word Count
-                      %th View Samples
-                      %th View Skills
-                      %th View Bidders
-                      %th Priority
-                      %th Login
-                      %th Action
-                  %tbody
-                    =render partial: 'admins/homeworks/pending-table', collection: @pending, as: :home
-                  
-          .card.mt-5
-            .card-body
-              .row 
-                .col-6.text-start
-                  %h3 Ongoing
-              .table-responsive
-                %table.homeworks-scrollX.display.nowrap
-                  %thead
-                    %tr
-                      %th id
-                      %th Client
-                      %th Tutor Category
-                      %th Tutor
-                      %th Sub Tutor
-                      %th TL
-                      %th TM
-                      %th Order Number
-                      %th Payment to Tutor
-                      %th Client's payment
-                      %th Profit
-                      %th Additional
-                      %th Internal Deadline
-                      %th Type
-                      %th Sub Type
-                      %th Updates
-                      %th Deadline
-                      %th Subject
-                      %th Subject 2
-                      %th Time Received
-                      %th Hours Late
-                      %th Notes
-                      %th Prof
-                      %th Grade
-                      %th Status
-                      %th Action
-                  %tbody
-                    =render partial: 'admins/homeworks/ongoing-table', collection: @ongoing, as: :home
-          .card.mt-5.mb-5
-            .card-body
-              .row 
-                .col-6.text-start
-                  %h3 History
-              .table-responsive
-                %table.homeworks-scrollX.display.nowrap
-                  %thead
-                    %tr
-                      %th Name
-                      %th Client
-                      -# %th Type
-                      %th Tutor Category
-                      %th Status
-                      %th Lead
-                      %th Manager
-                      %th Tutor
-                      %th Deadline
-                      %th Code
-                      %th Subject
-                      %th Tutor Category
-                      %th Word Count
-                      %th View Samples
-                      %th View Skills
-                      %th View Bidders
-                      %th Priority
-                      %th Login
-                      %th Action
-                  %tbody
-                    =render partial: 'admins/homeworks/history-table', collection: @history, as: :home
+.container-fluid
+  .row
+    .col-1
+      = render 'admins/shared/sidebar'
+    .col-11
+      .row 
+        .col-xl-10.col-lg-10.col-sm-12.ms-auto.me-auto 
+          .container-flex.mt-5
+            %h3 HW-Help
+            .card 
+              .card-body
+                .row 
+                  .col-6.text-start
+                    %h3 Pending
+                .table-responsive
+                  %table.homeworks-scrollX.display.nowrap
+                    %thead
+                      %tr
+                        %th Order created
+                        %th Order Type
+                        %th Type
+                        %th Deadline
+                        %th Subject
+                        %th Tutor Category
+                        %th Word Count
+                        %th View Samples
+                        %th View Skills
+                        %th View Bidders
+                        %th Priority
+                        %th Login
+                        %th Action
+                    %tbody
+                      =render partial: 'admins/homeworks/pending-table', collection: @pending, as: :home
+                    
+            .card.mt-5
+              .card-body
+                .row 
+                  .col-6.text-start
+                    %h3 Ongoing
+                .table-responsive
+                  %table.homeworks-scrollX.display.nowrap
+                    %thead
+                      %tr
+                        %th Name
+                        %th Client
+                        %th Tutor Category
+                        %th Tutor
+                        %th Sub Tutor
+                        %th TL
+                        %th TM
+                        %th Task Code
+                        %th Payment to Tutor
+                        %th Price
+                        %th Profit
+                        %th Tutor Skills
+                        %th Tutor Sample
+                        %th View Bidders
+                        %th Priority
+                        %th VIP
+                        %th Type
+                        %th Sub Type
+                        %th Updates
+                        %th Actual Due Date
+                        %th Actual Due Time
+                        %th Internal Due Date
+                        %th Internal Due Time
+                        %th Subject
+                        %th Subject 2
+                        %th Time Received
+                        %th Hours Late
+                        %th Notes
+                        %th Prof
+                        %th Course
+                        %th Grade
+                        %th Status
+                        %th Voucher
+                        %th In Bank?
+                        %th Date Paid
+                        %th Action
+                    %tbody
+                      =render partial: 'admins/homeworks/ongoing-table', collection: @ongoing, as: :home
+            .card.mt-5.mb-5
+              .card-body
+                .row 
+                  .col-6.text-start
+                    %h3 History
+                .table-responsive
+                  %table.homeworks-scrollX.display.nowrap
+                    %thead
+                      %tr
+                        %th Name
+                        %th Client
+                        %th Tutor Category
+                        %th Tutor
+                        %th Sub Tutor
+                        %th TL
+                        %th TM
+                        %th Task Code
+                        %th Payment to Tutor
+                        %th Price
+                        %th Profit
+                        %th Tutor Skills
+                        %th Tutor Sample
+                        %th View Bidders
+                        %th Priority
+                        %th VIP
+                        %th Type
+                        %th Sub Type
+                        %th Updates
+                        %th Actual Due Date
+                        %th Actual Due Time
+                        %th Internal Due Date
+                        %th Internal Due Time
+                        %th Subject
+                        %th Subject 2
+                        %th Time Received
+                        %th Hours Late
+                        %th Notes
+                        %th Prof
+                        %th Course
+                        %th Grade
+                        %th Status
+                        %th Voucher
+                        %th In Bank?
+                        %th Date Paid
+                        %th Action
+                    %tbody
+                      =render partial: 'admins/homeworks/history-table', collection: @history, as: :home
 
 
 = javascript_pack_tag 'datatable_basic'
