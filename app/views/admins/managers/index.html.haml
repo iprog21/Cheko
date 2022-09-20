@@ -30,7 +30,7 @@
                       %td.text-end
                         %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_manager_path(manager)}
                         %a.fas.fa-pen.text-primary.font-16.mr-3{href: edit_admins_manager_path(manager)}
-                        %a.fas.fa-trash.text-danger.font-16.mr-3{href: admins_manager_path(manager), data: {method: :delete}}
+                        = link_to '', admins_manager_path(manager), method: :delete, data: {confirm: "Are you sure?"}, class: "fas fa-trash text-danger font-16 mr-3"
                 -else
                   %td No Data found
               

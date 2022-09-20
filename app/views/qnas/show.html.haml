@@ -11,7 +11,7 @@
             %h5= "#{@qna.subject.titleize}"
           .col-2
             -if @qna.status == "assigned"
-              = link_to  "Finish", qna_finish_path(qna_id: @qna.id), class: "btn btn-success"
+              = link_to  "Finish", qna_finish_path(qna_id: @qna.id), class: "btn btn-success", method: 'put'
           - if @qna.document.attached?
             .col-12
               %h6 Download file

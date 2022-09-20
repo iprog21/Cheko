@@ -1,4 +1,5 @@
 import "../../plugin/jquery.steps.min.js"
+import "../../plugin/jquery.filter_input"
 import "jquery-validation"
 import "bootstrap-datepicker"
 // import "../../plugin/tempus-dominus"
@@ -11,51 +12,7 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-
-// $.fn.inputFilter = function(callback, errMsg) {
-//   return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
-//     if (callback(this.value)) {
-//       // Accepted value
-//       if (["keydown","mousedown","focusout"].indexOf(e.type) >= 0){
-//         $(this).removeClass("input-error");
-//         this.setCustomValidity("");
-//       }
-//       this.oldValue = this.value;
-//       this.oldSelectionStart = this.selectionStart;
-//       this.oldSelectionEnd = this.selectionEnd;
-//     } else if (this.hasOwnProperty("oldValue")) {
-//       // Rejected value - restore the previous one
-//       $(this).addClass("input-error");
-//       this.setCustomValidity(errMsg);
-//       this.reportValidity();
-//       this.value = this.oldValue;
-//       this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-//     } else {
-//       // Rejected value - nothing to restore
-//       this.value = "";
-//     }
-//   });
-// };
-
-
-// $('#homework_subject').numberInput(function(value) {return /^-?\d*$/.test(value); }, "Must be an integer")
-
 $(function(){
-  // $('#homework_deadline').datepicker({
-  //   format: 'mm/dd/yyyy',
-  //   startDate: new Date().getTime().toString(),
-  //   orientation: 'bottom'
-  // })
-
-  // $('#datetimepicker1').tempusDominus({
-  //   restrictions: {
-  //     minDate: new Date().toDateString()
-  //   },
-  //   display: {
-  //     theme: getCookie("theme")
-  //   }
-  // }).inputFormat("DD/MM/YYYY HH:mm");
-
   window.datetimepicker1 = new tempusDominus.TempusDominus(
     document.getElementById('datetimepicker1'),
     {
@@ -69,9 +26,10 @@ $(function(){
   );
 })
 
-// const picker = new tempusdominus.TempusDominus(document.getElementById('homework_deadline'));
-
-
+$(document).ready(function(){
+  $('#user_first_name').filter_input({regex:'[a-zA-Z]'});
+  $('#user_last_name').filter_input({regex:'[a-zA-Z]'});
+})
 
 $('#new_homework').steps({
   headerTag: "h3",

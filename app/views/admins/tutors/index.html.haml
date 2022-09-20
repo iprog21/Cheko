@@ -38,12 +38,5 @@
                           %td.text-end
                             %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_tutor_path(tutor)}
                             %a.fas.fa-pen.text-primary.font-16.mr-3{href: edit_admins_tutor_path(tutor)}
-                            %a.fas.fa-trash.text-danger.font-16.mr-3{href: admins_tutor_path(tutor), data: {method: :delete}, onclick: "deleteTutor()"}
+                            = link_to '', admins_tutor_path(tutor), method: :delete, data: {confirm: "Are you sure?"}, class: "fas fa-trash text-danger font-16 mr-3"
 = javascript_pack_tag 'datatable_basic'
-
-:javascript
-  function deleteTutor(){
-    if (!confirm("Do you want to delete")){
-        return false;
-      }
-  }

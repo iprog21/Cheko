@@ -42,7 +42,7 @@ class QnasController < ApplicationController
       cookies[:tutor_qna] = @qna.auth
     end
 
-    redirect_to root_path 
+    redirect_to qna_path(@qna.id)
   end
 
   def show 

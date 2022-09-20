@@ -10,7 +10,7 @@
           .col-10.text-start 
             %h5= "#{@qna.subject.titleize}"
           .col-2
-            = link_to  "Cancel", tutors_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger"
+            = link_to  "Cancel", tutors_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger", method: 'put'
           - if @qna.document.attached?
             .col-12
               %h6 Download file
@@ -34,7 +34,7 @@
                       %div.ms-auto{style: "width: -moz-fit-content; width: fit-content"}
                         -# %a{href: msg.content} Document
                         = link_to  "Download", rails_blob_path(msg.document, disposition: 'attachment')
-            - else 
+            - elsif msg.sendable_type == "User"
               .row.mt-3
                 .col-6.me-auto.text-white.rounded.pt-2
                   -# {style: "background: #24a64d"}

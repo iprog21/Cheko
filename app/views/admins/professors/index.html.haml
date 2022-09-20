@@ -51,6 +51,6 @@
                     %td.text-end
                       %a.fas.fa-eye.text-success.font-16.mr-3{href: admins_professor_path(prof)}
                       %a.fas.fa-pen.text-primary.font-16.mr-3{href: edit_admins_professor_path(prof)}
-                      %a.fas.fa-trash.text-danger.font-16.mr-3{href: admins_professor_path(prof), data: {method: :delete}}
+                      = link_to '', admins_professor_path(prof), method: :delete, data: {confirm: "Are you sure?"}, class: "fas fa-trash text-danger font-16 mr-3"
               
 = javascript_pack_tag 'datatable_basic'

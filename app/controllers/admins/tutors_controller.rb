@@ -38,6 +38,11 @@ class Admins::TutorsController < ApplicationController
   end
 
   def destroy
+    
+    Homework.where(tutor_id: @tutor.id).each do |hmw|
+      hmw.update(tutor_id: nil)
+    end
+    
     @tutor.destroy!
     redirect_to admins_tutors_path, notice: "Tutor successfully deleted"
   end

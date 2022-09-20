@@ -10,21 +10,6 @@ class PagesController < ApplicationController
     @user = User.new
   end
 
-  def professors
-  end
-
-  def about_us
-  end
-
-  def testimonials
-  end
-
-  def services
-  end
-
-  def how_it_works
-  end
-
   def contact_us
     @contact = Contact.new
   end

@@ -1,4 +1,6 @@
 import "jquery-validation"
+import "../../plugin/jquery.filter_input"
+
 $("#new_user").validate({
   rules: {
     "user[email]": {
@@ -18,3 +20,8 @@ $("#new_user").validate({
     "user[email]": "Email is already been used"
   }
 });
+
+$(document).ready(function(){
+  $('#user_first_name').filter_input({regex:'[a-zA-Z]'});
+  $('#user_last_name').filter_input({regex:'[a-zA-Z]'});
+})

@@ -86,6 +86,10 @@
                         .field
                           = f.label "Tutor", class: "form-label"
                           = f.select(:tutor_id, @tutors.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-select")
+                      .mb-3
+                        .field
+                          = f.label "Sub Tutor", class: "form-label"
+                          = f.select(:sub_tutor_id, @tutors.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-select")
                       .mb-3 
                         .field
                           = f.label :tutor_price, class: "form-label"

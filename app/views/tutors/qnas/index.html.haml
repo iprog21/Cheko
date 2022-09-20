@@ -24,7 +24,7 @@
                       %td.text-center= truncate(qna.question)
                       %td.text-center= qna.subject.titleize
                       %td.text-end
-                        %a{href: tutors_qna_assign_path(qna)}
+                        %a{href: tutors_qna_assign_path(qna), data: {method: 'put'}}
                           .fas.fa-eye.text-success.font-16.mr-3
   .row 
     .col-12.ms-auto.me-auto 
