@@ -5,7 +5,7 @@
     .mb-3
       .field
         = f.label "Type", class: "form-label"
-        = f.select :sub_type, options_for_select([["Test" , "test" ], ["Problem Set" , "problem_set" ], ["Paper" , "paper" ], ["Others" , "others" ]], selected: :sub_type), {include_blank: false}, class: "form-select"
+        = f.select :sub_type, options_for_select([["Problem Set" , "problem_set" ], ["Paper" , "paper" ], ["Others" , "others" ]], selected: :sub_type), {include_blank: false}, class: "form-select"
     .mb-3
       .field
         = f.label :subject, class: "form-label"
