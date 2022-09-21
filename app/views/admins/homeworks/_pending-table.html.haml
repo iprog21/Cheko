@@ -17,11 +17,7 @@
     - if home.admin_id == current_admin.id || current_admin.role == 'super_admin'
       %a{href: edit_admins_homework_path(home)}
         .fas.fa-pen.text-secondary.font-16.mr-3
-      -# = link_to :edit, edit_admins_homework_path(home)
-    - elsif home.admin_id.nil?
       %a{href: admins_homework_assign_path(homework_id: home.id), data: {method: :put}}
         .fas.fa-circle-check.text-success.font-16.mr-3
-      -# = link_to :assign, admins_homework_assign_path(homework_id: home.id), method: :put
     - if current_admin.role == 'super_admin'
       %a.fas.fa-trash.text-danger.font-16.mr-3{href: admins_homework_path(home), data: {method: :delete}}
-      -# = link_to :delete, admins_homework_path(home), method: :delete
