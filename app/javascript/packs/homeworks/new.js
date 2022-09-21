@@ -27,8 +27,8 @@ $(function(){
 })
 
 $(document).ready(function(){
-  $('#user_first_name').filter_input({regex:'[a-zA-Z]'});
-  $('#user_last_name').filter_input({regex:'[a-zA-Z]'});
+  $('#user_first_name').filter_input({regex:'[a-zA-Z ]+'});
+  $('#user_last_name').filter_input({regex:'[a-zA-Z ]+'});
 })
 
 $('#new_homework').steps({
