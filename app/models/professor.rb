@@ -40,11 +40,11 @@ class Professor < ApplicationRecord
   end
 
   def set_up_email
-    professor = self.professor
+    # professor = self.professor
 
-    if professor.school.name == "DLSU"
+    if self.school.name == "DLSU"
       self.dlsu_email
-    elsif professor.school.name == "ADMU" 
+    elsif self.school.name == "ADMU" 
       self.admu_email
     end
   end
