@@ -44,23 +44,28 @@
                       .col-4
                         = label_tag :priority, "Priority? +30%"
                         .form-check.form-switch
-                          = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.priority? ?  true : false
+                          = hidden_field_tag "homework[priority]", false
+                          = check_box_tag "homework[priority]", true, false, class: "form-check-input", checked: @homework.priority
                       .col-4
                         = label_tag :tutor_skills, "Tutor Skills? P100"
                         .form-check.form-switch
-                          = check_box_tag "homework[tutor_skills]", true, false, class: "form-check-input", checked: @homework.tutor_skills? ?  true : false
+                          = hidden_field_tag "homework[tutor_skills]", false
+                          = check_box_tag "homework[tutor_skills]", true, false, class: "form-check-input", checked: @homework.tutor_skills
                       .col-4
                         = label_tag :tutor_samples, "Tutor Samples? P100"
                         .form-check.form-switch
-                          = check_box_tag "homework[tutor_samples]", true, false, class: "form-check-input", checked: @homework.tutor_samples? ?  true : false
+                          = hidden_field_tag "homework[tutor_samples]", false
+                          = check_box_tag "homework[tutor_samples]", true, false, class: "form-check-input", checked: @homework.tutor_samples
                       .col-4
                         = label_tag :view_bidders, "View Bidders? P300"
                         .form-check.form-switch
-                          = check_box_tag "homework[view_bidders]", true, false, class: "form-check-input", checked: @homework.view_bidders? ?  true : false
+                          = hidden_field_tag "homework[view_bidders]", false
+                          = check_box_tag "homework[view_bidders]", true, false, class: "form-check-input", checked: @homework.view_bidders
                       .col-4
                         = label_tag :login_school, "Login School? P200"
                         .form-check.form-switch
-                          = check_box_tag "homework[login_school]", true, false, class: "form-check-input", checked: @homework.login_school? ?  true : false
+                          = hidden_field_tag "homework[login_school]", false
+                          = check_box_tag "homework[login_school]", true, false, class: "form-check-input", checked: @homework.login_school
                       .mb-3
                         .actions
                           = f.submit "Update", class: "btn btn-primary"

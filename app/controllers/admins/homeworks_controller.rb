@@ -78,6 +78,11 @@ class Admins::HomeworksController < ApplicationController
   end
 
   def homework_params
-    params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_deadline, :subject, :deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples)
+    if params[:homework][:deadline].present?
+      deadline = DateTime.strptime(params[:homework][:deadline], "%m/%d/%Y, %I:%M %p")
+      params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_subject, :internal_deadline, :subject, :deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples, :tutor_skills).merge(deadline: deadline)
+    else
+      params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_subject, :internal_deadline, :subject, :deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples, :tutor_skills)
+    end
   end
 end
