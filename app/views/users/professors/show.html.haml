@@ -9,6 +9,7 @@
           %h4= "#{@professor.name} - #{@professor.subject}"
           %h4= @professor.school_id.present? ? @professor.school.name : @professor.school_name
           %p= @professor.email
+          %a.btn.btn-primary{href: new_users_professor_path(prof_id: @professor.id)} Add a prof review
         .col-6
           %h5 Overall Grading
           .row.mt-3

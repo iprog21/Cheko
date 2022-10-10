@@ -9,26 +9,26 @@
           %h5 Add Professor
       .row
         .col-xl-6.col-lg-10.col-md-12.col-sm-12.ms-auto.me-auto
-          = form_for @professor, url: users_professors_path, method: :post do |f|
-            .mb-3
+          = form_for @prof_review, url: users_professors_path, method: :post do |f|
+            .mb-3{class:  ("d-none" if !@professor.nil?)}
               .field
                 = f.label :first_name, class: "form-label"
-                = f.text_field :first_name, class: "form-control", required: true
-            .mb-3
+                = f.text_field :first_name, class: "form-control", required: true, value: !@professor.nil? ? @professor.first_name : ""
+            .mb-3{class:  ("d-none" if !@professor.nil?)}
               .field
                 = f.label :last_name, class: "form-label"
-                = f.text_field :last_name, class: "form-control", required: true
-            .mb-3
+                = f.text_field :last_name, class: "form-control", required: true, value: !@professor.nil? ? @professor.last_name : ""
+            .mb-3{class:  ("d-none" if !@professor.nil?)}
               .field
                 = f.label :subject, class: "form-label"
-                = f.text_field :subject, class: "form-control", required: true
-            .mb-3
+                = f.text_field :subject, class: "form-control", required: true, value: !@professor.nil? ? @professor.subject : ""
+            .mb-3{class:  ("d-none" if !@professor.nil?)}
               .field
                 = f.label :school, class: "form-label"
-                = f.select :school_id, School.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }, class: "form-select"
-                #school_string.mt-3
+                = f.select :school_id, options_for_select(School.all.collect {|p| [ p.name, p.id ] }, !@professor.nil? ? @professor.school_id : 1 ), {include_blank: true}, class: "form-select" 
+                #school_string.mt-3{class: @professor.nil? ? "" : "form-control d-none"}
                   %h6 *if school is not in selection, type the school
-                  = f.text_field :school_name, class: "form-control", required: true
+                  = f.text_field :school_name, class: "form-control"
             .mb-3
               .field
                 = f.label :easiness, class: "form-label"

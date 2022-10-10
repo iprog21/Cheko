@@ -10,7 +10,9 @@
           %li.nav-item
             %a.nav-link{href: users_homeworks_path} Tasks
           %li.nav-item
-            %a.nav-link{href: pick_type_qnas_path} Q&A
+            %a.nav-link{href: pick_type_users_homeworks_path} HW-Help
+          %li.nav-item
+            %a.nav-link{href: users_qnas_path} Q&A
           %li.nav-item.dropdown
             %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"} Profs to Pick
             %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
@@ -18,8 +20,6 @@
                 %a.dropdown-item{href: users_professors_path} Search Prof
               %li
                 %a.dropdown-item{href: new_users_professor_path} Add a prof review
-          %li.nav-item
-            %a.nav-link{href: pick_type_users_homeworks_path} HW-Help
         -else 
           %li.nav-item
             %a.nav-link{href: pick_type_path} HW-Help

@@ -10,11 +10,12 @@ class Users::ProfessorsController < Users::UserAppController
   end
 
   def new
-    @professor = ProfReview.new
+    @professor = params[:prof_id].present? ? Professor.find(params[:prof_id]) : nil
+    @prof_review = ProfReview.new
     @school = School.all
   end
 
-  def create
+  def create 
     @professor = current_user.prof_reviews.create(professor_params)
     redirect_to users_professors_path
   end

@@ -21,13 +21,13 @@ class Tutors::HomeworksController < ApplicationController
   def upload
     @homework.documents.create(file: params[:document][:file], documentable_id: current_tutor.id, documentable_type: current_tutor.class.name)
     
-    # uploaded = @homework.documents.first.created_at.to_time
-    # deadline = @homework.internal_deadline.to_time
-    # hours = (uploaded - deadline) / 1.hours
+    uploaded = @homework.documents.first.created_at.to_time
+    deadline = @homework.internal_deadline.to_time
+    hours = (uploaded - deadline) / 1.hours
     
-    # unless hours.to_i.positive
-    #   @homework.hours_late
-    # end
+    unless hours.to_i.positive
+      @homework.hours_late
+    end
 
     HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "User")
     redirect_to tutors_homework_path(@homework.id)

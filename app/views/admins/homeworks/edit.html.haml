@@ -105,7 +105,7 @@
                           #datetimepicker2.input-group{"data-td-target-input" => "nearest", "data-td-target-toggle" => "nearest"}
                             -# %input#datetimepicker1Input.form-control{"data-td-target" => "#datetimepicker1", type: "text"}/
                             -# = text_field_tag "homework[deadline]", "", class: "form-control", id: "datetimepicker2Input", "data-td-target" => "#datetimepicker2", "data-td-toggle" => "datetimepicker", readonly: true, required: true, style: "background: white"
-                            = f.text_field :internal_deadline, value: @homework.internal_deadline.present? ? @homework.internal_deadline.strftime("%m/%d/%Y, %l:%M %p") : "", class: "form-control", "data-td-target" => "#datetimepicker2", "data-td-toggle" => "datetimepicker", readonly: true, style: "background: white"
+                            = f.text_field :internal_deadline, value: @homework.internal_deadline.present? ? @homework.internal_deadline.strftime("%m/%d/%Y, %l:%M %p") : "", class: "form-control", "data-td-target" => "#datetimepicker2", "data-td-toggle" => "datetimepicker", readonly: true, style: "background: white", required: true
                             %span.input-group-text{"data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker"}
                               %span.fas.fa-calendar
                       .mb-3
@@ -132,7 +132,7 @@
                           #datetimepicker2.input-group{"data-td-target-input" => "nearest", "data-td-target-toggle" => "nearest"}
                             -# %input#datetimepicker1Input.form-control{"data-td-target" => "#datetimepicker1", type: "text"}/
                             -# = text_field_tag "homework[deadline]", "", class: "form-control", id: "datetimepicker2Input", "data-td-target" => "#datetimepicker2", "data-td-toggle" => "datetimepicker", readonly: true, required: true, style: "background: white"
-                            = f.text_field :internal_deadline, value: @homework.internal_deadline.present? ? @homework.internal_deadline.strftime("%m/%d/%Y, %l:%M %p") : "", class: "form-control", "data-td-target" => "#datetimepicker2", "data-td-toggle" => "datetimepicker", readonly: true, style: "background: white"
+                            = f.text_field :internal_deadline, value: @homework.internal_deadline.present? ? @homework.internal_deadline.strftime("%m/%d/%Y, %l:%M %p") : "", class: "form-control", "data-td-target" => "#datetimepicker2", "data-td-toggle" => "datetimepicker", readonly: true, style: "background: white", required: true
                             %span.input-group-text{"data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker"}
                               %span.fas.fa-calendar
                       .mb-3

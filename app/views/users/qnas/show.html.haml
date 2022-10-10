@@ -1,6 +1,11 @@
 = render 'users/shared/header'
 = hidden_field_tag "chat_id", @qna.chat.id, id: "chat_id" if @qna.chat.present?
 = hidden_field_tag "type", "user", id: "type"
+-unless @qna.status == "assigned"
+  .row.text-center
+    .col-lg-12.col-md-12.col-sm-12.alert.mt-3.mb-3{class: "alert-danger"}
+      No tutor has accepted yet
+
 .container.mt-5
   .row
     .card{class: "card-#{cookies[:theme]}"}

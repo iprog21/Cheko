@@ -1,80 +1,78 @@
 = render 'users/shared/header'
 = render 'users/shared/chat-widget'
 
-.container-fluid.mt-5
-  .row
-    .col-sm-12.col-md-12.col-lg-10.ms-auto.me-auto.mt-2.p-4
-      .mx-2
-        .card{class: "bg-#{cookies[:theme]}"}
-          .card-body
-            .row 
-              .col-6.text-start
-                %h4= @homework.order_type.titleize
-              .col-6.text-end
-                %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
-                  Files
-            .row.mt-3
-              .col-6
-                %h5= "Client: #{@homework.user.name}"
-            .row.mt-3
-              .col-6
-                %h5 Deadline:
-                %p= @homework.deadline
-                %h5 Subject:
-                %p= @homework.subject.present? ? @homework.subject : "None Provided"
-              .col-3
-                %h5 Words:
-                %p= @homework.words
-                %h5 Target Grade:
-                %p= @homework.grade
-              .col-xl-3.col-lg-6.col-md-6.col-sm-6.ms-auto.me-auto
-                %h5 Payment
-                -if @homework.payment_type == "gcash"
-                  = image_tag "qr.jpg", class: "img-thumbnail ms-auto me-auto"
-                -else
-                  %h5 1234567889
-            - if @homework.hw_attachment.attached?
-              .row
-                .col-12
-                  %h6 Download file
-                  =link_to @homework.hw_attachment.filename, rails_blob_path(@homework.hw_attachment, disposition: 'attachment'),class: "btn btn-success" 
-            %hr
-            -# .row.mt-3.d-flex.justify-content-center
-            -#   .col-2
-            -#     %h6 Priority
-            -#     - if @homework.priority?
-            -#       %button.btn.btn-success.btn-sm{type: "button"}= @homework.priority.to_s.capitalize
-            -#     -else 
-            -#       %button.btn.btn-danger.btn-sm{type: "button"}= @homework.priority.to_s.capitalize
-            -#   .col-2
-            -#     %h6 Tutor skills
-            -#     - if @homework.tutor_skills?
-            -#       %button.btn.btn-success.btn-sm{type: "button"}= @homework.tutor_skills.to_s.capitalize
-            -#     -else 
-            -#       %button.btn.btn-danger.btn-sm{type: "button"}= @homework.tutor_skills.to_s.capitalize
-            -#   .col-2
-            -#     %h6 Tutor Samples
-            -#     - if @homework.tutor_samples?
-            -#       %button.btn.btn-success.btn-sm{type: "button"}= @homework.tutor_samples.to_s.capitalize
-            -#     -else 
-            -#       %button.btn.btn-danger.btn-sm{type: "button"}= @homework.tutor_samples.to_s.capitalize
-            -#   .col-2
-            -#     %h6 View Bidders
-            -#     - if @homework.view_bidders?
-            -#       %button.btn.btn-success.btn-sm{type: "button"}= @homework.view_bidders.to_s.capitalize
-            -#     -else 
-            -#       %button.btn.btn-danger.btn-sm{type: "button"}= @homework.view_bidders.to_s.capitalize
-            -#   .col-2
-            -#     %h6 Login School
-            -#     - if @homework.login_school?
-            -#       %button.btn.btn-success.btn-sm{type: "button"}= @homework.login_school.to_s.capitalize
-            -#     -else 
-            -#       %button.btn.btn-danger.btn-sm{type: "button"}= @homework.login_school.to_s.capitalize
-            -# %hr
-            .row
-              .col-12 
-                %h5 Details:
-                %p= @homework.details
+.container-fluid.mt-5.pb-5
+  .mx-2
+    .card{class: "bg-#{cookies[:theme]}"}
+      .card-body
+        .row 
+          .col-6.text-start
+            %h4= @homework.order_type.titleize
+          .col-6.text-end
+            %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
+              Files
+        .row.mt-3
+          .col-6
+            %h5= "Client: #{@homework.user.name}"
+        .row.mt-3
+          .col-sm-6
+            %h5 Deadline:
+            %p= @homework.deadline
+            %h5 Subject:
+            %p= @homework.subject.present? ? @homework.subject : "None Provided"
+          .col-sm-6.col-md-3
+            %h5 Words:
+            %p= @homework.words
+            %h5 Target Grade:
+            %p= @homework.grade
+          .col-xl-3.col-lg-6.col-md-6.col-sm-6
+            %h5 Payment
+            -if @homework.payment_type == "gcash"
+              = image_tag "qr.jpg", class: "img-thumbnail ms-auto me-auto"
+            -else
+              %h5 1234567889
+        - if @homework.hw_attachment.attached?
+          .row
+            .col-12
+              %h6 Download file
+              =link_to @homework.hw_attachment.filename, rails_blob_path(@homework.hw_attachment, disposition: 'attachment'),class: "btn btn-success" 
+        %hr
+        -# .row.mt-3.d-flex.justify-content-center
+        -#   .col-2
+        -#     %h6 Priority
+        -#     - if @homework.priority?
+        -#       %button.btn.btn-success.btn-sm{type: "button"}= @homework.priority.to_s.capitalize
+        -#     -else 
+        -#       %button.btn.btn-danger.btn-sm{type: "button"}= @homework.priority.to_s.capitalize
+        -#   .col-2
+        -#     %h6 Tutor skills
+        -#     - if @homework.tutor_skills?
+        -#       %button.btn.btn-success.btn-sm{type: "button"}= @homework.tutor_skills.to_s.capitalize
+        -#     -else 
+        -#       %button.btn.btn-danger.btn-sm{type: "button"}= @homework.tutor_skills.to_s.capitalize
+        -#   .col-2
+        -#     %h6 Tutor Samples
+        -#     - if @homework.tutor_samples?
+        -#       %button.btn.btn-success.btn-sm{type: "button"}= @homework.tutor_samples.to_s.capitalize
+        -#     -else 
+        -#       %button.btn.btn-danger.btn-sm{type: "button"}= @homework.tutor_samples.to_s.capitalize
+        -#   .col-2
+        -#     %h6 View Bidders
+        -#     - if @homework.view_bidders?
+        -#       %button.btn.btn-success.btn-sm{type: "button"}= @homework.view_bidders.to_s.capitalize
+        -#     -else 
+        -#       %button.btn.btn-danger.btn-sm{type: "button"}= @homework.view_bidders.to_s.capitalize
+        -#   .col-2
+        -#     %h6 Login School
+        -#     - if @homework.login_school?
+        -#       %button.btn.btn-success.btn-sm{type: "button"}= @homework.login_school.to_s.capitalize
+        -#     -else 
+        -#       %button.btn.btn-danger.btn-sm{type: "button"}= @homework.login_school.to_s.capitalize
+        -# %hr
+        .row
+          .col-12 
+            %h5 Details:
+            %p= @homework.details
 
       .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", tabindex: "-1", id: "exampleModal"}
         .modal-dialog.modal-lg

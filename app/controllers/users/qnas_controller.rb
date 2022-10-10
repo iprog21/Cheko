@@ -15,7 +15,7 @@ class Users::QnasController < Users::UserAppController
   end
 
   def create
-    @qna = Qna.create(qna_params)
+    @qna = current_user.qnas.create(qna_params)
     cookies[:tutor_qna] = @qna
     redirect_to users_path 
   end

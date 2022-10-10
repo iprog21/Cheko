@@ -127,12 +127,12 @@ Rails.application.routes.draw do
       get :search, on: :collection
     end
 
-    # resources :qnas do 
-    #   get :finish
-    #   resources :chats, only: [:show] do
-    #     resources :messages, only: [:create], on: :collection
-    #   end
-    # end
+    resources :qnas do 
+      get :finish
+      resources :chats, only: [:show] do
+        resources :messages, only: [:create], on: :collection
+      end
+    end
 
     get 'profile', to: 'users#show'
     resources :chats, only: [:index]
