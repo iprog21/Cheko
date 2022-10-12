@@ -23,10 +23,12 @@ class Tutors::HomeworksController < ApplicationController
     
     uploaded = @homework.documents.first.created_at.to_time
     deadline = @homework.internal_deadline.to_time
-    hours = (uploaded - deadline) / 1.hours
+    hours = (deadline - uploaded) / 1.hours
     
-    unless hours.to_i.positive
-      @homework.hours_late
+    unless hours.to_i.positive?
+      @homework.update(hours_late: hours)
+    else
+      @homework.update(hours_late: 0)
     end
 
     HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "User")
