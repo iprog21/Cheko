@@ -1,5 +1,5 @@
 = render "users/shared/header"
-.container.mt-3
+.container.my-5{style: "height:100%"}
   .row
     .alert.alert-primary{role: "alert"}
       .text-center
@@ -28,3 +28,5 @@
           .field
             .d-grid.gap-2
               = f.submit "Submit", class: "btn btn-lg btn-warning text-white"
+
+= render "users/shared/footer"

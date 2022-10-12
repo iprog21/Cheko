@@ -3,29 +3,29 @@
 = hidden_field_tag "qna_id", @qna.id, id: "qna_id"
 = hidden_field_tag "type", "tutor", id: "type"
 .container.mt-5
-  .row
-    .card{class: "bg-#{cookies[:theme]}"}
-      .card-body
-        .row 
-          .col-10.text-start 
-            %h5= "#{@qna.subject.titleize}"
-          .col-2
-            = link_to  "Cancel", tutors_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger", method: 'put'
-          - if @qna.document.attached?
-            .col-12
-              %h6 Download file
-              =link_to @qna.document.filename, rails_blob_path(@qna.document, disposition: 'attachment'),class: "btn btn-success" 
-          %hr.mt-3
-          .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
-            %p= @qna.question
-  .row.mt-3.mb-5
-    .card{class: "bg-#{cookies[:theme]}"}
-      .card-body
+
+  .card{class: "bg-#{cookies[:theme]}"}
+    .card-body
+      .row 
+        .col-sm-6.col-md-10.text-start 
+          %h5= "#{@qna.subject.titleize}"
+        .col-sm-6.col-md-2
+          = link_to  "Cancel", tutors_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger", method: 'put'
+        - if @qna.document.attached?
+          .col-12
+            %h6 Download file
+            =link_to @qna.document.filename, rails_blob_path(@qna.document, disposition: 'attachment'),class: "btn btn-success" 
+        %hr.mt-3
+        .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
+          %p= @qna.question
+  .mt-3.mb-5
+    .card{class: "card-#{cookies[:theme]}", style: "padding-bottom: 10px; padding-top: 10px"}
+      .card-body{style: "padding: 0"}
         .container#messages{style: "overflow: auto; height: 550px;"}
           - @qna.chat.messages.order(id: :asc).each do |msg|
             - if msg.sendable_type == "Tutor"
               .row.mt-3
-                .col-6.ms-auto.text-white.rounded.pt-2
+                .col-sm-12.col-md-6.ms-auto.text-white.rounded.pt-2
                   -# {style: "background: #24a64d"}
                   %div.ms-auto.rounded{style: "padding: 10px; width: 20em; background: #24a64d"}
                     %div.ms-auto{style: "width: -moz-fit-content; width: fit-content"}You
@@ -36,7 +36,7 @@
                         = link_to  "Download", rails_blob_path(msg.document, disposition: 'attachment')
             - elsif msg.sendable_type == "User"
               .row.mt-3
-                .col-6.me-auto.text-white.rounded.pt-2
+                .col-sm-12.col-md-6.me-auto.text-white.rounded.pt-2
                   -# {style: "background: #24a64d"}
                   %div.me-auto.rounded{style: "padding: 10px; width: 20em; background: #c97b0c"}
                     %div.me-auto{style: "width: -moz-fit-content; width: fit-content"}User012345

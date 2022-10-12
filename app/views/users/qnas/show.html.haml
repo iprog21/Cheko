@@ -1,5 +1,6 @@
 = render 'users/shared/header'
 = hidden_field_tag "chat_id", @qna.chat.id, id: "chat_id" if @qna.chat.present?
+= hidden_field_tag "qna_id", @qna.id, id: "qna_id"
 = hidden_field_tag "type", "user", id: "type"
 -unless @qna.status == "assigned"
   .row.text-center
@@ -11,22 +12,22 @@
     .card{class: "card-#{cookies[:theme]}"}
       .card-body
         .row 
-          .col-10.text-start 
+          .col-sm-6.col-md-10.text-start 
             %h5= "#{@qna.subject.titleize}"
-          .col-2
+          .col-sm-6.col-md-2
             -if @qna.status == "assigned"
               = link_to  "Finish", qna_finish_path(qna_id: @qna.id), class: "btn btn-success"
           .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
             %p= @qna.question
   .row.mt-3.mb-5
-    .card{class: "card-#{cookies[:theme]}"}
-      .card-body
+    .card{class: "card-#{cookies[:theme]}", style: "padding-bottom: 10px; padding-top: 10px"}
+      .card-body{style: "padding: 0"}
         .container-fluid#messages{style: "overflow: auto; height: 550px;"}
           -if @qna.chat.present?
             - @qna.chat.messages.order(id: :asc).each do |msg|
               - if msg.sendable_type == "User"
                 .row.mt-3
-                  .col-6.ms-auto.text-white.rounded.pt-2
+                  .col-sm-12.col-md-6.ms-auto.text-white.rounded.pt-2
                     -# {style: "background: #24a64d"}
                     %div.ms-auto.rounded{style: "padding: 10px; width: 20em; background: #24a64d"}
                       %div.ms-auto{style: "width: -moz-fit-content; width: fit-content; font-size: 0.9rem"}You
@@ -37,9 +38,9 @@
                           = link_to  "Download", rails_blob_path(msg.document, disposition: 'attachment')
               - else 
                 .row.mt-3
-                  .col-6.me-auto.text-white.rounded.pt-2
+                  .col-sm-12.col-md-6.me-auto.text-white.rounded.pt-2
                     -# {style: "background: #24a64d"}
-                    %div.me-auto.rounded{style: "padding: 10px; width: 20em; background: #24a64d"}
+                    %div.me-auto.rounded{style: "padding: 10px; width: 20em; background: #c97b0c"}
                       %div.me-auto{style: "width: -moz-fit-content; width: fit-content"}Tutor012345
                       %div.me-auto{style: "width: -moz-fit-content; width: fit-content"}= msg.content
                       - if msg.document.attached?

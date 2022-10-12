@@ -7,6 +7,7 @@
 
   $('.homeworks-scrollX').DataTable({
     scrollX: true,
+    
   });
 
   console.log("datatable log")
