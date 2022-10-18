@@ -8,10 +8,10 @@
           = form_for(resource, as: resource_name, url: user_registration_path) do |f|
             .mb-3
               .row.field
-                .col-6
+                .col-sm-12.col-md-6
                   = f.label :first_name
                   = f.text_field :first_name, class: "form-control", required: true
-                .col-6
+                .col-sm-12.col-md-6
                   = f.label :last_name
                   = f.text_field :last_name, class: "form-control", required: true
             .mb-3

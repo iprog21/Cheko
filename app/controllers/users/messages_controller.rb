@@ -6,8 +6,12 @@ class Users::MessagesController < ApplicationController
     qna = Qna.find(params[:qna_id])
 
     if current_user.id == qna.user_id
-      message = current_user.messages.create(content: params[:message][:content], chat_id: chat.id, document: params[:message][:document])
-      SendMessageJob.perform_now(message, "User", { document_url: message.document.attached? ? rails_blob_path(message.document, disposition: 'attachment') : nil })
+      message = Message.new(content: params[:message][:content], chat_id: chat.id, document: params[:message][:document], sendable_type: "User")
+      if message.save
+        SendMessageJob.perform_now(message, "User", chat.id, { document_url: message.document.attached? ? rails_blob_path(message.document, disposition: 'attachment') : nil })
+      else
+        SendMessageJob.perform_now(message, "Error User", chat.id, { message: message.errors.full_messages, document_url: message.document.attached? ? rails_blob_path(message.document, disposition: 'attachment') : nil })
+      end
     end
   end
 
