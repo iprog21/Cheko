@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
         theme = params[:theme].to_sym
 
         cookies[:theme] = theme
-        logger.info "\n \n #{current_user.theme} \n \n #{params[:theme]} \n \n #{request} \n \n"
-        redirect_to users_path
+        logger.info "\n \n #{current_user.theme} \n \n #{params[:theme]} \n \n #{URI(request.referer).path} \n \n"
+        # redirect_back(fallback_location: URI(request.referer).path)
       else
         theme = current_user.theme.to_sym
 

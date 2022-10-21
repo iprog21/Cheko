@@ -45,10 +45,10 @@
                 -# %a.dropdown-item{href: "#"} Profile
               - if current_user.theme == "light" || cookies[:theme] == "light"
                 %li.nav-item
-                  %a.dropdown-item{href: users_path(theme: "dark")} Change theme
+                  %a.dropdown-item{href: request.path + "?theme=dark"} Change theme
               - else
                 %li.nav-item
-                  %a.dropdown-item{href: users_path(theme: "light")} Change theme
+                  %a.dropdown-item{href: request.path + "?theme=light"} Change theme
               %li
                 %hr.dropdown-divider/
               %li

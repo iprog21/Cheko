@@ -31,6 +31,9 @@
   %h3 Payment
   %stuff
     .mb-3
+      %h5 Estimate
+      %h4#testEstimate
+    .mb-3
       .field
         = f.label :payment_type, class: "form-label"
         = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), {include_blank: false} , class: "form-select"
@@ -58,7 +61,7 @@
       .container.p-1
         = label_tag :priority, "Make it a priority? +30%"
         .form-check.form-switch
-          = check_box_tag "homework[priority]", true, false, class: "form-check-input"
+          = check_box_tag "homework[priority]", true, false, class: "form-check-input", id: "homework_priority"
   -# .mb-3
   -#   .actions
   -#     = f.submit "Create", class: "btn btn-primary"

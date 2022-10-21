@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/how_it_works', to: 'pages#how_it_works'
   get '/contact-us', to: 'pages#contact_us'
   get '/check-email', to: 'pages#check_email'
+  # get '/change-theme', to: 'application#set_theme'
   resources :contacts, only: [:create]
 
   resources :qnas do

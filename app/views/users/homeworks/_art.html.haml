@@ -49,6 +49,9 @@
   %h3 Payment
   %stuff
     .mb-3
+      %h5 Estimate
+      %h4#testEstimate
+    .mb-3
       .field
         = f.label :payment_type, class: "form-label"
         = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), {include_blank: false} , class: "form-select"

@@ -29,13 +29,13 @@
         = f.label :tutor_category, "Pick a type of writer"
         %br/
         .form-check
-          = f.radio_button :tutor_category, "a_plus", class: "form-check-input"
+          = f.radio_button :tutor_category, "a_plus", class: "form-check-input", "data-bal" => 3
           = f.label :tutor_category, "A-List Writers ; B+ to A", :value => "a_plus", class: "form-check-label"
         .form-check
-          = f.radio_button :tutor_category, "cheko", class: "form-check-input"
+          = f.radio_button :tutor_category, "cheko", class: "form-check-input", "data-bal" => 2
           = f.label :tutor_category, "Cheko+ Writers ; B to A", :value => "cheko", class: "form-check-label"
         .form-check
-          = f.radio_button :tutor_category, "standard", class: "form-check-input", checked: true
+          = f.radio_button :tutor_category, "standard", class: "form-check-input", checked: true, "data-bal" => 1
           = f.label :tutor_category, "Standard Writers ; C to A", :value => "standard", class: "form-check-label"
     .mb-3
       .field
@@ -47,6 +47,9 @@
         = f.file_field :hw_attachment, class: "form-control"
   %h3 Payment 
   %stuff
+    .mb-3
+      %h5 Estimate
+      %h4#testEstimate
     .mb-3
       .field
         = f.label :payment_type, class: "form-label"
