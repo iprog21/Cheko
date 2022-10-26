@@ -99,13 +99,13 @@ if ($('#homework_words').length){
       new_price = Math.round(new_price + prio)
     }
 
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
   })
 } else {
   var def_price = parseFloat(1000);
   new_price = def_price
   prio = Math.round(( .30 * def_price));
-  $('#testEstimate').html(new_price)
+  $('#testEstimate').html( '₱' + new_price )
 }
 
 $('input[name="homework[tutor_category]"]').on('change', function(){
@@ -116,7 +116,7 @@ $('input[name="homework[tutor_category]"]').on('change', function(){
     new_price = Math.round(new_price + prio)
   }
 
-  $('#testEstimate').html(new_price)
+  $('#testEstimate').html( '₱' + new_price )
 })
 
 
@@ -124,11 +124,11 @@ $('input[name="homework[tutor_category]"]').on('change', function(){
 $('#homework_priority').on('change', function(){
   if ($('#homework_priority').is(':checked')) {
     new_price = Math.round(new_price + prio)
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
 
   } else {
     new_price = Math.round(new_price - prio)
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
   }
 })
 
@@ -136,12 +136,12 @@ $('#homework_login_school').on('change', function(){
   if ($('#homework_login_school').is(':checked')) {
     login = parseInt(200)
     new_price = Math.round(new_price + login)
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
   } else {
     login = parseInt(200)
     new_price = Math.round(new_price - login)
     login = parseInt(0)
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
   }
 })
 
@@ -149,12 +149,12 @@ $('#homework_view_bidders').on('change', function(){
   if ($('#homework_view_bidders').is(':checked')) {
     bid = parseInt(300)
     new_price = Math.round(new_price + bid)
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
   } else {
     bid = parseInt(300)
     new_price = Math.round(new_price - bid)
     bid = parseInt(0)
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
   }
 })
 
@@ -162,12 +162,12 @@ $('#homework_tutor_samples').on('change', function(){
   if ($('#homework_tutor_samples').is(':checked')) {
     sample = parseInt(100)
     new_price = Math.round(new_price + sample)
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
   } else {
     sample = parseInt(100)
     new_price = Math.round(new_price - sample)
     sample = parseInt(0)
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
   }
 })
 
@@ -175,11 +175,11 @@ $('#homework_tutor_skills').on('change', function(){
   if ($('#homework_tutor_skills').is(':checked')) {
     skill = parseInt(100)
     new_price = Math.round(new_price + skill)
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
   } else {
     skill = parseInt(100)
     new_price = Math.round(new_price - skill)
     skill = parseInt(0)
-    $('#testEstimate').html(new_price)
+    $('#testEstimate').html( '₱' + new_price )
   }
 })
