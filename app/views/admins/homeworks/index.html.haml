@@ -14,7 +14,7 @@
                   .col-6.text-start
                     %h3 Pending
                 .table-responsive
-                  %table.homeworks-scrollX.display.nowrap
+                  %table#pending.display.nowrap
                     %thead
                       %tr
                         %th Order created
@@ -29,6 +29,7 @@
                         %th View Bidders
                         %th Priority
                         %th Login
+                        %th TL
                         %th Action
                     %tbody
                       =render partial: 'admins/homeworks/pending-table', collection: @pending, as: :home
@@ -42,7 +43,7 @@
                   %table.homeworks-scrollX.display.nowrap
                     %thead
                       %tr
-                        %th Name
+                        %th ID
                         %th Client
                         %th Tutor Category
                         %th Tutor

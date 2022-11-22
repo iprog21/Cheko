@@ -1,14 +1,23 @@
 
 // document.addEventListener("turbolinks:load", function () {
   require( 'datatables.net-dt' );
-  $('#datatable').DataTable();
 
-  $('.datatableBasic').DataTable();
+  $('#datatable').DataTable({
+    "order": [[ 0, "desc" ]],
+  });
+
+  $('.datatableBasic').DataTable({
+    "order": [[ 0, "desc" ]],
+  });
 
   $('.homeworks-scrollX').DataTable({
     scrollX: true,
-    
   });
+
+  $('#pending').DataTable({
+    scrollX: true,
+    "order": [[ 0, "desc" ]],
+  })
 
   console.log("datatable log")
 // });

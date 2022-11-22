@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :qnas do
     get :pick_type, on: :collection
     put :finish
+    get :cancel
     resources :chats, only: [:show] do
       resources :messages, only: [:create], on: :collection
     end
@@ -130,6 +131,7 @@ Rails.application.routes.draw do
 
     resources :qnas do 
       get :finish
+      get :cancel
       resources :chats, only: [:show] do
         resources :messages, only: [:create], on: :collection
       end

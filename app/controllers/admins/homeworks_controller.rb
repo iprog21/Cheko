@@ -4,7 +4,7 @@ class Admins::HomeworksController < ApplicationController
 
   def index
     @history = current_admin.role == "admin" ? Homework.where(status: "done", admin_id: current_admin.id).order(created_at: :asc) : Homework.where(status: "done").order(created_at: :asc)
-    @pending = Homework.where(status: "reviewing") 
+    @pending = Homework.where(status: "reviewing", admin_id: current_admin.id) 
     @ongoing = current_admin.role == "admin" ? Homework.where(status: "ongoing", admin_id: current_admin.id) : Homework.where(status: "ongoing")
   end
 
@@ -42,6 +42,10 @@ class Admins::HomeworksController < ApplicationController
       @homework.assign_tutor(nil, params[:homework][:tutor_price].to_i)
     end
 
+    if params[:homework][:manager_id].present?
+      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "AssignToTM")
+    end
+
     redirect_to admins_homeworks_path, notice: "Homework successfully updated"
   end
 
@@ -58,7 +62,9 @@ class Admins::HomeworksController < ApplicationController
     # if @homework.price.present? && @homework.tutor_price.present?
     #   @homework.calculate_profit
     # end
-    
+    name = "#{@homework.user.first_name[0,1].capitalize}#{@homework.user.last_name[0,1].capitalize}_#{@homework.subject}##{@homework.deadline.strftime("%b%m")}_#{@homework.tutor.first_name[0,1].capitalize}#{@homework.tutor.last_name[0,1].capitalize}"
+    @homework.update(name: name)
+
     redirect_to admins_homeworks_path
   end
 

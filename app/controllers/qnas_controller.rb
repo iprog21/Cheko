@@ -18,7 +18,7 @@ class QnasController < ApplicationController
 
   def pick_type
     if user_signed_in?
-      qna_old = current_user.qnas.where(status: :pending).last
+      # qna_old = current_user.qnas.where(status: :pending).last
     else
       qna_old = Qna.find_by(auth: cookies[:tutor_qna])
     end
@@ -42,6 +42,11 @@ class QnasController < ApplicationController
       cookies[:tutor_qna] = @qna.auth
     end
 
+    tutors = Tutor.all
+    tutors.each do |tutor|
+      QnaJob.set(wait: 2.seconds).perform_later("new_qna", tutor)
+    end
+
     redirect_to qna_path(@qna.id)
   end
 
@@ -55,6 +60,12 @@ class QnasController < ApplicationController
     message = Message.create(content: "Client has finished the question", chat_id: @qna.chat.id)
     SendMessageJob.perform_now(message, "Finish", message.chat_id)
     @qna.update(status: "done", auth: "finish")
+    redirect_to root_path
+  end
+
+  def cancel
+    @qna = Qna.find(params[:qna_id])
+    @qna.update(status: "cancelled", auth: "finish")
     redirect_to root_path
   end
 

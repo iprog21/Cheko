@@ -19,11 +19,24 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def create
+    @admin = Admin::where(status: 1).first
     @homework = current_user.homeworks.new(homework_params)
 
     if @homework.save
-      # HomeworkMailer.with(homework: @homework).notify_admin.deliver_now
+      #HomeworkMailer.with(homework: @homework).notify_admin.deliver_now
+     
+      #assign admin_id
+      @homework.update(admin_id: @admin.id)
+
       HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Admin")
+
+      #send email all tutors that new homework is up for bidding
+      tutors = Tutor.all 
+      tutors.each do |tutor|
+        NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
+      end
+
+
       redirect_to users_homeworks_path
     else
       render 'new'

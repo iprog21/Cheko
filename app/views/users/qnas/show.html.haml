@@ -16,7 +16,9 @@
             %h5= "#{@qna.subject.titleize}"
           .col-sm-6.col-md-2
             -if @qna.status == "assigned"
-              = link_to  "Finish", qna_finish_path(qna_id: @qna.id), class: "btn btn-success"
+              = link_to  "Finish", users_qna_finish_path(qna_id: @qna.id), class: "btn btn-success"
+            -else
+              = link_to "Cancel", users_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger"
           .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
             %p= @qna.question
   .row.mt-3.mb-5

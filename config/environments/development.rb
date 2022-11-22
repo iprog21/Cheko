@@ -64,12 +64,22 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method   = :smtp
 
-   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => "bret.encienzo.28@gmail.com",
-    :password             => Rails.application.credentials.mailer[:password],
-    :authentication       => :login,
-    :enable_starttls_auto => true
+  #bret smtp
+  #  config.action_mailer.smtp_settings = {
+  #   :address              => "smtp.gmail.com",
+  #   :port                 => 587,
+  #   :user_name            => "bret.encienzo.28@gmail.com",
+  #   :password             => Rails.application.credentials.mailer[:password],
+  #   :authentication       => :login,
+  #   :enable_starttls_auto => true
+  # }
+
+  config.action_mailer.smtp_settings = {
+    :user_name => '9a7803e957feee',
+    :password => '1573223ebb6f07',
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
   }
 end

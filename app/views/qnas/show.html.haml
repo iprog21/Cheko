@@ -19,6 +19,8 @@
           .col-2
             -if @qna.status == "assigned"
               = link_to  "Finish", qna_finish_path(qna_id: @qna.id), class: "btn btn-success", method: 'put'
+            -else
+              = link_to "Cancel", qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger"
           - if @qna.document.attached?
             .col-12
               %h6 Download file
