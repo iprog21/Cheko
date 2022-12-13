@@ -5,8 +5,10 @@
   .card{class: "card-#{cookies[:theme]}"}
     .card-body
       .row 
-        .col-12.text-start 
+        .col-8.text-start 
           %h5= "Add Homework - #{params[:title].present? ? params[:title].titleize : params[:type].titleize}"
+        .col-4{style: "text-align:right;"} 
+          %a#saveDraft{class: "btn btn-warning"} Save to Draft
         .col-xl-8.col-lg-10.col-md-12.ms-auto.me-auto
           - case params[:type]
           - when 'essay'

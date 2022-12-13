@@ -11,12 +11,12 @@ class Homework < ApplicationRecord
   has_many :documents, dependent: :destroy
   has_many :bids, dependent: :destroy
 
-  has_one_attached :hw_attachment
+  has_many_attached :hw_attachment
 
   enum order_type:     { essay: 0, thesis: 1, art: 2, group_project: 3, law: 4, math: 5, science: 6, translation: 7, code: 8, economics: 9, sketchup: 10, foreign_language: 11, robotics: 12, module: 13 }
   enum payment_type:   { gcash: 0, bank: 1 }
   enum payment_status: { unpaid: 0, paid: 1 }
-  enum status:         { reviewing: 0, cancel: 1, ongoing: 2, done: 3 }
+  enum status:         { reviewing: 0, cancel: 1, ongoing: 2, done: 3, in_draft: 4 }
   enum grade:          { a: 0, b: 1, c: 2 }
   enum tutor_category: { a_plus: 0, cheko: 1, standard: 2 }
 
@@ -53,5 +53,10 @@ class Homework < ApplicationRecord
     # self.tutor_id = tutor_id
     # self.tutor_price = bid.ammount
     # self.save
+  end
+
+  def draft 
+    self.status = "draft"
+    self.save
   end
 end

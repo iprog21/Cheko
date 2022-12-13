@@ -45,6 +45,9 @@
                         %td.text-end
                           %a{href: users_homework_path(home)}
                             .fas.fa-eye.text-success.font-16.mr-3
+                          -if home.status == "in_draft"
+                            %a{href:edit_users_homework_path(home.id)}
+                              .fas.fa-pen.text-warning.font-16.mr-3
                   -else
                     %td No Data found
 

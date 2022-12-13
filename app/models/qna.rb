@@ -6,10 +6,11 @@ class Qna < ApplicationRecord
   has_one :chat
 
   has_one_attached :document
+  has_one_attached :payment_receipt
 
   enum status:         {pending: 0, assigned: 1, done: 2, cancelled: 3}
   # enum qna_type:       {essay: 0, art: 2, group_project: 3, law: 4, math: 5, science: 6, translation: 7, code: 8, economics: 9 }
-
+  enum payment_status:  {not_paid: 0, paid: 1}
   after_create :create_auth
 
   def create_auth

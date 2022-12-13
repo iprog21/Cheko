@@ -14,13 +14,16 @@
         .row 
           .col-sm-6.col-md-10.text-start 
             %h5= "#{@qna.subject.titleize}"
-          .col-sm-6.col-md-2
+          .col-sm-6.col-md-2{style: "text-align:right;"}
             -if @qna.status == "assigned"
               = link_to  "Finish", users_qna_finish_path(qna_id: @qna.id), class: "btn btn-success"
             -else
               = link_to "Cancel", users_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger"
-          .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
-            %p= @qna.question
+          %div{style: "display: flex; gap: 35px; padding-top: 10px;"}
+            %div{style: "width: 80%;"}
+              %p= @qna.question
+            %div{style: "width: 20%;"}
+              = image_tag "qr.jpg", class: "img-thumbnail ms-auto me-auto"
   .row.mt-3.mb-5
     .card{class: "card-#{cookies[:theme]}", style: "padding-bottom: 10px; padding-top: 10px"}
       .card-body{style: "padding: 0"}

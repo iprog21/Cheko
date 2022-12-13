@@ -10,5 +10,23 @@
           .col-2
             = link_to  "Disable", admins_qna_finish_path(qna_id: @qna.id), class: "btn btn-danger"
           .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
-            %p= @qna.question
-
+            %p{style: "padding-top:25px; "}= @qna.question
+    %div{style: "padding-top:25px;"}
+  -if @qna.payment_status.present?
+    .card{class: "card-#{cookies[:theme]}"} 
+      .card-body 
+        .row
+          .col-10
+            %h5 Payment Info:
+          %div.margin-0
+            %p 
+              Tutor: 
+              %span= "#{@tutor.first_name} #{@tutor.last_name}"
+            %p 
+              Payment Status:  
+              %span{:class => "#{'span-green' if @qna.payment_status == 'paid'}" }="#{@qna.payment_status.upcase}"
+            %p 
+              Payment Date:
+              %span=  @qna.date_paid.strftime("%b %d, %Y %I:%M %p")
+            %p Payment Receipt :
+            =link_to @qna.payment_receipt.filename, rails_blob_path(@qna.payment_receipt, disposition: 'attachment'),class: "btn btn-success" 

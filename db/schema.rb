@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_25_034817) do
+ActiveRecord::Schema.define(version: 2022_12_07_035958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -253,6 +253,9 @@ ActiveRecord::Schema.define(version: 2022_08_25_034817) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "auth"
     t.integer "qna_type_id"
+    t.integer "amount"
+    t.datetime "date_paid"
+    t.integer "payment_status"
   end
 
   create_table "quality_officers", force: :cascade do |t|

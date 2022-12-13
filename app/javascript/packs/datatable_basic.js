@@ -12,6 +12,7 @@
 
   $('.homeworks-scrollX').DataTable({
     scrollX: true,
+    "order": [[ 0, "desc" ]],
   });
 
   $('#pending').DataTable({

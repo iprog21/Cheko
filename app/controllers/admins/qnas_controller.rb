@@ -7,6 +7,7 @@ class Admins::QnasController < ApplicationController
 
   def show
     @qna = Qna.find(params[:id])
+    @tutor = Tutor.find(@qna.tutor_id)
   end
 
   def finish

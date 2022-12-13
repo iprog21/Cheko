@@ -1,6 +1,6 @@
 class Users::HomeworksController < Users::UserAppController
   before_action :authenticate_user!
-  before_action :find_homework, except: [:index, :create, :new, :pick_type]
+  before_action :find_homework, except: [:index, :create, :new, :pick_type, :add_to_drafts]
   
   def index
     # @pending = current_user.homeworks.where(status: "reviewing")
@@ -15,7 +15,11 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def new
-    @homework = current_user.homeworks.new
+    if params[:id].present?
+      @homework = current_user.homeworks.find(params[:id])
+    else
+      @homework = current_user.homeworks.new()
+    end
   end
 
   def create
@@ -23,7 +27,6 @@ class Users::HomeworksController < Users::UserAppController
     @homework = current_user.homeworks.new(homework_params)
 
     if @homework.save
-      #HomeworkMailer.with(homework: @homework).notify_admin.deliver_now
      
       #assign admin_id
       @homework.update(admin_id: @admin.id)
@@ -35,7 +38,6 @@ class Users::HomeworksController < Users::UserAppController
       tutors.each do |tutor|
         NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
       end
-
 
       redirect_to users_homeworks_path
     else
@@ -63,6 +65,30 @@ class Users::HomeworksController < Users::UserAppController
   def destroy
   end
 
+  def add_to_drafts
+    @homework = current_user.homeworks.new(homework_params)
+    if @homework.save
+      @homework.update(status: "in_draft")
+      redirect_to users_homeworks_path
+    else
+      redirect_to new_users_homework_path
+    end
+  end
+
+  def submit_homework
+    @admin = Admin::where(status: 1).first
+    @homework = Homework.update(@homework.id, status: "reviewing", admin_id: @admin.id)
+
+    HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Admin")
+    #send email all tutors that new homework is up for bidding
+    tutors = Tutor.all 
+    tutors.each do |tutor|
+      NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
+    end
+
+    redirect_to users_homeworks_path
+  end
+
   private 
 
   def find_homework
@@ -70,7 +96,11 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def homework_params
-    deadline = DateTime.strptime(params[:homework][:deadline], "%m/%d/%Y, %I:%M %p")
-    params.require(:homework).permit(:hw_attachment, :details, :payment_type, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category).merge(deadline: deadline)
+    if (params[:homework][:deadline].nil?)
+      deadline = DateTime.now.strftime("%m/%d/%Y, %I:%M %p")
+    else
+      deadline = DateTime.strptime(params[:homework][:deadline], "%m/%d/%Y, %I:%M %p")
+    end
+    params.require(:homework).permit(:details, :payment_type, :subject, :sub_subject, :budget, :tutor_skills, :tutor_samples, :sub_type, :priority, :view_bidders, :login_school, :budget, :order_type, :words, :tutor_category, :hw_attachment => []).merge(deadline: deadline)
   end
 end

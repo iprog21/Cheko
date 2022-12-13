@@ -33,4 +33,12 @@ class Tutors::QnasController < ApplicationController
     @qna = Qna.find(params[:id])
     @message = Message.new
   end
+
+  def add_payment
+    date_paid = DateTime.strptime(params[:qna][:date_paid], "%m/%d/%Y, %I:%M %p")
+    @qna = Qna.find(params[:qna_id])
+    @qna.update(amount: params[:qna][:amount], date_paid: date_paid, payment_receipt: params[:qna][:payment_receipt], payment_status: 1)
+    redirect_to tutors_qna_path(params[:qna_id])
+  end
+
 end

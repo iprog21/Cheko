@@ -113,6 +113,7 @@ Rails.application.routes.draw do
       put :cancel
 
       resources :messages, only: [:create]
+      patch '/add_payment', to: 'qnas#add_payment', as: 'add_payment'
     end
 
     resources :chats, only: [:index]
@@ -123,7 +124,11 @@ Rails.application.routes.draw do
     resources :homeworks, on: :collection do
       get :success
       get :pick_type, on: :collection
+
+      patch '/edit', to: 'homeworks#update', as: 'update_homework'
+      get '/submit_homework', to: 'homeworks#submit_homework', as: 'submit_homework'
     end
+    post 'homeworks/add_to_draft', to: 'homeworks#add_to_drafts', as: 'add_to_drafts'
 
     resources :professors, only: [:index, :show, :new, :create] do
       get :search, on: :collection

@@ -7,10 +7,11 @@
   .card{class: "bg-#{cookies[:theme]}"}
     .card-body
       .row 
-        .col-sm-6.col-md-10.text-start 
+        .col-sm-6.col-md-8.text-start 
           %h5= "#{@qna.subject.titleize}"
-        .col-sm-6.col-md-2
+        .col-sm-6.col-md-4{style: "text-align: right;"}
           = link_to  "Cancel", tutors_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger", method: 'put'
+          %button.btn.btn-warning{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button", :class => "#{'disabled' if @qna.payment_status == 'paid'}"} Add Payment Method
         - if @qna.document.attached?
           .col-12
             %h6 Download file
@@ -59,7 +60,42 @@
             -#       = f.file_field :document, class: "form-control"
             -#     .col-6
             -#       = f.text_field :content, class: "form-control"
+
+.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", tabindex: "-1", id: "exampleModal"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title Add Payment Info
+        %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
+      .modal-body
+        = form_for @qna, url: tutors_qna_add_payment_path(@qna.id) do |f|
+          .row 
+            = f.hidden_field :qna_id, :value => @qna.id 
+            .col-4
+              = f.label :amount, class: 'form-label'
+            .col-6
+              = f.text_field :amount, class: "form-control", required: true
+            .w-100
+            %br
+            .col-4 
+              = label_tag :payment_receipt, "Attachment", class: "form-label"
+            .col-6
+              = f.file_field :payment_receipt, class: "form-control"
+            %br
+            .col-4
+              = f.label :date_paid, class: "form-label"
+            %br
+            .col-6{style: "padding-top: 20px;"}  
+              #datetimepicker1.input-group{"data-td-target-input" => "nearest", "data-td-target-toggle" => "nearest"}
+                = text_field_tag "qna[date_paid]", "", class: "form-control", id: "datetimepicker1Input", "data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker", readonly: true, required: true, style: "background: white"
+                %span.input-group-text{"data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker"}
+                  %span.fas.fa-calendar
+          %div{style: "text-align: right; padding-top: 15px;"}
+            = f.submit "Submit", class: "btn btn-primary"
+            %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Close
+        
 = javascript_pack_tag 'messages/new'
+= javascript_pack_tag 'tutors/qnas'
 :javascript
   var element = document.getElementById("messages");
   element.scrollTop = element.scrollHeight;

@@ -31,6 +31,21 @@ $(document).ready(function(){
   $('#user_last_name').filter_input({regex:'[a-zA-Z ]+'});
 })
 
+$('#saveDraft').on("click", function(){
+  //console.log(window.location.origin);
+  var homework = $("#new_homework").serialize()
+  //console.log(homework);
+  var ajaxPayload = {
+    type: "POST",
+    url: window.location.origin + "/users/homeworks/add_to_draft",
+    data: homework,
+    success: function(data){
+
+    }
+  }
+  $.ajax(ajaxPayload);
+})
+
 $('#new_homework').steps({
   headerTag: "h3",
   bodyTag: "stuff",
@@ -75,7 +90,6 @@ $('#new_homework').steps({
 $('div .steps').addClass("list-group list-group-horizontal")
 
 var prio = parseInt(0)
-
 var skill = parseInt(0)
 
 var sample = parseInt(0)
