@@ -28,7 +28,7 @@
                     = f.label :deadline, class: "form-label"
                     #datetimepicker1.input-group{"data-td-target-input" => "nearest", "data-td-target-toggle" => "nearest"}
                       -# %input#datetimepicker1Input.form-control{"data-td-target" => "#datetimepicker1", type: "text"}/
-                      = text_field_tag "homework[deadline]", "", class: "form-control", id: "datetimepicker1Input", "data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker", readonly: true, required: true, style: "background: white", value: @homework.deadline.strftime("%m/%d/%Y, %I:%M %p")
+                      = text_field_tag "homework[deadline]", "", class: "form-control", id: "datetimepicker1Input", "data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker", readonly: true, required: true, style: "background: white", value: "#{@homework.deadline.strftime("%m/%d/%Y, %I:%M %p") if !@homework.deadline.nil?}"
                       %span.input-group-text{"data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker"}
                         %span.fas.fa-calendar
                 .mb-3

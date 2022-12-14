@@ -96,7 +96,7 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def homework_params
-    if (params[:homework][:deadline].nil?)
+    if (!params[:homework][:deadline].present?)
       deadline = DateTime.now.strftime("%m/%d/%Y, %I:%M %p")
     else
       deadline = DateTime.strptime(params[:homework][:deadline], "%m/%d/%Y, %I:%M %p")
