@@ -15,11 +15,7 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def new
-    if params[:id].present?
-      @homework = current_user.homeworks.find(params[:id])
-    else
-      @homework = current_user.homeworks.new()
-    end
+    @homework = current_user.homeworks.new()
   end
 
   def create
@@ -27,7 +23,6 @@ class Users::HomeworksController < Users::UserAppController
     @homework = current_user.homeworks.new(homework_params)
 
     if @homework.save
-     
       #assign admin_id
       @homework.update(admin_id: @admin.id)
 

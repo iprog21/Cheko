@@ -23,7 +23,17 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
         set_flash_message! :notice, :signed_up
         if params[:homework].present? || cookies[:homework_params].present?
           logger.info "\n\n\n #{homework_params} \n\n\n"
+          admin = Admin::where(status: 1).first
           hw = resource.homeworks.create(homework_params)
+          hw.update(admin_id: admin.id)
+
+          HomeworkMailerJob.set(wait: 2.seconds).perform_later(hw, "Admin")
+
+          #send email all tutors that new homework is up for bidding
+          tutors = Tutor.all 
+          tutors.each do |tutor|
+            NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
+          end
 
           logger.info "\n\n\n IT REACHED HERE PART 1 \n\n\n"
 
