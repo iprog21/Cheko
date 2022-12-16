@@ -127,6 +127,8 @@ Rails.application.routes.draw do
 
       patch '/edit', to: 'homeworks#update', as: 'update_homework'
       get '/submit_homework', to: 'homeworks#submit_homework', as: 'submit_homework'
+      
+      get '/delete_draft', to: 'homeworks#delete_draft', as: 'delete_draft'
     end
     post 'homeworks/add_to_draft', to: 'homeworks#add_to_drafts', as: 'add_to_drafts'
 

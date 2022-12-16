@@ -2,9 +2,9 @@
 .row 
   .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
     .container.mt-5
-      .card 
+      .card{class: "card-#{cookies[:theme]}"}
         .card-body
-          .row 
+          .row
             .col-12.text-start 
               %h5 Update Homework
             .col-6.ms-auto.me-auto

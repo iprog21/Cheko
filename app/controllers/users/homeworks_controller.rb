@@ -6,7 +6,7 @@ class Users::HomeworksController < Users::UserAppController
     # @pending = current_user.homeworks.where(status: "reviewing")
     # @ongoing = current_user.homeworks.where(status: "ongoing")
     # @history = current_user.homeworks.where(status: "done")
-    @homeworks = current_user.homeworks
+    @homeworks = current_user.homeworks.not_deleted
   end
 
   def show
@@ -89,6 +89,13 @@ class Users::HomeworksController < Users::UserAppController
     redirect_to users_homeworks_path
   end
 
+  def delete_draft
+    @homework = Homework.find(params[:homework_id])
+    @homework.soft_delete
+    @homework.update(status: "deleted", deleted_at: DateTime.now)
+    redirect_to users_homeworks_path
+  end
+
   private 
 
   def find_homework
@@ -96,8 +103,8 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def homework_params
-    if (!params[:homework][:deadline].present?)
-      deadline = DateTime.now.strftime("%m/%d/%Y, %I:%M %p")
+    if params[:homework][:deadline].blank?
+      deadline = DateTime.now
     else
       deadline = DateTime.strptime(params[:homework][:deadline], "%m/%d/%Y, %I:%M %p")
     end
