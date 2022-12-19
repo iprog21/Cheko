@@ -1,6 +1,12 @@
 = render 'tutors/shared/header'
 .container-fluid 
   .container
+    .row
+    -if flash.any?
+      .row.text-center
+      - flash.each do |type, msg|
+        .col-lg-12.col-md-12.col-sm-12.alert.mt-3.mb-3{class: type == "alert" ? "alert-danger" : "alert-success"}
+          = msg
     .mt-5
       %h4= @homework.order_type.titleize
 .container-fluid 

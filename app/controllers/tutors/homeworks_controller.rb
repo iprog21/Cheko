@@ -36,7 +36,11 @@ class Tutors::HomeworksController < ApplicationController
   end
 
   def bid
-    @homework.bids.create(ammount: params[:ammount], tutor_id: current_tutor.id)
+    if @homework.bids.create(ammount: params[:ammount], tutor_id: current_tutor.id).valid?
+      @homework.bids.create(ammount: params[:ammount], tutor_id: current_tutor.id)
+    else
+      flash[:alert] = "Bid amount exceeded!"
+    end
     redirect_to tutors_homework_path(@homework)
   end
 

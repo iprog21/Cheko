@@ -7,29 +7,29 @@
         = f.label :sub_type, "Type"
         %br/
         .form-check
-          = f.radio_button :sub_type, true, class: "form-check-input", checked: true
+          = f.radio_button :sub_type, "Magazine", class: "form-check-input", checked: true
           = f.label :sub_type, "Magazine", :value => "magazine", class: "form-check-label"
         .form-check
-          = f.radio_button :sub_type, false, class: "form-check-input"
+          = f.radio_button :sub_type, "Infographic", class: "form-check-input"
           = f.label :sub_type, "Infographic", :value => "infographic", class: "form-check-label"
         .form-check
-          = f.radio_button :sub_type, false, class: "form-check-input"
+          = f.radio_button :sub_type, "Drawing", class: "form-check-input"
           = f.label :sub_type, "Drawing", :value => "drawing", class: "form-check-label"
         .form-check
-          = f.radio_button :sub_type, false, class: "form-check-input"
+          = f.radio_button :sub_type, "Painting", class: "form-check-input"
           = f.label :sub_type, "Painting", :value => "painting", class: "form-check-label"
         .form-check
-          = f.radio_button :sub_type, false, class: "form-check-input"
+          = f.radio_button :sub_type, "Others", class: "form-check-input"
           = f.label :sub_type, "Others", :value => "others", class: "form-check-label"
     .mb-3 
       .field 
         = f.label :sub_type, "Type of Art"
         %br/
         .form-check
-          = f.radio_button :sub_subject, true, class: "form-check-input", checked: true
+          = f.radio_button :sub_subject, "Digital", class: "form-check-input", checked: true
           = f.label :sub_subject, "Digital", :value => "digital", class: "form-check-label"
         .form-check
-          = f.radio_button :sub_subject, false, class: "form-check-input"
+          = f.radio_button :sub_subject, "Traditional", class: "form-check-input"
           = f.label :sub_subject, "Traditional", :value => "traditional", class: "form-check-label"
     
   %h3 Details
