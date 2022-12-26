@@ -3,7 +3,12 @@
 = hidden_field_tag "qna_id", @qna.id, id: "qna_id"
 = hidden_field_tag "type", "tutor", id: "type"
 .container.mt-5
-
+  .row 
+  - if flash.any?
+    .row.text-center
+      - flash.each do |type, msg|
+        .col-lg-12.col-md-12.col-sm12.alert.mt-3.mb-3{class: type == 'alert' ? 'alert-danger' : 'alert-success'}
+          = msg
   .card{class: "bg-#{cookies[:theme]}"}
     .card-body
       .row 
@@ -80,7 +85,7 @@
             .col-4 
               = label_tag :payment_receipt, "Attachment", class: "form-label"
             .col-6
-              = f.file_field :payment_receipt, class: "form-control"
+              = f.file_field :payment_receipt, class: "form-control", required: true
             %br
             .col-4
               = f.label :date_paid, class: "form-label"

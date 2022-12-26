@@ -35,9 +35,19 @@ class Tutors::QnasController < ApplicationController
   end
 
   def add_payment
-    date_paid = DateTime.strptime(params[:qna][:date_paid], "%m/%d/%Y, %I:%M %p")
     @qna = Qna.find(params[:qna_id])
+    if params[:qna][:date_paid].blank?
+      date_paid = DateTime.now
+    else
+      date_paid = DateTime.strptime(params[:qna][:date_paid], "%m/%d/%Y, %I:%M %p")
+    end
     @qna.update(amount: params[:qna][:amount], date_paid: date_paid, payment_receipt: params[:qna][:payment_receipt], payment_status: 1)
+    
+    if @qna.valid?
+      flash[:success] = "Payment Added."
+    else
+      flash[:alert] = "Invalid Payment Amount added"
+    end
     redirect_to tutors_qna_path(params[:qna_id])
   end
 

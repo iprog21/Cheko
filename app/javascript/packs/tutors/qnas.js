@@ -6,7 +6,8 @@ $(function(){
     document.getElementById('datetimepicker1'),
     {
       restrictions: {
-        minDate: new Date().toDateString()
+        //minDate: new Date().toDateString()
+        maxDate: new Date().toDateString()
       },
       display: {
         theme: "light",

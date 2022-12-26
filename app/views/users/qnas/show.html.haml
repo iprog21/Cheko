@@ -17,6 +17,8 @@
           .col-sm-6.col-md-2{style: "text-align:right;"}
             -if @qna.status == "assigned"
               = link_to  "Finish", users_qna_finish_path(qna_id: @qna.id), class: "btn btn-success"
+            -elsif @qna.status == "done"
+              //= link_to "Cancel", users_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger disabled"
             -else
               = link_to "Cancel", users_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger"
           %div{style: "display: flex; gap: 35px; padding-top: 10px;"}
@@ -57,9 +59,9 @@
             = form_for @message, url: qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chat.id) do |f|
               .row
                 .col-4
-                  = f.file_field :document, class: "form-control"
+                  = f.file_field :document, class: "form-control ", :disabled => "#{true if @qna.status == 'done'}"
                 .col-8
-                  = f.text_field :content, class: "form-control", autocomplete: 'off'
+                  = f.text_field :content, class: "form-control", autocomplete: 'off', :disabled => "#{true if @qna.status == 'done'}"
               -# .row
               -#   .col-4
               -#     = file_field_tag "document", class: "form-control"

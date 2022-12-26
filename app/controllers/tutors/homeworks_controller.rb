@@ -37,7 +37,7 @@ class Tutors::HomeworksController < ApplicationController
 
   def bid
     if @homework.bids.create(ammount: params[:ammount], tutor_id: current_tutor.id).valid?
-      @homework.bids.create(ammount: params[:ammount], tutor_id: current_tutor.id)
+      flash[:success] = "Bid successfully added."
     else
       flash[:alert] = "Bid amount exceeded!"
     end
