@@ -50,7 +50,8 @@ class Admins::HomeworksController < ApplicationController
   end
 
   def assign
-    @homework.update(admin_id: current_admin.id)
+    internal_deadline = DateTime.now - 1.day
+    @homework.update(admin_id: current_admin.id, internal_deadline: internal_deadline)
     @homework.accept_order
     redirect_to admins_homeworks_path #, notice: "Successfully assigned"
   end
