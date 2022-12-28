@@ -6,7 +6,7 @@
     .row 
       .col-xl-10.col-lg-10.col-sm-12.ms-auto.me-auto 
         .container-flex.mt-5
-          .card 
+          .card{class: "card card-#{cookies[:theme]}" } 
             .card-body
               .row 
                 .col-6.text-start
@@ -19,7 +19,7 @@
                     .col-lg-12.col-md-12.col-sm-12.alert.mt-3.mb-3{class: type == "alert" ? "alert-danger" : "alert-success"}
                       = msg
               .table-responsive
-                %table.table#datatable
+                %table.datatableBasic.display.nowrap
                   %thead
                     %tr
                       %th.text-start id

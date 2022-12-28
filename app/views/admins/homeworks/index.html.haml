@@ -8,7 +8,7 @@
         .col-xl-10.col-lg-10.col-sm-12.ms-auto.me-auto 
           .container-flex.mt-5
             %h3 HW-Help
-            .card 
+            .card{class: "card card-#{cookies[:theme]}" }
               .card-body
                 .row 
                   .col-6.text-start
@@ -35,7 +35,7 @@
                     %tbody
                       =render partial: 'admins/homeworks/pending-table', collection: @pending, as: :home
                     
-            .card.mt-5
+            .card.mt-5{class: "card card-#{cookies[:theme]}" }
               .card-body
                 .row 
                   .col-6.text-start
@@ -82,7 +82,7 @@
                         %th Action
                     %tbody
                       =render partial: 'admins/homeworks/ongoing-table', collection: @ongoing, as: :home
-            .card.mt-5.mb-5
+            .card.mt-5.mb-5{class: "card card-#{cookies[:theme]}" }
               .card-body
                 .row 
                   .col-6.text-start

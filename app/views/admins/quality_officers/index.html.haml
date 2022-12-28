@@ -6,7 +6,7 @@
     .row 
       .col-xl-10.col-lg-10.col-sm-12.ms-auto.me-auto 
         .container-flex.mt-5
-          .card 
+          .card{class: "card card-#{cookies[:theme]}" } 
             .card-body
               .row 
                 .col-6.text-start
@@ -14,7 +14,7 @@
                 .col-6.text-end 
                   = link_to "New QCO", new_admins_quality_officer_path, class: "btn btn-primary"
               .table-responsive
-                %table.table.datatableBasic
+                %table.datatableBasic.display.nowrap
                   %thead
                     %tr
                       %th.text-start id

@@ -3,13 +3,13 @@
 .row 
   .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
     .container.mt-5
-      .card 
+      .card{class: "card card-#{cookies[:theme]}" } 
         .card-body
           .row 
             .col-6.text-start
               %h3 Pending
           .table-responsive
-            %table.table.datatableBasic
+            %table.datatableBasic.display.nowrap
               %thead
                 %tr
                   %th.text-start id
@@ -27,7 +27,7 @@
 .row 
   .col-xl-8.col-lg-10.col-sm-12.ms-auto.me-auto 
     .container.mt-5
-      .card 
+      .card{class: "card card-#{cookies[:theme]}" }
         .card-body
           .row 
             .col-6.text-start
@@ -35,7 +35,7 @@
             .col-6.text-end 
               = link_to "New Prof", new_admins_professor_path, class: "btn btn-primary"
           .table-responsive
-            %table.table.datatableBasic
+            %table.datatableBasic.display.nowrap
               %thead
                 %tr
                   %th.text-start id
