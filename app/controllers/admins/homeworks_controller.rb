@@ -31,8 +31,10 @@ class Admins::HomeworksController < ApplicationController
     
     if params[:homework][:internal_deadline].present?
       internal_deadline = DateTime.strptime(params[:homework][:internal_deadline], "%m/%d/%Y, %I:%M %p")
-      @homework.update(internal_deadline: internal_deadline)
+    else
+      internal_deadline = DateTime.now - 1.day
     end
+    @homework.update(internal_deadline: internal_deadline)
 
     if work && @homework.admin_id.present? && @homework.status == "reviewing"
       @homework.accept_order
@@ -50,7 +52,9 @@ class Admins::HomeworksController < ApplicationController
   end
 
   def assign
-    internal_deadline = DateTime.now - 1.day
+    if @homework.internal_deadline.bank?
+      internal_deadline = DateTime.now - 1.day
+    end
     @homework.update(admin_id: current_admin.id, internal_deadline: internal_deadline)
     @homework.accept_order
     redirect_to admins_homeworks_path #, notice: "Successfully assigned"

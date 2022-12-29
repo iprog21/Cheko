@@ -7,7 +7,11 @@ class Admins::QnasController < ApplicationController
 
   def show
     @qna = Qna.find(params[:id])
-    @tutor = Tutor.find(@qna.tutor_id)
+
+    if @qna_tutor_id.present?
+      @tutor = Tutor.find(@qna.tutor_id)
+    end
+    
   end
 
   def finish

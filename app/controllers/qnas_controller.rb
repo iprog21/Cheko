@@ -5,15 +5,15 @@ class QnasController < ApplicationController
   # end
 
   def new
-    qna_old = Qna.find_by(auth: cookies[:tutor_qna])
+    # qna_old = Qna.find_by(auth: cookies[:tutor_qna])
 
-    if qna_old
-      redirect_to qna_path(qna_old.id)
-    elsif params[:type].nil?
-      redirect_to pick_type_qnas_path
-    else
+    # if qna_old
+    #   redirect_to qna_path(qna_old.id)
+    # elsif params[:type].nil?
+    #   redirect_to pick_type_qnas_path
+    # else
       @qna = Qna.new
-    end
+    # end
   end
 
   def pick_type
@@ -31,7 +31,9 @@ class QnasController < ApplicationController
 
   def create
     if user_signed_in? 
+      puts qna_params
       @qna = current_user.qnas.create(qna_params)
+      puts @qna.id
     else
       @qna = Qna.create(qna_params)
     end
