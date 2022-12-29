@@ -52,7 +52,7 @@ class Admins::HomeworksController < ApplicationController
   end
 
   def assign
-    if @homework.internal_deadline.bank?
+    if @homework.internal_deadline.blank?
       internal_deadline = DateTime.now - 1.day
     end
     @homework.update(admin_id: current_admin.id, internal_deadline: internal_deadline)
