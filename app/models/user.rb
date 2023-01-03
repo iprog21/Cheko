@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def create_identifier
-    key = "PmKdMh8hYDwk7doWjkQzoVYr"
+    key = "VyHCUdXBBienfnt5Bbv6FHBX"
     message = "#{self.id}-client"
     idd = OpenSSL::HMAC.hexdigest('sha256', key, message)
 
