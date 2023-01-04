@@ -9,7 +9,7 @@
             .card-body
               .row 
                 .col-6.text-start 
-                  %h5 Update Homework
+                  %h5 Update Homeworks
                 .col-12
                   = form_for @homework, url: admins_homework_path, method: :put do |f|
                     .mb-3
@@ -131,6 +131,10 @@
                             %span.input-group-text{"data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker"}
                               %span.fas.fa-calendar
                       .mb-3
+                        .field 
+                          = f.label :task_code, class: "form-label"
+                          = f.text_field :name, class: "form-control"
+                      .mb-3
                         .actions
                           = f.submit "Assign", class: "btn btn-primary"
                     -else
@@ -157,6 +161,10 @@
                             = f.text_field :internal_deadline, value: @homework.internal_deadline.present? ? @homework.internal_deadline.strftime("%m/%d/%Y, %l:%M %p") : "", class: "form-control", "data-td-target" => "#datetimepicker2", "data-td-toggle" => "datetimepicker", readonly: true, style: "background: white", required: true
                             %span.input-group-text{"data-td-target" => "#datetimepicker1", "data-td-toggle" => "datetimepicker"}
                               %span.fas.fa-calendar
+                      .mb-3
+                        .field 
+                          = f.label :task_code, class: "form-label"
+                          = f.text_field :name, class: "form-control"
                       .mb-3
                         .actions
                           = f.submit "Update", class: "btn btn-primary"

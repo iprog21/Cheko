@@ -1,6 +1,7 @@
 class Admins::ProfessorsController < ApplicationController
   before_action :authenticate_admin!
   before_action :find_prof, except: [:index, :new, :create]
+  include ProfessorMetricsHelper
 
   def index
     @professors = Professor.all
@@ -52,6 +53,6 @@ class Admins::ProfessorsController < ApplicationController
   end
 
   def professor_params
-    params.require(:professor).permit(:first_name, :last_name, :school_id, :easiness, :effectiveness, :life_changing, :light_workload, :leniency, :average, :a_able, :b_pls_able, :b_able, :c_able, :batch1_able, :batch2_able, :batch3_able, :batch4_able, :our_comments)
+    params.require(:professor).permit(:first_name, :last_name, :school_id, :easiness, :effectiveness, :life_changing, :light_workload, :leniency, :average, :a_able, :b_pls_able, :b_able, :c_able, :batch1_able, :batch2_able, :batch3_able, :batch4_able, :our_comments, :additional_metric_grade)
   end
 end

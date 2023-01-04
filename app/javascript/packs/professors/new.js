@@ -1,10 +1,12 @@
 $("#prof_review_school_id").on("change", function() {
-  if( !$('#prof_review_school_id').val() ) {
-    console.log("empty")
+  var x = $('#prof_review_school_id').find(":selected").text()
+  //console.log(x)
+  if( x == "Others" ) {
+    //console.log("empty")
     $("#school_string").removeClass("d-none")
     $('#prof_review_school_name').prop('required',true);
   } else {
-    console.log("not empty")
+    // console.log("not empty")
     $("#school_string").addClass("d-none")
     $('#prof_review_school_name').val("")
     $('#prof_review_school_name').prop('required',false);
@@ -12,12 +14,14 @@ $("#prof_review_school_id").on("change", function() {
 })
 
 $("#professor_school_id").on("change", function() {
-  if( !$('#professor_school_id').val() ) {
-    console.log("empty")
+  var x = $('#professor_school_id').find(":selected").text()
+  //console.log(x)
+  if( x == "Others") {
+    //console.log("empty")
     $("#school_string").removeClass("d-none")
     $('#professor_school_name').prop('required',true);
   } else {
-    console.log("not empty")
+    //console.log("not empty")
     $("#school_string").addClass("d-none")
     $('#professor_school_name').val("")
     $('#professor_school_name').prop('required',false);
@@ -131,3 +135,53 @@ $("#professor_batch4_able").on("input", function(){
   $("#percent_b4able").append($("#professor_batch4_able").val() + "%")
 })
 
+$("#professor_additional_metric_grade").on("input", function(){
+  var grade = $("#professor_additional_metric_grade").val()
+  let letter_grade
+  //console.log(grade)
+  switch(parseInt(grade)){
+    case 0:
+      letter_grade = "C"
+      break
+    case 25:
+      letter_grade = "B-"
+      break
+    case 50:
+      letter_grade = "B"
+      break
+    case 75:
+      letter_grade = "B+"
+      break
+    case 100:
+      letter_grade = "A"
+  }
+  //console.log(letter_grade)
+  $('#additional_metric').empty()
+  $('#additional_metric').append(letter_grade)
+})
+
+
+$("#prof_review_additional_metric_grade").on("input", function(){
+  var grade = $("#prof_review_additional_metric_grade").val()
+  let letter_grade
+  //console.log(grade)
+  switch(parseInt(grade)){
+    case 0:
+      letter_grade = "C"
+      break
+    case 25:
+      letter_grade = "B-"
+      break
+    case 50:
+      letter_grade = "B"
+      break
+    case 75:
+      letter_grade = "B+"
+      break
+    case 100:
+      letter_grade = "A"
+  }
+  //console.log(letter_grade)
+  $('#additional_metric').empty()
+  $('#additional_metric').append(letter_grade)
+})

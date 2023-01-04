@@ -21,10 +21,11 @@
               = link_to  "Finish", qna_finish_path(qna_id: @qna.id), class: "btn btn-success", method: 'put'
             -else
               = link_to "Cancel", qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger"
-          - if @qna.document.attached?
+          - if @qna.document_attachments.attached?
             .col-12
               %h6 Download file
-              =link_to @qna.document.filename, rails_blob_path(@qna.document, disposition: 'attachment'),class: "btn btn-success" 
+              -@qna.document_attachments.each do |attachment|
+                =link_to attachment.filename, rails_blob_path(attachment, disposition: 'attachment'), class: "btn btn-success" 
           %hr.mt-3
           .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
             %p= @qna.question

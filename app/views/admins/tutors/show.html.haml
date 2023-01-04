@@ -17,7 +17,7 @@
               %table.homeworks-scrollX.display.nowrap
                 %thead
                   %tr
-                    %th.text-start id
+                    %th.text-start Id
                     %th.text-center Order Date
                     %th.text-center Order Type
                     %th.text-center Type
@@ -35,7 +35,7 @@
                     %th.text-end Action
                 %tbody
                   =render partial: 'tutors/homeworks/ongoing', collection: @ongoing, as: :home
-        .card.mt-5
+        .card.mt-5{class: "card card-#{cookies[:theme]}" } 
           .card-body
             .row 
               .col-6.text-start
@@ -44,7 +44,7 @@
               %table.homeworks-scrollX.display.nowrap
                 %thead
                   %tr
-                    %th.text-start id
+                    %th.text-start Id
                     %th.text-center Order Date
                     %th.text-center Order Type
                     %th.text-center Type

@@ -34,6 +34,11 @@ class Users::HomeworksController < Users::UserAppController
         NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
       end
 
+      team_managers = Manager.all
+      team_managers.each do |team_manager|
+        NotifyTmMailerJob.set(wait: 2.seconds).perform_later("new_order", team_manager)
+      end
+
       redirect_to users_homeworks_path
     else
       render 'new'

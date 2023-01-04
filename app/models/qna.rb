@@ -5,7 +5,7 @@ class Qna < ApplicationRecord
 
   has_one :chat
 
-  has_one_attached :document
+  has_many_attached :document_attachments
   has_one_attached :payment_receipt
 
   enum status:         {pending: 0, assigned: 1, done: 2, cancelled: 3}

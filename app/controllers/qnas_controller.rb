@@ -76,6 +76,6 @@ class QnasController < ApplicationController
   def qna_params
     type = QnaType.find_by(name: params[:qna][:qna_type])
     
-    params.require(:qna).permit(:question, :subject, :document).merge(qna_type_id: type.id)
+    params.require(:qna).permit(:question, :subject, :document_attachments => []).merge(qna_type_id: type.id)
   end
 end

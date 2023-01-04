@@ -28,7 +28,8 @@ schools = [
   {name: "College of Saint Benilde"},
   {name: "Ateneo de Manila University"},
   {name: "University of Asia & Pacific"},
-  {name: "Enderun Colleges"}
+  {name: "Enderun Colleges"},
+  {name: "Others"}
 ]
 
 if School.all.count == 0

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_16_032659) do
+ActiveRecord::Schema.define(version: 2023_01_03_072237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(version: 2022_12_16_032659) do
     t.integer "batch4_able"
     t.string "subject"
     t.string "school_name"
+    t.integer "additional_metric_grade"
   end
 
   create_table "professors", force: :cascade do |t|
@@ -237,6 +238,7 @@ ActiveRecord::Schema.define(version: 2022_12_16_032659) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email"
+    t.integer "additional_metric_grade"
   end
 
   create_table "qna_types", force: :cascade do |t|

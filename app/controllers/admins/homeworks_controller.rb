@@ -44,10 +44,6 @@ class Admins::HomeworksController < ApplicationController
       @homework.assign_tutor(nil, params[:homework][:tutor_price].to_i)
     end
 
-    if params[:homework][:manager_id].present?
-      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "AssignToTM")
-    end
-
     redirect_to admins_homeworks_path, notice: "Homework successfully updated"
   end
 
@@ -55,6 +51,14 @@ class Admins::HomeworksController < ApplicationController
     if @homework.internal_deadline.blank?
       internal_deadline = DateTime.now - 1.day
     end
+
+    if params[:homework][:manager_id].present?
+      name = "#{@homework.user.first_name[0,1].capitalize}#{@homework.user.last_name[0,1].capitalize}_#{@homework.subject}##{@homework.deadline.strftime("%b%m")}_#{@homework.manager.first_name[0,1].capitalize}#{@homework.manager.last_name[0,1].capitalize}"
+
+      @homework.update(name:name)
+      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "AssignToTM")
+    end
+    
     @homework.update(admin_id: current_admin.id, internal_deadline: internal_deadline)
     @homework.accept_order
     redirect_to admins_homeworks_path #, notice: "Successfully assigned"
@@ -88,9 +92,9 @@ class Admins::HomeworksController < ApplicationController
   def homework_params
     if params[:homework][:deadline].present?
       deadline = DateTime.strptime(params[:homework][:deadline], "%m/%d/%Y, %I:%M %p")
-      params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_subject, :subject, :deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples, :tutor_skills).merge(deadline: deadline)
+      params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_subject, :subject, :internal_deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples, :tutor_skills, :name).merge(deadline: deadline)
     else
-      params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_subject, :subject, :deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples, :tutor_skills)
+      params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_subject, :subject, :internal_deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples, :tutor_skills, :name)
     end
   end
 end

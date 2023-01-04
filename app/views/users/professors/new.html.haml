@@ -12,6 +12,7 @@
           = form_for @prof_review, url: users_professors_path, method: :post do |f|
             .mb-3{class:  ("d-none" if !@professor.nil?)}
               .field
+                = f.hidden_field :professor_id, value: !@professor.nil? ? @professor.id : ""
                 = f.label :first_name, class: "form-label"
                 = f.text_field :first_name, class: "form-control", required: true, value: !@professor.nil? ? @professor.first_name : ""
             .mb-3{class:  ("d-none" if !@professor.nil?)}
@@ -25,7 +26,7 @@
             .mb-3{class:  ("d-none" if !@professor.nil?)}
               .field
                 = f.label :school, class: "form-label"
-                = f.select :school_id, options_for_select(School.all.collect {|p| [ p.name, p.id ] }, !@professor.nil? ? @professor.school_id : 1 ), {include_blank: true}, class: "form-select" 
+                = f.select :school_id, options_for_select(School.all.collect {|p| [ p.name, p.id ] }, !@professor.nil? ? @professor.school_id : 1 ), {include_blank: false}, class: "form-select" 
                 #school_string.mt-3{class: @professor.nil? ? "" : "form-control d-none"}
                   %h6 *if school is not in selection, type the school
                   = f.text_field :school_name, class: "form-control"
@@ -64,48 +65,52 @@
                 = f.hidden_field :average, class: "form-range", id: "professor_average"
             %hr
             .mb-3
-              %h4 Additional Metrics: 
+              %h4 Additional Metrics:
             .mb-3
               .field
-                = f.label :a_able, "A-able", class: "form-label"
-                %h6#percent_aable 50%
-                = f.range_field :a_able, class: "form-range", id: "professor_a_able", in: 1..100, value: 50
-            .mb-3
-              .field
-                = f.label :b_pls_able, "B+-able", class: "form-label"
-                %h6#percent_bbable 50%
-                = f.range_field :b_pls_able, class: "form-range", id: "professor_b_pls_able", in: 1..100, value: 50
-            .mb-3
-              .field
-                = f.label :b_able, "B-able", class: "form-label"
-                %h6#percent_bable 50%
-                = f.range_field :b_able, class: "form-range", id: "professor_b_able", in: 1..100, value: 50
-            .mb-3
-              .field
-                = f.label :c_able, "C-able", class: "form-label"
-                %h6#percent_cable 50%
-                = f.range_field :c_able, class: "form-range", id: "professor_c_able", in: 1..100, value: 50
+                %h6#additional_metric B 
+                =f.range_field :additional_metric_grade, class: "form-range", in: 0..100, step: 25, value: 50 
+            -# .mb-3
+            -#   .field
+            -#     = f.label :a_able, "A-able", class: "form-label"
+            -#     %h6#percent_aable 50%
+            -#     = f.range_field :a_able, class: "form-range", id: "professor_a_able", in: 0..100, value: 50
+            -# .mb-3
+            -#   .field
+            -#     = f.label :b_pls_able, "B+-able", class: "form-label"
+            -#     %h6#percent_bbable 50%
+            -#     = f.range_field :b_pls_able, class: "form-range", id: "professor_b_pls_able", in: 1..100, value: 50
+            -# .mb-3
+            -#   .field
+            -#     = f.label :b_able, "B-able", class: "form-label"
+            -#     %h6#percent_bable 50%
+            -#     = f.range_field :b_able, class: "form-range", id: "professor_b_able", in: 1..100, value: 50
+            -# .mb-3
+            -#   .field
+            -#     = f.label :c_able, "C-able", class: "form-label"
+            -#     %h6#percent_cable 50%
+            -#     = f.range_field :c_able, class: "form-range", id: "professor_c_able", in: 1..100, value: 50
             %hr
-            .mb-3
-              .field
-                = f.label :batch1_able, "Batch 1-able", class: "form-label"
-                %h6#percent_b1able 50%
-                = f.range_field :batch1_able, class: "form-range", id: "professor_batch1_able", in: 1..100, value: 50
-            .mb-3
-              .field
-                = f.label :batch2_able, "Batch 2-able", class: "form-label"
-                %h6#percent_b2able 50%
-                = f.range_field :batch2_able, class: "form-range", id: "professor_batch2_able", in: 1..100, value: 50
-            .mb-3
-              .field
-                = f.label :batch3_able, "Batch 3-able", class: "form-label"
-                %h6#percent_b3able 50%
-                = f.range_field :batch3_able, class: "form-range", id: "professor_batch3_able", in: 1..100, value: 50
-            .mb-3
-              .field
-                = f.label :batch4_able, "Batch 4-able", class: "form-label"
-                %h6#percent_b4able 50%
-                = f.range_field :batch4_able, class: "form-range", id: "professor_batch4_able", in: 1..100, value: 50
+            -# .mb-3
+            -#   .field
+            -#     = f.label :batch1_able, "Batch 1-able", class: "form-label"
+            -#     %h6#percent_b1able 50%
+            -#     = f.range_field :batch1_able, class: "form-range", id: "professor_batch1_able", in: 1..100, value: 50
+            -# .mb-3
+            -#   .field
+            -#     = f.label :batch2_able, "Batch 2-able", class: "form-label"
+            -#     %h6#percent_b2able 50%
+            -#     = f.range_field :batch2_able, class: "form-range", id: "professor_batch2_able", in: 1..100, value: 50
+            -# .mb-3
+            -#   .field
+            -#     = f.label :batch3_able, "Batch 3-able", class: "form-label"
+            -#     %h6#percent_b3able 50%
+            -#     = f.range_field :batch3_able, class: "form-range", id: "professor_batch3_able", in: 1..100, value: 50
+            -# .mb-3
+            -#   .field
+            -#     = f.label :batch4_able, "Batch 4-able", class: "form-label"
+            -#     %h6#percent_b4able 50%
+            -#     = f.range_field :batch4_able, class: "form-range", id: "professor_batch4_able", in: 1..100, value: 50
             %h4 Your review
             .mb-3
               .field

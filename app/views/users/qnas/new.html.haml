@@ -20,7 +20,7 @@
             .mb-3
               .field
                 = f.label :document, "Files (optional)", class: "form-label"
-                = f.file_field :document, class: "form-control"
+                = f.file_field :document, class: "form-control", :multiple => true
             .mb-3
               .actions
                 = f.submit "Create", class: "btn btn-primary"

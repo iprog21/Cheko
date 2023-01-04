@@ -1,5 +1,6 @@
 class Users::ProfessorsController < Users::UserAppController
   before_action :authenticate_user!, except: [:search]
+  include ProfessorMetricsHelper
   
   def index
   end
@@ -28,6 +29,6 @@ class Users::ProfessorsController < Users::UserAppController
 
   private
   def professor_params
-    params.require(:prof_review).permit(:first_name, :last_name, :school_id, :school_name, :easiness, :effectiveness, :life_changing, :light_workload, :leniency, :average, :a_able, :b_pls_able, :b_able, :c_able, :batch1_able, :batch2_able, :batch3_able, :batch4_able, :content, :subject)
+    params.require(:prof_review).permit(:first_name, :last_name, :school_id, :school_name, :easiness, :effectiveness, :life_changing, :light_workload, :leniency, :average, :a_able, :b_pls_able, :b_able, :c_able, :batch1_able, :batch2_able, :batch3_able, :batch4_able, :content, :subject, :additional_metric_grade, :professor_id)
   end
 end

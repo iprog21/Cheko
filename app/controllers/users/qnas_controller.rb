@@ -44,6 +44,6 @@ class Users::QnasController < Users::UserAppController
   private
 
   def qna_params
-    params.require(:qna).permit(:question, :subject, :document)
+    params.require(:qna).permit(:question, :subject,document_attachments: [])
   end
 end

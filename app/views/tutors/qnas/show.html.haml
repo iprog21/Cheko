@@ -17,10 +17,11 @@
         .col-sm-6.col-md-4{style: "text-align: right;"}
           = link_to  "Cancel", tutors_qna_cancel_path(qna_id: @qna.id), class: "btn btn-danger", method: 'put'
           %button.btn.btn-warning{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button", :class => "#{'disabled' if @qna.payment_status == 'paid'}"} Add Payment Method
-        - if @qna.document.attached?
+        - if @qna.document_attachments.attached?
           .col-12
             %h6 Download file
-            =link_to @qna.document.filename, rails_blob_path(@qna.document, disposition: 'attachment'),class: "btn btn-success" 
+            -@qna.document_attachments.each do |attachment|
+              =link_to attachment.filename, rails_blob_path(attachment, disposition: 'attachment'), class: "btn btn-success" 
         %hr.mt-3
         .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
           %p= @qna.question

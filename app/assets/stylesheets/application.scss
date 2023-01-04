@@ -73,11 +73,17 @@ body.light {
 body.dark {
   color: white;
   background-color: #212121;
+  .modal-content{
+    background-color: #212121 !important;
+  }
 }
 
 .card-dark{
   --bs-bg-opacity: 1;
   background-color: #3d3d3d !important;
+  .form-select{
+    color: black !important;
+  }
 }
 
 @media(min-width: 1200px){
