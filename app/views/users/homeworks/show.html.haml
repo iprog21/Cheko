@@ -27,11 +27,13 @@
               %h5 Target Grade:
               %p= @homework.grade
             .col-xl-3.col-lg-6.col-md-6.col-sm-6
-              %h5 Payment
+              %h5 Payment:
               -if @homework.payment_type == "gcash"
                 = image_tag "qr.jpg", class: "img-thumbnail ms-auto me-auto"
               -else
                 %h5 BPI - 1234567889
+                %h5 Unionbank - 10277003830
+                %h5 BDO - 003368011699
           - if @homework.hw_attachment.attached?
             .row
               .col-12
