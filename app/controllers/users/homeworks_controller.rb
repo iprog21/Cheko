@@ -15,7 +15,11 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def new
-    @homework = current_user.homeworks.new()
+    if params[:type].blank?
+      redirect_to pick_type_users_homeworks_path
+    else
+      @homework = current_user.homeworks.new()
+    end
   end
 
   def create

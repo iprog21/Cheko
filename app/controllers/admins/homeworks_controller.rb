@@ -51,14 +51,7 @@ class Admins::HomeworksController < ApplicationController
     if @homework.internal_deadline.blank?
       internal_deadline = DateTime.now - 1.day
     end
-
-    if params[:homework][:manager_id].present?
-      name = "#{@homework.user.first_name[0,1].capitalize}#{@homework.user.last_name[0,1].capitalize}_#{@homework.subject}##{@homework.deadline.strftime("%b%m")}_#{@homework.manager.first_name[0,1].capitalize}#{@homework.manager.last_name[0,1].capitalize}"
-
-      @homework.update(name:name)
-      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "AssignToTM")
-    end
-    
+   
     @homework.update(admin_id: current_admin.id, internal_deadline: internal_deadline)
     @homework.accept_order
     redirect_to admins_homeworks_path #, notice: "Successfully assigned"
