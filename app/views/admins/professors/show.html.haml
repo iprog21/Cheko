@@ -41,6 +41,10 @@
               .col-lg
                 %h5= additional_grade_to_letter(@professor)
                 %input.form-range{max:100, min:0, type: "range", value: "#{@professor.additional_metric_grade}", disabled: true, style: "width:100%" }
+                %div#a_metrics
+                  %p C 
+                  %p B
+                  %p A 
             -# .row.mt-3.mb-3
             -#   .col-6
             -#     %h5.mt-2.ms-3.text-start= "A-able: #{@professor.a_able}%"

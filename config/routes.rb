@@ -106,6 +106,7 @@ Rails.application.routes.draw do
       post :bid
       put :update_bid
       post :upload
+      get :finish_homework
     end
 
     resources :qnas, only: [:index, :show] do

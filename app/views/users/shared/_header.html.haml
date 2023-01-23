@@ -7,10 +7,11 @@
     #navbarSupportedContent.collapse.navbar-collapse
       %ul.navbar-nav.me-auto.mb-2.mb-lg-0
         -if user_signed_in?
+          -# %li.nav-item
+          -#   %a.nav-link{href: users_homeworks_path} Tasks
           %li.nav-item
-            %a.nav-link{href: users_homeworks_path} Tasks
-          %li.nav-item
-            %a.nav-link{href: pick_type_users_homeworks_path} HW-Help
+            -# %a.nav-link{href: pick_type_users_homeworks_path} HW-Help
+            %a.nav-link{href: users_homeworks_path} HW-Help
           %li.nav-item
             %a.nav-link{href: users_qnas_path} Q&A
           %li.nav-item.dropdown

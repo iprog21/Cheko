@@ -12,7 +12,7 @@
             %h5 User:
             %p= @homework.user.name
           .col-6.text-end
-            -if @homework.status == "ongoing"
+            -if @homework.status == "ongoing" || @homework.status == "finished_by_tutor"
               %a.btn.btn-success.float-end{href: admins_homework_finish_homework_path(@homework.id), data: {method: :put}} Finish order
             %button.btn.btn-primary.me-3{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
               Files

@@ -20,6 +20,7 @@
             .col-6.text-end
               %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
                 Files
+              = link_to "Finish Homework", tutors_homework_finish_homework_path(@homework.id), class: "btn btn-success #{'disabled' if @homework.status == 'finished_by_tutor'}"
         .row.mt-3
           .col-6
             %h5 Deadline:

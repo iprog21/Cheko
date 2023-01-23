@@ -86,11 +86,59 @@
               .card-body
                 .row 
                   .col-6.text-start
+                    %h3 For Approval
+                .table-responsive
+                  %table.homeworks-scrollX.display.nowrap
+                    %thead
+                      %tr
+                        %th ID
+                        %th Task Code
+                        %th Client
+                        %th Tutor Category
+                        %th Tutor
+                        %th Sub Tutor
+                        %th TL
+                        %th TM
+                        %th Payment to Tutor
+                        %th Price
+                        %th Profit
+                        %th Tutor Skills
+                        %th Tutor Sample
+                        %th View Bidders
+                        %th Priority
+                        %th VIP
+                        %th Type
+                        %th Sub Type
+                        %th Updates
+                        %th Actual Due Date
+                        %th Actual Due Time
+                        %th Internal Due Date
+                        %th Internal Due Time
+                        %th Subject
+                        %th Subject 2
+                        %th Time Received
+                        %th Hours Late
+                        %th Notes
+                        %th Prof
+                        %th Course
+                        %th Grade
+                        %th Status
+                        %th Voucher
+                        %th In Bank?
+                        %th Date Paid
+                        %th Action
+                    %tbody
+                      =render partial: "admins/homeworks/for_approval", collection: @finished_by_tutor, as: :home
+            .card.mt-5.mb-5{class: "card card-#{cookies[:theme]}" }
+              .card-body
+                .row 
+                  .col-6.text-start
                     %h3 History
                 .table-responsive
                   %table.homeworks-scrollX.display.nowrap
                     %thead
                       %tr
+                        %th ID
                         %th Name
                         %th Client
                         %th Tutor Category
@@ -98,7 +146,6 @@
                         %th Sub Tutor
                         %th TL
                         %th TM
-                        %th Task Code
                         %th Payment to Tutor
                         %th Price
                         %th Profit

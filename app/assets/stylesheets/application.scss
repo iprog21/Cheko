@@ -139,3 +139,22 @@ body.dark {
   height: auto;
   width: 100%
 }
+
+#a_metric{
+  display: flex;
+  gap: 294px;
+  
+  p{
+    font-weight: bold;
+  }
+}
+
+#a_metrics{
+  display: flex;
+  gap: 570px;
+
+  p{
+    font-weight: bold;
+    font-size: 20px;
+  }
+}

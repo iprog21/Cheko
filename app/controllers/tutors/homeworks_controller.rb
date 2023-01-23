@@ -6,6 +6,7 @@ class Tutors::HomeworksController < ApplicationController
     @ongoing = Homework.where("tutor_id = ? AND status = 2", current_tutor.id).not_deleted
     @pending = Homework.where("tutor_id IS NULL AND status = 2", current_tutor.id).not_deleted
     @history = Homework.where("tutor_id = ? AND status = 3", current_tutor.id).not_deleted
+    @for_admin_approval = Homework.where("tutor_id = ? AND status= 6", current_tutor.id).not_deleted
   end
 
   def show
@@ -53,6 +54,15 @@ class Tutors::HomeworksController < ApplicationController
     if @bid.update(ammount: params[:ammount])
       redirect_to tutors_homework_path(@homework)
     end
+  end
+
+
+  def finish_homework
+    @homework = Homework.find(params[:homework_id])
+    @homework.update(status: "finished_by_tutor")
+    flash[:success] = "Homework successfully submitted"
+
+    redirect_to tutors_homework_path(params[:homework_id])
   end
 
   private

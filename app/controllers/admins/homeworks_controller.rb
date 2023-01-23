@@ -4,8 +4,10 @@ class Admins::HomeworksController < ApplicationController
 
   def index
     @history = current_admin.role == "admin" ? Homework.where(status: "done", admin_id: current_admin.id).order(created_at: :asc) : Homework.where(status: "done").order(created_at: :asc)
-    @pending = Homework.where(status: "reviewing", admin_id: current_admin.id) 
+    @pending = Homework.where(status: "reviewing", admin_id: current_admin.id)
     @ongoing = current_admin.role == "admin" ? Homework.where(status: "ongoing", admin_id: current_admin.id) : Homework.where(status: "ongoing")
+    # @ongoing = Homework.find_by_sql("SELECT * FROM homeworks WHERE status IN(2,6) AND admin_id = #{current_admin.id}") 
+    @finished_by_tutor = Homework.where(status: "finished_by_tutor", admin_id: current_admin.id)
   end
 
   def show
