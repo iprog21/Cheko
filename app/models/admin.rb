@@ -28,7 +28,7 @@ class Admin < ApplicationRecord
     http = Net::HTTP.new(uri.host, uri.port)
     req = Net::HTTP::Post.new(uri.request_uri)
     req.set_form_data(params)
-    req["api_access_token"] = Rails.application.credentials.chatwoot[:userApiKey]
+    req["api_access_token"] = "4E5F2zFPzMrpSbMZHMRAFHWL"
     res = http.request(req)
     puts res.body
   end
