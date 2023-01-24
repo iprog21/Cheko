@@ -12,7 +12,7 @@ class Manager < ApplicationRecord
   end
 
   def create_agent
-    uri = URI('http://localhost:4000/api/v1/accounts/1/agents')
+    uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/agents')
     params = {
       name: self.name,
       email: self.email,
@@ -38,7 +38,7 @@ class Manager < ApplicationRecord
   end
 
   def remove_agent
-    uri = URI('http://localhost:4000/api/v1/accounts/1/agents')
+    uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/agents')
     http = Net::HTTP.new(uri.host, uri.port)
     req = Net::HTTP::Delete.new(uri.request_uri)
     req["api_access_token"] = Rails.application.credentials.chatwoot[:userApiKey]

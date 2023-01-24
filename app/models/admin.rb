@@ -9,27 +9,27 @@ class Admin < ApplicationRecord
     return "#{self.first_name} #{self.last_name}"
   end
 
-  # def create_agent
-  #   uri = URI('http://localhost:4000/api/v1/accounts/1/agents')
-  #   params = {
-  #     name: self.name,
-  #     email: self.email,
-  #     role: "agent",
-  #     availability_status: "available",
-  #     auto_offline: true,
-  #     "agent[name]" => self.name,
-  #     "agent[email]" => self.email,
-  #     "agent[role]" => "agent",
-  #     "agent[availability_status]" => "available",
-  #     "agent[auto_offline]" => true
-  #   }   
+  def create_agent
+    uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/agents')
+    params = {
+      name: self.name,
+      email: self.email,
+      role: "agent",
+      availability_status: "available",
+      auto_offline: true,
+      "agent[name]" => self.name,
+      "agent[email]" => self.email,
+      "agent[role]" => "administrator",
+      "agent[availability_status]" => "available",
+      "agent[auto_offline]" => true
+    }   
 
-  #   # "api_access_token" = "N7kvJH1xqrVgac3Yq5zkEZw4"
-  #   http = Net::HTTP.new(uri.host, uri.port)
-  #   req = Net::HTTP::Post.new(uri.request_uri)
-  #   req.set_form_data(params)
-  #   req["api_access_token"] = "N7kvJH1xqrVgac3Yq5zkEZw4"
-  #   res = http.request(req)
-  #   puts res.body
-  # end
+    # "api_access_token" = "N7kvJH1xqrVgac3Yq5zkEZw4"
+    http = Net::HTTP.new(uri.host, uri.port)
+    req = Net::HTTP::Post.new(uri.request_uri)
+    req.set_form_data(params)
+    req["api_access_token"] = Rails.application.credentials.chatwoot[:userApiKey]
+    res = http.request(req)
+    puts res.body
+  end
 end
