@@ -56,9 +56,13 @@ class Manager < ApplicationRecord
   end
 
   def remove_agent
-    uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/agents')
+    uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/agents/')
+    params = {
+      id: self.agent_id,
+    }
     http = Net::HTTP.new(uri.host, uri.port)
     req = Net::HTTP::Delete.new(uri.request_uri)
+    req.set_form_data(params)
     req["api_access_token"] = "4E5F2zFPzMrpSbMZHMRAFHWL"
     res = http.request(req)
   end
