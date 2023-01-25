@@ -39,14 +39,10 @@ class Manager < ApplicationRecord
 
   def assign_inbox
     uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/inbox_members')
-    params = {
-      inbox_id: 1,
-      users_id: [self.agent_id]
-    }
 
     http = Net::HTTP.new(uri.host, uri.port)
     req = Net::HTTP::Post.new(uri.request_uri)
-    req.form_data(params)
+    req.form_data({'index_id' => '1', 'users_id[0]' => "#{self.agent_id}"})
     req["api_access_token"] = "4E5F2zFPzMrpSbMZHMRAFHWL"
     res = http.request(req)
     result = JSON.parse(res.body)
