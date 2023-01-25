@@ -37,10 +37,27 @@ class Manager < ApplicationRecord
     self.update(agent_id: result["id"])
   end
 
+  def assign_inbox
+    uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/inbox_members')
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    req = Net::HTTP::Post.new(uri.request_uri)
+    req.set_form_data({'index_id' => '1', 'users_id[0]' => "#{self.agent_id}"})
+    req["api_access_token"] = "4E5F2zFPzMrpSbMZHMRAFHWL"
+    res = http.request(req)
+    result = JSON.parse(res.body)
+    logger.info "\n\n #{result}\n\n"
+  end
+
   def remove_agent
-    uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/agents')
+    url = "http://172.104.186.240:3000/api/v1/accounts/1/agents/#{self.agent_id}"
+    uri = URI(url)
+    params = {
+      id: self.agent_id,
+    }
     http = Net::HTTP.new(uri.host, uri.port)
     req = Net::HTTP::Delete.new(uri.request_uri)
+    req.set_form_data(params)
     req["api_access_token"] = "4E5F2zFPzMrpSbMZHMRAFHWL"
     res = http.request(req)
   end

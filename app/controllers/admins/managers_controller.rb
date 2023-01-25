@@ -18,6 +18,7 @@ class Admins::ManagersController < ApplicationController
     @manager = Manager.new(manager_params)
     if @manager.save
       @manager.create_agent
+      @manager.assign_inbox
       redirect_to admins_managers_path, notice: "Manager successfully created"
     else
       render 'new'
