@@ -41,9 +41,7 @@ class Manager < ApplicationRecord
     uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/inbox_members')
     params = {
       inbox_id: 1,
-      "users_id" => [
-        self.agent_id
-      ]
+      "users_id[0]": self.agent_id
     }
 
     http = Net::HTTP.new(uri.host, uri.port)
