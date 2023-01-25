@@ -14,6 +14,7 @@ class Admins::HomeworksController < ApplicationController
     @bids = Bid.where(homework_id: @homework.id).order(ammount: :asc)
     @tutor = @homework.documents.where(documentable_type: "Tutor")
     @qco = @homework.documents.where(documentable_type: "QualityOfficer")
+    @admin = @homework.documents.where(documentable_type: "Admin")
   end
 
   def destroy
@@ -76,6 +77,11 @@ class Admins::HomeworksController < ApplicationController
     @homework.finish_order
     HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Finish")
     redirect_to admins_homeworks_path
+  end
+
+  def upload
+    @homework.documents.create(file: params[:document][:file], documentable_id: current_admin.id, documentable_type: current_admin.class.name)
+    redirect_to admins_homeworks_path(@homework_id)
   end
 
   private 

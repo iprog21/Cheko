@@ -1,12 +1,12 @@
 %tr
+  %td= home.id
   %td= home.name
   %td= home.user.name
-  %td= home.tutor_category.titleize
+  %td= home.tutor_category.titleize if home.tutor_category.present?
   %td= home.tutor.name     if home.tutor_id.present?
   %td= home.sub_tutor.name if home.sub_tutor_id.present?
   %td= home.admin.name
   %td= home.manager.name   if home.manager_id.present?
-  %td= home.id
   %td= home.internal_deadline.strftime("%b %d, %Y - %l:%M %p") if home.internal_deadline.present?
   %td= home.updates
   %td= home.deadline.strftime("%b %d, %Y - %l:%M %p")

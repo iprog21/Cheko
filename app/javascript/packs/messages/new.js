@@ -4,6 +4,13 @@
 // })
 var qnaId = $("#qna_id").val()
 var chatId = $("#chat_id").val()
+var send = $(".fa-paper-plane")
+
+send.on("click", function(){
+  //console.log("test");
+  $( '#new_message' ).submit();
+
+})
 
 $( '#new_message' ).on("submit", function(event){
   event.preventDefault();
@@ -36,7 +43,6 @@ $( '#new_message' ).on("submit", function(event){
     })
   } 
 })
-
 
 
 // else if( $("#type").value() == "tutor" ){

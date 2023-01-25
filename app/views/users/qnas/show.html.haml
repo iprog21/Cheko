@@ -65,9 +65,11 @@
             = form_for @message, url: qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chat.id) do |f|
               .row
                 .col-4
-                  = f.file_field :document, class: "form-control ", :disabled => "#{true if @qna.status == 'done'}"
+                  = f.file_field :document, class: "form-control ", disabled:(true if @qna.status == "done")
                 .col-8
-                  = f.text_field :content, class: "form-control", autocomplete: 'off', :disabled => "#{true if @qna.status == 'done'}"
+                  %div#send_icon
+                    = f.text_field :content, class: "form-control", autocomplete: 'off', disabled:(true if @qna.status == "done")
+                    %i.fa-regular.fa-paper-plane.btn-default
               -# .row
               -#   .col-4
               -#     = file_field_tag "document", class: "form-control"
@@ -75,5 +77,8 @@
               -#     = text_field_tag "content", "", class: "form-control"
 = javascript_pack_tag 'messages/new'
 :javascript
-  var element = document.getElementById("messages");
-  element.scrollTop = element.scrollHeight;
+  function updateScroll(){
+    var element = document.getElementById("messages");
+    element.scrollTop = element.scrollHeight;
+  }
+  setInterval(updateScroll, 100)
