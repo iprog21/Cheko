@@ -3,6 +3,7 @@ class Admin < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :recoverable, :validatable
+  has_many :documents, as: :documentable, dependent: :destroy
 
   enum role: { super_admin: 0, admin: 1 }
   def name

@@ -158,3 +158,17 @@ body.dark {
     font-size: 20px;
   }
 }
+
+#send_icon{
+  display: flex; 
+  flex-direction: row; 
+  flex-wrap: nowrap; 
+  align-content: center; 
+  justify-content: center; 
+  align-items: center; 
+  gap: 5px;
+
+  i{
+    font-size: 22px;
+  }
+}

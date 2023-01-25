@@ -67,6 +67,7 @@ Rails.application.routes.draw do
       put :assign
       put :finish_homework
       put :assign_tutor
+      post :upload
     end
     resources :professors 
     resources :prof_reviews, only: [:show, :update] do 

@@ -103,5 +103,8 @@
 = javascript_pack_tag 'messages/new'
 = javascript_pack_tag 'tutors/qnas'
 :javascript
-  var element = document.getElementById("messages");
-  element.scrollTop = element.scrollHeight;
+  function updateScroll(){
+    var element = document.getElementById("messages");
+    element.scrollTop = element.scrollHeight;
+  }
+  setInterval(updateScroll, 100)
