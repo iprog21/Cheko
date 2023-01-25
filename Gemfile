@@ -59,3 +59,8 @@ gem 'awesome_print'
 gem 'haml'
 gem 'httparty'
 gem 'sidekiq'
+
+
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'ruby-openai'
+gem 'dotenv-rails'

@@ -154,5 +154,7 @@ Rails.application.routes.draw do
     resources :homeworks, only: [:index, :show, :update], on: :collection
     get '/', to: 'dashboard#home'
   end
-
+  get '/cheko-ai' => 'gpt3#index'
+  post '/gpt3/generate' => 'gpt3#generate'
+  get '/gpt3/render_better_answer_bubble' => 'gpt3#render_better_answer_bubble'
 end
