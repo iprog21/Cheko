@@ -52,7 +52,7 @@ class Manager < ApplicationRecord
     req["api_access_token"] = "4E5F2zFPzMrpSbMZHMRAFHWL"
     res = http.request(req)
     result = JSON.parse(res.body)
-    puts "\n\n #{result}\n\n"
+    logger.info "\n\n #{result}\n\n"
   end
 
   def remove_agent
