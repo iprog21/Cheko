@@ -42,7 +42,7 @@ class Manager < ApplicationRecord
 
     http = Net::HTTP.new(uri.host, uri.port)
     req = Net::HTTP::Post.new(uri.request_uri)
-    req.form_data({'index_id' => '1', 'users_id[0]' => "#{self.agent_id}"})
+    req.set_form_data({'index_id' => '1', 'users_id[0]' => "#{self.agent_id}"})
     req["api_access_token"] = "4E5F2zFPzMrpSbMZHMRAFHWL"
     res = http.request(req)
     result = JSON.parse(res.body)
