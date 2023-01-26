@@ -77,8 +77,3 @@
               -#     = text_field_tag "content", "", class: "form-control"
 = javascript_pack_tag 'messages/new'
 :javascript
-  function updateScroll(){
-    var element = document.getElementById("messages");
-    element.scrollTop = element.scrollHeight;
-  }
-  setInterval(updateScroll, 100)

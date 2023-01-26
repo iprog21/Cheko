@@ -142,22 +142,147 @@ body.dark {
 
 #a_metric{
   display: flex;
-  gap: 294px;
+  gap: 234px;
   
   p{
     font-weight: bold;
   }
 }
 
-#a_metrics{
+@media(min-width: 360px){
+  #a_metric{
   display: flex;
-  gap: 570px;
-
+  gap: 85px;
+  
   p{
     font-weight: bold;
-    font-size: 20px;
+  }
+}}
+
+@media(min-width: 375px){
+  #a_metric{
+  display: flex;
+  gap: 94px;
+  
+    p{
+      font-weight: bold;
+    }
+  }
+
+  #a_metrics{
+    display: flex;
+    gap: 86px;
+  
+    p{
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+  
+}
+
+@media(min-width: 390px){
+  #a_metric{
+  display: flex;
+  gap: 90px;
+  
+  p{
+    font-weight: bold;
+  }
+}}
+
+
+@media(min-width: 412px){
+  #a_metric{
+    display: flex;
+    gap: 103px;
+    
+    p{
+      font-weight: bold;
+    }
+  }
+  #a_metrics{
+    display: flex;
+    gap: 99px;
+
+    p{
+      font-weight: bold;
+      font-size: 20px;
+    }
   }
 }
+
+@media(min-width: 500px){
+  #a_metric{
+  display: flex;
+  gap: 131px;
+  
+  p{
+    font-weight: bold;
+  }
+}}
+
+@media(min-width: 768px){
+  #a_metric{
+    display: flex;
+    gap: 205px;
+    
+    p{
+      font-weight: bold;
+    }
+
+
+  }
+  #a_metrics{
+    display: flex;
+    gap: 190px;
+
+    p{
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+}
+
+@media(min-width: 992px){
+  #a_metric{
+    display: flex;
+    gap: 234px;
+    
+    p{
+      font-weight: bold;
+    }
+  }
+  #a_metrics{
+    display: flex;
+    gap: 400px;
+
+    p{
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+}
+
+@media(min-width: 1200px){
+  #a_metric{
+  display: flex;
+  gap: 190px;
+  
+  p{
+    font-weight: bold;
+  }
+}}
+
+// #a_metrics{
+//   display: flex;
+//   gap: 570px;
+
+//   p{
+//     font-weight: bold;
+//     font-size: 20px;
+//   }
+// }
 
 #send_icon{
   display: flex; 

@@ -70,7 +70,9 @@
                 .col-4
                   = f.file_field :document, class: "form-control"
                 .col-8
-                  = f.text_field :content, class: "form-control", autocomplete: 'off'
+                  %div#send_icon
+                    = f.text_field :content, class: "form-control", autocomplete: 'off', disabled:(true if @qna.status == "done")
+                    %i.fa-regular.fa-paper-plane.btn-default
             -# = form_tag( "#", method: :get, id: "new_message", multipart: true) do
             -#   .row
             -#     .col-4
@@ -83,6 +85,4 @@
               -#   .col-8
               -#     = text_field_tag "content", "", class: "form-control"
 = javascript_pack_tag 'messages/new'
-:javascript
-  var element = document.getElementById("messages");
-  element.scrollTop = element.scrollHeight;
+

@@ -68,9 +68,10 @@
               %h4 Additional Metrics:
             .mb-3
               .field
-                %h6#additional_metric B 
-                =f.range_field :additional_metric_grade, class: "form-range", in: 0..100, step: 25, value: 50 
+                %h6#additional_metric C
+                =f.range_field :additional_metric_grade, class: "form-range", in: 0..90, step: 30, value: 30
                 %div#a_metric
+                  %p D 
                   %p C 
                   %p B
                   %p A 

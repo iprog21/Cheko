@@ -59,7 +59,9 @@
                 .col-4
                   = f.file_field :document, class: "form-control"
                 .col-8
-                  = f.text_field :content, class: "form-control", autocomplete: 'off'
+                  %div#send_icon
+                    = f.text_field :content, class: "form-control", autocomplete: 'off', disabled:(true if @qna.status == "done")
+                    %i.fa-regular.fa-paper-plane.btn-default
             -# = form_for @message, url: tutors_qna_messages_path(qna_id: @qna.id, chat_id: @qna.chats.first.id) do |f|
             -#   .row
             -#     .col-4
@@ -102,9 +104,3 @@
         
 = javascript_pack_tag 'messages/new'
 = javascript_pack_tag 'tutors/qnas'
-:javascript
-  function updateScroll(){
-    var element = document.getElementById("messages");
-    element.scrollTop = element.scrollHeight;
-  }
-  setInterval(updateScroll, 100)
