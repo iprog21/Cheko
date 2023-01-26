@@ -6,14 +6,21 @@ var qnaId = $("#qna_id").val()
 var chatId = $("#chat_id").val()
 var send = $(".fa-paper-plane")
 
+function updateScroll(){
+  var element = document.getElementById("messages");
+  element.scrollTop = element.scrollHeight;
+}
+
+updateScroll()
+
 send.on("click", function(){
   //console.log("test");
   $( '#new_message' ).submit();
-
 })
 
 $( '#new_message' ).on("submit", function(event){
   event.preventDefault();
+  updateScroll()
   if ( $("#type").val() == "user" ){
 
     $.ajax({

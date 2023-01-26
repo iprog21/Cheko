@@ -137,22 +137,23 @@ $("#professor_batch4_able").on("input", function(){
 
 $("#professor_additional_metric_grade").on("input", function(){
   var grade = $("#professor_additional_metric_grade").val()
+  console.log(grade)
   let letter_grade
   //console.log(grade)
   switch(parseInt(grade)){
     case 0:
+      letter_grade = "D"
+      break
+    case 30:
       letter_grade = "C"
       break
-    case 25:
-      letter_grade = "B-"
-      break
-    case 50:
+    // case 50:
+    //   letter_grade = "B"
+      // break
+    case 60:
       letter_grade = "B"
       break
-    case 75:
-      letter_grade = "B+"
-      break
-    case 100:
+    case 90:
       letter_grade = "A"
   }
   //console.log(letter_grade)
@@ -167,18 +168,18 @@ $("#prof_review_additional_metric_grade").on("input", function(){
   //console.log(grade)
   switch(parseInt(grade)){
     case 0:
+      letter_grade = "D"
+      break
+    case 30:
       letter_grade = "C"
       break
-    case 25:
-      letter_grade = "B-"
-      break
-    case 50:
+    // case 50:
+    //   letter_grade = "B"
+    // break
+    case 60:
       letter_grade = "B"
       break
-    case 75:
-      letter_grade = "B+"
-      break
-    case 100:
+    case 90:
       letter_grade = "A"
   }
   //console.log(letter_grade)
