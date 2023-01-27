@@ -17,8 +17,8 @@ class Tutor < ApplicationRecord
   end
 
   def create_identifier
-    key = "PmKdMh8hYDwk7doWjkQzoVYr"
-    message = "#{self.id}-client"
+    key = "VyHCUdXBBienfnt5Bbv6FHBX"
+    message = "#{self.id}-tutor"
     idd = OpenSSL::HMAC.hexdigest('sha256', key, message)
 
     self.update(identifier_string: idd)
