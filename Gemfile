@@ -58,7 +58,7 @@ gem 'devise'
 gem 'awesome_print'
 gem 'haml'
 gem 'httparty'
-gem 'sidekiq'
+gem 'sidekiq', '~> 6.5.8'
 
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
