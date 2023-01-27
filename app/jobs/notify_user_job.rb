@@ -1,7 +1,7 @@
 class NotifyUserJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
-    # Do something later
+  def perform(qna)
+    QnaMailer.with(qna: qna).notify_user.deliver_now
   end
 end

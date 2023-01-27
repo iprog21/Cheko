@@ -56,7 +56,7 @@
         = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), {include_blank: false} , class: "form-select"
     .mb-3.d-flex.flex-row
       .container.p-1
-        = label_tag :view_skill, "View tutors skill profile for P100"
+        = label_tag :view_skill, "View tutor's skill profile for P100"
         .form-check.form-switch
           = check_box_tag "homework[tutor_skills]", true, false, class: "form-check-input"
       
