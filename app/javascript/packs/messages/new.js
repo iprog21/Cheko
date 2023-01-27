@@ -20,7 +20,6 @@ send.on("click", function(){
 
 $( '#new_message' ).on("submit", function(event){
   event.preventDefault();
-  updateScroll()
   if ( $("#type").val() == "user" ){
 
     $.ajax({
@@ -49,6 +48,8 @@ $( '#new_message' ).on("submit", function(event){
       }
     })
   } 
+
+  // updateScroll()
 })
 
 

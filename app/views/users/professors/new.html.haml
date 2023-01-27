@@ -26,7 +26,7 @@
             .mb-3{class:  ("d-none" if !@professor.nil?)}
               .field
                 = f.label :school, class: "form-label"
-                = f.select :school_id, options_for_select(School.all.collect {|p| [ p.name, p.id ] }, !@professor.nil? ? @professor.school_id : 1 ), {include_blank: false}, class: "form-select" 
+                = f.select :school_id, options_for_school, {include_blank: false}, class: "form-select" 
                 #school_string.mt-3{class: @professor.nil? ? "d-none" : "form-control d-none"}
                   %h6 *if school is not in selection, type the school
                   = f.text_field :school_name, class: "form-control"

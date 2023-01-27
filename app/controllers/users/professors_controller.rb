@@ -17,6 +17,7 @@ class Users::ProfessorsController < Users::UserAppController
   end
 
   def create 
+    # raise "test"
     @prof_review = current_user.prof_reviews.create(professor_params)
     prof = Professor.find_by(first_name: @prof_review.first_name, last_name: @prof_review.last_name)
     if prof
@@ -31,7 +32,7 @@ class Users::ProfessorsController < Users::UserAppController
       hash = JSON.parse(@prof_review.to_json)
       hash = hash.except("id", "professor_id", "user_id", "created_at", "updated_at", "status", "content", "school", "school_name")
       new_prof = Professor.create(hash)
-      new_prof.update(subject: params[:subject], our_comments: params[:our_comment])
+      new_prof.update(subject: params[:prof_review][:subject])
       @prof_review.update(status: "approved", professor_id: new_prof)
 
       if @prof_review.school_id.nil? && @prof_review.school_name.present?

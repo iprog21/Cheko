@@ -12,7 +12,6 @@
           .col-xl-10.col-lg-10.col-md-12.ms-auto.me-auto
             %p{style: "padding-top:25px; "}= @qna.question
     %div{style: "padding-top:25px;"}
-  -if @qna.payment_status.present?
     .card{class: "card-#{cookies[:theme]}"} 
       .card-body 
         .row
@@ -24,9 +23,18 @@
               %span= "#{@tutor.first_name} #{@tutor.last_name}"
             %p 
               Payment Status:  
-              %span{:class => "#{'span-green' if @qna.payment_status == 'paid'}" }="#{@qna.payment_status.upcase}"
+              - if @qna.payment_status == 'paid'
+                %span{:class => "span-green" }="#{@qna.payment_status.upcase}"
+              - else 
+                %span{:class => "span-red" } NOT PAID
             %p 
               Payment Date:
-              %span=  @qna.date_paid.strftime("%b %d, %Y %I:%M %p")
+              - if @qna.payment_status == 'paid'
+                %span=  @qna.date_paid.strftime("%b %d, %Y %I:%M %p")
+              - else
+                
             %p Payment Receipt :
-            =link_to @qna.payment_receipt.filename, rails_blob_path(@qna.payment_receipt, disposition: 'attachment'),class: "btn btn-success" 
+            - if @qna.payment_status == 'paid'
+              =link_to @qna.payment_receipt.filename, rails_blob_path(@qna.payment_receipt, disposition: 'attachment'),class: "btn btn-success" 
+            - else 
+
