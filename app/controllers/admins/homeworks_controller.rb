@@ -57,6 +57,13 @@ class Admins::HomeworksController < ApplicationController
    
     @homework.update(admin_id: current_admin.id, internal_deadline: internal_deadline)
     @homework.accept_order
+
+    #send email all tutors that new homework is up for bidding
+    tutors = Tutor.all 
+    tutors.each do |tutor|
+      NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
+    end
+
     redirect_to admins_homeworks_path #, notice: "Successfully assigned"
   end
 
