@@ -33,12 +33,6 @@ class Users::HomeworksController < Users::UserAppController
 
       HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Admin")
 
-      #send email all tutors that new homework is up for bidding
-      tutors = Tutor.all 
-      tutors.each do |tutor|
-        NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
-      end
-
       team_managers = Manager.all
       team_managers.each do |team_manager|
         NotifyTmMailerJob.set(wait: 2.seconds).perform_later("new_order", team_manager)
