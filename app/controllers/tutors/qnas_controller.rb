@@ -15,7 +15,7 @@ class Tutors::QnasController < ApplicationController
     SendMessageJob.perform_now(message, "Accept", message.chat_id)
 
     if @qna.user.present?
-      QnaMailer.with(qna: @qna).notify_user.deliver_now
+      QnaJob.set(wait: 2.seconds).perform_later(@qna)
     end
 
     redirect_to tutors_qna_path(@qna)
