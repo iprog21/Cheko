@@ -18,12 +18,18 @@ document.addEventListener('turbolinks:load', () => {
       },
 
       received(data) {
+        function updateScroll(){
+          var element = document.getElementById("messages");
+          element.scrollTop = element.scrollHeight;
+        }
         if ($('#type').val() == "user"){
           if (data.type == "User"){
             if (data.document == null) {
               $('#messages').append('<div class="row mt-3"><div class="col-sm-12 col-md-6  text-end ms-auto text-white rounded pt-2"><div class="ms-auto rounded" style="padding: 10px; width: 20em; background: #24a64d"> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content">You</div> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content">' + data.html + '</div></div></div>')
+              updateScroll()
             } else {
               $('#messages').append('<div class="row mt-3"><div class="col-sm-12 col-md-6  text-end ms-auto text-white rounded pt-2"><div class="ms-auto rounded" style="padding: 10px; width: 20em; background: #24a64d"> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content">You</div> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content">' + data.html + '</div> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content"><a href=' + data.document + '>Download</a></div></div></div>')
+              updateScroll()
             }
           } else if (data.type == "Error User") {
             $('#messages').append('<div class="row mt-3"><div class="col-sm-12 col-md-6  text-end ms-auto text-white rounded pt-2"><div class="ms-auto rounded bg-danger" style="padding: 10px; width: 20em;"> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content">You</div> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content">' + data.html + '</div></div></div>')
@@ -42,8 +48,10 @@ document.addEventListener('turbolinks:load', () => {
           if (data.type == "Tutor"){
             if (data.document == null){
               $('#messages').append('<div class="row mt-3"><div class="col-sm-12 col-md-6  text-end ms-auto text-white rounded pt-2"><div class="ms-auto rounded" style="padding: 10px; width: 20em; background: #24a64d"> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content">You</div> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content">' + data.html + '</div></div></div>')
+              updateScroll()
             } else {
               $('#messages').append('<div class="row mt-3"><div class="col-sm-12 col-md-6  text-end ms-auto text-white rounded pt-2"><div class="ms-auto rounded" style="padding: 10px; width: 20em; background: #24a64d"> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content">You</div> <div class="ms-auto" style="width: -moz-fit-content; width: fit-content">' + data.html + '</div><div class="ms-auto" style="width: -moz-fit-content; width: fit-content"><a href=' + data.document + '>Download</a></div></div></div>')
+              updateScroll()
             }
           } else if (data.type == "Finish") {
             $('#messages').append('<div class="row mt-3"><div class="col-sm-12 col-md-6  text-start me-auto text-white rounded pt-2"><div class="me-auto rounded bg-success" style="padding: 10px; width: 20em"> <div class="me-auto" style="width: -moz-fit-content; width: fit-content">User012345</div> <div class="me-auto" style="width: -moz-fit-content; width: fit-content">' + data.html + '</div></div></div>')

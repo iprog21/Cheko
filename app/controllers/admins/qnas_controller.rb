@@ -3,12 +3,13 @@ class Admins::QnasController < ApplicationController
 
   def index
     @qnas = Qna.where("status = 0 OR status = 1")
+    @history = Qna.where("status = 2 OR status = 3")
   end
 
   def show
     @qna = Qna.find(params[:id])
 
-    if @qna_tutor_id.present?
+    if @qna.tutor_id.present?
       @tutor = Tutor.find(@qna.tutor_id)
     end
     
