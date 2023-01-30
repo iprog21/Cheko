@@ -13,6 +13,10 @@ class HomeworkMailerJob < ApplicationJob
       HomeworkMailer.with(homework: @homework).notify_tm.deliver_now
     elsif type == "AssignToTutor"
       HomeworkMailer.with(homework: @homework).notify_tutor.deliver_now
+    elsif type == "NotifyAdmin"
+      HomeworkMailer.with(homework: @homework).admin_notify.deliver_now
+    elsif type == "NotifyTM"
+      HomeworkMailer.with(homework: @homework).homework_notify_tm.deliver_now
     end
   end
 end

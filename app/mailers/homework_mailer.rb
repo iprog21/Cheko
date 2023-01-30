@@ -26,4 +26,14 @@ class HomeworkMailer < ApplicationMailer
     mail(to: @homework.tutor.email, subject: 'An order has been assigned to you')
   end
 
+  def admin_notify
+    @homework = params[:homework]
+    mail(to: @homework.admin.email, subject: 'A tutor has uploaded a file' )
+  end
+  
+  def homework_notify_tm
+    @homework = params[:homework]
+    mail(to: @homework.manager.email, subject: 'A tutor has uploaded a file')
+  end
+
 end

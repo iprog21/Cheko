@@ -17,16 +17,17 @@ class QnasController < ApplicationController
   end
 
   def pick_type
-    if user_signed_in?
-      # qna_old = current_user.qnas.where(status: :pending).last
-    else
-      qna_old = Qna.find_by(auth: cookies[:tutor_qna])
-    end
-    
-    if qna_old
-      logger.info "\n\n\n #{qna_old.id}"
-      redirect_to qna_path(qna_old.id)
-    end
+    # if user_signed_in?
+    #   # qna_old = current_user.qnas.where(status: :pending).last
+    # else
+    #   # qna_old = Qna.find_by(auth: cookies[:tutor_qna])
+    #   qna_old = Qna.new
+    # end
+    # if qna_old
+    #   logger.info "\n\n\n #{qna_old.id}"
+    #   redirect_to qna_path()
+    # end
+    qna_old = Qna.new
   end
 
   def create

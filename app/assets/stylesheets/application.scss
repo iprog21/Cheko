@@ -26,7 +26,7 @@
 }
 
 .bg-cheko{
-  background-color: #075a9c !important; 
+  background-color: #1D2BDF !important; //#075a9c old color
 }
 
 .autocomplete {
@@ -295,6 +295,10 @@ body.dark {
 
   i{
     font-size: 22px;
-    color: #0d6efd;
+    color: #1D2BDF;
   }
+}
+
+#logo-image{
+  width: 120px;
 }

@@ -20,7 +20,7 @@
 .wizard > .steps .current a,
 .wizard > .steps .current a:active,
 .wizard > .steps .current a:hover {
-  /* background: #075a9c !important;
+  /* background: #1D2BDF !important;
   color: #ffffff; */
   padding: 0px 20px 2px 2px;
   -webkit-box-shadow: 0px 3px 10px 0 rgba(80, 110, 228, 0.4);
@@ -34,7 +34,7 @@
 .wizard > .steps .done a:active,
 .wizard > .steps .done a:hover {
   background-color: rgba(80, 110, 228, 0.1);
-  color: #075a9c !important;
+  color: #1D2BDF !important;
   padding: 0 20px 0 0;
   -webkit-box-shadow: 0px 0px 0px 2.25px rgba(80, 110, 228, 0.5);
           box-shadow: 0px 0px 0px 2.25px rgba(80, 110, 228, 0.5);
@@ -52,7 +52,7 @@
 .wizard > .steps .done a .number,
 .wizard > .steps .done a:active .number,
 .wizard > .steps .done a:hover .number {
-  border-color: #075a9c !important;
+  border-color: #1D2BDF !important;
 }
 
 .wizard > .content {
@@ -95,7 +95,7 @@
 .wizard > .actions .disabled a:active,
 .wizard > .actions .disabled a:hover {
   opacity: .65;
-  background: #075a9c !important;
+  background: #1D2BDF !important;
   color: #ffffff;
   cursor: not-allowed;
 }
@@ -103,7 +103,7 @@
 .wizard > .actions a,
 .wizard > .actions a:active,
 .wizard > .actions a:hover {
-  background: #075a9c !important;
+  background: #1D2BDF !important;
   padding: 8px 15px;
 }
 
