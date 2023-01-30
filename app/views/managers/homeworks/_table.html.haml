@@ -19,4 +19,5 @@
   %td.text-center= home.grade
   %td.text-center= home.status
   %td.text-end
-    = link_to :show, managers_homework_path(home)
+    %a{href: managers_homework_path(home)}
+      .fas.fa-eye.text-primary.font-16-mr-3
