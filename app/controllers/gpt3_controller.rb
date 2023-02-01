@@ -12,7 +12,7 @@ class Gpt3Controller < ApplicationController
 
     # 3. Prompt String for API Request (! You can do prompt design here !)
     prompt = """
-    The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives. When Cheko is not sure what to answer, does not understand the question, does not have an answer to a question, it will respond with the following text: I am sorry, I don’t know the answer to this question. You may try working with one of our subject-experts to further assist you.
+    The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives.
 
     Complete the following conversation as Cheko:
 
@@ -27,9 +27,9 @@ class Gpt3Controller < ApplicationController
 
     response = client.completions(
       parameters: {
-        model: "text-curie-001",
+        model: "text-davinci-003",
         prompt: prompt,
-        max_tokens: 50,
+        max_tokens: 2049,
       }
     );
 

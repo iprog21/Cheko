@@ -16,8 +16,6 @@ function createChatBubble(content, sender) {
   return chatBubble;
 }
 
-//test
-
 const generateText = async (prompt) => {
   promptsCount++; // Increase prompt count
 
