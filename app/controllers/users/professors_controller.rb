@@ -35,7 +35,7 @@ class Users::ProfessorsController < Users::UserAppController
       new_prof.update(subject: params[:prof_review][:subject])
       @prof_review.update(status: "approved", professor_id: new_prof)
 
-      if @prof_review.school_id.nil? && @prof_review.school_name.present?
+      if @prof_review.school_id.nil? || @prof_review.school_id == 0 && @prof_review.school_name.present?
         unless School.where("LOWER(name) = LOWER(?)", @prof_review.school).first
           new_school = School.create(name: @prof_review.school_name)
           new_prof.update(school_id: new_school.id)
