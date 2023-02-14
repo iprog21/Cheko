@@ -3,7 +3,7 @@ class Managers::HomeworksController < ApplicationController
   before_action :find_homework, only: [:show]
   
   def index
-    @homeworks = Homework.where(manager_id: current_manager.id)
+    @homeworks = Homework.where(manager_id: current_manager.id).not_deleted
   end
 
   def show
