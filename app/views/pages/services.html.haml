@@ -1,61 +1,61 @@
 = render "users/shared/header"
 .container.my-5
-  .row  
+  .row{style: "row-gap: 25px;"}
     .col-md-6.col-sm-12
       .row
         .col-xl-6.col-lg-6.col-md-12.col-sm-12
           .container
-            = image_tag "Essay.jpeg", class: "card-img-top" 
+            = image_tag "Essay.jpg", class: "card-img-top" 
         .col-xl-6.col-lg-6.col-md-12.col-sm-12
           .container.mb-3
-            %h5{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Essays
+            %h5{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} HW-Help
 
-            %p We can write all types of academic essays. Philosophy, Theology, Business, and even Filipino essays!
-            %a.btn.btn-primary.stretched-link{href: new_path(type: "essay")} Order here
+            %p We can help you with your homeworks.
+            %a.btn.btn-primary{href: pick_type_path } Order here
     .col-md-6.col-sm-12
       .row
         .col-xl-6.col-lg-6.col-md-12.col-sm-12
           .container
-            = image_tag "Art-Project.jpeg", class: "card-img-top" 
+            = image_tag "profstopick1.jpg", class: "card-img-top" 
         .col-xl-6.col-lg-6.col-md-12.col-sm-12
           .container.mb-3
-            %h5{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Art Projects
+            %h5{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Profs To Pick
 
-            %p We can write all types of academic essays. Philosophy, Theology, Business, and even Filipino essays!
-            %a.btn.btn-primary.stretched-link{href: new_path(type: "essay")} Order here
+            %p We have a database that contains comments and ratings on various professors collected from the students themselves
+            %a.btn.btn-primary{href: professors_path} Order here
     .col-md-6.col-sm-12
       .row
         .col-xl-6.col-lg-6.col-md-12.col-sm-12
           .container
-            = image_tag "Math.jpeg", class: "card-img-top" 
+            = image_tag "Economics.jpg", class: "card-img-top" 
         .col-xl-6.col-lg-6.col-md-12.col-sm-12
           .container.mb-3  
-            %h5{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Math & Computation
+            %h5{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Q & A
 
             %p We can write all types of academic essays. Philosophy, Theology, Business, and even Filipino essays!
-            %a.btn.btn-primary.stretched-link{href: new_path(type: "essay")} Order here
+            %a.btn.btn-primary{href: pick_type_qnas_path} Order here
     .col-md-6.col-sm-12
       .row
         .col-xl-6.col-lg-6.col-md-12.col-sm-12
           .container
-            = image_tag "Translations.jpeg", class: "card-img-top" 
+            = image_tag "ai-image.jpg", class: "card-img-top" 
         .col-xl-6.col-lg-6.col-md-12.col-sm-12
           .container.mb-3
-            %h5{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Translations & Foreign Languages
+            %h5{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Cheko AI
 
             %p We can write all types of academic essays. Philosophy, Theology, Business, and even Filipino essays!
-            %a.btn.btn-primary.stretched-link{href: new_path(type: "essay")} Order here
-    .col-md-6.col-sm-12
-      .row
-        .col-xl-6.col-lg-6.col-md-12.col-sm-12
-          .container
-            = image_tag "Law.jpeg", class: "card-img-top" 
-        .col-xl-6.col-lg-6.col-md-12.col-sm-12
-          .container.mb-3
-            %h5{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Law
+            %a.btn.btn-primary{href: "/cheko-ai"} Order here
+    -# .col-md-6.col-sm-12
+    -#   .row
+    -#     .col-xl-6.col-lg-6.col-md-12.col-sm-12
+    -#       .container
+    -#         = image_tag "Law.jpeg", class: "card-img-top" 
+    -#     .col-xl-6.col-lg-6.col-md-12.col-sm-12
+    -#       .container.mb-3
+    -#         %h5{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Law
 
-            %p We can write all types of academic essays. Philosophy, Theology, Business, and even Filipino essays!
-            %a.btn.btn-primary.stretched-link{href: new_path(type: "essay")} Order here
-    .col-xl-6.col-lg-6.col-md-6.col-sm-12
+    -#         %p We can write all types of academic essays. Philosophy, Theology, Business, and even Filipino essays!
+    -#         -# %a.btn.btn-primary.stretched-link{href: new_path(type: "essay")} Order here
+    .col-xl-6.col-lg-6.col-md-6.col-sm-12{style: "padding: 2.2em;"}
     
 = render "users/shared/footer"

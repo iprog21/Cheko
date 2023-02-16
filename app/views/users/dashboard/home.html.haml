@@ -3,8 +3,9 @@
   .row
     .col-sm-12.col-md-12.col-lg-6.ms-auto.me-auto.mt-2.p-4
       .d-grid.gap-5
-        %a.btn.bg-cheko.text-white.btn-xl{href: users_homeworks_path}
+        %a.btn.bg-cheko.text-white.btn-xl{:href =>users_homeworks_path, "aria-describedby" => "tooltip" }
           .h2 HW-Help
+        #tooltip{:role => "tooltip"} My tooltip
         -# %button.btn.bg-cheko.text-white.position-relative.btn-xl{type: "button"}
         -#   .h2 Past Documents
         -#   %span.position-absolute.top-0.translate-middle.badge.rounded-pill.bg-danger{style: "left: 90%"}
@@ -20,6 +21,9 @@
       %div{style:"display: flex; flex-direction: row; align-content: center; flex-wrap: inherit; justify-content: center;" }
         %a.btn.bg-cheko.text-white.btn-xl{href: users_qnas_path, style: "width: 612px;"}
           .h2 Q&A
+  .col-xl-6.col-lg-6.col-md-6.col-sm-12{style: "padding: 11.8em;"}       
+= render "users/shared/footer"
+= javascript_pack_tag 'user/users'
 
 :javascript
   window.addEventListener("chatwoot:ready", function () { 

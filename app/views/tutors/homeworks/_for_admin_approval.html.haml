@@ -12,6 +12,7 @@
   -# %td.text-center= home.hours_late
   -# %td.text-center= home.prof
   -# %td.text-center= home.grade
+  %td.text-center= format_category(home)
   %td.text-center= home.status
   %td.text-end
     %a.fas.fa-eye.text-success.font-16.mr-3{href: tutors_homework_path(home)}
