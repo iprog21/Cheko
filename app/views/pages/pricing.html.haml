@@ -1,0 +1,67 @@
+=render "users/shared/header"
+
+.container-fluid{:style => "background-image: url(#{image_path "doodads-bg.png"}); background-color:#f0f0f0;"}
+  .row
+    .col-xl-6.col-lg-6.col-md-12.col-sm-12
+      .container
+        = image_tag "asian-how-it-works-mascot-min-crop.png", class: "card-img-top", style: "height:400px; object-fit: contain;"
+    .col-xl-6.col-lg-6.col-md-12.col-sm-12
+      .container
+        %h1{:style => "padding: 3em;"} Pricing
+.container
+  .row{style: "row-gap: 25px; padding-top: 50px;"}
+    .col-md-6.col-sm-12
+      .row
+        .col-xl-6.col-lg-6.col-md-12.col-sm-12
+          .container
+            = image_tag "Essay.jpg", class: "card-img-top" 
+        .col-xl-6.col-lg-6.col-md-12.col-sm-12
+          .container.mb-3
+            %h3{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"}  
+              %u HW Help
+            %p Starts at 500
+            %p Essays:
+            %ul
+              %li B+ to A grade: P3 per word
+              %li B to A grade: P2 per word
+              %li C to A grade: P1 per word
+            %p
+              %em 30% discount for all orders above P5,000
+    .col-md-6.col-sm-12
+      .row
+        .col-xl-6.col-lg-6.col-md-12.col-sm-12
+          .container
+            = image_tag "profstopick1.jpg", class: "card-img-top" 
+        .col-xl-6.col-lg-6.col-md-12.col-sm-12
+          .container.mb-3
+            %h3{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} 
+              %u Profs To Pick
+
+            %p FREE
+    .col-md-6.col-sm-12
+      .row
+        .col-xl-6.col-lg-6.col-md-12.col-sm-12
+          .container
+            = image_tag "Economics.jpg", class: "card-img-top" 
+        .col-xl-6.col-lg-6.col-md-12.col-sm-12
+          .container.mb-3  
+            %h3{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} 
+              %u Q & A
+
+            %p Nothing Above P500
+    .col-md-6.col-sm-12
+      .row
+        .col-xl-6.col-lg-6.col-md-12.col-sm-12
+          .container
+            = image_tag "ai-image.jpg", class: "card-img-top" 
+        .col-xl-6.col-lg-6.col-md-12.col-sm-12
+          .container.mb-3
+            %h3{style: "padding-top: 15px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} 
+              %u Cheko AI
+            %p FREE
+  
+.col-xl-6.col-lg-6.col-md-6.col-sm-12{style: "padding: 2em;"}
+    
+= render "users/shared/footer"
+
+    

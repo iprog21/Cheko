@@ -143,6 +143,14 @@
                         .field
                           = f.label "Task Manager", class: "form-label"
                           = f.select(:manager_id, @managers.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-select")
+                      .mb-3
+                        .field
+                          = f.label "Tutor", class: "form-label"
+                          = f.select(:tutor_id, @tutors.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-select")
+                      .mb-3
+                        .field
+                          = f.label "Sub Tutor", class: "form-label"
+                          = f.select(:sub_tutor_id, @tutors.collect{|l| [l.name, l.id]}, {include_blank: true }, class: "form-select")
                       - if @homework.tutor_id.present?
                         .mb-3
                           .field

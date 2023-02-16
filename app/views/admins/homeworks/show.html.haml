@@ -9,6 +9,7 @@
       .card-body
         .row.mt-3
           .col-6
+            %h5= "Order ID: #{@homework.id}"
             %h5 User:
             %p= @homework.user.name
           .col-6.text-end

@@ -3,7 +3,10 @@
   .row
     .alert.alert-primary{role: "alert"}
       .text-center
-        %h5 You can call or text us here: 0963 646 8276, you may also message us on Telegram, Viber or Whatsapp with the same number.
+        %h5 
+          You can call or text us here: 
+          %a{href: "tel: 0963 646 8276"} 0963 646 8276, 
+          you may also message us on Telegram, Viber or Whatsapp with the same number from 8am to 5pm.
         %h5 Alternatively, you may message us on FB or contact us through the form below:
   .row
     .col-10.ms-auto.me-auto
@@ -28,5 +31,5 @@
           .field
             .d-grid.gap-2
               = f.submit "Submit", class: "btn btn-lg btn-warning text-white"
-
+  .col-xl-6.col-lg-6.col-md-6.col-sm-12{style: "padding: 4em;"}
 = render "users/shared/footer"

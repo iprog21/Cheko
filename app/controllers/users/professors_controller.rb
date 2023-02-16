@@ -46,6 +46,9 @@ class Users::ProfessorsController < Users::UserAppController
         new_prof.set_up_email
       end
 
+      user = current_user
+      ProfToPickJob.set(wait: 2.seconds).perform_later("review_recieved", user)
+      
       redirect_to users_professors_path
     end
 

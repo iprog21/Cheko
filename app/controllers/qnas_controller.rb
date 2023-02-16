@@ -47,8 +47,11 @@ class QnasController < ApplicationController
 
     tutors = Tutor.all
     tutors.each do |tutor|
-      QnaJob.set(wait: 2.seconds).perform_later("new_qna", tutor)
+      QnaJob.set(wait: 2.seconds).perform_later("new_qna", tutor, @qna)
     end
+
+    tutor = Tutor.first
+    QnaJob.set(wait: 2.seconds).perform_later("booked_order", tutor, @qna)
 
     redirect_to qna_path(@qna.id)
   end

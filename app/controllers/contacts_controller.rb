@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
   def create
-    Contact.create(contact_params)
+    @contact = Contact.create(contact_params)
+    ApplicationMailer.contact_email(@contact).deliver_now
     redirect_to root_path
   end
 

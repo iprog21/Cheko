@@ -3,7 +3,7 @@ class HomeworkMailer < ApplicationMailer
 
   def notify_admin
     @homework = params[:homework]
-    mail(to: "bret.encienzo.28@gmail.com", subject: 'New Order')
+    mail(to: "daveuygongco@gmail.com", subject: "HW-Help Order #{@homework.id}")
   end
 
   def notify_user
@@ -13,7 +13,7 @@ class HomeworkMailer < ApplicationMailer
 
   def finish_notify
     @homework = params[:homework]
-    mail(to: @homework.user.email, subject: 'Order has been completed')
+    mail(to: @homework.user.email, subject: "HW-Help Order #{@homework.id} - Completed")
   end
 
   def notify_tm
@@ -28,12 +28,28 @@ class HomeworkMailer < ApplicationMailer
 
   def admin_notify
     @homework = params[:homework]
-    mail(to: @homework.admin.email, subject: 'A tutor has uploaded a file' )
+    mail(to: @homework.admin.email, subject: "HW-Help Order #{@homework.id} - Task Submitted" )
   end
   
   def homework_notify_tm
     @homework = params[:homework]
-    mail(to: @homework.manager.email, subject: 'A tutor has uploaded a file')
+    mail(to: @homework.manager.email, subject: "HW-Help Order #{@homework.id} - Task Submitted")
   end
 
+  def new_order(admin)
+    @homework = params[:homework]
+    @admin = admin
+    mail(to: @admin.email, subject: "HW-Help Order #{@homework.id}")
+  end
+
+  def tutor_bid(admin)
+    @homework = params[:homework]
+    @admin = admin
+    mail(to: @admin.email, subject: "HW-Help Order #{@homework.id} - Bid")
+  end
+
+  def booked_order
+    @homework = params[:homework]
+    mail(to: @homework.user.email, subject: "HW-Help Order #{@homework.id} - Processing")
+  end
 end

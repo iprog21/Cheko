@@ -26,17 +26,17 @@
               .field
                 = f.label :school
                 = f.text_field :school, class: "form-control", required: true
-            .mb-3
-              .field
-                = f.label :college
-                = f.text_field :college, class: "form-control", required: true
+            -# .mb-3
+            -#   .field
+            -#     = f.label :college
+            -#     = f.text_field :college, class: "form-control", required: true
             .mb-3
               .row.field
                 .col-6
                   = f.label :course
                   = f.text_field :course, class: "form-control", required: true
                 .col-6
-                  = f.label :year
+                  = f.label :year, "School Year"
                   = f.text_field :year, class: "form-control", required: true
             .mb-3
               .field

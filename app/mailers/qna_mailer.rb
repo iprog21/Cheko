@@ -4,11 +4,18 @@ class QnaMailer < ApplicationMailer
 
   def notify_user
     @qna = params[:qna]
-    mail(to: @qna.user.email, subject: "A Q and A is picked up by a tutor")
+    mail(to: @qna.user.email, subject: "Q&A Order #{@qna.id} - Accepted")
   end
 
   def new_qna(tutor)
-    mail(to: tutor.email, subject: "New Question")
+    @qna = params[:qna]
+    @tutor = tutor
+    mail(to: tutor.email, subject: "Q&A Order #{@qna.id} - Available")
+  end
+
+  def booked_order
+    @qna = params[:qna]
+    mail(to: @qna.user.email, subject: "Q&A Order #{@qna.id} - Processing")
   end
 
 end

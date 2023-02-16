@@ -16,16 +16,16 @@
       .card-body
         .row.mt-3
           .col-6
-            %h5= "Client: #{@homework.user.name}"
+            -# %h5= "Client: #{@homework.user.name}"
           -if @homework.tutor_id == current_tutor.id
             .col-6.text-end
               %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
                 Files
-              = link_to "Finish Homework", tutors_homework_finish_homework_path(@homework.id), class: "btn btn-success #{'disabled' if @homework.status == 'finished_by_tutor'}"
+              = link_to "Submit for Approval", tutors_homework_finish_homework_path(@homework.id), class: "btn btn-success #{'disabled' if @homework.status == 'finished_by_tutor'}"
         .row.mt-3
           .col-6
             %h5 Deadline:
-            %p= @homework.deadline
+            %p= @homework.internal_deadline
           .col-6
             %h5 Subject:
             %p= @homework.subject_id.present? ? @homework.subject.name : "None Provided"
@@ -35,6 +35,9 @@
           .col-6
             %h5 Target Grade:
             %p= @homework.grade
+          .col-6
+            %h5 Tutor Category:
+            %p= format_category(@homework)
           - if @homework.hw_attachment.attached?
             .row
               .col-12

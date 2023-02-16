@@ -61,7 +61,7 @@ class Admins::HomeworksController < ApplicationController
     #send email all tutors that new homework is up for bidding
     tutors = Tutor.all 
     tutors.each do |tutor|
-      NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
+      NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor, @homework)
     end
 
     redirect_to admins_homeworks_path #, notice: "Successfully assigned"
@@ -71,11 +71,15 @@ class Admins::HomeworksController < ApplicationController
     bid = Bid.find(params[:bid_id])
     @homework.assign_tutor(bid)
     
+    
     # if @homework.price.present? && @homework.tutor_price.present?
     #   @homework.calculate_profit
     # end
     name = "#{@homework.user.first_name[0,1].capitalize}#{@homework.user.last_name[0,1].capitalize}_#{@homework.subject}##{@homework.deadline.strftime("%b%m")}_#{@homework.tutor.first_name[0,1].capitalize}#{@homework.tutor.last_name[0,1].capitalize}"
     @homework.update(name: name)
+    
+    tutor = Tutor.find(bid.tutor_id)
+    NotifyTutorJob.set(wait: 2.seconds).perform_later("approved_bid", tutor, @homework)
 
     redirect_to admins_homeworks_path
   end

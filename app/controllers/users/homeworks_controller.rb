@@ -24,20 +24,22 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def create
-    @admin = Admin::where(status: 1).first
+    @admin = Admin::where(role: 1, status: 1).first
     @homework = current_user.homeworks.new(homework_params)
 
     if @homework.save
       #assign admin_id
       @homework.update(admin_id: @admin.id)
 
-      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Admin")
+      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "NewOrder")
+      # HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Admin")
 
-      team_managers = Manager.all
-      team_managers.each do |team_manager|
-        NotifyTmMailerJob.set(wait: 2.seconds).perform_later("new_order", team_manager)
-      end
+      # team_managers = Manager.all
+      # team_managers.each do |team_manager|
+      #   NotifyTmMailerJob.set(wait: 2.seconds).perform_later("new_order", team_manager)
+      # end
 
+      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "BookedOrder")
       redirect_to users_homeworks_path
     else
       render 'new'
@@ -75,15 +77,17 @@ class Users::HomeworksController < Users::UserAppController
   end
 
   def submit_homework
-    @admin = Admin::where(status: 1).first
+    @admin = Admin::where(role: 1, status: 1).first
     @homework = Homework.update(@homework.id, status: "reviewing", admin_id: @admin.id)
 
-    HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Admin")
-    #send email all tutors that new homework is up for bidding
-    tutors = Tutor.all 
-    tutors.each do |tutor|
-      NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
-    end
+    HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "NewOrder")
+    # #send email all tutors that new homework is up for bidding
+    # tutors = Tutor.all 
+    # tutors.each do |tutor|
+    #   NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
+    # end
+
+    HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "BookedOrder")
 
     redirect_to users_homeworks_path
   end

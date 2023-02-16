@@ -41,6 +41,7 @@ class Tutors::HomeworksController < ApplicationController
   def bid
     if @homework.bids.create(ammount: params[:ammount], tutor_id: current_tutor.id).valid?
       flash[:success] = "Bid successfully added."
+      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "TutorBid")
     else
       flash[:alert] = "Bid amount exceeded!"
     end
@@ -57,7 +58,6 @@ class Tutors::HomeworksController < ApplicationController
       redirect_to tutors_homework_path(@homework)
     end
   end
-
 
   def finish_homework
     @homework = Homework.find(params[:homework_id])
