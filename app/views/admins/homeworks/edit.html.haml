@@ -58,6 +58,10 @@
                       .field
                         = f.label :price, class: "form-label"
                         = f.number_field :price, class: "form-control", min: 0, value: @homework.price
+                    .mb-3
+                      .field 
+                        = f.label :min_bid, "Budget", class: "form-label"
+                        = f.number_field :min_bid, class: "form-control", min: 0, value: @homework.min_bid
                     .mb-3 
                       .field
                         %h5 Estimate Price

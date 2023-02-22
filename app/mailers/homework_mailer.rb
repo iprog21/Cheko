@@ -52,4 +52,9 @@ class HomeworkMailer < ApplicationMailer
     @homework = params[:homework]
     mail(to: @homework.user.email, subject: "HW-Help Order #{@homework.id} - Processing")
   end
+
+  def admin_upload
+    @homework = params[:homework]
+    mail(to: @homework.user.email, subject: "HW-Help Order #{@homework.id} - Update")
+  end
 end

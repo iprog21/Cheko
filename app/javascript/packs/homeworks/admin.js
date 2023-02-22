@@ -174,3 +174,9 @@ $('#homework_tutor_skills2').on('change', function(){
     $('#testEstimate').html( '₱' + new_price )
   }
 })
+
+$('#homework_min_bid').on('click',function(){
+  var min_bid = $('#testEstimate').text().split('₱')
+  console.log(min_bid[1]);
+  $('#homework_min_bid').val(parseInt(min_bid[1]))
+})
