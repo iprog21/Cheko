@@ -8,7 +8,7 @@ require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
 
-require("@popperjs/core");
+require("@popperjs/core/lib/popper.js");
 
 import "bootstrap";
 import "datatables.net-dt/css/jquery.dataTables.css";
