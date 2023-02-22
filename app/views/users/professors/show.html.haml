@@ -84,17 +84,18 @@
     .card-body
       .row.mb-3
         .col-6.text-start
-          %h4 Student Reviews
+          %h4 
+            Student Reviews
+            %i.fa-regular.fa-eye.btn-default.pointer
+            %i.fa-regular.fa-eye-slash.btn-default.pointer.hidden-rating
       - @reviews.each do |rev|
         .row.mb-3
           .col-6
             %h6
               = "#{rev.user.first_name.first}#{rev.user.last_name.first}"
-              %i.fa-regular.fa-eye.btn-default.pointer
-              %i.fa-regular.fa-eye-slash.btn-default.pointer.hidden-rating
             %p.text-muted= rev.created_at 
             %p= rev.content
-          .col-6#individual.hidden-rating
+          .col-6.individual.hidden-rating
             %h5 Individual Rating
             .col-12.mt-3
               .progress.bg-cheko{style: "height: 30px"}
