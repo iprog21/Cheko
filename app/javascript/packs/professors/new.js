@@ -186,3 +186,15 @@ $("#prof_review_additional_metric_grade").on("input", function(){
   $('#additional_metric').empty()
   $('#additional_metric').append(letter_grade)
 })
+
+$('.fa-eye').on("click", function(){
+  $(".individual").removeClass("hidden-rating")
+  $(".fa-eye-slash").removeClass("hidden-rating")
+  $(".fa-eye").addClass("hidden-rating")
+})
+
+$('.fa-eye-slash').on("click", function(){
+  $(".individual").addClass("hidden-rating")
+  $(".fa-eye-slash").addClass("hidden-rating")
+  $(".fa-eye").removeClass("hidden-rating")
+})
