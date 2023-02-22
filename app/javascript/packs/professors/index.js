@@ -111,6 +111,8 @@ document.getElementById("myInput").addEventListener("keyup", async function(e) {
 
   autocomplete(document.getElementById("myInput"), data.profs);
 });
+
+console.log("test")
 // console.log(profs)
 // console.log(profs[0][1])
 // autocomplete(document.getElementById("myInput"), profs);
