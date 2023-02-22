@@ -88,6 +88,7 @@
               .row.mt-3
                 .col-6 
                   %h5= "Tutors Interested: #{@bids.count}"
+                  %h6= "Bid Budget: #{@homework.min_bid}"
                 .col-6.text-end
                   - if @bid.present?
                     = link_to "Update Bid - #{@bid.ammount}", tutors_homework_edit_bid_path(@homework.id), class: "btn btn-primary"

@@ -29,6 +29,8 @@ class HomeworkMailerJob < ApplicationJob
       admins.each do |admin|
         HomeworkMailer.with(homework: @homework).tutor_bid(admin).deliver_now
       end
+    elsif type = "AdminUpload"
+      HomeworkMailer.with(homework: @homework).admin_upload.deliver_now
     end
   end
 end

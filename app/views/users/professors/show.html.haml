@@ -90,10 +90,11 @@
           .col-6
             %h6
               = "#{rev.user.first_name.first}#{rev.user.last_name.first}"
-              -# %i#see_rating.fa-regular.fa-eye.btn-default.pointer
+              %i.fa-regular.fa-eye.btn-default.pointer
+              %i.fa-regular.fa-eye-slash.btn-default.pointer.hidden-rating
             %p.text-muted= rev.created_at 
             %p= rev.content
-          .col-6
+          .col-6#individual.hidden-rating
             %h5 Individual Rating
             .col-12.mt-3
               .progress.bg-cheko{style: "height: 30px"}

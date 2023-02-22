@@ -92,6 +92,7 @@ class Admins::HomeworksController < ApplicationController
 
   def upload
     @homework.documents.create(file: params[:document][:file], documentable_id: current_admin.id, documentable_type: current_admin.class.name)
+    HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "AdminUpload")
     redirect_to admins_homeworks_path(@homework_id)
   end
 
@@ -104,9 +105,9 @@ class Admins::HomeworksController < ApplicationController
   def homework_params
     if params[:homework][:deadline].present?
       deadline = DateTime.strptime(params[:homework][:deadline], "%m/%d/%Y, %I:%M %p")
-      params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_subject, :subject, :internal_deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples, :tutor_skills, :name).merge(deadline: deadline)
+      params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_subject, :subject, :internal_deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples, :tutor_skills, :name, :min_bid).merge(deadline: deadline)
     else
-      params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_subject, :subject, :internal_deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples, :tutor_skills, :name)
+      params.require(:homework).permit(:admin_id, :manager_id, :tutor_id, :sub_tutor_id, :price, :additional, :internal_subject, :subject, :internal_deadline, :details, :priority, :tutor_price, :view_bidders, :login_school, :tutor_samples, :tutor_skills, :name, :min_bid)
     end
   end
 end
