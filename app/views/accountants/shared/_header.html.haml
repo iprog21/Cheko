@@ -10,14 +10,14 @@
           %a.nav-link{href: accountants_homeworks_path} Homeworks
       %ul.navbar-nav.ms-auto.mb-2.mb-lg-0
         %li.nav-item.dropdown
-          %a#navbarDropdown.nav-link.active.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}= current_admin.first_name
+          %a#navbarDropdown.nav-link.active.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}= current_accountant.first_name
           %ul.dropdown-menu.dropdown-menu-end{"aria-labelledby" => "navbarDropdown"}
             -# %li
             -#   %a.dropdown-item{href: "#"} Profile
             -# %li
             -#   %hr.dropdown-divider/
             %li
-              %a.dropdown-item{href: destroy_admin_session_path, data: {method: :delete}} Log out
+              %a.dropdown-item{href: destroy_accountant_session_path, data: {method: :delete}} Log out
       -# %form.d-flex
       -#   %input.form-control.me-2{"aria-label" => "Search", placeholder: "Search", type: "search"}/
       -#   %button.btn.btn-outline-success{type: "submit"} Search

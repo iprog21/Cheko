@@ -46,16 +46,16 @@
                 .col-3.text-end
                   = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'),class: "btn btn-success"
               %hr
-          .container-flex.mt-2
-            %h6 
-              %strong Quality Control Officer files:
-            - @qco.each do |docu|
-              .row.d-flex.justify-content-between
-                .col-3
-                  = docu.file.filename
-                .col-3.text-end
-                  = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'),class: "btn btn-success"
-              %hr
+          -# .container-flex.mt-2
+          -#   %h6 
+          -#     %strong Quality Control Officer files:
+          -#   - @qco.each do |docu|
+          -#     .row.d-flex.justify-content-between
+          -#       .col-3
+          -#         = docu.file.filename
+          -#       .col-3.text-end
+          -#         = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'),class: "btn btn-success"
+          -#     %hr
       .modal-footer
         %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Close
 
