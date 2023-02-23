@@ -65,7 +65,8 @@
                     .mb-3 
                       .field
                         %h5 Estimate Price
-                        %h4#testEstimate
+                        %h4#testEstimate 
+                          = @homework.price.present? ? @homework.price : ""
                     .row
                       .col-4
                         = label_tag :priority, "Priority? +30%"

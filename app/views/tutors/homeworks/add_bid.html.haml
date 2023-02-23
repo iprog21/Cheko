@@ -30,7 +30,7 @@
         .row 
           .col-xl-6.col-lg-8.col-md-10.col-sm-12.ms-auto.me-auto 
             %h5= "Add Bid #{@homework.order_type.titleize}"
-            %h6= "Bid Budget: #{@homework.min_bid}"
+            %h6= "Starting Bid: #{@homework.min_bid}"
         .row
           .col-xl-6.col-lg-8.col-md-10.col-sm-12.ms-auto.me-auto 
             = form_tag(tutors_homework_bid_path) do

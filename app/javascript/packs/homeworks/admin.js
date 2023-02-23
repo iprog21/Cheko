@@ -89,7 +89,14 @@ if ($('#homework_words').length){
     $('#testEstimate').html( '₱' + new_price )
   })
 } else {
-  var def_price = parseInt(1000);
+  var price = $('#homework_price').val();
+  var def_price;
+  if(price.length > 0){
+    def_price = parseInt(price);
+  }
+  else{
+    def_price = parseInt(1000);
+  }
   
   new_price = def_price
   prio = Math.round(( .30 * def_price));
