@@ -85,15 +85,13 @@
         .col-sm-12.col-md-6.text-start
           %h4 
             Student Reviews
-            %i.fa-regular.fa-eye.btn-default.pointer
-            %i.fa-regular.fa-eye-slash.btn-default.pointer.hidden-rating
+            %i.fa-regular.fa-eye.btn-default.pointer{"aria-describedby" => "tooltip", "data-bs-content" => "Show All Individual Ratings", "data-bs-toggle" => "popover", :type => "button", "data-bs-trigger" => "hover", "data-bs-placement"=>"right"}
+            %i.fa-regular.fa-eye-slash.btn-default.pointer.hidden-rating{"aria-describedby" => "tooltip", "data-bs-content" => "Hide All Individual Ratings", "data-bs-toggle" => "popover", :type => "button", "data-bs-trigger" => "hover", "data-bs-placement"=>"right"}
       - @reviews.each do |rev|
         .row.mb-3
           .col-6
             %h6
               = "#{rev.user.first_name.first}#{rev.user.last_name.first}"
-              %i.fa-regular.fa-eye.btn-default.pointer
-              %i.fa-regular.fa-eye-slash.btn-default.pointer.hidden-rating
             %p.text-muted= rev.created_at 
             %p= rev.content
           .col-6.individual.hidden-rating
