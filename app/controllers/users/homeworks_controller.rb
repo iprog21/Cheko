@@ -13,6 +13,7 @@ class Users::HomeworksController < Users::UserAppController
     @tutor = @homework.documents.where(documentable_type: "Tutor")
     @qco = @homework.documents.where(documentable_type: "QualityOfficer")
     @admin = @homework.documents.where(documentable_type: "Admin")
+    @manager = @homework.documents.where(documentable_type: "Manager")
   end
 
   def new

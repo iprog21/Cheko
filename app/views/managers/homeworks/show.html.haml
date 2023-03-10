@@ -11,6 +11,12 @@
           .col-12.text-end
             %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
               Files
+            -if @homework.status == "finished_by_tutor"
+              %a.btn.btn-success.fload-end{href: managers_homework_approve_path(@homework.id), data: {method: :put}} Approve Order
+          .col-6
+            %h5= "Order ID: #{@homework.id}"
+            %h5= "User: #{@homework.user.name}"
+            %br
           .col-12
             %h5 Details:
             %p= @homework.details
@@ -46,6 +52,28 @@
                 .col-3.text-end
                   = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'),class: "btn btn-success"
               %hr
+          .container-flex.mt-2
+            .row-mt.3
+              %h5
+                %strong Manager Files:
+              =form_for @homework.documents.new, url: managers_homework_upload_path(homework_id: @homework.id) do |f|
+                .row.d-flex.justify-content-between
+                  .col-12
+                  .col-10
+                    = f.file_field "file", class: "form-control"
+                  .col-2.text-end
+                    = submit_tag "Upload", class: "btn btn-primary disabled", id: "uploadButton"
+                .row.mt-3
+                  %h5 Uploaded Files:
+                  .container-flex.mt-2
+                    - @manager.each do |docu|
+                      .row.d-flex.justify-content-between
+                        .col-3
+                          = docu.file.filename
+                        .col-3.text-end
+                          = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'), class: "btn btn-success"
+                      %hr  
+
           -# .container-flex.mt-2
           -#   %h6 
           -#     %strong Quality Control Officer files:
@@ -58,5 +86,5 @@
           -#     %hr
       .modal-footer
         %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Close
-
+= javascript_pack_tag 'managers/homework'
     

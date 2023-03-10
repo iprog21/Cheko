@@ -92,9 +92,8 @@ class Admins::HomeworksController < ApplicationController
 
   def upload
     @homework.documents.create(file: params[:document][:file], documentable_id: current_admin.id, documentable_type: current_admin.class.name)
-    # HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "AdminUpload")
-    HomeworkMailer.with(homework: @homework).admin_upload.deliver_now
-    redirect_to admins_homeworks_path(@homework_id)
+    HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "AdminUpload")
+    redirect_to admins_homework_path(@homework.id)
   end
 
   private 

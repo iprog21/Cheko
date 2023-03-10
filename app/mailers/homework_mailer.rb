@@ -8,7 +8,7 @@ class HomeworkMailer < ApplicationMailer
 
   def notify_user
     @homework = params[:homework]
-    mail(to: @homework.user.email, subject: 'Tutor has uploaded')
+    mail(to: @homework.user.email, subject: "HW-Help Order #{@homework.id}")
   end
 
   def finish_notify
@@ -57,4 +57,25 @@ class HomeworkMailer < ApplicationMailer
     @homework = params[:homework]
     mail(to: @homework.user.email, subject: "HW-Help Order #{@homework.id} - Update")
   end
+
+  def manager_upload
+    @homework = params[:homework]
+    mail(to: @homework.user.email, subject: "HW-Help Order #{@homework.id} - Completed")
+  end
+
+  def notify_manager
+    @homework = params[:homework]
+    mail(to: @homework.manager.email, subject: "HW-Order #{@homework.id} - For Approval")
+  end
+
+  def manager_approved
+    @homework = params[:homework]
+    mail(to: @homework.tutor.email, subject: "HW-Order #{@homework.id} - Approved" )
+  end
+  
+  def for_admin_approval
+    @homework = params[:homework]
+    mail(to: @homework.admin.email, subject: "HW-Order #{@homework.id} - For Approval")
+  end
+
 end

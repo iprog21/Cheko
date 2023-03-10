@@ -16,13 +16,13 @@
         %br/
         .form-check
           = f.radio_button :tutor_category, "a_plus", class: "form-check-input", "data-bal" => 3
-          = f.label :tutor_category, "A-List Writers ; B+ to A", :value => "a_plus", class: "form-check-label"
+          = f.label :tutor_category, "Best Writers (₱3 per word)", :value => "a_plus", class: "form-check-label"
         .form-check
           = f.radio_button :tutor_category, "cheko", class: "form-check-input", "data-bal" => 2
-          = f.label :tutor_category, "Cheko+ Writers ; B to A", :value => "cheko", class: "form-check-label"
+          = f.label :tutor_category, "Great Writers (₱2 per word)", :value => "cheko", class: "form-check-label"
         .form-check
           = f.radio_button :tutor_category, "standard", class: "form-check-input", checked: true, "data-bal" => 1
-          = f.label :tutor_category, "Standard Writers ; C to A", :value => "standard", class: "form-check-label"
+          = f.label :tutor_category, "Standard Writers (₱1 per word)", :value => "standard", class: "form-check-label"
     
   %h3 Details
   %stuff
@@ -57,17 +57,17 @@
             %span.fas.fa-calendar
     .mb-3.d-flex.flex-row
       .container.p-1
-        = label_tag :view_skill, "View tutor's skill profile for P100"
+        = label_tag :view_skill, "View tutor's skill profile for ₱100"
         .form-check.form-switch
           = check_box_tag "homework[tutor_skills]", true, false, class: "form-check-input"
       
       .container.p-1
-        = label_tag :view_sample, "View tutor's sample works for P100"
+        = label_tag :view_sample, "View tutor's sample works for ₱100"
         .form-check.form-switch
           = check_box_tag "homework[tutor_samples]", true, false, class: "form-check-input"
 
       .container.p-1
-        = label_tag :view_bidders, "View all bidders, their skill profiles and their sample works for P300"
+        = label_tag :view_bidders, "View all bidders, their skill profiles and their sample works for ₱300"
         .form-check.form-switch
           = check_box_tag "homework[view_bidders]", true, false, class: "form-check-input"
           

@@ -52,17 +52,17 @@
         = f.select :payment_type, options_for_select([["GCash" , "gcash" ], ["Bank Transfer" , "bank" ]], selected: :payment_type), {include_blank: false} , class: "form-select"
     .mb-3.d-flex.flex-row
       .container.p-1
-        = label_tag :view_skill, "View tutor's skill profile for P100"
+        = label_tag :view_skill, "View tutor's skill profile for ₱100"
         .form-check.form-switch
           = check_box_tag "homework[tutor_skills]", true, false, class: "form-check-input"
       
       .container.p-1
-        = label_tag :view_sample, "View tutor's sample works for P100"
+        = label_tag :view_sample, "View tutor's sample works for ₱100"
         .form-check.form-switch
           = check_box_tag "homework[tutor_samples]", true, false, class: "form-check-input"
 
       .container.p-1
-        = label_tag :view_bidders, "View all bidders, their skill profiles and their sample works for P300"
+        = label_tag :view_bidders, "View all bidders, their skill profiles and their sample works for ₱300"
         .form-check.form-switch
           = check_box_tag "homework[view_bidders]", true, false, class: "form-check-input"
           

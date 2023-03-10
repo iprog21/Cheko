@@ -88,16 +88,16 @@
       .modal-body
         .row.mt-3
           %h5 Uploaded files
-          .container-flex.mt-2
-            %h6 
-              %strong Tutor files:
-            - @tutor.each do |docu|
-              .row.d-flex.justify-content-between
-                .col-3
-                  = docu.file.filename
-                .col-3.text-end
-                  = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'),class: "btn btn-success"
-              %hr
+          -# .container-flex.mt-2
+          -#   %h6 
+          -#     %strong Tutor files:
+          -#   - @tutor.each do |docu|
+          -#     .row.d-flex.justify-content-between
+          -#       .col-3
+          -#         = docu.file.filename
+          -#       .col-3.text-end
+          -#         = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'),class: "btn btn-success"
+          -#     %hr
           -# .container-flex.mt-2
           -#   %h6 
           -#     %strong Quality Control Officer files:
@@ -110,12 +110,22 @@
           -#     %hr
           .contain-flex.mt-2 
             %h6
-              %strong Admin Files:
+              -# %strong Admin Files:
             - @admin.each do |docu|
               .row.d-flex.justify-content-between
                 .col-3
                   = docu.file.filename
                 .col-3.text-end 
+                  = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'), class: "btn btn-success"
+              %hr
+          .contain-flex.mt-2
+            %h6
+              -# %strong Manager Files:
+            - @manager.each do |docu|
+              .row.d-flex.justify-content-between 
+                .col-3
+                  = docu.file.filename
+                .col-3.text-end
                   = link_to "Download File", rails_blob_path(docu.file, disposition: 'attachment'), class: "btn btn-success"
               %hr
       .modal-footer

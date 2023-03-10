@@ -97,7 +97,10 @@ Rails.application.routes.draw do
   end
 
   namespace :managers do
-    resources :homeworks, only: [:index, :show, :update], on: :collection
+    resources :homeworks, only: [:index, :show, :update, :edit], on: :collection do
+      post :upload
+      put :approve
+    end
     resources :chats, only: [:index]
     get '/', to: 'dashboard#home'
   end
@@ -109,7 +112,7 @@ Rails.application.routes.draw do
       post :bid
       put :update_bid
       post :upload
-      get :finish_homework
+      put :finish_homework
     end
 
     resources :qnas, only: [:index, :show] do
