@@ -28,12 +28,9 @@ class Users::Auth::RegistrationsController < Devise::RegistrationsController
           hw.update(admin_id: admin.id)
 
           HomeworkMailerJob.set(wait: 2.seconds).perform_later(hw, "Admin")
+          HomeworkMailerJob.set(wait: 2.seconds).perform_later(hw, "NewOrder")
 
-          #send email all tutors that new homework is up for bidding
-          tutors = Tutor.all 
-          tutors.each do |tutor|
-            NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor)
-          end
+          HomeworkMailerJob.set(wait: 2.seconds).perform_later(hw, "BookedOrder")
 
           logger.info "\n\n\n IT REACHED HERE PART 1 \n\n\n"
 

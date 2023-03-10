@@ -51,7 +51,7 @@
                       - if msg.document.attached?
                         %div.ms-auto{style: "width: -moz-fit-content; width: fit-content"}
                           -# %a{href: msg.document} Document
-                          = link_to  "Download", rails_blob_path(msg.document, disposition: 'attachment')
+                          = link_to  "#{msg.document.blob.filename}", rails_blob_path(msg.document, disposition: 'attachment')
               - else 
                 .row.mt-3
                   .col-6.me-auto.text-white.rounded.pt-2
@@ -62,7 +62,7 @@
                       - if msg.document.attached?
                         %div.me-auto{style: "width: -moz-fit-content; width: fit-content"}
                           -# %a{href: msg.content} Document
-                          = link_to "Download", rails_blob_path(msg.document, disposition: 'attachment')
+                          = link_to "#{msg.document.blob.filename}", rails_blob_path(msg.document, disposition: 'attachment')
         .container#text-box.mt-3
           - if @qna.status == "assigned" || @qna.status == "pending"
             = form_for @message, url: qna_chat_messages_path(qna_id: @qna.id, chat_id: @qna.chat.id) do |f|
@@ -85,4 +85,3 @@
               -#   .col-8
               -#     = text_field_tag "content", "", class: "form-control"
 = javascript_pack_tag 'messages/new'
-

@@ -60,11 +60,19 @@ class Tutors::HomeworksController < ApplicationController
   end
 
   def finish_homework
-    @homework = Homework.find(params[:homework_id])
     @homework.update(status: "finished_by_tutor")
     flash[:success] = "Homework successfully submitted"
 
-    redirect_to tutors_homework_path(params[:homework_id])
+    #send notification to team manager or admin
+    if @homework.manager_id.present?
+      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "FinishedByTutor")
+      
+      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "ForAdminApproval")
+    else
+      HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "ForAdminApproval")
+    end
+
+    redirect_to tutors_homework_path(@homework.id)
   end
 
   private
