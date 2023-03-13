@@ -41,6 +41,12 @@ class Admins::HomeworksController < ApplicationController
 
     if work && @homework.admin_id.present? && @homework.status == "reviewing"
       @homework.accept_order
+
+      #send email all tutors that new homework is up for bidding
+      tutors = Tutor.all 
+      tutors.each do |tutor|
+        NotifyTutorJob.set(wait: 2.seconds).perform_later("new_order", tutor, @homework)
+      end
     end
 
     if params[:homework][:tutor_price].present?
@@ -87,6 +93,9 @@ class Admins::HomeworksController < ApplicationController
   def finish_homework
     @homework.finish_order
     HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Finish")
+
+    HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "ApprovedByManager")
+
     redirect_to admins_homeworks_path
   end
 

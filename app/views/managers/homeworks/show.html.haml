@@ -12,7 +12,7 @@
             %button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
               Files
             -if @homework.status == "finished_by_tutor"
-              %a.btn.btn-success.fload-end{href: managers_homework_approve_path(@homework.id), data: {method: :put}} Approve Order
+              %a.btn.btn-success.fload-end{href: managers_homework_approve_path(@homework.id), data: {method: :put}} Finish Order
           .col-6
             %h5= "Order ID: #{@homework.id}"
             %h5= "User: #{@homework.user.name}"
