@@ -52,7 +52,7 @@ class QnasController < ApplicationController
 
     tutor = Tutor.first
     
-    if @qna.email.present?
+    if @qna.user.present?
       QnaJob.set(wait: 2.seconds).perform_later("booked_order", tutor, @qna)
     end
 
