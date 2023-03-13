@@ -21,19 +21,21 @@
                     %thead
                       %tr
                         %th.text-start Id
+                        %th.text-start Task Code
                         %th.text-center Order Date
                         %th.text-center Order Type
                         %th.text-center Type
                         %th.text-center Deadline
                         %th.text-center Subject
                         %th.text-center Word count
-                        %th.text-center Priority
-                        %th.text-center Login School Account
-                        %th.text-center Client
-                        %th.text-center Order Number
-                        %th.text-center Hours Late
-                        %th.text-center Prof
-                        %th.text-center Grade
+                        -# %th.text-center Priority
+                        -# %th.text-center Login School Account
+                        -# %th.text-center Client
+                        -# %th.text-center Order Number
+                        -# %th.text-center Hours Late
+                        -# %th.text-center Prof
+                        -# %th.text-center Grade
+                        %th.text-center Task Level
                         %th.text-center Status
                         %th.text-end Action
                     %tbody
@@ -48,20 +50,23 @@
                     %thead
                       %tr
                         %th.text-start Id
+                        %th.text-start Name
                         %th.text-center Order Date
                         %th.text-center Order Type
                         %th.text-center Type
                         %th.text-center Deadline
                         %th.text-center Subject
                         %th.text-center Word count
-                        %th.text-center Priority
-                        %th.text-center Login School Account
-                        %th.text-center Client
-                        %th.text-center Order Number
-                        %th.text-center Hours Late
-                        %th.text-center Prof
-                        %th.text-center Grade
+                        -# %th.text-center Priority
+                        -# %th.text-center Login School Account
+                        -# %th.text-center Client
+                        -# %th.text-center Order Number
+                        -# %th.text-center Hours Late
+                        -# %th.text-center Prof
+                        -# %th.text-center Grade
+                        %th.text-center Task Level
                         %th.text-center Status
+                        %th.text-end Action
                     %tbody
                       =render partial: 'tutors/homeworks/history', collection: @history, as: :home
 
