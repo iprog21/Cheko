@@ -41,7 +41,7 @@ class Users::HomeworksController < Users::UserAppController
       # end
 
       HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "BookedOrder")
-      redirect_to users_homeworks_path
+      redirect_to users_homework_path(@homework.id), :alert => "Thanks for your order! Kindly message us through our chatbox on the lower right corner to confirm the price!"
     else
       render 'new'
     end
