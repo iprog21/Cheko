@@ -53,31 +53,30 @@
                       %td.text-end
                         %a{href: tutors_qna_path(qna)}
                           .fas.fa-eye.text-success.font-16.mr-3
-
--# .col-12.ms-auto.me-auto 
--#   .mt-5.mx-2
--#     %div{class: "card card-#{cookies[:theme]}" }
--#       .card-body
--#         .row 
--#           .col-6.text-start
--#             %h3 Tutor QnA - History
--#         %div{class: "table-responsive "}
--#           %table.datatableBasic
--#             %thead
--#               %tr
--#                 %th.text-start Order no.
--#                 %th.text-center Question
--#                 %th.text-center Subject
--#                 %th.text-end Action
--#             %tbody
--#               - @finish.each do |qna|
--#                 %tr
--#                   %td.text-start= qna.id
--#                   %td.text-center= qna.question
--#                   %td.text-center= qna.subject.titleize
--#                   %td.text-end
--#                     %a{href: users_qna_path(qna)}
--#                       .fas.fa-eye.text-success.font-16.mr-3
-
+  .row
+    .col-12.ms-auto.me-auto
+      .mt-5.mx-2
+        %div{class: "card card-#{cookies[:theme]}" }
+          .card-body
+            .row
+              .col-12.text-start
+                %h3 Q&A - History
+            %div{class: "table-responsive" }
+              %table.datatableBasic
+                %thead
+                  %tr
+                    %th.text-start Order no.
+                    %th.text-center Question
+                    %th.text-center Subject
+                    %th.text-end Action
+                %tbody
+                  - @history.each do |qna|
+                    %tr
+                      %td.text-start= qna.id
+                      %td.text-center= truncate(qna.question)
+                      %td.text-center= qna.subject.titleize
+                      %td.text-end
+                        %a{href: tutors_qna_path(qna)}
+                          .fas.fa-eye.text-success.font-16.mr-3
               
 = javascript_pack_tag 'datatable_basic'

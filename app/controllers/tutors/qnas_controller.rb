@@ -4,6 +4,7 @@ class Tutors::QnasController < ApplicationController
   def index
     @pending = Qna.where(status: "pending")
     @assigned = Qna.where(tutor_id: current_tutor.id, status: "assigned")
+    @history = Qna.where(tutor_id: current_tutor.id, status: "done")
   end
 
   def assign

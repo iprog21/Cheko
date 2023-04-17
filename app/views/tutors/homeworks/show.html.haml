@@ -24,6 +24,9 @@
               = link_to "Submit for Approval", tutors_homework_finish_homework_path(@homework.id), method: :put, class: "btn btn-success #{'disabled' if @homework.status == 'finished_by_tutor'}"
         .row.mt-3
           .col-6
+            %h5 Order Number:
+            %p= @homework.id
+          .col-6
             %h5 Deadline:
             %p= @homework.internal_deadline
           .col-6
