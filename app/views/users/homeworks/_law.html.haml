@@ -44,6 +44,9 @@
     .mb-3
       .field
         = label_tag :hw_attachments, "Files", class: "form-label"
+      .field.borders
+        %center
+          %strong Drag and Drop Files
         = f.file_field :hw_attachment, :multiple => true, class: "form-control"
   %h3 Payment 
   %stuff

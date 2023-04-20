@@ -15,6 +15,8 @@ class Managers::HomeworksController < ApplicationController
     @tutor = @homework.documents.where(documentable_type: "Tutor")
     @qco = @homework.documents.where(documentable_type: "QualityOfficer")
     @manager = @homework.documents.where(documentable_type: "Manager")
+
+    @bids = Bid.where(homework_id: @homework.id).order(ammount: :asc)
   end
 
   def edit
@@ -60,6 +62,20 @@ class Managers::HomeworksController < ApplicationController
     HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "ApprovedByManager")
 
     HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "Finish")
+    redirect_to managers_homework_path(@homework.id)
+  end
+
+  def assign_tutor
+    bid = Bid.find(params[:bid_id])
+    @homework.assign_tutor(bid)
+
+    name = "#{@homework.user.first_name[0,1].capitalize}#{@homework.user.last_name[0,1].capitalize}_#{@homework.subject}##{@homework.deadline.strftime("%b%m")}_#{@homework.tutor.first_name[0,1].capitalize}#{@homework.tutor.last_name[0,1].capitalize}"
+
+    @homework.update(name: name)
+
+    tutor = Tutor.find(bid.tutor_id)
+    NotifyTutorJob.set(wait: 2.seconds).perform_later("approved_bid", tutor, @homework)
+
     redirect_to managers_homework_path(@homework.id)
   end
 

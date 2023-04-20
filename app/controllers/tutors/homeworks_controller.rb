@@ -38,7 +38,6 @@ class Tutors::HomeworksController < ApplicationController
       else
       HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "NotifyAdmin")
     end
-    
     redirect_to tutors_homework_path(@homework.id)
   end
 

@@ -100,6 +100,7 @@ Rails.application.routes.draw do
     resources :homeworks, only: [:index, :show, :update, :edit], on: :collection do
       post :upload
       put :approve
+      put :assign_tutor
     end
     resources :chats, only: [:index]
     get '/', to: 'dashboard#home'
