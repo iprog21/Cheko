@@ -63,5 +63,5 @@ gem 'sidekiq', '~> 6.5.8'
 
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-gem 'ruby-openai'
+gem 'ruby-openai', '>= 3.7.0'
 gem 'dotenv-rails'
