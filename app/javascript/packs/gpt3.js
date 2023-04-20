@@ -1,4 +1,4 @@
-let currentDialogue = null; // Stores the current conversation.
+let currentDialogue = null; // Stores the current conversation. Messages[]
 let promptsCount = 0; // How many prompts have been sent so far?
 
 /**
@@ -19,11 +19,20 @@ function createChatBubble(content, sender) {
 const generateText = async (prompt) => {
   promptsCount++; // Increase prompt count
 
+  // Utils:
+  const chekoLoadingBubble = document.getElementById("cheko-loading-bubble");
+  function setLoading(bool) {
+    if (bool) {
+      chekoLoadingBubble.classList.remove("d-none"); // loading animation
+    } else {
+      chekoLoadingBubble.classList.add("d-none"); // loading animation
+    }
+  }
+
   // 1. Start requesting: Clear Chatbox, Disable Button, Play Loading Animation
   document.querySelector("textarea#prompt").value = ""; // clear
   document.getElementById("generate-btn").setAttribute("disabled", true); // disable
-  const chekoLoadingBubble = document.getElementById("cheko-loading-bubble");
-  chekoLoadingBubble.classList.remove("d-none"); // loading animation
+  setLoading(true); // loading animation
 
   // Scroll into view
   const scrollContainer = document.getElementsByClassName("card-body-top")[0];
@@ -36,13 +45,22 @@ const generateText = async (prompt) => {
   chatContainer.appendChild(createChatBubble(prompt, "user"));
 
   // 3. Send Prompt to Controller:
-  const response = await fetch("/gpt3/generate", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ prompt, currentDialogue }),
-  });
+  let response;
+
+  try {
+    response = await fetch("/gpt3/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt, currentDialogue }),
+    });
+  } catch (e) {
+    console.log(e);
+
+    setLoading(false);
+    return;
+  }
 
   const json = await response.json();
 
@@ -55,8 +73,8 @@ const generateText = async (prompt) => {
   );
 
   // 4. Maintain a string record of the current dialogue between the user and the chatbot.
-  currentDialogue = currentDialogue || "";
-  currentDialogue += json.new_dialogue + "\n";
+  currentDialogue = json.new_dialogue;
+  console.log(currentDialogue);
 
   // 5. Get response and add as a chat bubble:
   const chekoResponse = json.generated_text
@@ -67,7 +85,7 @@ const generateText = async (prompt) => {
 
   // 6. Finished Requesting: Re-enable button, turn off loading animation
   document.getElementById("generate-btn").removeAttribute("disabled");
-  chekoLoadingBubble.classList.add("d-none"); // loading animation
+  setLoading(false); // loading animation
 
   scrollContainer.scrollTop = scrollContainer.scrollHeight;
 
@@ -76,7 +94,7 @@ const generateText = async (prompt) => {
     // Need a better answer? Work with our tutors in HW-Help or Q&A.
     // chatContainer.append(createChatBubble(``,"cheko"))
 
-    chekoLoadingBubble.classList.remove("d-none"); // loading animation
+    setLoading(true); // loading animation
     setTimeout(() => {
       scrollContainer.scrollTop = scrollContainer.scrollHeight;
     }, 50);
@@ -85,7 +103,7 @@ const generateText = async (prompt) => {
       .then((data) => {
         setTimeout(() => {
           chatContainer.insertAdjacentHTML("beforeend", data);
-          chekoLoadingBubble.classList.add("d-none"); // loading animation
+          setLoading(false); // loading animation
           scrollContainer.scrollTop = scrollContainer.scrollHeight;
         }, 800);
       });
