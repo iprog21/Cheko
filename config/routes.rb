@@ -125,7 +125,7 @@ Rails.application.routes.draw do
     end
 
     resources :chats, only: [:index]
-    # get '/', to: 'dashboard#home'
+    get '/', to: 'homeworks#index'
   end
 
   namespace :users do 
