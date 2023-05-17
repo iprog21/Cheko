@@ -13,7 +13,7 @@ class Manager < ApplicationRecord
   end
 
   def create_agent
-    uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/agents')
+    uri = URI('https://chatwoot.chekohomeworkhelp.com/api/v1/accounts/1/agents')
     params = {
       name: self.name,
       email: self.email,
@@ -31,7 +31,7 @@ class Manager < ApplicationRecord
     http = Net::HTTP.new(uri.host, uri.port)
     req = Net::HTTP::Post.new(uri.request_uri)
     req.set_form_data(params)
-    req["api_access_token"] = "4E5F2zFPzMrpSbMZHMRAFHWL"
+    req["api_access_token"] = "Eg2NEZNp4BakhcoS1bPgCHGw"
     res = http.request(req)
     result = JSON.parse(res.body)
     
@@ -39,12 +39,12 @@ class Manager < ApplicationRecord
   end
 
   def assign_inbox
-    uri = URI('http://172.104.186.240:3000/api/v1/accounts/1/inbox_members')
+    uri = URI('https://chatwoot.chekohomeworkhelp.com/api/v1/accounts/1/inbox_members')
 
     http = Net::HTTP.new(uri.host, uri.port)
     req = Net::HTTP::Post.new(uri.request_uri)
     req.set_form_data({'index_id' => '1', 'users_id[0]' => "#{self.agent_id}"})
-    req["api_access_token"] = "4E5F2zFPzMrpSbMZHMRAFHWL"
+    req["api_access_token"] = "Eg2NEZNp4BakhcoS1bPgCHGw"
     res = http.request(req)
     result = JSON.parse(res.body)
     logger.info "\n\n #{result}\n\n"
@@ -59,7 +59,7 @@ class Manager < ApplicationRecord
     http = Net::HTTP.new(uri.host, uri.port)
     req = Net::HTTP::Delete.new(uri.request_uri)
     req.set_form_data(params)
-    req["api_access_token"] = "4E5F2zFPzMrpSbMZHMRAFHWL"
+    req["api_access_token"] = "Eg2NEZNp4BakhcoS1bPgCHGw"
     res = http.request(req)
   end
 end
