@@ -97,7 +97,7 @@
                             = check_box_tag "homework[login_school]", true, false, class: "form-check-input", id: "homework_login_school2", checked: @homework.login_school
                         .mb-3
                           .actions
-                            = f.submit "Update", class: "btn btn-primary"
+                            = f.submit "Update Homework", class: "btn btn-primary"
           .col-xl-6.col-lg-6.col-sm-12
             .card 
               .card-body
@@ -142,5 +142,5 @@
                           = f.text_field :name, class: "form-control"
                       .mb-3
                         .actions
-                          = f.submit "Update", class: "btn btn-primary"
+                          = f.submit "Update Personnel", class: "btn btn-primary"
 = javascript_pack_tag 'homeworks/admin'
