@@ -36,7 +36,9 @@ class Homework < ApplicationRecord
   def accept_order
     # logger.info "\n \n #{self.name}"
     self.status = "ongoing"
-    self.name = "#{self.user.first_name[0,1].capitalize}#{self.user.last_name[0,1].capitalize}_#{self.subject}##{self.deadline.strftime("%b%m")}_#{self.admin.first_name[0,1].capitalize}#{self.admin.last_name[0,1].capitalize}"
+    if !self.name.present?
+      self.name = "#{self.user.first_name[0,1].capitalize}#{self.user.last_name[0,1].capitalize}_#{self.subject}##{self.deadline.strftime("%b%m")}_#{self.admin.first_name[0,1].capitalize}#{self.admin.last_name[0,1].capitalize}"
+    end
     self.save
   end
 

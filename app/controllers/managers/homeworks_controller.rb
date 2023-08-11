@@ -40,8 +40,10 @@ class Managers::HomeworksController < ApplicationController
     end
 
     if @homework.tutor_id.present?
-      name = "#{@homework.user.first_name[0,1].capitalize}#{@homework.user.last_name[0,1].capitalize}_#{@homework.subject}##{@homework.deadline.strftime("%b%m")}_#{@homework.tutor.first_name[0,1].capitalize}#{@homework.tutor.last_name[0,1].capitalize}"
-      @homework.update(name: name)
+      if !@homework.name.present?
+        name = "#{@homework.user.first_name[0,1].capitalize}#{@homework.user.last_name[0,1].capitalize}_#{@homework.subject}##{@homework.deadline.strftime("%b%m")}_#{@homework.tutor.first_name[0,1].capitalize}#{@homework.tutor.last_name[0,1].capitalize}"
+        @homework.update(name: name)
+      end
 
       tutor = Tutor.find(@homework.tutor_id)
       NotifyTutorJob.set(wait: 2.seconds).perform_later("approved_bid", tutor, @homework)
@@ -69,9 +71,11 @@ class Managers::HomeworksController < ApplicationController
     bid = Bid.find(params[:bid_id])
     @homework.assign_tutor(bid)
 
-    name = "#{@homework.user.first_name[0,1].capitalize}#{@homework.user.last_name[0,1].capitalize}_#{@homework.subject}##{@homework.deadline.strftime("%b%m")}_#{@homework.tutor.first_name[0,1].capitalize}#{@homework.tutor.last_name[0,1].capitalize}"
+    if !@homework.name.present?
+      name = "#{@homework.user.first_name[0,1].capitalize}#{@homework.user.last_name[0,1].capitalize}_#{@homework.subject}##{@homework.deadline.strftime("%b%m")}_#{@homework.tutor.first_name[0,1].capitalize}#{@homework.tutor.last_name[0,1].capitalize}"
 
-    @homework.update(name: name)
+      @homework.update(name: name)
+    end
 
     tutor = Tutor.find(bid.tutor_id)
     NotifyTutorJob.set(wait: 2.seconds).perform_later("approved_bid", tutor, @homework)
