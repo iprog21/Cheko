@@ -1,5 +1,5 @@
 = render 'managers/shared/header'
-.container-fluid
+.container-fluid#manager-homework-table
   .row
     .col-md-3.col-lg-2 
       = render 'managers/shared/sidebar'
@@ -13,8 +13,8 @@
                 .row 
                   .col-6.text-start 
                     %h3 Pending
-                .table-responsive
-                  %table.homeworks-scrollX.display.nowrap
+                .table-responsive.manager
+                  %table#pending.display.nowrap
                     %thead
                       %tr
                         %th.text-start id
