@@ -18,10 +18,10 @@
   %td= home.order_type.titleize
   %td= home.sub_type.titleize if home.sub_type.present?
   %td= home.updates
-  %td= home.internal_deadline.strftime("%b %d, %Y") if home.internal_deadline.present?
-  %td= home.internal_deadline.strftime("%l:%M %p") if home.internal_deadline.present?
   %td= home.deadline.strftime("%b %d, %Y")
   %td= home.deadline.strftime("%l:%M %p")
+  %td= home.internal_deadline.strftime("%b %d, %Y") if home.internal_deadline.present?
+  %td= home.internal_deadline.strftime("%l:%M %p") if home.internal_deadline.present?
   %td= home.subject
   %td= home.sub_subject
   %td= home.file_received
