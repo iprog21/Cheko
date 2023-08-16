@@ -41,6 +41,47 @@ class Users::HomeworksController < Users::UserAppController
       # end
 
       HomeworkMailerJob.set(wait: 2.seconds).perform_later(@homework, "BookedOrder")
+
+      ActionCable.server.broadcast 'homework_update_channel', data: { homework: {
+          id: @homework.id, 
+          created_at: @homework.created_at.strftime("%b %d, %Y"), order_type: @homework.order_type.titleize, 
+          sub_type: @homework.sub_type.present? ? @homework.sub_type.titleize : "", 
+          deadline: @homework.deadline.present? ? @homework.deadline.strftime("%b %d, %Y - %l:%M %p"): "",  
+          subject: @homework.subject.present? ? @homework.subject.titleize : "",
+          tutor_category: @homework.tutor_category.present? ? @homework.tutor_category.titleize : "",
+          words: @homework.words.present? ? @homework.words : "",
+          tutor_samples: @homework.tutor_samples.present? ? @homework.tutor_samples.to_s.capitalize : "",
+          tutor_skills: @homework.tutor_skills.present? ? @homework.tutor_skills.to_s.capitalize : "",
+          view_bidders: @homework.view_bidders.present? ? @homework.view_bidders.to_s.capitalize : "",
+          priority: @homework.priority.present? ? @homework.priority.to_s.capitalize : "",
+          login_school: @homework.login_school.present? ? @homework.login_school.to_s.capitalize : "",
+          admin_id: @homework.admin_id,
+          admin: @homework.admin.name,
+          name: @homework.name.present? ? @homework.name : "",
+          order_type: @homework.order_type.titleize,
+          internal_deadline_date: @homework.internal_deadline.present? ? @homework.internal_deadline.strftime("%B %d, %Y") : "",
+          internal_deadline_time: @homework.internal_deadline.present? ? @homework.internal_deadline.strftime("%l:%M %p") : "",
+          details: @homework.details.present? ? @homework.details : "",
+          user: @homework.user.present? ? @homework.user.name : "",
+          tutor: @homework.tutor.present? ? @homework.tutor.name : "",
+          sub_tutor: @homework.sub_tutor.present? ? @homework.sub_tutor.name : "",
+          hours_late: @homework.hours_late.present? ? @homework.hours_late : "",
+          prof: @homework.prof.present? ? @homework.prof : "",
+          grade: @homework.grade.present? ? @homework.grade : "",
+          status: @homework.status.present? ? @homework.status : "",
+          manager: @homework.manager.present? ? @homework.manager.name : "",
+          tutor_price: @homework.tutor_price.present? ? @homework.tutor_price : "",
+          price: @homework.price.present? ? @homework.price : "",
+          profit: @homework.profit.present? ? @homework.profit : "",
+          updates: @homework.updates.present? ? @homework.updates : "",
+          sub_subject: @homework.sub_subject.present? ? @homework.sub_subject : "",
+          file_received: @homework.file_received.present? ? @homework.file_received : "",
+          notes: @homework.notes.present? ? @homework.notes : "",
+          course: @homework.user.present? ? @homework.user.course : "",
+          payment_received: @homework.payment_received.present? ? @homework.payment_received : "",
+          } },
+      controller_action: "create"
+
       redirect_to users_homework_path(@homework.id), :alert => "Thanks for your order! Kindly message us through our chatbox on the lower right corner to confirm the price!"
     else
       render 'new'

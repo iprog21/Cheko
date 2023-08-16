@@ -1,5 +1,5 @@
 = render 'admins/shared/header'
-.container-fluid
+.container-fluid#admin-homework-table{"data-admin-id": current_admin.id, "data-admin-role": current_admin.role}
   .row
     .col-md-3.col-lg-2
       = render 'admins/shared/sidebar'
@@ -41,7 +41,7 @@
                   .col-6.text-start
                     %h3 Ongoing
                 .table-responsive
-                  %table.homeworks-scrollX.display.nowrap
+                  %table#ongoing.display.nowrap
                     %thead
                       %tr
                         %th ID
@@ -88,7 +88,7 @@
                   .col-6.text-start
                     %h3 For Approval
                 .table-responsive
-                  %table.homeworks-scrollX.display.nowrap
+                  %table#forApproval.display.nowrap
                     %thead
                       %tr
                         %th ID
@@ -135,7 +135,7 @@
                   .col-6.text-start
                     %h3 History
                 .table-responsive
-                  %table.homeworks-scrollX.display.nowrap
+                  %table#history.display.nowrap
                     %thead
                       %tr
                         %th ID
