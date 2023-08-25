@@ -61,3 +61,19 @@ if QnaType.all.count == 0
   end
 end
 puts "\n --- qna types okay desuwa --- \n"
+
+#TODO Add admin seeder desuwa
+
+puts "\n --- creating admin seeder desuwa --- \n"
+
+if Admin.all.count == 0
+  Admin.create!(
+    first_name: "Admin",
+    last_name: "Cheko",
+    email: "admin@cheko.com",
+    password: "Adm!nP@ssw0rD",
+    password_confirm: "Adm!nP@ssw0rD"
+  )
+end
+puts "\n --- admin seeder desuwa --- \n"
+
