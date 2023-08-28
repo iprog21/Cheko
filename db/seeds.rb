@@ -73,6 +73,7 @@ if Admin.all.count == 0
     email: "admin@cheko.com",
     password: "Adm!nP@ssw0rD",
     password_confirm: "Adm!nP@ssw0rD"
+    role: 1
   )
 end
 puts "\n --- admin seeder desuwa --- \n"
