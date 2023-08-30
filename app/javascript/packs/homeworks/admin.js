@@ -65,12 +65,20 @@ if ($('#homework_view_bidders2').is(':checked')) {
 var new_price = 0
 
 if ($('#homework_words').length){
-  var def_price = parseFloat($('#homework_words').val())
+  var def_price = parseFloat($('#homework_words').val() * parseFloat($('input[name="homework[tutor_category]"]:checked').data("bal")))
   prio = ( .30 * def_price);
   new_price = (def_price + skill + sample + login + bid)
 
   if ($('#homework_priority').is(':checked')) {
     new_price = (new_price + prio)
+  }
+
+  if(new_price >=5000 && new_price <= 9999){
+    discount = (new_price * .10)
+    new_price = new_price - discount
+  }else if(new_price >=10000){
+    discount = (new_price * .20)
+    new_price = new_price - discount
   }
 
   $('#testEstimate').html( '₱' + new_price )
@@ -84,6 +92,14 @@ if ($('#homework_words').length){
 
     if ($('#homework_priority').is(':checked')) {
       new_price = (new_price + prio)
+    }
+
+    if(new_price >=5000 && new_price <= 9999){
+      discount = (new_price * .10)
+      new_price = new_price - discount
+    }else if(new_price >=10000){
+      discount = (new_price * .20)
+      new_price = new_price - discount
     }
 
     $('#testEstimate').html( '₱' + new_price )
@@ -105,13 +121,13 @@ if ($('#homework_words').length){
 }
 
 $('input[name="homework[tutor_category]"]').on('change', function(){
-  var new_def_price = parseFloat(def_price) * parseFloat($(this).data("bal"))
+  var new_def_price = parseFloat($('#homework_words').val()) * parseFloat($(this).data("bal"))
   new_price = (new_def_price + skill + sample + login + bid)
   prio = ( .30 * new_def_price);
   if ($('#homework_priority').is(':checked')) {
     new_price = (new_price + prio)
   }
-
+  
   $('#testEstimate').html( '₱' + new_price )
 })
 
