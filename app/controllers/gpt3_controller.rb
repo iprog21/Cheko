@@ -17,7 +17,7 @@ class Gpt3Controller < ApplicationController
     # 4. REQUEST via OpenAI API
     response = client.chat(
       parameters: {
-        model: "gpt-3.5-turbo",
+        model: "gpt-4",
         messages: currentDialogue,
       }
     )
