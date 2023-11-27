@@ -40,8 +40,8 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
-  # config.action_cable.url = 'wss://example.com/cable'
-  # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
+  config.action_cable.url = 'http://172.104.186.240/cable'
+  config.action_cable.allowed_request_origins = [ 'http://172.104.186.240', /http:\/\/172.104.186.240.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -58,7 +58,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "checko_production"
+  # config.active_job.queue_name_prefix = "cheko_production"
 
   config.action_mailer.perform_caching = false
 
@@ -109,4 +109,17 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.action_mailer.raise_delivery_errors = true 
+  config.action_mailer.default_url_options = { host: "https://beta.chekohomeworkhelp.com"}
+  config.action_mailer.delivery_method   = :smtp
+
+   config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "cheko.alert@gmail.com",
+    :password             => Rails.application.credentials.mailer[:password],
+    :authentication       => :login,
+    :enable_starttls_auto => true
+  }
 end
