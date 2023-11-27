@@ -1,7 +1,7 @@
 class Gpt3Controller < ApplicationController
   def generate
     client = OpenAI::Client.new
-    
+
     # 1. Default
     initialDialogue = [
       { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
@@ -10,14 +10,14 @@ class Gpt3Controller < ApplicationController
 
     # 2. Turn prompt into a message object
     prompt = {role: "user", content: params[:prompt]}
-    
+
     # 3. Initialize/Extend currentDialogue
     currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
 
     # 4. REQUEST via OpenAI API
     response = client.chat(
       parameters: {
-        model: "gpt-4-0613",
+        model: "gpt-4-1106-preview",
         messages: currentDialogue,
       }
     )
@@ -26,7 +26,7 @@ class Gpt3Controller < ApplicationController
     generated_text = response.dig("choices", 0, "message", "content")
     puts response
     newDialogue = currentDialogue.concat([response.dig("choices", 0, "message")])
-    
+
     usage = {
       completion_tokens: response.dig("usage", "completion_tokens"),
       prompt_tokens: response.dig("usage", "prompt_tokens"),
