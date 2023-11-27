@@ -16,7 +16,7 @@ function createChatBubble(content, sender) {
   return chatBubble;
 }
 
-const generateText = async (prompt, humanizeOrNot) => {
+const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   promptsCount++; // Increase prompt count
 
   // Utils:
@@ -43,7 +43,7 @@ const generateText = async (prompt, humanizeOrNot) => {
   // 2. Add prompt as a chat bubble:
 
   const chatContainer = document.getElementById("gpt-chat-container");
-  const text = humanizeOrNot ? "Humanizing text.." : prompt;
+  const text = humanizeOrNot ? "Humanizing text.." : citationOrNot ? "Adding citation.." : prompt;
   chatContainer.appendChild(createChatBubble(text, "user"));
 
   // 3. Send Prompt to Controller:
@@ -76,7 +76,7 @@ const generateText = async (prompt, humanizeOrNot) => {
 
   // 4. Maintain a string record of the current dialogue between the user and the chatbot.
   currentDialogue = json.new_dialogue;
-  console.log(currentDialogue);
+  // console.log(currentDialogue);
 
   // 5. Get response and add as a chat bubble:
   const chekoResponse = json.generated_text
@@ -145,6 +145,18 @@ document
       .lastChild.innerText}`;
     generateText(prompt, true);
   }
-);
+  );
+
+// -- Citation Button --
+document
+  .querySelector("#add-citations-button")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    const prompt = `Search for citations: \n\n${document
+      .querySelector("#gpt-chat-container")
+      .lastChild.innerText}`;
+    generateText(prompt, false, true);
+  }
+  );
 
 window.LOG_EVENTS.logChekoAIVisit();
