@@ -22,6 +22,7 @@ class PagesController < ApplicationController
   def professor_show
     @professor = Professor.find(params[:id])
     @reviews = @professor.prof_reviews.where(status: "approved")
+    @user = @reviews.user ? "#{@reviews.user.first_name.first}#{@reviews.user.last_name.first}" : "ANON"
   end
 
   def how_it_works

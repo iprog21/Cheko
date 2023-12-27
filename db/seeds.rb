@@ -5,6 +5,35 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'roo'
+file_name = './db/cheko_prof.xlsx'
+excel = Roo::Spreadsheet.open(file_name, {:expand_merged_ranges => true})
+
+sheets = excel.sheets
+sheets.shift
+
+prof_ids = []
+sheets.each do |sheet|
+
+  parsed = excel.sheet(sheet).parse(headers: true)
+
+  parsed.each_with_index do |parse, index|
+    next if index == 0
+    next if parse['professor_id'] == nil
+ 
+    prof_ids.insert(1, parse['professor_id'].to_i)
+    parse.delete("Facebook link")
+    parse.delete("user_id")
+    parse.delete("subject/s")
+
+    # ProfReview.create(parse)
+  end
+end
+
+prof_ids.each do |id|
+  prof = Professor.find(id)
+  prof.update_grading
+end
 
 subjects = [
   {name: "English", status: 1},
@@ -72,9 +101,7 @@ if Admin.all.count == 0
     last_name: "Cheko",
     email: "admin@cheko.com",
     password: "Adm!nP@ssw0rD",
-    password_confirm: "Adm!nP@ssw0rD"
     role: 1
   )
 end
 puts "\n --- admin seeder desuwa --- \n"
-
