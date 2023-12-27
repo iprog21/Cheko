@@ -3,7 +3,7 @@
   .row
     .col-sm-12.col-md-12.col-lg-6.ms-auto.me-auto.mt-2.p-4
       .d-grid.gap-5
-        %a.btn.bg-cheko.text-white.btn-xl{:href =>users_homeworks_path, "aria-describedby" => "tooltip", "data-bs-content" => "A premium service that starts at ₱500.", "data-bs-toggle" => "popover", :type => "button", "data-bs-trigger" => "hover", "data-bs-placement"=>"bottom"}
+        %a.btn.bg-cheko.text-white.btn-xl{:href =>users_homeworks_path, "aria-describedby" => "tooltip", "data-bs-content" => "Get an expert to help with your HW", "data-bs-toggle" => "popover", :type => "button", "data-bs-trigger" => "hover", "data-bs-placement"=>"bottom"}
           .h2 HW-Help
         -# %button.btn.bg-cheko.text-white.position-relative.btn-xl{type: "button"}
         -#   .h2 Past Documents
@@ -12,17 +12,17 @@
             %span.visually-hidden unread messages
     .col-sm-12.col-md-12.col-lg-6.ms-auto.me-auto.mt-2.p-4
       .d-grid.gap-5
-        %a.btn.bg-cheko.text-white.btn-xl{href: professors_path, "aria-describedby" => "tooltip", "data-bs-content" => "Prof-rating & review system", "data-bs-toggle" => "popover", :type => "button", "data-bs-trigger" => "hover", "data-bs-placement"=>"bottom"}
+        %a.btn.bg-cheko.text-white.btn-xl{href: professors_path, "aria-describedby" => "tooltip", "data-bs-content" => "Prof-rating & review tool", "data-bs-toggle" => "popover", :type => "button", "data-bs-trigger" => "hover", "data-bs-placement"=>"bottom"}
           .h2 Profs to Pick
         -# %a.btn.bg-cheko.text-white.btn-xl{href: users_qnas_path}
         -#   .h2 Q&A
+    -# .col-sm-12.col-md-12.col-lg-6.ms-auto.me-auto.mt-2.p-4
+    -#   %div{style:"display: flex; flex-direction: row; align-content: center; flex-wrap: inherit; justify-content: center;" }
+    -#     %a.btn.bg-cheko.text-white.btn-xl{href: users_qnas_path, style: "width: 612px;", "aria-describedby" => "tooltip", "data-bs-content" => "₱500 and lower. A question & answer platform.", "data-bs-toggle" => "popover", :type => "button", "data-bs-trigger" => "hover", "data-bs-placement"=>"bottom"}
+    -#       .h2 Q&A
     .col-sm-12.col-md-12.col-lg-6.ms-auto.me-auto.mt-2.p-4
       %div{style:"display: flex; flex-direction: row; align-content: center; flex-wrap: inherit; justify-content: center;" }
-        %a.btn.bg-cheko.text-white.btn-xl{href: users_qnas_path, style: "width: 612px;", "aria-describedby" => "tooltip", "data-bs-content" => "₱500 and lower. A question & answer platform.", "data-bs-toggle" => "popover", :type => "button", "data-bs-trigger" => "hover", "data-bs-placement"=>"bottom"}
-          .h2 Q&A
-    .col-sm-12.col-md-12.col-lg-6.ms-auto.me-auto.mt-2.p-4
-      %div{style:"display: flex; flex-direction: row; align-content: center; flex-wrap: inherit; justify-content: center;" }
-        %a.btn.bg-cheko.text-white.btn-xl{href: cheko_ai_path, style: "width: 612px;", "aria-describedby" => "tooltip", "data-bs-content" => "AI Homework assistant", "data-bs-toggle" => "popover", :type => "button", "data-bs-trigger" => "hover", "data-bs-placement"=>"bottom"}
+        %a.btn.bg-cheko.text-white.btn-xl{href: cheko_ai_path, style: "width: 612px;", "aria-describedby" => "tooltip", "data-bs-content" => "AI-powered College Agent.", "data-bs-toggle" => "popover", :type => "button", "data-bs-trigger" => "hover", "data-bs-placement"=>"bottom"}
           .h2 ChekoAI
   .col-xl-6.col-lg-6.col-md-6.col-sm-12{style: "padding: 11.8em;"}       
 = render "users/shared/footer"
