@@ -1,5 +1,6 @@
 %tr
   %td= home.id
+  %td= home.user.name
   %td= home.created_at.strftime("%b %d, %Y")
   %td= home.order_type.titleize
   %td= home.sub_type.titleize if home.sub_type.present?

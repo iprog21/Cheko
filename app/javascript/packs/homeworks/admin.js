@@ -114,7 +114,7 @@ if ($('#homework_words').length){
     def_price = parseFloat(price);
   }
   else{
-    def_price = parseFloat(1000);
+    def_price = parseFloat(500);
   }
   
   new_price = def_price
