@@ -9,7 +9,7 @@ require 'roo'
 
 if ENV['prof_review'] == "true"
   puts "\n --- PROF_REVIEW okay desuwa ---\n"
-  file_name = './db/cheko_prof.xlsx'
+  file_name = './db/cheko_prof2.xlsx'
   excel = Roo::Spreadsheet.open(file_name, {:expand_merged_ranges => true})
 
   sheets = excel.sheets
@@ -22,14 +22,18 @@ if ENV['prof_review'] == "true"
 
     parsed.each_with_index do |parse, index|
       next if index == 0
-      next if parse['professor_id'] == nil
+      if parse['professor_id'] == nil && parse['first_name'] != nil
+        school = School.find_by(name: "Ateneo de Manila University")
+        puts "\n --- creating professor desuwa ---\n" 
+        Professor.create(['first_name' => parse['first_name'], 'last_name' => parse['last_name'], 'school_id' => school.id])
+      else
+        prof_ids.insert(1, parse['professor_id'].to_i)
+        parse.delete("Facebook link")
+        parse.delete("user_id")
+        parse.delete("subject/s")
   
-      prof_ids.insert(1, parse['professor_id'].to_i)
-      parse.delete("Facebook link")
-      parse.delete("user_id")
-      parse.delete("subject/s")
-
-      ProfReview.create(parse)
+        ProfReview.create(parse)
+      end
     end
   end
 
