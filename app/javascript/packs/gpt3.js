@@ -12,8 +12,19 @@ function createChatBubble(content, sender) {
   const chatBubble = document.createElement("div");
   chatBubble.className =
     sender === "user" ? "chat-bubble-user" : "chat-bubble-cheko";
-  chatBubble.innerHTML = content;
+    
+  sender === "user" ? chatBubble.innerHTML = content : typewriterEffect(chatBubble, content);
   return chatBubble;
+}
+
+function typewriterEffect(element, content, i = 0) {
+  element.innerHTML += content[i];
+
+  if (i === content.length - 1) {
+    return;
+  }
+
+  setTimeout(() => typewriterEffect(element, content, i + 1), 30);
 }
 
 const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
@@ -81,7 +92,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   // 5. Get response and add as a chat bubble:
   const chekoResponse = json.generated_text
     .split("\n")
-    .map((t) => `<p>${t}</p>`)
+    .map((t) => `${t}`)
     .join("");
   chatContainer.appendChild(createChatBubble(chekoResponse, "cheko"));
 
