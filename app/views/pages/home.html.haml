@@ -1,26 +1,24 @@
 %main.h-screen.flex.relative
   = render "users/shared/sidebar"
-  .flex.flex-col.p-4.flex-1.my-2.5.mr-2.5.rounded-lg.bg-neutral-900.border-1.border-neutral-700.overflow-auto
-    .container.mt-3
-      .row
-        .col-sm-12.col-md-6
-          = image_tag "main.png", class: "full-width"
-        .col-sm-12.col-md-6
-          .container.text-center.pt-5
-            %h1 HW-Help
-          .container.text-center.pb-5
-            %h5 Connect with a tutor, get homework support, and understand the homework
-    .container.mt-3
-      .text-center
-        %h2 Order Your Homework in 4 Simple Steps
+  .flex.flex-col.flex-1.my-2.5.mr-2.5.rounded-lg.bg-neutral-900.border-1.border-neutral-700.overflow-auto
+    .container.mt-10
+      .flex.h-500
+        = image_tag "main.png", class: "h-[75%] object-cover ml-10 -mr-36"
+        .grid.place-items-center.justify-center.-mt-36
+          .text-center
+            %h1.text-white HW-Help
+            %h5.text-neutral-400 Connect with a tutor, get homework support, and understand the homework
+    .container
+      .text-center.mb-20
+        %h2.text-white Order Your Homework in 4 Simple Steps
       .row
         .col-xl-6.col-lg-6.col-md-6.col-sm-12
           .row
             .col-xl-6.col-lg-6.col-md-12.col-sm-12
               .container
                 = image_tag "works1.png"
-            .col-xl-6.col-lg-6.col-md-12.col-sm-12
-              %h5{style: "padding-top: 25px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Step 1
+            .col-xl-6.col-lg-6.col-md-12.col-sm-12.text-neutral-300
+              %h5.text-xl.mt-4.text-primary.font-semibold Step 1
               %h6 Create an Account
               %p If you already have an account, welcome back! If not, it’s never too late. Sign up with our easy account creation process & get on-board.
         .col-xl-6.col-lg-6.col-md-6.col-sm-12
@@ -28,8 +26,8 @@
             .col-xl-6.col-lg-6.col-md-12.col-sm-12
               .container
                 = image_tag "works2.png"
-            .col-xl-6.col-lg-6.col-md-12.col-sm-12
-              %h5{style: "padding-top: 25px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Step 2
+            .col-xl-6.col-lg-6.col-md-12.col-sm-12.text-neutral-300
+              %h5.text-xl.mt-4.text-primary.font-semibold Step 2
               %h6 Tell us about your work
               %p Submit instructions by filling out the order form & include as many details as possible: your notes, preferred sources, sample problems, etc.
         .col-xl-6.col-lg-6.col-md-6.col-sm-12
@@ -37,8 +35,8 @@
             .col-xl-6.col-lg-6.col-md-12.col-sm-12
               .container
                 = image_tag "works3.png"
-            .col-xl-6.col-lg-6.col-md-12.col-sm-12
-              %h5{style: "padding-top: 25px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Step 3
+            .col-xl-6.col-lg-6.col-md-12.col-sm-12.text-neutral-300
+              %h5.text-xl.mt-4.text-primary.font-semibold Step 3
               %h6 Pay for your order
               %p Filled up the order form? Now it’s time to preview the details and make the payment.
         .col-xl-6.col-lg-6.col-md-6.col-sm-12
@@ -46,8 +44,8 @@
             .col-xl-6.col-lg-6.col-md-12.col-sm-12
               .container
                 = image_tag "works4.png"
-            .col-xl-6.col-lg-6.col-md-12.col-sm-12
-              %h5{style: "padding-top: 25px; margin: 0px; color: rgb(0, 74, 173); --fontSize: 24; line-height: 1.4;"} Step 4
+            .col-xl-6.col-lg-6.col-md-12.col-sm-12.text-neutral-300
+              %h5.text-xl.mt-4.text-primary.font-semibold Step 4
               %h6 Download file from user area
               %p A Cheko Tutor will start your session as soon as the payment has been made. You’ll receive an email notification when your order is ready.
 
@@ -86,7 +84,7 @@
               .container
                 = image_tag "years.png", class: "card-img-top"
             .col-12.mt-5
-              .container.text-center
+              .container.text-center.text-white
                 %h3 4 years in Service
         .col-xl-3.col-lg-3.col-md-6.col-sm-12
           .row
@@ -94,7 +92,7 @@
               .container
                 = image_tag "tasks.png", class: "card-img-top"
             .col-12.mt-5
-              .container.text-center
+              .container.text-center.text-white
                 %h3 Accomplished 5,500
         .col-xl-3.col-lg-3.col-md-6.col-sm-12
           .row
@@ -102,7 +100,7 @@
               .container
                 = image_tag "creators.png", class: "card-img-top"
             .col-12.mt-5
-              .container.text-center
+              .container.text-center.text-white
                 %h3 Over 300 tutors
         -# .col-xl-3.col-lg-3.col-md-6.col-sm-12
           -# .row
@@ -118,8 +116,8 @@
         .col-xl-6.col-lg-6.col-md-12.col-sm-12
           .container
             = image_tag "about_pic.png", class: "full-width"
-        .col-xl-6.col-lg-6.col-md-12.col-sm-12
-          %h2 About Cheko
+        .col-xl-6.col-lg-6.col-md-12.col-sm-12.text-neutral-400
+          %h2.text-white About Cheko
           %p Cheko started in 2019 when a college student wanted to improve students’ lives. Now, our goal is to craft tools and services built around the everyday problems of students. Ultimately, we should help students save time and graduate. Currently, we have four services to do that.
 
           %p
