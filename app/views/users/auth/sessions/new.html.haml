@@ -4,12 +4,11 @@
     .container
       .row
         .col-sm-12.col-md-6.ms-auto.me-auto.mt-5
-          .card
+          .card.bg-neutral-800.text-white.p-2
             .card-body
               %h2 Users Log in
               -if flash.any?
                 .row.text-center
-                  -# %ul.alert.alert-danger
                   - flash.each do |type, msg|
                     .col-lg-12.col-md-12.col-sm-12.alert.mt-3.mb-3{class: type == "alert" ? "alert-danger" : "alert-success"}
                       = msg

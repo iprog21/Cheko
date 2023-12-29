@@ -15,9 +15,9 @@
     <%= render "users/shared/sidebar_item", title: "Cheko AI", path: cheko_ai_path, icon: "robot" %>
     <%= render "users/shared/sidebar_item", title: "Sign In", path: new_user_session_path, icon: "right-to-bracket" %>
   </div>
-  <div class="px-2.5 w-full mt-3">
-    <button class="bg-cheko rounded-full py-2 w-full font-semibold text-white">
-      Sign Up
-    </button>
+  <div class="grid px-2.5 w-full mt-3">
+    <%= link_to new_user_registration_path, class: "text-center no-underline bg-cheko rounded-full py-2 w-full font-semibold text-white" do %>
+       Sign Up
+    <% end %>
   </div>
 </div>
