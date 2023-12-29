@@ -8,7 +8,16 @@
     </div>
   </div>
   <div class="grid w-full mt-[1rem]">
-      <%= render "users/shared/sidebar_item", title: "Home", path: root_path, icon: "search" %>
-      <%= render "users/shared/sidebar_item", title: "Cheko AI", path: cheko_ai_path, icon: "robot" %>
+    <%= render "users/shared/sidebar_item", title: "Home", path: root_path, icon: "home" %>
+    <%= render "users/shared/sidebar_item", title: "HW Help", path: pick_type_path, icon: "receipt" %>
+    <%= render "users/shared/sidebar_item", title: "Profs to Pick", path: professors_path, icon: "receipt" %>
+    <%= render "users/shared/sidebar_item", title: "Q&A", path: pick_type_qnas_path, icon: "question" %>
+    <%= render "users/shared/sidebar_item", title: "Cheko AI", path: cheko_ai_path, icon: "robot" %>
+    <%= render "users/shared/sidebar_item", title: "Sign In", path: new_user_session_path, icon: "right-to-bracket" %>
+  </div>
+  <div class="px-2 w-full mt-3">
+    <button class="bg-cheko rounded-full py-2 w-full font-semibold text-white">
+      Sign Up
+    </button>
   </div>
 </div>
