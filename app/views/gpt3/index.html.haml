@@ -24,7 +24,7 @@
               -# %label{for: "prompt"} Prompt
               %textarea.bg-neutral-600.border-1.border-neutral-500.placeholder-neutral-300.text-white.form-control#prompt{rows: "2"}(placeholder='Ask any question here. (Enter to send, Shift + Enter for new line)')
             = submit_tag "Send", class: "bg-cheko mt-2 text-white px-4 py-2 rounded-full", id: "generate-btn"
-            %button.btn.btn-secondary.mt-2#humanize-text-button Humanize Text
-            %button.btn.btn-secondary.mt-2#add-citations-button Add Citations
+            %button.btn.btn-secondary#humanize-text-button Humanize Text
+            %button.btn.btn-secondary#add-citations-button Add Citations
 
 = javascript_pack_tag 'gpt3', 'data-turbolinks-track': 'reload'
