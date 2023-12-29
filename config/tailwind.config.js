@@ -1,6 +1,5 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
-
 module.exports = {
+  important: true,
   content: [
     "./public/*.html",
     "./app/helpers/**/*.rb",
@@ -9,13 +8,8 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
-      },
       colors: {
-        primary: "##0096FF",
-        secondary: "#1F1F1D",
-        tertiary: "#292927",
+        cheko: "rgb(37 99 235)",
       },
       borderWidth: {
         1: "1px",
