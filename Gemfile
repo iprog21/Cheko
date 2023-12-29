@@ -61,9 +61,9 @@ gem 'haml'
 gem 'httparty'
 gem 'sidekiq', '~> 6.5.8'
 
-
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'ruby-openai'
 gem 'dotenv-rails'
 
 gem 'tailwindcss-rails'
+gem 'font-awesome-sass', '~> 6.4.0'

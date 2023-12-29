@@ -104,6 +104,8 @@ GEM
     ffi (1.16.3-java)
     ffi (1.16.3-x64-mingw32)
     ffi (1.16.3-x86-mingw32)
+    font-awesome-sass (6.4.2)
+      sassc (~> 2.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     haml (6.2.3)
@@ -322,6 +324,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise
   dotenv-rails
+  font-awesome-sass (~> 6.4.0)
   haml
   httparty
   jbuilder (~> 2.7)
