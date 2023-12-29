@@ -56,3 +56,8 @@ Things you may want to cover:
    ruby ./bin/webpack-dev-server # run the webpack-dev-server
    rails server
    ```
+   Run with tailwind
+   > This will run the rails server along with the tailwind watcher
+   ```
+   ./bin/dev
+   ```
