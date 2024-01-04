@@ -92,6 +92,7 @@ document.addEventListener('turbolinks:load', () => {
 
             adminTablePending.row.add([
               homework.id,
+              homework.user,
               homework.created_at,
               homework.order_type,
               homework.sub_type,
