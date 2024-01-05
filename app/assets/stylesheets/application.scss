@@ -13,7 +13,6 @@
  *= require_tree .
  *= require_self
  */
-
  .sidenav {
   height: 100%;
   width: 200px;
@@ -68,7 +67,8 @@
 
 body.light {
   color: black;
-  background-color: #F5F9FF;
+  // background-color: #F5F9FF;
+  background-color: #292927;
 }
 body.dark {
   color: white;
@@ -353,4 +353,69 @@ body.dark {
 
 #tooltip[data-popper-placement^='right'] > #arrow {
   left: -4px;
+}
+
+
+::placeholder {
+  color: #8f8f8f;
+}
+
+.parent {
+  border: 2px solid;
+  border-color: #3b3b3b;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  height: calc(100% - 50px);
+  width: calc(100% - 50px);
+  background-color:#1f1f1d;
+}
+
+.form-outline .text-input {
+  background-color: #292927;
+  border: 1px solid #292927;
+}
+
+input {
+  color: #8f8f8f !important;
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
+  background-color: #292927;
+  border: 1px solid #8f8f8f;
+}
+
+i.bi-eye, i.bi-eye-slash {
+  float: right;
+  margin-right: 10px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  color: #8f8f8f;
+}
+
+.card-img-top #logo-image {
+  height: auto;
+  width: 50%;
+}
+
+.submit {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.submit-btn {
+  border: 1px solid #292927;
+  background-color: #292927;
+  color: #8f8f8f;
+  margin: 0;
+  padding: 0;
+}
+
+.sign-in-link {
+  color: #8f8f8f;
+  font-size: 13px;
+  text-decoration: none;
 }
