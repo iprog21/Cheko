@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  .body {
+  /* .body {
     @apply bg-neutral-800;
-  }
+  } */
 }
 
 @layer components {
