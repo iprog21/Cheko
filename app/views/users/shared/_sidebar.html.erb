@@ -1,0 +1,22 @@
+<div class="flex flex-col h-screen sticky left-0 top-0 min-w-[220px] py-3 px-1">
+  <%= link_to root_path, class: "grid justify-items-center w-full mb-1 no-underline" do %>
+    <div class="flex flex-col">
+      <div class="flex">
+        <%= image_tag "logo-white.png", class: "h-7 mt-1" %>
+        <div class="text-zinc-500 font-semibold text-4xl italic">AI</div>
+      </div>
+      <div class="flex gap-1 place-self-end">
+        <%= icon('fa-solid', 'bolt', class: "text-zinc-500 text-xs")%>
+        <span class="text-zinc-500 text-xs">powered by GPT4</span>
+      </div>
+    </div>
+  <% end %>
+  <div class="grid w-full mt-[1rem]">
+    <%= render "users/shared/sidebar_item", title: "Home", path: root_path, icon: "home" %>
+    <%= render "users/shared/sidebar_item", title: "HW Help", path: pick_type_path, icon: "pen" %>
+    <%= render "users/shared/sidebar_item", title: "Profs to Pick", path: professors_path, icon: "chalkboard-user" %>
+    <%= render "users/shared/sidebar_convo_item", title: "Convo", icon: "comments" %>
+  </div>
+  <div class="grid px-2.5 w-full mt-3">
+  </div>
+</div>
