@@ -44,3 +44,6 @@ Gemfile.lock
 dump.rdb
 .env
 config/credentials.yml.enc
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
