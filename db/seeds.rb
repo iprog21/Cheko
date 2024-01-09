@@ -23,21 +23,21 @@ if ENV['prof_review'] == "true"
     parsed.each_with_index do |parse, index|
       next if index == 0
 
-      if ProfReview.where(content: parse['content']).first
-        puts "\n --- skip ---\n" 
-        next
-      end
-
-      if Professor.where(first_name: parse['first_name'])
-        puts "\n --- skip ---\n" 
-        next
-      end
-
       if parse['professor_id'] == nil && parse['first_name'] != nil
+        if Professor.where(first_name: parse['first_name'])
+          puts "\n --- skip ---\n" 
+          next
+        end
+        
         school = School.find_by(name: "Ateneo de Manila University")
         puts "\n --- creating professor desuwa ---\n" 
         Professor.create(['first_name' => parse['first_name'], 'last_name' => parse['last_name'], 'school_id' => school.id])
       else
+        if ProfReview.where(content: parse['content']).first
+          puts "\n --- skip ---\n" 
+          next
+        end
+
         puts "\n --- inserting prof review desuwa" + parse['professor_id'].to_s + " ---\n" 
         prof_ids.insert(1, parse['professor_id'].to_i)
         parse.delete("Facebook link")
