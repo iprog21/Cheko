@@ -16,17 +16,29 @@ if ENV['prof_review'] == "true"
   sheets.shift
 
   prof_ids = []
-  sheets.each do |sheet|
+  sheets.each_with_index do |sheet, index|
 
     parsed = excel.sheet(sheet).parse(headers: true)
 
     parsed.each_with_index do |parse, index|
       next if index == 0
+
+      if ProfReview.where(content: parse['content']).first
+        puts "\n --- skip ---\n" 
+        next
+      end
+
+      if Professor.where(first_name: parse['first_name'])
+        puts "\n --- skip ---\n" 
+        next
+      end
+
       if parse['professor_id'] == nil && parse['first_name'] != nil
         school = School.find_by(name: "Ateneo de Manila University")
         puts "\n --- creating professor desuwa ---\n" 
         Professor.create(['first_name' => parse['first_name'], 'last_name' => parse['last_name'], 'school_id' => school.id])
       else
+        puts "\n --- inserting prof review desuwa" + parse['professor_id'].to_s + " ---\n" 
         prof_ids.insert(1, parse['professor_id'].to_i)
         parse.delete("Facebook link")
         parse.delete("user_id")
