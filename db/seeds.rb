@@ -9,7 +9,7 @@ require 'roo'
 
 if ENV['prof_review'] == "true"
   puts "\n --- PROF_REVIEW okay desuwa ---\n"
-  file_name = './db/cheko_prof2.xlsx'
+  file_name = './db/cheko_prof4.xlsx'
   excel = Roo::Spreadsheet.open(file_name, {:expand_merged_ranges => true})
 
   sheets = excel.sheets
