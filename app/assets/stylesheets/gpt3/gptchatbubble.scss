@@ -53,7 +53,6 @@
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 15px;
-  max-width: 75%;
   p {
     margin: 0;
   }
@@ -62,6 +61,7 @@
     background: #057ae7;
     align-self: flex-end;
     color: white;
+    max-width: 75%;
   }
 
   &-cheko {
@@ -76,6 +76,13 @@
   @extend .chat-bubble-cheko;
   align-self: flex-start;
   max-width: fit-content;
+}
+
+.chat-bubble-cheko {
+  background-color: #404040;
+  color: white;
+  border-width: 1px;
+  border-color: #737373;
 }
 
 .loading-icon {

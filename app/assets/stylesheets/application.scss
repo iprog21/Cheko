@@ -419,3 +419,42 @@ i.bi-eye, i.bi-eye-slash {
   font-size: 13px;
   text-decoration: none;
 }
+
+.related-question {
+  display: flex;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  justify-content: space-between;
+  border-bottom: 1px solid white;
+  cursor: pointer;
+  color: white;
+}
+
+.source-link, .source-link:hover {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.source-box {
+  width: 16rem;
+  height: 6rem;
+  background-color: #404040;
+  border-width: 1px;
+  border-color: #737373; 
+  border-radius: 15px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title-header {
+  color: white;
+  font-size: 18px;
+}
+
+.chat-button {
+  color: white;
+}

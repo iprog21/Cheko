@@ -7,6 +7,10 @@ module.exports = {
     "./app/views/**/*.{erb,haml,html,slim,turbo_stream}",
   ],
   theme: {
+    fontFamily: {
+      'sans': ['"Inter var", sans-serif']
+    },
+
     extend: {
       colors: {
         cheko: "rgb(37 99 235)",
