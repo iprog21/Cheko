@@ -13,7 +13,6 @@
  *= require_tree .
  *= require_self
  */
-
 .sidenav {
   height: 100%;
   width: 200px;
@@ -354,4 +353,108 @@ body.dark {
 
 #tooltip[data-popper-placement^="right"] > #arrow {
   left: -4px;
+}
+
+
+::placeholder {
+  color: #8f8f8f;
+}
+
+.parent {
+  border: 2px solid;
+  border-color: #3b3b3b;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  height: calc(100% - 50px);
+  width: calc(100% - 50px);
+  background-color:#1f1f1d;
+}
+
+.form-outline .text-input {
+  background-color: #292927;
+  border: 1px solid #292927;
+}
+
+input {
+  color: #8f8f8f !important;
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
+  background-color: #292927;
+  border: 1px solid #8f8f8f;
+}
+
+i.bi-eye, i.bi-eye-slash {
+  float: right;
+  margin-right: 10px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  color: #8f8f8f;
+}
+
+.card-img-top #logo-image {
+  height: auto;
+  width: 50%;
+}
+
+.submit {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.submit-btn {
+  border: 1px solid #292927;
+  background-color: #292927;
+  color: #8f8f8f;
+  margin: 0;
+  padding: 0;
+}
+
+.sign-in-link {
+  color: #8f8f8f;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.related-question {
+  display: flex;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  justify-content: space-between;
+  border-bottom: 1px solid white;
+  cursor: pointer;
+  color: white;
+}
+
+.source-link, .source-link:hover {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.source-box {
+  width: 16rem;
+  height: 6rem;
+  background-color: #404040;
+  border-width: 1px;
+  border-color: #737373; 
+  border-radius: 15px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title-header {
+  color: white;
+  font-size: 18px;
+}
+
+.chat-button {
+  color: white;
 }
