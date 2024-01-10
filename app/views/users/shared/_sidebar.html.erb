@@ -17,6 +17,10 @@
     <%= render "users/shared/sidebar_item", title: "Profs to Pick", path: professors_path, icon: "chalkboard-user" %>
     <%= render "users/shared/sidebar_convo_item", title: "Convo", icon: "comments" %>
   </div>
-  <div class="grid px-2.5 w-full mt-3">
+  <div class="grid px-2.5 w-full mt-3 flex h-full">
+      <button class="p-2 py-2 text-neutral-500 new-convo-btn rounded-md mt-auto text-sm">
+        <i class="fa-regular fa-comments text-md me-1"></i>
+        <span>New convo</span>
+      </button>
   </div>
 </div>

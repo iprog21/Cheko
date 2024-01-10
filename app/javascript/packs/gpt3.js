@@ -34,10 +34,17 @@ function createChatBubble(content, sender) {
     humanizeButton.setAttribute("id", "humanize-btn");
     humanizeButton.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="color: #ffffff;"></i> Humanize';
 
+    const copyButton = document.createElement("div");
+    copyButton.classList.add('chat-button');
+    copyButton.innerHTML = '<i class="fa-solid fa-copy" style="color: #ffffff;"></i>';
+    copyButton.classList.add('chat-button');
+    copyButton.innerHTML = '<i class="fa-solid fa-edit" style="color: #ffffff;"></i>';
+
     rewriteHumanizeDiv.appendChild(rewriteButton);
     rewriteHumanizeDiv.appendChild(humanizeButton);
 
     buttonsContainer.appendChild(rewriteHumanizeDiv);
+    buttonsContainer.appendChild(copyButton);
 
     bubbleContainer.appendChild(chatBubble);
     bubbleContainer.appendChild(buttonsContainer); 

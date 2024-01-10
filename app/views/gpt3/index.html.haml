@@ -1,16 +1,18 @@
-%main.h-screen.flex.relative
+%main.h-screen.flex.relative.gpt-wrapper
   = render "users/shared/sidebar"
-  .flex.p-4.flex-1.items-center.justify-content-center.my-3.mr-3.rounded-lg.bg-neutral-900.border-1.border-neutral-700
-    .bg-neutral-800.px-4.py-3.rounded-lg.border-1.border-neutral-700.w-full.h-full.relative
-      .card-header.d-flex.align-items-center.py-3
-        = image_tag("cheko_ai_profile.jpg", class:"rounded-full w-14 h-14")
-        %div.flex.flex-col.justify-content-center.font-medium.pl-3
-          %h2.text-white Cheko AI
-          %p.mb-0.text-neutral-400 Ask me anything!
-      .card-body
+  .flex.flex-1.items-center.justify-content-center.my-3.mr-3.rounded-lg.bg-neutral-900.p-0.ans-wrapper
+    .bg-neutral-800.rounded-lg.border-1.border-neutral-700.w-full.h-full.relative
+      .card-header.d-flex.align-items-center.p-3.border-neutral-700.justify-content-between
+        %div.flex.justify-content-center.font-medium.gap-2.align-items-center
+          = image_tag("cheko_ai_profile.jpg", class:"rounded-full w-8 h-8")
+          %h6.text-white.m-0 Cheko AI
+        %p.mb-0.text-neutral-400
+          %i.fa.fa-check
+          %span Saved
+      .card-body.px-5.py-3
         .card-body-top
           #gpt-chat-container
-            .chat-bubble-cheko.bg-neutral-700.text-white.border-1.border-neutral-500
+            .chat-bubble-cheko.bg-neutral-700.text-white.border-1.border-neutral-500.text-md.font-semibold
               Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!
           -# Loading animation (enabled/disabled when prompting)
           #cheko-loading-bubble.d-none.bg-neutral-700.border-1.border-neutral-500
