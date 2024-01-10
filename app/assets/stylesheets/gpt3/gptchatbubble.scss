@@ -173,13 +173,13 @@
   }
   .card-body {
     width: 100%;
-    .chat-bubble-user {
-      background-color: #404040;
-    }
+    // .chat-bubble-user {
+    //   background-color: #404040;
+    // }
     .card-body-top {
       overflow: auto;
-    max-height: calc(100vh - 240px);
-    width: 100%;
+      max-height: calc(100vh - 240px);
+      width: 100%;
     }
     .card-body-top::-webkit-scrollbar {
       display: none;

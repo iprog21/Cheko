@@ -224,8 +224,11 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   setTimeout(() => {
     run(url, chatContainer, relatedDiv);
     setLoading(false); // loading animation
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
-  }, 2000);
+  }, 1000);
+
+  setTimeout(() => {
+    scrollContainer.scrollTop = chatContainer.scrollHeight;
+  }, 50);
 
   // -- Event Log --
   window.LOG_EVENTS.logSubmitPrompt(
@@ -287,12 +290,16 @@ async function scrapeQuestion(url) {
       sourceLink.setAttribute('target', '_blank');
 
       let domainName = result.domain;
-      domainName = domainName.split('.').slice(1).join('.');
+      if (domainName.split('.').length == 2) {
+        domainName = domainName;
+      } else {
+        domainName = domainName.split('.').slice(1).join('.');
+      }
 
       sourceImg.classList.add('h-4')
       sourceImg.src = result.faviconUrl;
 
-      iconDiv.innerHTML = `<span class="flex flex-row py-2 text-white"><img class="h-5 pr-2" src="${result.faviconUrl}"></img> ${domainName} </span>`;
+      iconDiv.innerHTML = `<span class="flex flex-row py-2 text-white font-sailecRegular"><img class="h-5 pr-2" src="${result.faviconUrl}"></img> ${domainName} </span>`;
 
       // iconDiv.appendChild(sourceImg);
       // iconDiv.appendChild(sourceDomain);
