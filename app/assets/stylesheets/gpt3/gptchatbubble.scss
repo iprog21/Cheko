@@ -166,25 +166,25 @@
     -webkit-animation-timing-function: ease-in;
   }
 }
-.gpt-wrapper {
-  background-color: rgb(41, 41, 39);
-  .card-header {
-    border-bottom: 1px solid rgb(41, 41, 39);
-  }
-  .card-body {
-    width: 100%;
-    // .chat-bubble-user {
-    //   background-color: #404040;
-    // }
-    .card-body-top {
-      overflow: auto;
-      max-height: calc(100vh - 240px);
-      width: 100%;
-    }
-    .card-body-top::-webkit-scrollbar {
-      display: none;
-    }
-  }
+// .gpt-wrapper {
+//   background-color: rgb(41, 41, 39);
+//   .card-header {
+//     border-bottom: 1px solid rgb(41, 41, 39);
+//   }
+//   .card-body {
+//     width: 100%;
+//     // .chat-bubble-user {
+//     //   background-color: #404040;
+//     // }
+//     .card-body-top {
+//       overflow: auto;
+//       max-height: calc(100vh - 240px);
+//       width: 100%;
+//     }
+//     .card-body-top::-webkit-scrollbar {
+//       display: none;
+//     }
+//   }
   // .prompt-container {
   //   .form-group {
   //     border-radius: 100px;
@@ -204,10 +204,10 @@
   //     box-shadow: none !important;
   //   }
   // }
-  .ans-wrapper {
-    width: calc(100% - 250px);
-  }
-}
-.new-convo-btn {
-background-color: rgb(51, 51, 49);
-}
+//   .ans-wrapper {
+//     width: calc(100% - 250px);
+//   }
+// }
+// .new-convo-btn {
+// background-color: rgb(51, 51, 49);
+// }
