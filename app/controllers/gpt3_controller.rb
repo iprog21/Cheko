@@ -5,17 +5,17 @@ class Gpt3Controller < ApplicationController
 
   def generate
 
-    # url = URI("https://api.perplexity.ai/chat/completions")
+    url = URI("https://api.perplexity.ai/chat/completions")
 
-    # http = Net::HTTP.new(url.host, url.port)
-    # http.use_ssl = true
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
 
-    # request = Net::HTTP::Post.new(url)
-    # request["accept"] = 'application/json'
-    # request["content-type"] = 'application/json'
-    # request["authorization"] = "Bearer #{ENV.fetch('PERPLEXITY_AI_TOKEN')}"
+    request = Net::HTTP::Post.new(url)
+    request["accept"] = 'application/json'
+    request["content-type"] = 'application/json'
+    request["authorization"] = "Bearer #{ENV.fetch('PERPLEXITY_AI_TOKEN')}"
 
-    client = OpenAI::Client.new
+    # client = OpenAI::Client.new
 
     # 1. Default
     initialDialogue = [
@@ -30,17 +30,17 @@ class Gpt3Controller < ApplicationController
     currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
 
     # 4. REQUEST via PERPLEXITY.AI API
-    # request.body = {:model => "mistral-7b-instruct", :messages => [prompt]}.to_json
-    # response = http.request(request)
-    # response = JSON.parse(response.body)
+    request.body = {:model => "mistral-7b-instruct", :messages => [prompt]}.to_json
+    response = http.request(request)
+    response = JSON.parse(response.body)
 
-    # 4. REQUEST via OpenAI API
-    response = client.chat(
-      parameters: {
-        model: "gpt-4-1106-preview",
-        messages: currentDialogue,
-      }
-    )
+    # # 4. REQUEST via OpenAI API
+    # response = client.chat(
+    #   parameters: {
+    #     model: "gpt-4-1106-preview",
+    #     messages: currentDialogue,
+    #   }
+    # )
 
     # 5. Process OpenAI RESPONSE / PERLEXITY.AI RESPONSE
     generated_text = response.dig("choices", 0, "message", "content")

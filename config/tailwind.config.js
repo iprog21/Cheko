@@ -8,7 +8,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'sans': ['"Inter var", sans-serif']
+      sailec: ["Sailec-Regular", "sans-serif"],
     },
 
     extend: {
