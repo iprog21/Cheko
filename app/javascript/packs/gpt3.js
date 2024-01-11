@@ -16,6 +16,10 @@ function createChatBubble(content, sender) {
   sender === "user" ? chatBubble.innerHTML = content : typewriterEffect(chatBubble, content);
 
   if (sender != "user") {
+    const titleContainer = document.createElement("div");
+    titleContainer.classList.add('flex', 'flex-row');
+    titleContainer.innerHTML = '<span class="title-header"><i class="fa-solid fa-bars-staggered" style="color: #ffffff;"></i> Answer</span>'
+
     const bubbleContainer = document.createElement("div");
     bubbleContainer.classList.add('pb-4');
     bubbleContainer.style.maxWidth = '75%';
@@ -30,6 +34,9 @@ function createChatBubble(content, sender) {
     rewriteButton.innerHTML = '<i class="fa-solid fa-repeat" style="color: #ffffff;"></i> Rewrite';
 
     const humanizeButton = document.createElement("button");
+    humanizeButton.addEventListener("click", function() {
+      humanizeAnswer(humanizeButton);
+    });
     humanizeButton.classList.add('chat-button', 'pl-2');
     humanizeButton.setAttribute("id", "humanize-btn");
     humanizeButton.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="color: #ffffff;"></i> Humanize';
@@ -46,6 +53,7 @@ function createChatBubble(content, sender) {
     buttonsContainer.appendChild(rewriteHumanizeDiv);
     buttonsContainer.appendChild(copyButton);
 
+    bubbleContainer.append(titleContainer);
     bubbleContainer.appendChild(chatBubble);
     bubbleContainer.appendChild(buttonsContainer); 
 
@@ -55,8 +63,14 @@ function createChatBubble(content, sender) {
   }
 }
 
-function typewriterEffect(element, content, i = 0) {
-  element.innerHTML += content[i];
+function typewriterEffect(element, content, i = 0, willChangeDiv) {
+  if (willChangeDiv) {
+    element.innerHTML = "";
+    element.innerHTML += content[i];
+  } else {
+    element.innerHTML += content[i];
+  }
+  
 
   if (i === content.length - 1) {
     return;
@@ -112,7 +126,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     setLoading(false);
     return;
   }
-  console.log(response.json.generated_text);
+
   const json = await response.json();
 
   // -- Event Log --
@@ -182,9 +196,6 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     return;
   }
 
-  // 4. Maintain a string record of the current dialogue between the user and the chatbot.
-  currentDialogue = json.new_dialogue;
-
   // SCRAPING GOOGLE RESULTS
   const url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyDXUK2pb4hfX4xQ_9-3vQRc4TrzqJU42fk&cx=271535145f8274dcc&q=" + prompt;
 
@@ -211,16 +222,13 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   });
 
   setTimeout(() => {
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
-  }, 50);
-
-  setTimeout(() => {
     run(url, chatContainer, relatedDiv);
     setLoading(false); // loading animation
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
-  }, 2000);
+  }, 1000);
 
-  humanizeAnswers();
+  setTimeout(() => {
+    scrollContainer.scrollTop = chatContainer.scrollHeight;
+  }, 50);
 
   // -- Event Log --
   window.LOG_EVENTS.logSubmitPrompt(
@@ -229,6 +237,9 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     responseJson.usage.total_tokens,
     responseJson.usage.model
   );
+
+  // 4. Maintain a string record of the current dialogue between the user and the chatbot.
+  currentDialogue = json.new_dialogue;
 };
 
 async function fetchData(url) {
@@ -242,12 +253,12 @@ async function fetchData(url) {
 async function scrapeQuestion(url) {
   try {
     const data = await fetchData(url);
-    console.log(data.items.slice(0, 4));
     const results = data.items.slice(0, 4).map((item) => {
       const title = item.title;
       const link = item.link;
       const faviconUrl = `https://www.google.com/s2/favicons?domain=${new URL(link).hostname}`;
-      return { title, link, faviconUrl };
+      const domain = item.displayLink;
+      return { title, link, faviconUrl, domain };
     });
 
     const mainContainer = document.createElement("div"); // Holds the title and source boxes
@@ -278,11 +289,20 @@ async function scrapeQuestion(url) {
       sourceLink.textContent = result.title;
       sourceLink.setAttribute('target', '_blank');
 
+      let domainName = result.domain;
+      if (domainName.split('.').length == 2) {
+        domainName = domainName;
+      } else {
+        domainName = domainName.split('.').slice(1).join('.');
+      }
+
+      sourceImg.classList.add('h-4')
       sourceImg.src = result.faviconUrl;
 
-      sourceImg.classList.add('size-5');
+      iconDiv.innerHTML = `<span class="flex flex-row py-2 text-white font-sailecRegular"><img class="h-5 pr-2" src="${result.faviconUrl}"></img> ${domainName} </span>`;
 
-      iconDiv.appendChild(sourceImg);
+      // iconDiv.appendChild(sourceImg);
+      // iconDiv.appendChild(sourceDomain);
 
       div.appendChild(sourceLink);
       div.appendChild(iconDiv);
@@ -357,6 +377,33 @@ document.querySelector("form").addEventListener("submit", (e) => {
 //   }
 //   );
 
+const humanizeAnswer = async (button) => {
+  const chekoChatBubble = button.parentElement.parentElement.parentElement.children[1]; // Selecting the div for chat-bubble-cheko
+  const humanizeQuestion = 'Craft this response in a manner that resembles the writing style of a college student. It should strike a balance between being relatable and sophisticated enough to fit seamlessly into a college paper or assignment: ' + chekoChatBubble.textContent;
+  const currentDialogue = null;
+  let response;
+
+  try {
+    response = await fetch("/gpt3/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+        prompt: humanizeQuestion,
+        currentDialogue: currentDialogue
+      }),
+    });
+  } catch (e) {
+    console.log(e);
+
+    return;
+  }
+
+  const requestResponse = await response.json();
+  const humanizedResponse = requestResponse.generated_text.split("\n").map((t) => `${t}`).join("");
+  typewriterEffect(chekoChatBubble, humanizedResponse, 0, true);
+}
 
 
 // -- Citation Button --
@@ -366,7 +413,7 @@ document.querySelector("form").addEventListener("submit", (e) => {
 //     e.preventDefault();
 //     const prompt = `Search for citations: \n\n${document
 //       .querySelector("#gpt-chat-container")
-//       .lastChild.innerText}`;
+//       .lastChild.innerText}`;  
 //     generateText(prompt, false, true);
 //   }
 //   );

@@ -12,7 +12,7 @@
       .card-body.px-5.py-3
         .card-body-top
           #gpt-chat-container
-            .chat-bubble-cheko.bg-neutral-700.text-white.border-1.border-neutral-500.text-md.font-semibold
+            .chat-bubble-cheko
               Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!
           -# Loading animation (enabled/disabled when prompting)
           #cheko-loading-bubble.d-none.bg-neutral-700.border-1.border-neutral-500
@@ -24,7 +24,8 @@
           = form_tag do
             .form-group
               -# %label{for: "prompt"} Prompt
-              %textarea.bg-neutral-600.border-1.border-neutral-500.placeholder-neutral-300.text-white.form-control#prompt{rows: "2"}(placeholder='Ask any question here. (Enter to send, Shift + Enter for new line)')
+              -# %textarea.bg-neutral-600.border-1.border-neutral-500.placeholder-neutral-300.text-white.form-control#prompt{rows: "2"}(placeholder='Ask any question here. (Enter to send, Shift + Enter for new line)')
+              %textarea#prompt{rows: "1"}(placeholder='Ask Checko AI..')
             -# = submit_tag "Send", class: "bg-cheko mt-2 text-white px-4 py-2 rounded-full", id: "generate-btn"
             -# %button.btn.btn-secondary#humanize-text-button Humanize Text
             -# %button.btn.btn-secondary#add-citations-button Add Citations
