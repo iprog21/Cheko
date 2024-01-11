@@ -24,6 +24,7 @@ function createChatBubble(content, sender) {
     buttonsContainer.classList.add('flex', 'flex-row', 'justify-between');
 
     const rewriteHumanizeDiv = document.createElement("div");
+    const copyEditButton = document.createElement("dev");
 
     const rewriteButton = document.createElement("button");
     rewriteButton.classList.add('chat-button');
@@ -34,17 +35,22 @@ function createChatBubble(content, sender) {
     humanizeButton.setAttribute("id", "humanize-btn");
     humanizeButton.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="color: #ffffff;"></i> Humanize';
 
-    const copyButton = document.createElement("div");
+    const copyButton = document.createElement("button");
     copyButton.classList.add('chat-button');
     copyButton.innerHTML = '<i class="fa-solid fa-copy" style="color: #ffffff;"></i>';
-    copyButton.classList.add('chat-button');
-    copyButton.innerHTML = '<i class="fa-solid fa-edit" style="color: #ffffff;"></i>';
+
+    const editButton = document.createElement("button");
+    editButton.classList.add('chat-button', 'pl-2');
+    editButton.innerHTML = '<i class="fa-solid fa-edit" style="color: #ffffff;"></i>';
 
     rewriteHumanizeDiv.appendChild(rewriteButton);
     rewriteHumanizeDiv.appendChild(humanizeButton);
 
+    copyEditButton.appendChild(copyButton);
+    copyEditButton.appendChild(editButton);
+
     buttonsContainer.appendChild(rewriteHumanizeDiv);
-    buttonsContainer.appendChild(copyButton);
+    buttonsContainer.appendChild(copyEditButton);
 
     bubbleContainer.appendChild(chatBubble);
     bubbleContainer.appendChild(buttonsContainer); 
@@ -220,7 +226,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     scrollContainer.scrollTop = scrollContainer.scrollHeight;
   }, 2000);
 
-  humanizeAnswers();
+  // humanizeAnswers();
 
   // -- Event Log --
   window.LOG_EVENTS.logSubmitPrompt(
