@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* .body {
+    @apply bg-neutral-800;
+  } */
+}
+
 @layer components {
   .field input {
     @apply bg-neutral-800 focus:bg-neutral-800 focus:text-white border border-neutral-600 placeholder-neutral-300 text-white;
@@ -14,11 +20,4 @@
   .field select {
     @apply bg-neutral-800 border border-neutral-600 text-white;
   }
-}
-
-@font-face {
-  font-family: "Sailec-Regular";
-  src: url("../assets/Sailec-Regular.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
 }
