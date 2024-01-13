@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap/scss/bootstrap.scss";
+ 
 .sidenav {
   height: 100%;
   width: 200px;
