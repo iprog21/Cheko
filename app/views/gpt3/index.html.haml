@@ -1,11 +1,13 @@
 %main.h-screen.flex.relative.gpt-wrapper
   = render "users/shared/sidebar"
-  .flex.flex-1.items-center.justify-content-center.my-3.mr-3.rounded-lg.bg-neutral-900.p-0.ans-wrapper
+  .flex.flex-1.items-center.justify-content-center.my-3.mr-3.rounded-lg.p-0.ans-wrapper.bg-content-cheko
     .bg-neutral-800.rounded-lg.border-1.border-neutral-700.w-full.h-full.relative
-      .card-header.d-flex.align-items-center.p-3.border-neutral-700.justify-content-between
+      .card-header.d-flex.align-items-center.p-3.border-neutral-700.justify-content-between.border-bottom
         %div.flex.justify-content-center.font-medium.gap-2.align-items-center
           = image_tag("cheko_ai_profile.jpg", class:"rounded-full w-8 h-8")
           %h6.text-white.m-0 Cheko AI
+        %span
+          %h4.text-white New convo
         %p.mb-0.text-neutral-400
           %i.fa.fa-check
           %span Saved
@@ -21,12 +23,14 @@
               %span
               %span
         .prompt-container.absolute.bottom-5.w-full.left-0.px-10
-          = form_tag do
-            .form-group
-              -# %label{for: "prompt"} Prompt
-              %textarea.bg-neutral-600.border-1.border-neutral-500.placeholder-neutral-300.text-white.form-control#prompt{rows: "2"}(placeholder='Ask any question here. (Enter to send, Shift + Enter for new line)')
-            -# = submit_tag "Send", class: "bg-cheko mt-2 text-white px-4 py-2 rounded-full", id: "generate-btn"
-            -# %button.btn.btn-secondary#humanize-text-button Humanize Text
-            -# %button.btn.btn-secondary#add-citations-button Add Citations
+          %div.bg-new-cheko.p-2.rounded-full
+            = form_tag do
+              %label.sr-only{for: "chat"} Your message
+              .flex.items-center.pr-3.rounded-full.bg-new-cheko.dark:bg-gray-700.border-1.cheko-border-color-1
+                %textarea#prompt.block.mx-4.w-full.text-sm.bg-new-cheko.cheko-text-1.rounded-full.resize-none.border-0.focus:ring-transparent.focus:border-0.dark:bg-gray-800.dark:border-gray-600.dark:placeholder-gray-400.dark:text-white.dark:focus:ring-blue-500.dark:focus:border-blue-500{class: "p-2.5", placeholder: "Ask Cheko AI..", rows: "1"}
+                %button.inline-flex.justify-center.p-2.cheko-text-color-2.rounded-full.cursor-pointer.hover:bg-blue-100.dark:text-blue-500.dark:hover:bg-gray-600{type: "submit"}
+                  %i.fa-solid.fa-circle-arrow-up.text-2xl
+                  %span.sr-only Send message
+
 
 = javascript_pack_tag 'gpt3', 'data-turbolinks-track': 'reload'
