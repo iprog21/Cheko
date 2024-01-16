@@ -57,6 +57,10 @@ class Gpt3Controller < ApplicationController
     render json: { generated_text: generated_text, new_dialogue: newDialogue, usage: usage}
   end
 
+  def generate_v2
+
+  end
+
   def render_better_answer_bubble
     render partial: 'better_answer'
   end
