@@ -14,6 +14,11 @@
  *= require_self
  */
  @import "bootstrap/scss/bootstrap.scss";
+
+@font-face {
+  font-family: Sailec Regular;
+  src: url(assets/sailec-regular.otf);
+}
  
 .sidenav {
   height: 100%;

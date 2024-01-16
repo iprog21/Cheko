@@ -1,23 +1,40 @@
 %main.h-screen.flex.relative.gpt-wrapper
   = render "users/shared/sidebar"
   .flex.flex-1.items-center.justify-content-center.my-3.mr-3.rounded-lg.p-0.ans-wrapper.bg-content-cheko
-    .bg-neutral-800.rounded-lg.border-1.border-neutral-700.w-full.h-full.relative
+    .rounded-lg.border-1.border-neutral-700.w-full.h-full.relative.bg-content-cheko
       .card-header.d-flex.align-items-center.p-3.border-neutral-700.justify-content-between.border-bottom
         %div.flex.justify-content-center.font-medium.gap-2.align-items-center
-          = image_tag("cheko_ai_profile.jpg", class:"rounded-full w-8 h-8")
-          %h6.text-white.m-0 Cheko AI
+          -if user_signed_in?
+            = image_tag("cheko_ai_profile.jpg", class:"rounded-full w-8 h-8")
+            %h6.text-white.m-0 Cheko AI
+          -else
+            %a.cheko-text-1.rounded-md.bg-new-cheko.border-0.px-2.py-1.text-sm{href: new_user_session_path}
+              %i.fa-solid.fa-arrow-right-to-bracket
+              Login
+            %a.cheko-text-1.rounded-md.bg-new-cheko.border-0.px-2.py-1.text-sm{href: new_user_registration_path}
+              %i.fa-regular.fa-user
+              Signup
         %span
-          %h4.text-white New convo
-        %p.mb-0.text-neutral-400
-          %i.fa.fa-check
-          %span Saved
-      .card-body.px-5.py-3
+          %h4.text-white.text-xl.font-extrabold New convo
+
+        %button.cheko-text-1.rounded-md.bg-new-cheko.border-0.px-2.py-1.text-sm
+          %i.fa-regular.fa-floppy-disk
+          Save
+      .card-body.px-10.py-3
         .card-body-top
           #gpt-chat-container
-            .chat-bubble-cheko.bg-neutral-700.text-white.border-1.border-neutral-500.text-md.font-semibold
+            .chat-bubble-cheko.bg-new-cheko.text-white.border-0.text-base.font-semibold
               Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!
+            %div
+              %span.cheko-text-1 Try Cheko AI ->
+              %button.cheko-text-1.rounded-full.bg-content-cheko.border-1.cheko-border-color-1.px-2.py-1
+                %i.fa-solid.fa-apple-whole.text-red-600
+                Who invented gravity?
+              %button.cheko-text-1.rounded-full.bg-content-cheko.border-1.cheko-border-color-1.px-2.py-1
+                %i.fa-solid.fa-franc-sign.text-gray-600
+                What is the meaning of "bonjour"?
           -# Loading animation (enabled/disabled when prompting)
-          #cheko-loading-bubble.d-none.bg-neutral-700.border-1.border-neutral-500
+          #cheko-loading-bubble.d-none.bg-new-cheko.text-white.border-0.text-md.font-semibold
             .loading-icon
               %span
               %span
