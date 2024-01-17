@@ -12,6 +12,7 @@ function createChatBubble(content, sender) {
   const chatBubble = document.createElement("div");
   chatBubble.className =
     sender === "user" ? "chat-bubble-user" : "chat-bubble-cheko";
+  chatBubble.classList.add("bg-new-cheko", "text-white", "border-0", "text-base", "font-semibold");
 
   sender === "user" ? chatBubble.innerHTML = content : typewriterEffect(chatBubble, content);
 
@@ -31,17 +32,17 @@ function createChatBubble(content, sender) {
     rewriteButton.innerHTML = '<i class="fa-solid fa-repeat" style="color: #ffffff;"></i> Rewrite';
 
     const humanizeButton = document.createElement("button");
-    humanizeButton.classList.add('chat-button', 'pl-2');
+    humanizeButton.classList.add('chat-button', 'pl-2', 'cheko-text-1');
     humanizeButton.setAttribute("id", "humanize-btn");
     humanizeButton.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="color: #ffffff;"></i> Humanize';
 
     const copyButton = document.createElement("button");
-    copyButton.classList.add('chat-button');
-    copyButton.innerHTML = '<i class="fa-solid fa-copy" style="color: #ffffff;"></i>';
+    copyButton.classList.add('chat-button', 'cheko-text-1');
+    copyButton.innerHTML = '<i class="fa-solid fa-copy cheko-text-1" ></i>';
 
     const editButton = document.createElement("button");
-    editButton.classList.add('chat-button', 'pl-2');
-    editButton.innerHTML = '<i class="fa-solid fa-edit" style="color: #ffffff;"></i>';
+    editButton.classList.add('chat-button', 'pl-2', 'cheko-text-1');
+    editButton.innerHTML = '<i class="fa-solid fa-edit cheko-text-1" ></i>';
 
     rewriteHumanizeDiv.appendChild(rewriteButton);
     rewriteHumanizeDiv.appendChild(humanizeButton);
@@ -140,6 +141,11 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   // currentDialogue = json.new_dialogue;
   // console.log(currentDialogue);
 
+  const titleContainer = document.createElement("div"); // Holds the title and icon
+  titleContainer.classList.add('pb-2')
+  titleContainer.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-align-left"></i> Answer </span>';
+  chatContainer.appendChild(titleContainer);
+
   // 5. Get response and add as a chat bubble:
   const chekoResponse = json.generated_text
     .split("\n")
@@ -221,13 +227,14 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   var headerDiv = document.createElement("div");
   relatedDiv.style.maxWidth = '75%';
   relatedDiv.style.marginBottom = '16px';
-  headerDiv.innerHTML = '<span class="title-header"><i class="fa-solid fa-layer-group" style="color: #ffffff;"></i> Related</span>'
+  headerDiv.classList.add('pt-4 pb-2');
+  headerDiv.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-layer-group" style="color: #ffffff;"></i> Related</span>'
   relatedDiv.appendChild(headerDiv);
 
   chekoAutomatedResponse.slice(0, 3).forEach(response => {
     const str = response.replace(/^\d+\.\s*/, '').toLowerCase();
     let bodyDiv = document.createElement("div");
-    bodyDiv.classList.add('related-question');
+    bodyDiv.classList.add('related-question', 'cheko-border-color-1');
     bodyDiv.innerHTML = str + '<i class="fa-solid fa-plus" style="color: #ffffff;"></i>';
     bodyDiv.style.pointer = 'cursor';
     relatedDiv.appendChild(bodyDiv);
@@ -279,13 +286,15 @@ async function scrapeQuestion(url) {
 
     mainContainer.classList.add('flex', 'flex-col', 'pb-4');
     mainContainer.style.maxWidth = '75%';
+    titleContainer.classList.add('pt-4 pb-2');
 
-    titleContainer.innerHTML = '<span class="title-header"><i class="fa-solid fa-list-ul" style="color: #ffffff;"></i> Sources </span>';
+    titleContainer.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-list-ul" style="color: #ffffff;"></i> Sources </span>';
     mainContainer.appendChild(titleContainer);
 
     sourcesContainer.classList.add('flex', 'flex-row', 'justify-between');
 
     results.forEach(result => {
+      console.log(result)
       const div = document.createElement("div");
       div.classList.add('source-box')
 

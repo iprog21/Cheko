@@ -58,7 +58,7 @@ class Gpt3Controller < ApplicationController
   end
 
   def generate_v2
-    max_retry = 8
+    max_retry = 10
     num_retry = 0
     before_start_task_count_num = Octoparse.get_non_exported_data[:data_size]
 
