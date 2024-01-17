@@ -163,5 +163,6 @@ Rails.application.routes.draw do
   end
   get '/cheko-ai' => 'gpt3#index'
   post '/gpt3/generate' => 'gpt3#generate'
+  post '/gpt3/generate_v2' => 'gpt3#generate_v2'
   get '/gpt3/render_better_answer_bubble' => 'gpt3#render_better_answer_bubble'
 end

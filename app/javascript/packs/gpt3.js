@@ -105,7 +105,14 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   let response;
 
   try {
-    response = await fetch("/gpt3/generate", {
+    // response = await fetch("/gpt3/generate", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ prompt, currentDialogue }),
+    // });
+    response = await fetch("/gpt3/generate_v2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -118,16 +125,16 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     setLoading(false);
     return;
   }
-  console.log(response.json.generated_text);
   const json = await response.json();
+  console.log(json.generated_text);
 
   // -- Event Log --
-  window.LOG_EVENTS.logSubmitPrompt(
-    json.usage.prompt_tokens,
-    json.usage.completion_tokens,
-    json.usage.total_tokens,
-    json.usage.model
-  );
+  // window.LOG_EVENTS.logSubmitPrompt(
+  //   json.usage.prompt_tokens,
+  //   json.usage.completion_tokens,
+  //   json.usage.total_tokens,
+  //   json.usage.model
+  // );
 
   // // 4. Maintain a string record of the current dialogue between the user and the chatbot.
   // currentDialogue = json.new_dialogue;
@@ -171,7 +178,17 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   let automatedResponse;
 
   try {
-    automatedResponse = await fetch("/gpt3/generate", {
+    // automatedResponse = await fetch("/gpt3/generate", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     prompt: automatedQuestion,
+    //     currentDialogue: currentDialogue
+    //   }),
+    // });
+    automatedResponse = await fetch("/gpt3/generate_v2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

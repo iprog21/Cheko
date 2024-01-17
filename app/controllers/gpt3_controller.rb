@@ -57,6 +57,32 @@ class Gpt3Controller < ApplicationController
     render json: { generated_text: generated_text, new_dialogue: newDialogue, usage: usage}
   end
 
+  def generate_v2
+    max_retry = 8
+    num_retry = 0
+    before_start_task_count_num = Octoparse.get_non_exported_data[:data_size]
+
+    begin
+      Octoparse.start_task(params[:prompt])
+      exported_data = Octoparse.get_non_exported_data
+      puts "generated_text:: #{exported_data[:text]}"
+      if exported_data[:data_size] > before_start_task_count_num
+        render json: { generated_text: exported_data[:text]}
+        return
+      else
+        raise StandardError.new("task is not finish")
+      end
+    rescue StandardError => e
+      num_retry +=1
+      if num_retry == max_retry
+        render json: { generated_text: "Server Timeout error."}
+        return
+      end
+      sleep 10
+      retry
+    end
+  end
+
   def render_better_answer_bubble
     render partial: 'better_answer'
   end

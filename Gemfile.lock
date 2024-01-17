@@ -330,6 +330,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise
   dotenv-rails
+  faraday (~> 2.7, >= 2.7.11)
   font-awesome-sass (~> 6.4.0)
   haml
   httparty
@@ -359,4 +360,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.3.4
+   2.4.22
