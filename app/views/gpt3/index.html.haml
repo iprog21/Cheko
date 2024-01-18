@@ -43,9 +43,9 @@
           %div.bg-new-cheko.p-2.rounded-full
             = form_tag do
               %label.sr-only{for: "chat"} Your message
-              .flex.items-center.pr-3.rounded-full.bg-new-cheko.dark:bg-gray-700.border-1.cheko-border-color-1
-                %textarea#prompt.block.mx-4.w-full.text-sm.bg-new-cheko.cheko-text-1.rounded-full.resize-none.border-0.focus:ring-transparent.focus:border-0.dark:bg-gray-800.dark:border-gray-600.dark:placeholder-gray-400.dark:text-white.dark:focus:ring-blue-500.dark:focus:border-blue-500{class: "p-2.5", placeholder: "Ask Cheko AI..", rows: "1"}
-                %button.inline-flex.justify-center.p-2.cheko-text-color-2.rounded-full.cursor-pointer.hover:bg-blue-100.dark:text-blue-500.dark:hover:bg-gray-600{type: "submit"}
+              .flex.items-center.pr-3.rounded-full.bg-new-cheko.border-1.cheko-border-color-1
+                %textarea#prompt.block.mx-4.w-full.text-sm.bg-new-cheko.cheko-text-1.rounded-full.resize-none.border-0.focus:ring-transparent.focus:border-0{class: "p-2.5", placeholder: "Ask Cheko AI..", rows: "1"}
+                %button.inline-flex.justify-center.p-2.cheko-text-color-2.rounded-full.cursor-pointer.hover:bg-blue-100{type: "submit"}
                   %i.fa-solid.fa-circle-arrow-up.text-2xl
                   %span.sr-only Send message
 

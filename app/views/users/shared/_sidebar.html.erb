@@ -17,10 +17,22 @@
     <%= render "users/shared/sidebar_item", title: "Profs to Pick", path: professors_path, icon: "chalkboard-user" %>
     <%= render "users/shared/sidebar_convo_item", title: "Convo", icon: "comments" %>
   </div>
-  <div class="grid px-2.5 w-full mt-3 flex h-full">
-      <button class="p-2 py-2 text-neutral-500 new-convo-btn rounded-md mt-auto text-sm">
+  <div class="grid px-2.5 w-full my-3 flex h-full">
+      <button class="p-2 py-2 text-white bg-new-cheko-2 new-convo-btn rounded-md mt-auto text-base font-extrabold">
         <i class="fa-regular fa-comments text-md me-1"></i>
         <span>New convo</span>
       </button>
+  </div>
+  <div>
+    <button class="pl-2 pr-1 py-2 cheko-text-1 new-convo-btn rounded-md mt-auto text-xs">
+      <i class="fa-solid fa-download text-md me-1"></i>
+      <span>Cheko Mobile</span>
+    </button>
+    <div class="check-button-divider-1"></div>
+
+    <button class="p-2 py-2 cheko-text-1 new-convo-btn rounded-md mt-auto text-xs">
+      <i class="fa-brands fa-chrome text-md me-1"></i>
+      <span>Cheko for Chrome</span>
+    </button>
   </div>
 </div>
