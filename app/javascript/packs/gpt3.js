@@ -184,17 +184,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   let automatedResponse;
 
   try {
-    // automatedResponse = await fetch("/gpt3/generate", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     prompt: automatedQuestion,
-    //     currentDialogue: currentDialogue
-    //   }),
-    // });
-    automatedResponse = await fetch("/gpt3/generate_v2", {
+    automatedResponse = await fetch("/gpt3/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -204,6 +194,16 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
         currentDialogue: currentDialogue
       }),
     });
+    // automatedResponse = await fetch("/gpt3/generate_v2", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     prompt: automatedQuestion,
+    //     currentDialogue: currentDialogue
+    //   }),
+    // });
   } catch (e) {
     console.log(e);
 
@@ -227,7 +227,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   var headerDiv = document.createElement("div");
   relatedDiv.style.maxWidth = '75%';
   relatedDiv.style.marginBottom = '16px';
-  headerDiv.classList.add('pt-4 pb-2');
+  headerDiv.classList.add('pt-4', 'pb-2');
   headerDiv.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-layer-group" style="color: #ffffff;"></i> Related</span>'
   relatedDiv.appendChild(headerDiv);
 
@@ -286,7 +286,7 @@ async function scrapeQuestion(url) {
 
     mainContainer.classList.add('flex', 'flex-col', 'pb-4');
     mainContainer.style.maxWidth = '75%';
-    titleContainer.classList.add('pt-4 pb-2');
+    titleContainer.classList.add('pt-4', 'pb-2');
 
     titleContainer.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-list-ul" style="color: #ffffff;"></i> Sources </span>';
     mainContainer.appendChild(titleContainer);
