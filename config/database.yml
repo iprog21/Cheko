@@ -12,8 +12,6 @@ default: &default
 development:
   <<: *default
   database: cheko_development
-#  username: mariageraldine
-#  password: superuser
   username: postgres
   password: postgres
   host: localhost
