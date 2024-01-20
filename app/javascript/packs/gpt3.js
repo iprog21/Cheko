@@ -106,20 +106,14 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   let response;
 
   try {
-    // response = await fetch("/gpt3/generate", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ prompt, currentDialogue }),
-    // });
-    response = await fetch("/gpt3/generate_v2", {
+    response = await fetch("/gpt3/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ prompt, currentDialogue }),
     });
+
   } catch (e) {
     console.log(e);
 
@@ -130,16 +124,16 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   console.log(json.generated_text);
 
   // -- Event Log --
-  // window.LOG_EVENTS.logSubmitPrompt(
-  //   json.usage.prompt_tokens,
-  //   json.usage.completion_tokens,
-  //   json.usage.total_tokens,
-  //   json.usage.model
-  // );
+  window.LOG_EVENTS.logSubmitPrompt(
+    json.usage.prompt_tokens,
+    json.usage.completion_tokens,
+    json.usage.total_tokens,
+    json.usage.model
+  );
 
-  // // 4. Maintain a string record of the current dialogue between the user and the chatbot.
-  // currentDialogue = json.new_dialogue;
-  // console.log(currentDialogue);
+  // 4. Maintain a string record of the current dialogue between the user and the chatbot.
+  currentDialogue = json.new_dialogue;
+  console.log(currentDialogue);
 
   const titleContainer = document.createElement("div"); // Holds the title and icon
   titleContainer.classList.add('pb-2')
