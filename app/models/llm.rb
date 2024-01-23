@@ -11,7 +11,7 @@ class Llm
     url = URI("https://api.perplexity.ai/chat/completions")
     prompts = opts[:prompts]
     prompt = opts[:prompt]
-    model = opts[:model] || "mistral-7b-instruct"
+    model = opts[:model] || "pplx-7b-online"
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -31,7 +31,7 @@ class Llm
   def self.go opts={}
     prompts = opts[:prompts]
     prompt = opts[:prompt]
-    model = opts[:model] || "mistral-7b-instruct"
+    model = opts[:model] || "pplx-7b-online"
     is_full_prompt = opts[:is_full_prompt] || false
     max_attempts = opts[:max_attempts] || 1
     attempts = 0

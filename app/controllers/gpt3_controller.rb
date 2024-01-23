@@ -17,11 +17,11 @@ class Gpt3Controller < ApplicationController
 
     # client = OpenAI::Client.new
 
-    start_writing_prompt = "Generate a conversation with ChatGPT where a student seeks advice on completing homework efficiently. The conversation should cover time management techniques, effective study habits, and tips for staying focused. Include prompts for practical solutions and actionable steps that the student can implement to finish their homework quickly while maintaining academic integrity and understanding of the material."
+    start_writing_prompt = "Generate a conversation with ChatGPT where a student seeks advice on completing homework efficiently. The conversation should cover time management techniques, effective study habits, and tips for staying focused. Include prompts for practical solutions and actionable steps that the student can implement to finish their homework quickly while maintaining academic integrity and understanding of the material. Show complete results"
 
     # 1. Default
     initialDialogue = [
-      { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
+      { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, complete and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
       { role: "assistant", content: "Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!"},
       { role:"user", content:start_writing_prompt }
     ]
@@ -29,7 +29,7 @@ class Gpt3Controller < ApplicationController
     initialDialogue.append({role:"assistant",content:section_content})
 
     # 2. Turn prompt into a message object
-    prompt = {role: "user", content: params[:prompt]}
+    prompt = {role: "user", content: "Complete Results for: #{params[:prompt]}"}
     initialDialogue.append(prompt)
 
     # 3. Initialize/Extend currentDialogue
@@ -74,7 +74,7 @@ class Gpt3Controller < ApplicationController
         render json: { generated_text: "Server Timeout error."}
         return
       end
-      sleep 10
+      sleep 5
       retry
     end
   end
