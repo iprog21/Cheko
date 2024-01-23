@@ -51,6 +51,11 @@
   border-color: #3b3b3b !important;
 }
 
+.cheko-chat-container {
+  height: 80vh;
+  overflow: auto;
+}
+
 .check-button-divider-1 {
   border-left: 1px solid #373737;
   background: transparent;

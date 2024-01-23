@@ -1,5 +1,7 @@
 let currentDialogue = null; // Stores the current conversation. Messages[]
 let promptsCount = 0; // How many prompts have been sent so far?
+let autoScrollCount = 0;
+let autoScrollMaxCount = 30000;
 
 /**
  * Returns a Chat Bubble Element as a Div.
@@ -62,6 +64,16 @@ function createChatBubble(content, sender) {
   }
 }
 
+function autoScroll() {
+  autoScrollCount += 2000;
+  if (autoScrollCount <= autoScrollMaxCount) {
+    document.getElementById('auto-scroll-anchor').scrollIntoView({ behavior: "smooth" });
+
+    // document.getElementById('cheko-chat-sub-container').scrollTo(0,document.getElementById('cheko-chat-sub-container').scrollHeight);
+    setTimeout(() => autoScroll(), 2000);
+  }
+}
+
 function typewriterEffect(element, content, i = 0) {
   element.innerHTML += content[i];
 
@@ -74,7 +86,7 @@ function typewriterEffect(element, content, i = 0) {
 
 const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   promptsCount++; // Increase prompt count
-
+  autoScrollCount = 0;
   // Utils:
   const chekoLoadingBubble = document.getElementById("cheko-loading-bubble");
   function setLoading(bool) {
@@ -87,11 +99,12 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
 
   // 1. Start requesting: Clear Chatbox, Disable Button, Play Loading Animation
   document.querySelector("textarea#prompt").value = ""; // clear
+  document.querySelector("textarea#prompt").disabled=true;
   // document.getElementById("generate-btn").setAttribute("disabled", true); // disable
   setLoading(true); // loading animation
 
   // Scroll into view
-  const scrollContainer = document.getElementsByClassName("card-body-top")[0];
+  let scrollContainer = document.getElementById('cheko-chat-sub-container');
   setTimeout(() => {
     scrollContainer.scrollTop = scrollContainer.scrollHeight;
   }, 50);
@@ -121,8 +134,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     return;
   }
   const json = await response.json();
-  console.log(json.generated_text);
-
+  autoScroll();
   // -- Event Log --
   window.LOG_EVENTS.logSubmitPrompt(
     json.usage.prompt_tokens,
@@ -225,6 +237,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   headerDiv.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-layer-group" style="color: #ffffff;"></i> Related</span>'
   relatedDiv.appendChild(headerDiv);
 
+
   chekoAutomatedResponse.slice(0, 3).forEach(response => {
     const str = response.replace(/^\d+\.\s*/, '').toLowerCase();
     let bodyDiv = document.createElement("div");
@@ -234,15 +247,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     relatedDiv.appendChild(bodyDiv);
   });
 
-  setTimeout(() => {
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
-  }, 50);
-
-  setTimeout(() => {
-    run(url, chatContainer, relatedDiv);
-    setLoading(false); // loading animation
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
-  }, 2000);
+  document.querySelector("textarea#prompt").disabled=false;
 
   // humanizeAnswers();
 
@@ -253,6 +258,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     responseJson.usage.total_tokens,
     responseJson.usage.model
   );
+
 };
 
 async function fetchData(url) {

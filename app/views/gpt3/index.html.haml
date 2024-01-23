@@ -20,8 +20,8 @@
         %button.cheko-text-1.rounded-md.bg-new-cheko.border-0.px-2.py-1.text-sm
           %i.fa-regular.fa-floppy-disk
           Save
-      .card-body.px-10.py-3
-        .card-body-top
+      .card-body.px-10.py-3.cheko-chat-container
+        .card-body-top#cheko-chat-sub-container
           #gpt-chat-container
             .chat-bubble-cheko.bg-new-cheko.text-white.border-0.text-base.font-semibold
               Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!
@@ -39,6 +39,7 @@
               %span
               %span
               %span
+          #auto-scroll-anchor
         .prompt-container.absolute.bottom-5.w-full.left-0.px-10
           %div.bg-new-cheko.p-2.rounded-full
             = form_tag do
