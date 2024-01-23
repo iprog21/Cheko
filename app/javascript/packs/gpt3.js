@@ -68,8 +68,6 @@ function autoScroll() {
   autoScrollCount += 2000;
   if (autoScrollCount <= autoScrollMaxCount) {
     document.getElementById('auto-scroll-anchor').scrollIntoView({ behavior: "smooth" });
-
-    // document.getElementById('cheko-chat-sub-container').scrollTo(0,document.getElementById('cheko-chat-sub-container').scrollHeight);
     setTimeout(() => autoScroll(), 2000);
   }
 }
@@ -134,6 +132,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     return;
   }
   const json = await response.json();
+  console.log(json.generated_text);
   autoScroll();
   // -- Event Log --
   window.LOG_EVENTS.logSubmitPrompt(
@@ -246,6 +245,11 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     bodyDiv.style.pointer = 'cursor';
     relatedDiv.appendChild(bodyDiv);
   });
+
+  setTimeout(() => {
+    run(url, chatContainer, relatedDiv);
+    setLoading(false); // loading animation
+  }, 2000);
 
   document.querySelector("textarea#prompt").disabled=false;
 
