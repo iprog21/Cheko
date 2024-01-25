@@ -6,7 +6,8 @@
         %div.flex.justify-content-center.font-medium.gap-2.align-items-center
           -if user_signed_in?
             = image_tag("cheko_ai_profile.jpg", class:"rounded-full w-8 h-8")
-            %h6.text-white.m-0 Cheko AI
+            %h6.text-white.m-0
+              = current_user.name
           -else
             %a.cheko-text-1.rounded-md.bg-new-cheko.border-0.px-2.py-1.text-sm{href: new_user_session_path}
               %i.fa-solid.fa-arrow-right-to-bracket
