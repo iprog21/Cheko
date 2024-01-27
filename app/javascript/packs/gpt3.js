@@ -1,4 +1,6 @@
 let currentDialogue = null; // Stores the current conversation. Messages[]
+let userMessages = [];
+let assistantMessages = [];
 let promptsCount = 0; // How many prompts have been sent so far?
 let autoScrollCount = 0;
 let autoScrollMaxCount = 30000;
@@ -133,6 +135,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   }
   const json = await response.json();
   console.log(json.generated_text);
+  assistantMessages.push(json.generated_text);
   autoScroll();
   // -- Event Log --
   window.LOG_EVENTS.logSubmitPrompt(
@@ -358,6 +361,96 @@ async function run(url, chatContainer, relatedDiv) {
 
 };
 
+const saveConversation = async () => {
+  let messageTitle = document.getElementById('message_title').innerText;
+  let response =  await fetch("/gpt3/save_conversation", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: messageTitle,
+      user_messages: userMessages,
+      assistant_messages: assistantMessages,
+      new_dialogue: currentDialogue
+    }),
+  });
+
+  const json = await response.json();
+
+  document.getElementById('conversation_id').value = json.id;
+}
+
+const updateTitle = async () => {
+  toggleSaveConversationBtn(true);
+
+  let messageTitle = document.getElementById('message_title').innerText;
+  let conversationId = document.getElementById('conversation_id').value;
+  if (conversationId == null || conversationId == undefined || conversationId == '') {
+    saveConversation();
+  } else {
+    let response =  await fetch("/gpt3/update_title", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: conversationId,
+        title: messageTitle
+      }),
+    });
+  }
+}
+
+const updateConversation = async () => {
+  toggleSaveConversationBtn(true);
+
+  let messageTitle = document.getElementById('message_title').innerText;
+  let conversationId = document.getElementById('conversation_id').value;
+  if (conversationId == null || conversationId == undefined || conversationId == '') {
+    saveConversation();
+  } else {
+    let response =  await fetch("/gpt3/update_conversation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: conversationId,
+        title: messageTitle,
+        user_messages: userMessages,
+        assistant_messages: assistantMessages,
+        new_dialogue: currentDialogue
+      }),
+    });
+  }
+}
+
+function toggleSaveConversationBtn(is_saved) {
+  let save_btn = document.getElementById('save_conversation_btn');
+  let save_text = document.getElementById('saved_text');
+  if (is_saved) {
+    if (!save_btn.classList.contains("hidden")) {
+      save_btn.classList.add('hidden');
+      save_btn.classList.remove('block');
+    }
+    if (!save_text.classList.contains("block")) {
+      save_text.classList.add('block');
+      save_text.classList.remove('hidden');
+    }
+  } else {
+    if (!save_btn.classList.contains("block")) {
+      save_btn.classList.add('block');
+      save_btn.classList.remove('hidden');
+    }
+
+    if (!save_text.classList.contains("hidden")) {
+      save_text.classList.add('hidden');
+      save_text.classList.remove('block');
+    }
+  }
+}
+
 // -- Submit Event Listener --
 const promptArea = document.querySelector("textarea#prompt");
 
@@ -372,8 +465,34 @@ promptArea.addEventListener("keydown", function (e) {
 
     // Do something else such as send the message to back-end
     // ...
+    userMessages.push(promptArea.value);
     generateText(promptArea.value);
+    toggleSaveConversationBtn(false);
   }
+});
+
+
+let titleContainer = document.getElementById('message_title');
+console.log(titleContainer);
+titleContainer.addEventListener("keydown", function (e) {
+  // Get the code of pressed key
+  const keyCode = e.which || e.keyCode;
+
+  // 13 represents the Enter key
+  if (keyCode === 13 && !e.shiftKey) {
+    // Don't generate a new line
+    e.preventDefault();
+    titleContainer.blur();
+    updateTitle();
+    console.log("working...")
+    toggleSaveConversationBtn(false);
+  }
+});
+
+
+let saveConversationBtn = document.getElementById('save_conversation_btn');
+saveConversationBtn.addEventListener("click", function (e) {
+  updateConversation();
 });
 
 document.querySelector("form").addEventListener("submit", (e) => {

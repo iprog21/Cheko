@@ -16,11 +16,22 @@
               %i.fa-regular.fa-user
               Signup
         %span
-          %h4.text-white.text-xl.font-extrabold New convo
+          %h4.text-white.text-xl.font-extrabold#message_title{"contenteditable": true}
+            - if @conversation.present?
+              = @conversation.title_name
+            - else
+              New convo
+          %input#conversation_id{name: "conversation_id", type: "hidden", value: (@conversation && @conversation.id)}/
+          - if @conversation.present?
+            %input#assistant_messages{name: "assistant_messages", type: "hidden", value: (raw @conversation.assistant_messages)}/
+            %input#user_messages{name: "user_messages", type: "hidden", value: (raw @conversation.user_messages)}/
 
-        %button.cheko-text-1.rounded-md.bg-new-cheko.border-0.px-2.py-1.text-sm
+        %button#save_conversation_btn.cheko-text-1.rounded-md.bg-new-cheko.border-0.px-2.py-1.text-sm
           %i.fa-regular.fa-floppy-disk
           Save
+        %span#saved_text.cheko-text-1.bg-new-cheko.border-0.px-2.py-1.text-sm.hidden
+          %i.fa-regular.fa-floppy-disk
+          Saved
       .card-body.px-10.py-3.cheko-chat-container
         .card-body-top#cheko-chat-sub-container
           #gpt-chat-container
@@ -34,6 +45,32 @@
               %button.cheko-text-1.rounded-full.bg-content-cheko.border-1.cheko-border-color-1.px-2.py-1
                 %i.fa-solid.fa-franc-sign.text-gray-600
                 What is the meaning of "bonjour"?
+            - if @conversation.present?
+              - assistant_messages = @conversation.assistant_messages
+              - @conversation.user_messages.each_with_index do |user_message, index|
+                .chat-bubble-user.bg-new-cheko.text-white.border-0.text-base.font-semibold
+                  = user_message
+                - if assistant_messages && assistant_messages[index]
+                  .pb-2
+                    %span.title-header.text-xl.font-extrabold
+                      %i.fa-solid.fa-align-left
+                      Answer
+                  .pb-4{style: "max-width: 75%;"}
+                    .chat-bubble-cheko.bg-new-cheko.text-white.border-0.text-base.font-semibold
+                      = assistant_messages[index]
+                    .flex.flex-row.justify-between
+                      %div
+                        %button.chat-button
+                          %i.fa-solid.fa-repeat{style: "color: #ffffff;"}
+                          Rewrite
+                        %button#humanize-btn.chat-button.pl-2.cheko-text-1
+                          %i.fa-solid.fa-wand-magic-sparkles{style: "color: #ffffff;"}
+                          Humanize
+                      %dev
+                        %button.chat-button.cheko-text-1
+                          %i.fa-solid.fa-copy.cheko-text-1
+                        %button.chat-button.pl-2.cheko-text-1
+                          %i.fa-solid.fa-edit.cheko-text-1
           -# Loading animation (enabled/disabled when prompting)
           #cheko-loading-bubble.d-none.bg-new-cheko.text-white.border-0.text-md.font-semibold
             .loading-icon

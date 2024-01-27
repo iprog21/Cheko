@@ -21,11 +21,11 @@ class Gpt3Controller < ApplicationController
       initialDialogue.append({role:"assistant",content:section_content})
 
       # 2. Turn prompt into a message object
-      prompt = {role: "user", content: "Complete Results for: #{params[:prompt]}"}
+      prompt = {role: "user", content: params[:prompt]}
       initialDialogue.append(prompt)
 
       # 3. Initialize/Extend currentDialogue
-      currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
+      # currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
 
       # 4. REQUEST via PERPLEXITY.AI API
       response = Llm.go(prompts:initialDialogue,is_full_prompt: true)
@@ -33,7 +33,7 @@ class Gpt3Controller < ApplicationController
       # 5. Process OpenAI RESPONSE / PERLEXITY.AI RESPONSE
       generated_text = response.dig("choices", 0, "message", "content")
 
-      newDialogue = currentDialogue.concat([response.dig("choices", 0, "message")])
+      newDialogue = initialDialogue.concat([response.dig("choices", 0, "message")])
 
       raise StandardError if generated_text.include?('cheko') || generated_text.include?('Cheko')
 
@@ -80,10 +80,62 @@ class Gpt3Controller < ApplicationController
     end
   end
 
+  def save_conversation
+    if user_signed_in?
+      convo = Conversation.new
+
+      convo.title_name = params[:title]
+      convo.messages = params[:new_dialogue]
+      convo.user_messages = params[:user_messages]
+      convo.assistant_messages = params[:assistant_messages]
+      convo.user_id = current_user.id
+
+      convo.save
+
+      render json: convo
+    else
+      render json: {error: "You need to sign in before saving a convo. Please sign in."}, status: 422
+    end
+  end
+
+  def update_title
+    if user_signed_in?
+      convo = Conversation.find(params[:id])
+
+      convo.title_name = params[:title]
+      convo.save
+
+      render json: convo
+    else
+      render json: {error: "You need to sign in before saving a convo. Please sign in."}, status: 422
+    end
+  end
+
+  def update_conversation
+    if user_signed_in?
+      convo = Conversation.find(params[:id])
+
+      convo.title_name = params[:title]
+      convo.messages = params[:new_dialogue]
+      convo.user_messages = params[:user_messages]
+      convo.assistant_messages = params[:assistant_messages]
+      convo.save
+
+      render json: convo
+    else
+      render json: {error: "You need to sign in before saving a convo. Please sign in."}, status: 422
+    end
+  end
+
   def render_better_answer_bubble
     render partial: 'better_answer'
   end
 
   def index
+    if params[:conversation_id].present?
+      @conversation = Conversation.find(params[:conversation_id])
+      @user_conversation_start_count = 4
+      @assitant_conversation_start_count = 5
+    end
   end
 end
