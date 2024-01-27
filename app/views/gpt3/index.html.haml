@@ -71,6 +71,32 @@
                           %i.fa-solid.fa-copy.cheko-text-1
                         %button.chat-button.pl-2.cheko-text-1
                           %i.fa-solid.fa-edit.cheko-text-1
+                            .flex.flex-col.pb-4{style: "max-width: 75%;"}
+                  - source_list = @sources.where(prompt_title: user_message).first
+                  - if source_list.present?
+                    .pt-4.pb-2
+                      %span.title-header.text-xl.font-extrabold
+                        %i.fa-solid.fa-list-ul{style: "color: #ffffff;"}
+                        Sources
+                    .flex.flex-row.justify-between
+                      - source_list.result.each do |source|
+                        .source-box
+                          %a.source-link{href: source['link'], target: "_blank"}
+                            = source['title']
+                          .flex.flex-row
+                            %img.size-5{src: source['faviconUrl']}/
+                  - related_list = @relates.where(prompt_title: user_message).first
+                  - if related_list.present?
+                    %div{style: "max-width: 75%; margin-bottom: 16px;"}
+                      .pt-4.pb-2
+                        %span.title-header.text-xl.font-extrabold
+                          %i.fa-solid.fa-layer-group{style: "color: #ffffff;"}
+                          Related
+                      - related_list.result.each do |related|
+                        .related-question.cheko-border-color-1
+                          = related
+                          %i.fa-solid.fa-plus{style: "color: #ffffff;"}
+
           -# Loading animation (enabled/disabled when prompting)
           #cheko-loading-bubble.d-none.bg-new-cheko.text-white.border-0.text-md.font-semibold
             .loading-icon

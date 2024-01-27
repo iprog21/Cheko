@@ -1,6 +1,8 @@
 let currentDialogue = null; // Stores the current conversation. Messages[]
 let userMessages = [];
 let assistantMessages = [];
+let sourceList = [];
+let relatedList = [];
 let promptsCount = 0; // How many prompts have been sent so far?
 let autoScrollCount = 0;
 let autoScrollMaxCount = 30000;
@@ -239,9 +241,10 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   headerDiv.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-layer-group" style="color: #ffffff;"></i> Related</span>'
   relatedDiv.appendChild(headerDiv);
 
-
+  let processedRelatedList = []
   chekoAutomatedResponse.slice(0, 3).forEach(response => {
     const str = response.replace(/^\d+\.\s*/, '').toLowerCase();
+    processedRelatedList.push(str);
     let bodyDiv = document.createElement("div");
     bodyDiv.classList.add('related-question', 'cheko-border-color-1');
     bodyDiv.innerHTML = str + '<i class="fa-solid fa-plus" style="color: #ffffff;"></i>';
@@ -249,8 +252,10 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     relatedDiv.appendChild(bodyDiv);
   });
 
+  relatedList.push({prompt: prompt, results: processedRelatedList});
+
   setTimeout(() => {
-    run(url, chatContainer, relatedDiv);
+    run(url, prompt, chatContainer, relatedDiv);
     setLoading(false); // loading animation
   }, 2000);
 
@@ -276,7 +281,7 @@ async function fetchData(url) {
   return response.json();
 }
 
-async function scrapeQuestion(url) {
+async function scrapeQuestion(url, prompt) {
   try {
     const data = await fetchData(url);
     console.log(data.items.slice(0, 4));
@@ -286,6 +291,8 @@ async function scrapeQuestion(url) {
       const faviconUrl = `https://www.google.com/s2/favicons?domain=${new URL(link).hostname}`;
       return { title, link, faviconUrl };
     });
+
+    sourceList.push({prompt: prompt, results: results});
 
     const mainContainer = document.createElement("div"); // Holds the title and source boxes
     const titleContainer = document.createElement("div"); // Holds the title and icon
@@ -349,8 +356,8 @@ function addDivListener() {
   }
 }
 
-async function run(url, chatContainer, relatedDiv) {
-  scrapeQuestion(url).then(container => {
+async function run(url, prompt, chatContainer, relatedDiv) {
+  scrapeQuestion(url, prompt).then(container => {
     chatContainer.appendChild(container);
   });
 
@@ -372,7 +379,9 @@ const saveConversation = async () => {
       title: messageTitle,
       user_messages: userMessages,
       assistant_messages: assistantMessages,
-      new_dialogue: currentDialogue
+      new_dialogue: currentDialogue,
+      related_list: relatedList,
+      source_list: sourceList
     }),
   });
 
@@ -420,7 +429,9 @@ const updateConversation = async () => {
         title: messageTitle,
         user_messages: userMessages,
         assistant_messages: assistantMessages,
-        new_dialogue: currentDialogue
+        new_dialogue: currentDialogue,
+        related_list: relatedList,
+        source_list: sourceList
       }),
     });
   }

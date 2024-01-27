@@ -92,6 +92,9 @@ class Gpt3Controller < ApplicationController
 
       convo.save
 
+      save_related_list(convo, params)
+      save_source_list(convo, params)
+
       render json: convo
     else
       render json: {error: "You need to sign in before saving a convo. Please sign in."}, status: 422
@@ -121,6 +124,9 @@ class Gpt3Controller < ApplicationController
       convo.assistant_messages = params[:assistant_messages]
       convo.save
 
+      save_related_list(convo, params)
+      save_source_list(convo, params)
+
       render json: convo
     else
       render json: {error: "You need to sign in before saving a convo. Please sign in."}, status: 422
@@ -134,8 +140,36 @@ class Gpt3Controller < ApplicationController
   def index
     if params[:conversation_id].present?
       @conversation = Conversation.find(params[:conversation_id])
-      @user_conversation_start_count = 4
-      @assitant_conversation_start_count = 5
+      @sources = @conversation.conversation_sources
+      @relates = @conversation.conversation_relateds
+    end
+  end
+
+  private
+
+  def save_source_list(convo, params)
+    if params[:source_list].present?
+      params[:source_list].each do |source|
+        conversation_source = convo.conversation_sources.first_or_initialize(
+          conversation_id: convo.id,
+          prompt_title: source[:prompt]
+          )
+        conversation_source.result = source[:results]
+        conversation_source.save
+      end
+    end
+  end
+
+  def save_related_list(convo, params)
+    if params[:related_list].present?
+      params[:related_list].each do |relate|
+        conversation_related = convo.conversation_relateds.first_or_initialize(
+          conversation_id: convo.id,
+          prompt_title: relate[:prompt],
+          )
+        conversation_related.result = relate[:results]
+        conversation_related.save
+      end
     end
   end
 end
