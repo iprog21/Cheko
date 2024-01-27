@@ -8,6 +8,9 @@
             = image_tag("cheko_ai_profile.jpg", class:"rounded-full w-8 h-8")
             %h6.text-white.m-0
               = current_user.name
+            = link_to destroy_user_session_url, method: :delete, class: 'cheko-text-1 rounded-md bg-new-cheko border-0 px-2 py-1 text-sm' do
+              %i.fa-solid.fa-arrow-right-from-bracket
+              Log out
           -else
             %a.cheko-text-1.rounded-md.bg-new-cheko.border-0.px-2.py-1.text-sm{href: new_user_session_path}
               %i.fa-solid.fa-arrow-right-to-bracket
