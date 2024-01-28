@@ -150,10 +150,13 @@ class Gpt3Controller < ApplicationController
   def save_source_list(convo, params)
     if params[:source_list].present?
       params[:source_list].each do |source|
-        conversation_source = convo.conversation_sources.first_or_initialize(
+        puts "source[:prompt] #{source[:prompt]}"
+        puts "source['prompt'] #{source['prompt']}"
+        puts "source[''prompt''] #{source["prompt"]}"
+        conversation_source = convo.conversation_sources.find_or_initialize_by(
           conversation_id: convo.id,
           prompt_title: source[:prompt]
-          )
+        )
         conversation_source.result = source[:results]
         conversation_source.save
       end
@@ -163,7 +166,7 @@ class Gpt3Controller < ApplicationController
   def save_related_list(convo, params)
     if params[:related_list].present?
       params[:related_list].each do |relate|
-        conversation_related = convo.conversation_relateds.first_or_initialize(
+        conversation_related = convo.conversation_relateds.find_or_initialize_by(
           conversation_id: convo.id,
           prompt_title: relate[:prompt],
           )

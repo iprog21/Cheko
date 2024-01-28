@@ -77,17 +77,18 @@
                             .flex.flex-col.pb-4{style: "max-width: 75%;"}
                   - source_list = @sources.where(prompt_title: user_message).first
                   - if source_list.present?
-                    .pt-4.pb-2
-                      %span.title-header.text-xl.font-extrabold
-                        %i.fa-solid.fa-list-ul{style: "color: #ffffff;"}
-                        Sources
-                    .flex.flex-row.justify-between
-                      - source_list.result.each do |source|
-                        .source-box
-                          %a.source-link{href: source['link'], target: "_blank"}
-                            = source['title']
-                          .flex.flex-row
-                            %img.size-5{src: source['faviconUrl']}/
+                    .flex.flex-col.pb-4{style: "max-width: 75%;"}
+                      .pt-4.pb-2
+                        %span.title-header.text-xl.font-extrabold
+                          %i.fa-solid.fa-list-ul{style: "color: #ffffff;"}
+                          Sources
+                      .flex.flex-row.justify-between
+                        - source_list.result.each do |source|
+                          .source-box
+                            %a.source-link{href: source['link'], target: "_blank"}
+                              = source['title']
+                            .flex.flex-row
+                              %img.size-5{src: source['faviconUrl']}/
                   - related_list = @relates.where(prompt_title: user_message).first
                   - if related_list.present?
                     %div{style: "max-width: 75%; margin-bottom: 16px;"}

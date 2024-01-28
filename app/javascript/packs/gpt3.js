@@ -14,6 +14,7 @@ let autoScrollMaxCount = 30000;
  *
  * sender: "user" | "cheko"
  */
+
 function createChatBubble(content, sender) {
   const chatBubble = document.createElement("div");
   chatBubble.className =
@@ -499,6 +500,19 @@ titleContainer.addEventListener("keydown", function (e) {
     toggleSaveConversationBtn(false);
   }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  let currentUserMessages = document.getElementById('user_messages').value;
+  let currentAssistantMessages = document.getElementById('assistant_messages').value;
+
+  if (currentUserMessages) {
+    userMessages = JSON.parse(currentUserMessages);
+  }
+  if (currentAssistantMessages) {
+    assistantMessages = JSON.parse(currentAssistantMessages);
+  }
+}, false);
+
 
 
 let saveConversationBtn = document.getElementById('save_conversation_btn');

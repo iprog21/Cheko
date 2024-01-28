@@ -13,10 +13,10 @@
           = form_for(resource, as: resource_name, url: user_session_path) do |f|
             .row.mb-2
               .form-outline
-                = f.email_field :email, class: "form-control form-control-sm text-input", placeholder: "Email Address", autofocus: true, autocomplete: "email"
+                = f.email_field :email, class: "form-control form-control-sm text-input cheko-text-1", placeholder: "Email Address", autofocus: true, autocomplete: "email"
             .row.mb-3
               .form-outline 
-                = f.password_field :password, class: "form-control form-control-sm text-input", placeholder: "Password", autocomplete: "current-password"
+                = f.password_field :password, class: "form-control form-control-sm text-input cheko-text-1", placeholder: "Password", autocomplete: "current-password"
                 %i#togglePassword.bi.bi-eye
             .row.submit.mb-3
               = button_tag "Submit", class: "submit-btn rounded-2" do
