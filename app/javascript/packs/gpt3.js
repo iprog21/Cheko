@@ -389,6 +389,7 @@ const saveConversation = async () => {
   const json = await response.json();
 
   document.getElementById('conversation_id').value = json.id;
+  addNewSideMenuConvoItem();
 }
 
 const updateTitle = async () => {
@@ -409,6 +410,8 @@ const updateTitle = async () => {
         title: messageTitle
       }),
     });
+
+    updateSideMenuConvoList();
   }
 }
 
@@ -435,6 +438,8 @@ const updateConversation = async () => {
         source_list: sourceList
       }),
     });
+
+    updateSideMenuConvoList();
   }
 }
 
@@ -461,6 +466,26 @@ function toggleSaveConversationBtn(is_saved) {
       save_text.classList.remove('block');
     }
   }
+}
+
+function updateSideMenuConvoList() {
+  let messageTitle = document.getElementById('message_title').innerText;
+  let conversationId = document.getElementById('conversation_id').value;
+  if (conversationId == null || conversationId == undefined || conversationId == '') {
+    document.getElementById('conversation-list-' + conversationId).innerText = messageTitle;
+  }
+}
+
+function addNewSideMenuConvoItem() {
+  let conversationListContainer = document.getElementById('conversation-list');
+  let conversationId = document.getElementById('conversation_id').value;
+  let convoLink = document.createElement("a"); // Holds the source boxes
+  let messageTitle = document.getElementById('message_title').innerText;
+
+  convoLink.classList.add('pl-2', 'hover:bg-neutral-700/30', 'w-full', 'py-1', 'block', 'my-2');
+  convoLink.innerText = messageTitle;
+  convoLink.href = "/cheko-ai?conversation_id=" + conversationId ;
+  conversationListContainer.prepend(convoLink);
 }
 
 // -- Submit Event Listener --
@@ -495,21 +520,27 @@ titleContainer.addEventListener("keydown", function (e) {
     // Don't generate a new line
     e.preventDefault();
     titleContainer.blur();
-    updateTitle();
-    console.log("working...")
-    toggleSaveConversationBtn(false);
   }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  let currentUserMessages = document.getElementById('user_messages').value;
-  let currentAssistantMessages = document.getElementById('assistant_messages').value;
+titleContainer.addEventListener("blur", function (e) {
+  updateTitle();
+  toggleSaveConversationBtn(false);
+});
 
-  if (currentUserMessages) {
-    userMessages = JSON.parse(currentUserMessages);
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('user_messages')) {
+    let currentUserMessages = document.getElementById('user_messages').value;
+    if (!(currentUserMessages == null || currentUserMessages == undefined || currentUserMessages == '')) {
+      userMessages = JSON.parse(currentUserMessages);
+    }
   }
-  if (currentAssistantMessages) {
-    assistantMessages = JSON.parse(currentAssistantMessages);
+
+  if (document.getElementById('assistant_messages')) {
+    let currentAssistantMessages = document.getElementById('assistant_messages').value;
+    if (!(currentAssistantMessages == null || currentAssistantMessages == undefined || currentAssistantMessages == '')) {
+      assistantMessages = JSON.parse(currentAssistantMessages);
+    }
   }
 }, false);
 
