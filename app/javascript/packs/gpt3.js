@@ -258,7 +258,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     responseJson.usage.total_tokens,
     responseJson.usage.model
   );
-
+  updateConversation();
 };
 
 async function fetchData(url) {
@@ -320,6 +320,8 @@ async function scrapeQuestion(url, prompt) {
       div.appendChild(iconDiv);
 
       sourcesContainer.appendChild(div);
+
+      updateConversation();
     });
 
     mainContainer.appendChild(sourcesContainer);
@@ -373,6 +375,10 @@ async function run(url, prompt, chatContainer, relatedDiv) {
 
 const saveConversation = async () => {
   let messageTitle = document.getElementById('message_title').innerText;
+  if (messageTitle == 'New convo') {
+    messageTitle = userMessages[0];
+    document.getElementById('message_title').innerText = messageTitle;
+  }
   let response =  await fetch("/gpt3/save_conversation", {
     method: "POST",
     headers: {
