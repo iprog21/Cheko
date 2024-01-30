@@ -137,7 +137,6 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     return;
   }
   const json = await response.json();
-  console.log(json.generated_text);
   assistantMessages.push(json.generated_text);
   autoScroll();
   // -- Event Log --
@@ -150,7 +149,6 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
 
   // 4. Maintain a string record of the current dialogue between the user and the chatbot.
   currentDialogue = json.new_dialogue;
-  console.log(currentDialogue);
 
   const titleContainer = document.createElement("div"); // Holds the title and icon
   titleContainer.classList.add('pb-2')
@@ -191,30 +189,19 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   // }
 
   // 7. Display related topics
-  const automatedQuestion = 'Can you suggest 3 related questions or prompts to: ' + prompt + ' that are short and simple';
+  let automatedQuestion = 'Can you suggest 3 related questions or prompts to: ' + prompt + ' that are short and simple';
   let automatedResponse;
 
   try {
-    automatedResponse = await fetch("/gpt3/generate", {
+    automatedResponse = await fetch("/gpt3/generate_related", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: automatedQuestion,
-        currentDialogue: currentDialogue
+        prompt: automatedQuestion
       }),
     });
-    // automatedResponse = await fetch("/gpt3/generate_v2", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     prompt: automatedQuestion,
-    //     currentDialogue: currentDialogue
-    //   }),
-    // });
   } catch (e) {
     console.log(e);
 
@@ -230,9 +217,9 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
 
   // Add a Related Topics section in the container
   const responseJson = await automatedResponse.json();
-  const chekoAutomatedResponse = responseJson.generated_text.split("\n");
+  let chekoAutomatedResponse = responseJson.generated_text.split("\n");
   chekoAutomatedResponse.filter(item => !/^\s*$/.test(item)); // Filter empty
-
+  chekoAutomatedResponse = checkForEmptyAndNotRelatedQuestion(chekoAutomatedResponse, prompt);
   var relatedDiv = document.createElement("div");
   // Related header with icon
   var headerDiv = document.createElement("div");
@@ -285,7 +272,6 @@ async function fetchData(url) {
 async function scrapeQuestion(url, prompt) {
   try {
     const data = await fetchData(url);
-    console.log(data.items.slice(0, 4));
     const results = data.items.slice(0, 4).map((item) => {
       const title = item.title;
       const link = item.link;
@@ -309,7 +295,6 @@ async function scrapeQuestion(url, prompt) {
     sourcesContainer.classList.add('flex', 'flex-row', 'justify-between');
 
     results.forEach(result => {
-      console.log(result)
       const div = document.createElement("div");
       div.classList.add('source-box')
 
@@ -343,6 +328,23 @@ async function scrapeQuestion(url, prompt) {
   } catch (error) {
     console.log("There was a problem fetching the data: " + error.message);
   }
+}
+
+function checkForEmptyAndNotRelatedQuestion(response, prompt) {
+  console.log(response);
+  console.log(prompt);
+  let related_questions = [];
+  if (response.length >= 5) {
+    response = response.slice(2);
+  }
+  response.forEach(function (related) {
+    console.log(!related.includes(prompt));
+    if (!related.includes(prompt) && related != '') {
+      related_questions.push(related);
+    }
+  });
+
+  return related_questions;
 }
 
 function addDivListener() {
@@ -510,7 +512,6 @@ promptArea.addEventListener("keydown", function (e) {
 
 
 let titleContainer = document.getElementById('message_title');
-console.log(titleContainer);
 titleContainer.addEventListener("keydown", function (e) {
   // Get the code of pressed key
   const keyCode = e.which || e.keyCode;

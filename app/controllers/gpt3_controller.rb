@@ -3,6 +3,31 @@ require 'net/http'
 
 class Gpt3Controller < ApplicationController
 
+  def generate_related
+    initialDialogue = [
+      { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
+      { role: "assistant", content: "Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!"},
+    ]
+
+    prompt = {role: "user", content: params[:prompt]}
+
+    currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
+
+    response = Llm.go(prompts:currentDialogue,is_full_prompt: true)
+
+    generated_text = response.dig("choices", 0, "message", "content")
+    newDialogue = currentDialogue.concat([response.dig("choices", 0, "message")])
+
+    usage = {
+      completion_tokens: response.dig("usage", "completion_tokens"),
+      prompt_tokens: response.dig("usage", "prompt_tokens"),
+      total_tokens: response.dig("usage", "total_tokens"),
+      model: response.dig("model")
+    }
+
+    render json: { generated_text: generated_text, new_dialogue: newDialogue, usage: usage}
+  end
+
   def generate
 
     start_writing_prompt = "Generate a conversation with ChatGPT where a student seeks advice on completing homework efficiently. The conversation should cover time management techniques, effective study habits, and tips for staying focused. Include prompts for practical solutions and actionable steps that the student can implement to finish their homework quickly while maintaining academic integrity and understanding of the material. Show complete results"
