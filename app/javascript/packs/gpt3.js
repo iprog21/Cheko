@@ -39,7 +39,7 @@ function createChatBubble(content, sender) {
     rewriteButton.innerHTML = '<i class="fa-solid fa-repeat" style="color: #ffffff;"></i> Rewrite';
 
     const humanizeButton = document.createElement("button");
-    humanizeButton.classList.add('chat-button', 'pl-2', 'cheko-text-1');
+    humanizeButton.classList.add('chat-button', 'pl-2', 'cheko-text-1', 'humanize-btn');
     humanizeButton.setAttribute("id", "humanize-btn");
     humanizeButton.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="color: #ffffff;"></i> Humanize';
 
@@ -106,6 +106,7 @@ const humanizeText = async(prompt, element) => {
   const chatContainer = document.getElementById("gpt-chat-container");
   const text = "Humanizing text.."
   chatContainer.appendChild(createChatBubble(text, "user"));
+  setLoading(true);
 
   let response;
 
@@ -639,14 +640,19 @@ document.querySelector("form").addEventListener("submit", (e) => {
 });
 
 // -- Humanize Button --
-document
-  .querySelector(".humanize-btn")
-  .addEventListener("click", (e) => {
-    e.preventDefault();
-    let prompt = document.querySelector("#gpt-chat-container").lastChild.innerText;
-    humanizeText(prompt, null);
-  }
-  );
+$('body').on('click', '.humanize-btn', function() {
+  let prompt = $(this).parent().parent().parent().find('.chat-bubble-cheko').text();
+  console.log(prompt);
+  humanizeText(prompt, null);
+});
+// document
+//   .querySelectorAll(".humanize-btn")
+//   .addEventListener("click", (e) => {
+//     e.preventDefault();
+//     let prompt = document.querySelector("#gpt-chat-container").lastChild.innerText;
+//     humanizeText(prompt, null);
+//   }
+//   );
 
 
 

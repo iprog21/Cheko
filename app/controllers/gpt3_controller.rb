@@ -108,20 +108,25 @@ class Gpt3Controller < ApplicationController
   end
 
   def humanize
-    if params[:content]
+    if params[:prompt]
+      start_writing_prompt = "Generate a conversation with ChatGPT where a student seeks advice on completing homework efficiently. The conversation should cover time management techniques, effective study habits, and tips for staying focused. Include prompts for practical solutions and actionable steps that the student can implement to finish their homework quickly while maintaining academic integrity and understanding of the material. Show complete results. Compose this reply adopting a writing style akin to that of a college student. Achieve a harmonious blend of relatability and sophistication to seamlessly integrate it into the tone of a college paper or assignment."
+
       initialDialogue = [
         { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
         { role: "assistant", content: "Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!"},
+        { role:"user", content:start_writing_prompt }
       ]
+      section_content = Llm.go(prompts:initialDialogue)
+      initialDialogue.append({role:"assistant",content:"#{section_content}"})
 
-      prompt = {role: "user", content: "Compose this reply adopting a writing style akin to that of a college student. Achieve a harmonious blend of relatability and sophistication to seamlessly integrate it into the tone of a college paper or assignment: \n\n#{params[:content]}"}
+      # 2. Turn prompt into a message object
+      prompt = {role: "user", content: "Humanize this: #{params[:prompt]}"}
+      initialDialogue.append(prompt)
 
-      currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
-
-      response = Llm.go(prompts:currentDialogue,is_full_prompt: true)
+      response = Llm.go(prompts:initialDialogue,is_full_prompt: true)
 
       generated_text = response.dig("choices", 0, "message", "content")
-      newDialogue = currentDialogue.concat([response.dig("choices", 0, "message")])
+      newDialogue = initialDialogue.concat([response.dig("choices", 0, "message")])
 
       usage = {
         completion_tokens: response.dig("usage", "completion_tokens"),
