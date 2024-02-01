@@ -44,7 +44,7 @@ function createChatBubble(content, sender) {
     humanizeButton.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="color: #ffffff;"></i> Humanize';
 
     const copyButton = document.createElement("button");
-    copyButton.classList.add('chat-button', 'cheko-text-1');
+    copyButton.classList.add('chat-button', 'cheko-text-1', 'humanize-btn');
     copyButton.innerHTML = '<i class="fa-solid fa-copy cheko-text-1" ></i>';
 
     const editButton = document.createElement("button");
@@ -91,6 +91,70 @@ function typewriterEffect(element, content, i = 0) {
   }
 
   setTimeout(() => typewriterEffect(element, content, i + 1), 10);
+}
+
+const humanizeText = async(prompt, element) => {
+  // Utils:
+  const chekoLoadingBubble = document.getElementById("cheko-loading-bubble");
+  function setLoading(bool) {
+    if (bool) {
+      chekoLoadingBubble.classList.remove("d-none"); // loading animation
+    } else {
+      chekoLoadingBubble.classList.add("d-none"); // loading animation
+    }
+  }
+  const chatContainer = document.getElementById("gpt-chat-container");
+  const text = "Humanizing text.."
+  chatContainer.appendChild(createChatBubble(text, "user"));
+
+  let response;
+
+  try {
+    response = await fetch("/gpt3/humanize", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt, currentDialogue }),
+    });
+
+  } catch (e) {
+    console.log(e);
+
+    setLoading(false);
+    return;
+  }
+  const json = await response.json();
+  assistantMessages.push(json.generated_text);
+  autoScroll();
+  // -- Event Log --
+  window.LOG_EVENTS.logSubmitPrompt(
+    json.usage.prompt_tokens,
+    json.usage.completion_tokens,
+    json.usage.total_tokens,
+    json.usage.model
+  );
+
+  // 4. Maintain a string record of the current dialogue between the user and the chatbot.
+  currentDialogue = json.new_dialogue;
+
+  const titleContainer = document.createElement("div"); // Holds the title and icon
+  titleContainer.classList.add('pb-2')
+  titleContainer.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-align-left"></i> Answer </span>';
+  chatContainer.appendChild(titleContainer);
+
+  // 5. Get response and add as a chat bubble:
+  const chekoResponse = json.generated_text
+    .split("\n")
+    .map((t) => `${t}`)
+    .join("");
+  chatContainer.appendChild(createChatBubble(chekoResponse, "cheko"));
+
+  // 6. Finished Requesting: Re-enable button, turn off loading animation
+  // document.getElementById("generate-btn").removeAttribute("disabled");
+  setLoading(false); // loading animation
+
+  autoScroll();
 }
 
 const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
@@ -575,16 +639,14 @@ document.querySelector("form").addEventListener("submit", (e) => {
 });
 
 // -- Humanize Button --
-// document
-//   .querySelector("#humanize-text-button")
-//   .addEventListener("click", (e) => {
-//     e.preventDefault();
-//     const prompt = `Craft this response in a manner that resembles the writing style of a college student. It should strike a balance between being relatable and sophisticated enough to fit seamlessly into a college paper or assignment: \n\n${document
-//       .querySelector("#gpt-chat-container")
-//       .lastChild.innerText}`;
-//     generateText(prompt, true);
-//   }
-//   );
+document
+  .querySelector(".humanize-btn")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    let prompt = document.querySelector("#gpt-chat-container").lastChild.innerText;
+    humanizeText(prompt, null);
+  }
+  );
 
 
 

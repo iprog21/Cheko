@@ -109,9 +109,28 @@ class Gpt3Controller < ApplicationController
 
   def humanize
     if params[:content]
-      humanize_content = Undetectable.humanize(params[:content])
+      initialDialogue = [
+        { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
+        { role: "assistant", content: "Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!"},
+      ]
 
-      render json: {content: humanize_content}
+      prompt = {role: "user", content: "Compose this reply adopting a writing style akin to that of a college student. Achieve a harmonious blend of relatability and sophistication to seamlessly integrate it into the tone of a college paper or assignment: \n\n#{params[:content]}"}
+
+      currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
+
+      response = Llm.go(prompts:currentDialogue,is_full_prompt: true)
+
+      generated_text = response.dig("choices", 0, "message", "content")
+      newDialogue = currentDialogue.concat([response.dig("choices", 0, "message")])
+
+      usage = {
+        completion_tokens: response.dig("usage", "completion_tokens"),
+        prompt_tokens: response.dig("usage", "prompt_tokens"),
+        total_tokens: response.dig("usage", "total_tokens"),
+        model: response.dig("model")
+      }
+
+      render json: { generated_text: generated_text, new_dialogue: newDialogue, usage: usage}
     end
   end
 

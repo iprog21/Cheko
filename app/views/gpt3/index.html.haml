@@ -60,13 +60,13 @@
                       Answer
                   .pb-4{style: "max-width: 75%;"}
                     .chat-bubble-cheko.bg-new-cheko.text-white.border-0.text-base.font-semibold
-                      = assistant_messages[index]
+                      = Conversation.markdown_to_html(assistant_messages[index])
                     .flex.flex-row.justify-between
                       %div
                         %button.chat-button
                           %i.fa-solid.fa-repeat{style: "color: #ffffff;"}
                           Rewrite
-                        %button#humanize-btn.chat-button.pl-2.cheko-text-1
+                        %button#humanize-btn.chat-button.pl-2.cheko-text-1.humanize-btn
                           %i.fa-solid.fa-wand-magic-sparkles{style: "color: #ffffff;"}
                           Humanize
                       %dev

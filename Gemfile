@@ -34,6 +34,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # For HTTP/HTTPS Request
 gem 'faraday', '~> 2.7', '>= 2.7.11'
 
+gem 'redcarpet'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
