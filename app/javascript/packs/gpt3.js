@@ -35,7 +35,7 @@ function createChatBubble(content, sender) {
     const copyEditButton = document.createElement("dev");
 
     const rewriteButton = document.createElement("button");
-    rewriteButton.classList.add('chat-button');
+    rewriteButton.classList.add('chat-button', 'rewrite-btn');
     rewriteButton.innerHTML = '<i class="fa-solid fa-repeat" style="color: #ffffff;"></i> Rewrite';
 
     const humanizeButton = document.createElement("button");
@@ -44,11 +44,11 @@ function createChatBubble(content, sender) {
     humanizeButton.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="color: #ffffff;"></i> Humanize';
 
     const copyButton = document.createElement("button");
-    copyButton.classList.add('chat-button', 'cheko-text-1', 'humanize-btn');
+    copyButton.classList.add('chat-button', 'cheko-text-1', 'copy-btn');
     copyButton.innerHTML = '<i class="fa-solid fa-copy cheko-text-1" ></i>';
 
     const editButton = document.createElement("button");
-    editButton.classList.add('chat-button', 'pl-2', 'cheko-text-1');
+    editButton.classList.add('chat-button', 'pl-2', 'cheko-text-1', 'edit-btn');
     editButton.innerHTML = '<i class="fa-solid fa-edit cheko-text-1" ></i>';
 
     rewriteHumanizeDiv.appendChild(rewriteButton);
@@ -423,18 +423,6 @@ function checkForEmptyAndNotRelatedQuestion(response, prompt) {
   return related_questions;
 }
 
-function addDivListener() {
-  let relElements = document.querySelectorAll('.related-question');
-  if (relElements) {
-    relElements.forEach(function (element) {
-      element.addEventListener('click', (e) => {
-        const divText = element.textContent;
-        generateText(divText, false);
-      });
-    });
-  }
-}
-
 async function run(url, prompt, chatContainer, relatedDiv) {
   scrapeQuestion(url, prompt).then(container => {
     chatContainer.appendChild(container);
@@ -442,7 +430,6 @@ async function run(url, prompt, chatContainer, relatedDiv) {
 
   setTimeout(() => {
     chatContainer.appendChild(relatedDiv);
-    addDivListener();
   }, 1000);
 
 };
@@ -639,22 +626,35 @@ document.querySelector("form").addEventListener("submit", (e) => {
   generateText(document.querySelector("textarea#prompt").value, false);
 });
 
+// -- Sample Question Button --
+$('body').on('click', '.sample-question', function() {
+  const divText = $(this).text();
+  generateText(divText, false);
+});
+
+// -- Related Question Button --
+$('body').on('click', '.related-question', function() {
+  const divText = $(this).text();
+  generateText(divText, false);
+});
+
 // -- Humanize Button --
 $('body').on('click', '.humanize-btn', function() {
   let prompt = $(this).parent().parent().parent().find('.chat-bubble-cheko').text();
-  console.log(prompt);
   humanizeText(prompt, null);
 });
-// document
-//   .querySelectorAll(".humanize-btn")
-//   .addEventListener("click", (e) => {
-//     e.preventDefault();
-//     let prompt = document.querySelector("#gpt-chat-container").lastChild.innerText;
-//     humanizeText(prompt, null);
-//   }
-//   );
 
-
+// -- Copy Button --
+$('body').on('click', '.copy-btn', function() {
+  let prompt = $(this).parent().parent().parent().find('.chat-bubble-cheko').text();
+  navigator.clipboard.writeText(prompt).then(() => {
+    console.log('Content copied to clipboard');
+    /* Resolved - text copied to clipboard successfully */
+  },() => {
+    console.error('Failed to copy');
+    /* Rejected - text failed to copy to the clipboard */
+  });
+});
 
 // -- Citation Button --
 // document
