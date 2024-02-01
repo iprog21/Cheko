@@ -61,7 +61,7 @@ function createChatBubble(content, sender) {
     buttonsContainer.appendChild(copyEditButton);
 
     bubbleContainer.appendChild(chatBubble);
-    bubbleContainer.appendChild(buttonsContainer); 
+    bubbleContainer.appendChild(buttonsContainer);
 
     return bubbleContainer;
   } else {
@@ -69,12 +69,18 @@ function createChatBubble(content, sender) {
   }
 }
 
-function autoScroll() {
+function old_autoScroll() {
   autoScrollCount += 2000;
   if (autoScrollCount <= autoScrollMaxCount) {
     document.getElementById('auto-scroll-anchor').scrollIntoView({ behavior: "smooth" });
     setTimeout(() => autoScroll(), 2000);
   }
+}
+
+function autoScroll() {
+  setTimeout(() => {
+    document.getElementById('auto-scroll-anchor').scrollIntoView({ behavior: "smooth" });
+  }, 2000);
 }
 
 function typewriterEffect(element, content, i = 0) {
@@ -107,9 +113,8 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   setLoading(true); // loading animation
 
   // Scroll into view
-  let scrollContainer = document.getElementById('cheko-chat-sub-container');
   setTimeout(() => {
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
+    autoScroll();
   }, 50);
 
   // 2. Add prompt as a chat bubble:
@@ -166,7 +171,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   // document.getElementById("generate-btn").removeAttribute("disabled");
   setLoading(false); // loading animation
 
-  scrollContainer.scrollTop = scrollContainer.scrollHeight;
+  autoScroll();
 
   // 7. Display a prompt after the 2nd
   // if (promptsCount === 2) {
@@ -212,6 +217,8 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   // 4. Maintain a string record of the current dialogue between the user and the chatbot.
   currentDialogue = json.new_dialogue;
 
+  autoScroll();
+
   // SCRAPING GOOGLE RESULTS
   const url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyDXUK2pb4hfX4xQ_9-3vQRc4TrzqJU42fk&cx=271535145f8274dcc&q=" + prompt;
 
@@ -245,6 +252,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   setTimeout(() => {
     run(url, prompt, chatContainer, relatedDiv);
     setLoading(false); // loading animation
+    autoScroll();
   }, 2000);
 
   document.querySelector("textarea#prompt").disabled=false;
@@ -259,6 +267,7 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     responseJson.usage.model
   );
   updateConversation();
+  autoScroll();
 };
 
 async function fetchData(url) {
@@ -549,6 +558,8 @@ document.addEventListener('DOMContentLoaded', function() {
       assistantMessages = JSON.parse(currentAssistantMessages);
     }
   }
+
+  autoScroll();
 }, false);
 
 

@@ -3,6 +3,34 @@ require 'net/http'
 
 class Gpt3Controller < ApplicationController
 
+  def generate_sources
+    initialDialogue = [
+      { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
+      { role: "assistant", content: "Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!"},
+    ]
+
+    sample_format = '[{title: "How I\'m Stepping Out on a Limb and Branding With Bold Stickers", site_url: "https://www.nytimes.com", favicon_url: "https://www.nytimes.com/favicon.ico" site_name: "NY Times"}, {title: "How I\'m Stepping Out on a Limb and Branding With Bold Stickers", site_url: "https://www.nytimes.com", favicon_url: "https://www.nytimes.com/favicon.ico" site_name: "NY Times"}]'
+    prompt = {role: "user", content: "Can you give me 5 google search result not the same website wit this prompt: #{params[:prompt]} with json format name of site, url, favicon url and title. Here an example format: #{sample_format} "}
+
+    currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
+
+    response = Llm.go(prompts:currentDialogue,is_full_prompt: true)
+
+    generated_text = response.dig("choices", 0, "message", "content")
+    newDialogue = currentDialogue.concat([response.dig("choices", 0, "message")])
+
+    usage = {
+      completion_tokens: response.dig("usage", "completion_tokens"),
+      prompt_tokens: response.dig("usage", "prompt_tokens"),
+      total_tokens: response.dig("usage", "total_tokens"),
+      model: response.dig("model")
+    }
+
+    generated_text.split(/^.[\n\d\.]/)
+
+    render json: { generated_text: generated_text.split("\n\n"), new_dialogue: newDialogue, usage: usage}
+  end
+
   def generate_related
     initialDialogue = [
       { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
@@ -76,6 +104,14 @@ class Gpt3Controller < ApplicationController
       if retry_count <= max_count_of_retries
         retry
       end
+    end
+  end
+
+  def humanize
+    if params[:content]
+      humanize_content = Undetectable.humanize(params[:content])
+
+      render json: {content: humanize_content}
     end
   end
 
