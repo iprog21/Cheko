@@ -9,7 +9,7 @@ require 'roo'
 
 if ENV['prof_review'] == "true"
   puts "\n --- PROF_REVIEW okay desuwa ---\n"
-  file_name = './db/cheko_prof4.xlsx'
+  file_name = './db/cheko_prof5.xlsx'
   excel = Roo::Spreadsheet.open(file_name, {:expand_merged_ranges => true})
 
   sheets = excel.sheets
@@ -25,6 +25,8 @@ if ENV['prof_review'] == "true"
 
       if parse['professor_id'] == nil && parse['first_name'] != nil
         if Professor.where(first_name: parse['first_name'])
+          prof = Professor.where(first_name: parse['first_name']).first
+          prof_ids.insert(0, prof.id)
           puts "\n --- skip ---\n" 
           next
         end
@@ -34,24 +36,26 @@ if ENV['prof_review'] == "true"
         Professor.create(['first_name' => parse['first_name'], 'last_name' => parse['last_name'], 'school_id' => school.id])
       else
         if ProfReview.where(content: parse['content']).first
+          rev = ProfReview.where(content: parse['content']).first
+          rev.update(user_initials: parse['user_id'])
+          prof_ids.insert(0, rev.professor_id)
           puts "\n --- skip ---\n" 
           next
         end
 
         puts "\n --- inserting prof review desuwa" + parse['professor_id'].to_s + " ---\n" 
-        prof_ids.insert(1, parse['professor_id'].to_i)
         parse.delete("Facebook link")
         parse.delete("user_id")
         parse.delete("subject/s")
   
-        ProfReview.create(parse)
+        rev = ProfReview.create(parse)
+        prof_ids.insert(0, rev.professor_id)
       end
     end
   end
 
 
-  prof_ids.each do |id|
-    prof = Professor.find(id)
+  Professor.all.each do |prof|
     prof.update_grading
   end
 end

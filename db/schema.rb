@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_22_021301) do
+ActiveRecord::Schema.define(version: 2024_02_02_074050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,6 +171,8 @@ ActiveRecord::Schema.define(version: 2023_02_22_021301) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "agent_id"
     t.string "theme", default: "light"
+    t.boolean "soft_deleted", default: false
+    t.datetime "deleted_at"
     t.index ["email"], name: "index_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
   end
@@ -212,6 +214,7 @@ ActiveRecord::Schema.define(version: 2023_02_22_021301) do
     t.string "subject"
     t.string "school_name"
     t.integer "additional_metric_grade"
+    t.string "user_initials"
   end
 
   create_table "professors", force: :cascade do |t|

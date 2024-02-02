@@ -44,6 +44,13 @@ class Admins::ProfessorsController < ApplicationController
   end
 
   def destroy
+    prof_rev = ProfReview.where(professor_id: @professor.id)
+    prof_rev.each do |rev|
+      rev.delete()
+    end
+
+    @professor.delete()
+    redirect_to admins_professors_path()
   end
 
   private
