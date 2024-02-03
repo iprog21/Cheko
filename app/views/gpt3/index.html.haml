@@ -51,65 +51,66 @@
             - if @conversation.present?
               - assistant_messages = @conversation.assistant_messages
               - @conversation.user_messages.each_with_index do |user_message, index|
-                .chat-bubble-user.bg-new-cheko.text-white.border-0.text-base.font-semibold
-                  = user_message
-                - if assistant_messages && assistant_messages[index]
-                  .pb-2
-                    %span.title-header.text-xl.font-extrabold
-                      %i.fa-solid.fa-align-left
-                      Answer
-                  .pb-4{style: "max-width: 75%;"}
-                    .chat-bubble-cheko.bg-new-cheko.text-white.border-0.text-base.font-semibold
-                      = Conversation.markdown_to_html(assistant_messages[index])
-                    .flex.flex-row.justify-between
-                      %div
-                        %button.chat-button.rewrite-btn
-                          %i.fa-solid.fa-repeat{style: "color: #ffffff;"}
-                          Rewrite
-                        %button#humanize-btn.chat-button.pl-2.cheko-text-1.humanize-btn
-                          %i.fa-solid.fa-wand-magic-sparkles{style: "color: #ffffff;"}
-                          Humanize
-                      %dev
-                        %button.chat-button.cheko-text-1.copy-btn
-                          %i.fa-solid.fa-copy.cheko-text-1
-                        %button.chat-button.pl-2.cheko-text-1.edit-btn
-                          %i.fa-solid.fa-edit.cheko-text-1
-                            .flex.flex-col.pb-4{style: "max-width: 75%;"}
-                  - source_list = @sources.where(prompt_title: user_message).first
-                  - if source_list.present?
-                    .flex.flex-col.pb-4{style: "max-width: 75%;"}
-                      .pt-4.pb-2
-                        %span.title-header.text-xl.font-extrabold
-                          %i.fa-solid.fa-list-ul{style: "color: #ffffff;"}
-                          Sources
-                      .flex.flex-row.justify-between.gap-x-2
-                        - source_list.result.each_with_index do |source, index|
-                          %a.rounded-md.flex.w-full.ring-borderMain.bg-new-cheko.text-white.p-2{href: source['link'], target: "_blank"}
-                            .relative.z-10.flex.items.max-w-full.flex-col.justify-between.h-full.pointer-events-none.select-none.px-sm.pt-sm.pb-xs
-                              %div
-                                .line-clamp-2.grow.default.font-sans.text-xs.font-medium.text-textMain.dark:text-textMainDark.selection:bg-superDuper.selection:text-textMain
-                                  = source['title']
-                              .flex.items-center.space-x-xs
-                                .flex.items-center.gap-x-xs.ring-borderMain.dark:ring-borderMainDark.bg-transparent{class: "border-borderMain/60 dark:border-borderMainDark/80 divide-borderMain/60 dark:divide-borderMainDark/80"}
-                                  .relative.flex-none
-                                    .rounded-full.overflow-hidden
-                                      %img.block{alt: "#{source['title']} favicon", height: "16", src: source['faviconUrl'], width: "16"}/
-                                  .duration-300.transition-all.line-clamp-1.break-all.light.font-sans.text-xs.ml-1.font-medium.text-textOff.dark:text-textOffDark.selection:bg-superDuper.selection:text-textMain
-                                    = ConversationSource.site_name(source['link'])
-                                %h2.text-gray-500.mx-1.light.font-display.text-lg.font-medium.text-textOff.dark:text-textOffDark.selection:bg-superDuper.selection:text-textMain ·
-                                .light.font-sans.text-xs.font-medium.text-textOff.dark:text-textOffDark.selection:bg-superDuper.selection:text-textMain
-                                  = index+1
-                  - related_list = @relates.where(prompt_title: user_message).first
-                  - if related_list.present?
-                    %div{style: "max-width: 75%; margin-bottom: 16px;"}
-                      .pt-4.pb-2
-                        %span.title-header.text-xl.font-extrabold
-                          %i.fa-solid.fa-layer-group{style: "color: #ffffff;"}
-                          Related
-                      - related_list.result.each do |related|
-                        .related-question.cheko-border-color-1
-                          = related
-                          %i.fa-solid.fa-plus{style: "color: #ffffff;"}
+                %div.chat-bubble-container{class: "convo-container-#{index}"}
+                  .chat-bubble-user.bg-new-cheko.text-white.border-0.text-base.font-semibold
+                    = user_message
+                  - if assistant_messages && assistant_messages[index]
+                    .pb-2.chat-bubble-content
+                      %span.title-header.text-xl.font-extrabold
+                        %i.fa-solid.fa-align-left
+                        Answer
+                    .pb-4.chat-bubble-content{style: "max-width: 75%;"}
+                      .chat-bubble-cheko.bg-new-cheko.text-white.border-0.text-base.font-semibold
+                        = Conversation.markdown_to_html(assistant_messages[index])
+                      .flex.flex-row.justify-between
+                        %div
+                          %button.chat-button.rewrite-btn{'data-index': index}
+                            %i.fa-solid.fa-repeat{style: "color: #ffffff;"}
+                            Rewrite
+                          %button#humanize-btn.chat-button.pl-2.cheko-text-1.humanize-btn{'data-index': index}
+                            %i.fa-solid.fa-wand-magic-sparkles{style: "color: #ffffff;"}
+                            Humanize
+                        %dev
+                          %button.chat-button.cheko-text-1.copy-btn{'data-index': index}
+                            %i.fa-solid.fa-copy.cheko-text-1
+                          %button.chat-button.pl-2.cheko-text-1.edit-btn{'data-index': index}
+                            %i.fa-solid.fa-edit.cheko-text-1
+                              .flex.flex-col.pb-4{style: "max-width: 75%;"}
+                    - source_list = @sources.where(prompt_title: user_message).first
+                    - if source_list.present?
+                      .flex.flex-col.pb-4.chat-bubble-content{style: "max-width: 75%;"}
+                        .pt-4.pb-2
+                          %span.title-header.text-xl.font-extrabold
+                            %i.fa-solid.fa-list-ul{style: "color: #ffffff;"}
+                            Sources
+                        .flex.flex-row.justify-between.gap-x-2
+                          - source_list.result.each_with_index do |source, index|
+                            %a.rounded-md.flex.w-full.ring-borderMain.bg-new-cheko.text-white.p-2{href: source['link'], target: "_blank"}
+                              .relative.z-10.flex.items.max-w-full.flex-col.justify-between.h-full.pointer-events-none.select-none.px-sm.pt-sm.pb-xs
+                                %div
+                                  .line-clamp-2.grow.default.font-sans.text-xs.font-medium.text-textMain.dark:text-textMainDark.selection:bg-superDuper.selection:text-textMain
+                                    = source['title']
+                                .flex.items-center.space-x-xs
+                                  .flex.items-center.gap-x-xs.ring-borderMain.dark:ring-borderMainDark.bg-transparent{class: "border-borderMain/60 dark:border-borderMainDark/80 divide-borderMain/60 dark:divide-borderMainDark/80"}
+                                    .relative.flex-none
+                                      .rounded-full.overflow-hidden
+                                        %img.block{alt: "#{source['title']} favicon", height: "16", src: source['faviconUrl'], width: "16"}/
+                                    .duration-300.transition-all.line-clamp-1.break-all.light.font-sans.text-xs.ml-1.font-medium.text-textOff.dark:text-textOffDark.selection:bg-superDuper.selection:text-textMain
+                                      = ConversationSource.site_name(source['link'])
+                                  %h2.text-gray-500.mx-1.light.font-display.text-lg.font-medium.text-textOff.dark:text-textOffDark.selection:bg-superDuper.selection:text-textMain ·
+                                  .light.font-sans.text-xs.font-medium.text-textOff.dark:text-textOffDark.selection:bg-superDuper.selection:text-textMain
+                                    = index+1
+                    - related_list = @relates.where(prompt_title: user_message).first
+                    - if related_list.present?
+                      %div.chat-bubble-content{style: "max-width: 75%; margin-bottom: 16px;"}
+                        .pt-4.pb-2
+                          %span.title-header.text-xl.font-extrabold
+                            %i.fa-solid.fa-layer-group{style: "color: #ffffff;"}
+                            Related
+                        - related_list.result.each do |related|
+                          .related-question.cheko-border-color-1
+                            = related
+                            %i.fa-solid.fa-plus{style: "color: #ffffff;"}
 
           -# Loading animation (enabled/disabled when prompting)
           #cheko-loading-bubble.d-none.bg-new-cheko.text-white.border-0.text-md.font-semibold

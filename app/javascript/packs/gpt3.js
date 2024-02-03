@@ -69,6 +69,10 @@ function createChatBubble(content, sender) {
   }
 }
 
+function renderSources () {
+
+}
+
 function old_autoScroll() {
   autoScrollCount += 2000;
   if (autoScrollCount <= autoScrollMaxCount) {
@@ -159,23 +163,21 @@ const humanizeText = async(prompt, element) => {
 }
 
 const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
+
   promptsCount++; // Increase prompt count
   autoScrollCount = 0;
   // Utils:
-  const chekoLoadingBubble = document.getElementById("cheko-loading-bubble");
-  function setLoading(bool) {
-    if (bool) {
-      chekoLoadingBubble.classList.remove("d-none"); // loading animation
-    } else {
-      chekoLoadingBubble.classList.add("d-none"); // loading animation
-    }
-  }
+  const chatContainer = document.getElementById("gpt-chat-container");
+  const bubbleContainer = document.createElement("div");
+  bubbleContainer.classList.add('chat-bubble-container', 'convo-container-' +userMessages.length);
+  chatContainer.appendChild(bubbleContainer);
+  const convoContainer = $('.convo-container-' +userMessages.length)
+
 
   // 1. Start requesting: Clear Chatbox, Disable Button, Play Loading Animation
   document.querySelector("textarea#prompt").value = ""; // clear
   document.querySelector("textarea#prompt").disabled=true;
   // document.getElementById("generate-btn").setAttribute("disabled", true); // disable
-  setLoading(true); // loading animation
 
   // Scroll into view
   setTimeout(() => {
@@ -184,15 +186,14 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
 
   // 2. Add prompt as a chat bubble:
 
-  const chatContainer = document.getElementById("gpt-chat-container");
-  const text = humanizeOrNot ? "Humanizing text.." : citationOrNot ? "Adding citation.." : prompt;
-  chatContainer.appendChild(createChatBubble(text, "user"));
+  convoContainer.append(createChatBubble(prompt, "user"));
+  showLoadingBubble(convoContainer);
 
   // 3. Send Prompt to Controller:
   let response;
 
   try {
-    response = await fetch("/gpt3/generate", {
+    response = await fetch("/gpt3/generate_v3", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -201,118 +202,47 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
     });
 
   } catch (e) {
-    console.log(e);
-
-    setLoading(false);
+    $('#cheko-loading-bubble').remove();
     return;
   }
+
   const json = await response.json();
-  assistantMessages.push(json.generated_text);
+  let content_data = json.content;
+  let source_data = json.sources;
+  let related_question_data = json.related_questions;
+  $('#cheko-loading-bubble').remove();
+  assistantMessages.push(content_data.generated_text);
   autoScroll();
   // -- Event Log --
   window.LOG_EVENTS.logSubmitPrompt(
-    json.usage.prompt_tokens,
-    json.usage.completion_tokens,
-    json.usage.total_tokens,
-    json.usage.model
+    content_data.usage.prompt_tokens,
+    content_data.usage.completion_tokens,
+    content_data.usage.total_tokens,
+    content_data.usage.model
   );
 
-  // 4. Maintain a string record of the current dialogue between the user and the chatbot.
-  currentDialogue = json.new_dialogue;
+  showSource(convoContainer,source_data);
+  sourceList.push({prompt: prompt, results: source_data});
+  autoScroll();
 
+  // 4. Maintain a string record of the current dialogue between the user and the chatbot.
+  currentDialogue = content_data.new_dialogue;
   const titleContainer = document.createElement("div"); // Holds the title and icon
   titleContainer.classList.add('pb-2')
   titleContainer.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-align-left"></i> Answer </span>';
-  chatContainer.appendChild(titleContainer);
+  convoContainer.append(titleContainer);
 
   // 5. Get response and add as a chat bubble:
-  const chekoResponse = json.generated_text
+  const chekoResponse = content_data.generated_text
     .split("\n")
     .map((t) => `${t}`)
     .join("");
-  chatContainer.appendChild(createChatBubble(chekoResponse, "cheko"));
-
-  // 6. Finished Requesting: Re-enable button, turn off loading animation
-  // document.getElementById("generate-btn").removeAttribute("disabled");
-  setLoading(false); // loading animation
-
+  convoContainer.append(createChatBubble(chekoResponse, "cheko"));
   autoScroll();
 
-  // 7. Display a prompt after the 2nd
-  // if (promptsCount === 2) {
-  //   // Need a better answer? Work with our tutors in HW-Help or Q&A.
-  //   // chatContainer.append(createChatBubble(``,"cheko"))
-
-  //   setLoading(true); // loading animation
-  //   setTimeout(() => {
-  //     scrollContainer.scrollTop = scrollContainer.scrollHeight;
-  //   }, 50);
-  //   await fetch("/gpt3/render_better_answer_bubble")
-  //     .then((response) => response.text())
-  //     .then((data) => {
-  //       setTimeout(() => {
-  //         chatContainer.insertAdjacentHTML("beforeend", data);
-  //         setLoading(false); // loading animation
-  //         scrollContainer.scrollTop = scrollContainer.scrollHeight;
-  //       }, 800);
-  //     });
-  // }
-
-  // 7. Display related topics
-  let automatedQuestion = 'Can you suggest 3 related questions or prompts to: ' + prompt + ' that are short and simple';
-  let automatedResponse;
-
-  try {
-    automatedResponse = await fetch("/gpt3/generate_related", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        prompt: automatedQuestion
-      }),
-    });
-  } catch (e) {
-    console.log(e);
-
-    setLoading(false);
-    return;
-  }
-
-  // 4. Maintain a string record of the current dialogue between the user and the chatbot.
-  currentDialogue = json.new_dialogue;
-
+  showRelatedQuestions(convoContainer,related_question_data);
+  relatedList.push({prompt: prompt, results: source_data});
   autoScroll();
-
-  // SCRAPING GOOGLE RESULTS
-  const url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyDXUK2pb4hfX4xQ_9-3vQRc4TrzqJU42fk&cx=271535145f8274dcc&q=" + prompt;
-
-  // Add a Related Topics section in the container
-  const responseJson = await automatedResponse.json();
-  let chekoAutomatedResponse = responseJson.generated_text.split("\n");
-  chekoAutomatedResponse.filter(item => !/^\s*$/.test(item)); // Filter empty
-  chekoAutomatedResponse = checkForEmptyAndNotRelatedQuestion(chekoAutomatedResponse, prompt);
-  var relatedDiv = document.createElement("div");
-  // Related header with icon
-  var headerDiv = document.createElement("div");
-  relatedDiv.style.maxWidth = '75%';
-  relatedDiv.style.marginBottom = '16px';
-  headerDiv.classList.add('pt-4', 'pb-2');
-  headerDiv.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-layer-group" style="color: #ffffff;"></i> Related</span>'
-  relatedDiv.appendChild(headerDiv);
-
-  let processedRelatedList = []
-  chekoAutomatedResponse.slice(0, 3).forEach(response => {
-    const str = response.replace(/^\d+\.\s*/, '').toLowerCase();
-    processedRelatedList.push(str);
-    let bodyDiv = document.createElement("div");
-    bodyDiv.classList.add('related-question', 'cheko-border-color-1');
-    bodyDiv.innerHTML = str + '<i class="fa-solid fa-plus" style="color: #ffffff;"></i>';
-    bodyDiv.style.pointer = 'cursor';
-    relatedDiv.appendChild(bodyDiv);
-  });
-
-  relatedList.push({prompt: prompt, results: processedRelatedList});
 
   setTimeout(() => {
     run(url, prompt, chatContainer, relatedDiv);
@@ -322,15 +252,6 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
 
   document.querySelector("textarea#prompt").disabled=false;
 
-  // humanizeAnswers();
-
-  // -- Event Log --
-  window.LOG_EVENTS.logSubmitPrompt(
-    responseJson.usage.prompt_tokens,
-    responseJson.usage.completion_tokens,
-    responseJson.usage.total_tokens,
-    responseJson.usage.model
-  );
   updateConversation();
   autoScroll();
 };
@@ -433,6 +354,79 @@ async function run(url, prompt, chatContainer, relatedDiv) {
   }, 1000);
 
 };
+
+function showLoadingBubble(container_element) {
+  container_element.append('<div class="bg-new-cheko text-white border-0 text-md font-semibold" id="cheko-loading-bubble">\n' +
+    '      <div class="loading-icon"><span></span><span></span><span></span></div>\n' +
+    '    </div>')
+}
+
+function showSource(container_element, sources) {
+  let data_html = '<div class="flex flex-col pb-4 chat-bubble-content" style="max-width: 75%;">\n' +
+      '<div class="pt-4 pb-2">\n' +
+        '<span class="title-header text-xl font-extrabold">\n' +
+          '<i class="fa-solid fa-list-ul" style="color: #ffffff;"></i>\n' +
+            'Sources\n' +
+        '</span>\n' +
+      '</div>\n' +
+      '<div class="flex flex-row justify-between gap-x-2">';
+  sources.forEach(source => {
+    if (source.position >= 5) {
+      return;
+    }
+    data_html += '<a class="rounded-md flex w-full ring-borderMain bg-new-cheko text-white p-2" href="' + source.link + '" target="_blank">\n' +
+        '<div class="relative z-10 flex items max-w-full flex-col justify-between h-full pointer-events-none select-none px-sm pt-sm pb-xs">\n' +
+          '<div>\n' +
+            '<div class="line-clamp-2 grow default font-sans text-xs font-medium text-textMain dark:text-textMainDark selection:bg-superDuper selection:text-textMain">\n' +
+              source.title +
+            '</div>\n' +
+          '</div>\n' +
+          '<div class="flex items-center space-x-xs">\n' +
+            '<div class="flex items-center gap-x-xs ring-borderMain dark:ring-borderMainDark bg-transparent border-borderMain/60 dark:border-borderMainDark/80 divide-borderMain/60 dark:divide-borderMainDark/80">\n' +
+              '<div class="relative flex-none">\n' +
+                '<div class="rounded-full overflow-hidden">\n' +
+                  '<img alt="'+ source.source +' favicon" class="block" src="' + source.favicon + '" width="16" height="16">\n' +
+                '</div>\n' +
+              '</div>\n' +
+              '<div class="duration-300 transition-all line-clamp-1 break-all light text-gray-500 font-sans text-xs ml-1 font-medium text-textOff dark:text-textOffDark selection:bg-superDuper selection:text-textMain">\n' +
+                source.source +
+              '</div>\n' +
+            '</div>\n' +
+            '<h2 class="text-gray-500 mx-1 light font-display text-lg font-medium text-textOff dark:text-textOffDark selection:bg-superDuper selection:text-textMain">·</h2>\n' +
+            '<div class="light font-sans text-xs font-medium text-textOff dark:text-textOffDark selection:bg-superDuper selection:text-textMain">\n' +
+              source.position +
+            '</div>\n' +
+          '</div>\n' +
+        '</div>\n' +
+      '</a>';
+  });
+  data_html += '</div>\n' +
+    '</div>';
+
+  container_element.append(data_html)
+}
+
+function showRelatedQuestions(container_element, related_questions) {
+  let data_html = '<div class="chat-bubble-content" style="max-width: 75%; margin-bottom: 16px;">\n' +
+      '<div class="pt-4 pb-2">\n' +
+        '<span class="title-header text-xl font-extrabold">\n' +
+          '<i class="fa-solid fa-layer-group" style="color: #ffffff;"></i>\n' +
+            'Related\n' +
+        '</span>\n' +
+      '</div>';
+
+  related_questions.forEach((related_question, index) => {
+    if (index >= 3) {
+      return;
+    }
+    data_html += '<a href="' + related_question.link + '" class="related-question cheko-border-color-1">\n' +
+        related_question.question +
+        '<i class="fa-solid fa-plus" style="color: #ffffff;"></i>\n' +
+      '</a>'
+  });
+  data_html += '</div>';
+  container_element.append(data_html);
+}
 
 const saveConversation = async () => {
   let messageTitle = document.getElementById('message_title').innerText;

@@ -43,7 +43,7 @@
   }
 }
 
-#gpt-chat-container {
+#gpt-chat-container, .chat-bubble-container {
   display: flex;
   flex-direction: column;
   flex: 1;

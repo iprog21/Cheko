@@ -170,5 +170,6 @@ Rails.application.routes.draw do
   post '/gpt3/update_conversation' => 'gpt3#update_conversation'
   post '/gpt3/save_conversation' => 'gpt3#save_conversation'
   post '/gpt3/generate_v2' => 'gpt3#generate_v2'
+  post '/gpt3/generate_v3' => 'gpt3#generate_v3'
   get '/gpt3/render_better_answer_bubble' => 'gpt3#render_better_answer_bubble'
 end
