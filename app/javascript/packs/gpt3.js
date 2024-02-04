@@ -236,7 +236,7 @@ const generateText = async (prompt, index, is_rewrite, current_result) => {
   autoScroll();
 
   showRelatedQuestions(convoContainer,related_question_data);
-  relatedList.push({prompt: prompt, results: source_data});
+  relatedList.push({prompt: prompt, results: related_question_data});
   autoScroll();
 
   document.querySelector("textarea#prompt").disabled=false;
