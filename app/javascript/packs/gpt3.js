@@ -14,7 +14,6 @@ let autoScrollMaxCount = 30000;
  *
  * sender: "user" | "cheko"
  */
-
 function createChatBubble(content, sender) {
   const chatBubble = document.createElement("div");
   chatBubble.className =
@@ -66,18 +65,6 @@ function createChatBubble(content, sender) {
     return bubbleContainer;
   } else {
     return chatBubble;
-  }
-}
-
-function renderSources () {
-
-}
-
-function old_autoScroll() {
-  autoScrollCount += 2000;
-  if (autoScrollCount <= autoScrollMaxCount) {
-    document.getElementById('auto-scroll-anchor').scrollIntoView({ behavior: "smooth" });
-    setTimeout(() => autoScroll(), 2000);
   }
 }
 
@@ -162,16 +149,23 @@ const humanizeText = async(prompt, element) => {
   autoScroll();
 }
 
-const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
+const generateText = async (prompt, index) => {
 
   promptsCount++; // Increase prompt count
   autoScrollCount = 0;
   // Utils:
-  const chatContainer = document.getElementById("gpt-chat-container");
-  const bubbleContainer = document.createElement("div");
-  bubbleContainer.classList.add('chat-bubble-container', 'convo-container-' +userMessages.length);
-  chatContainer.appendChild(bubbleContainer);
-  const convoContainer = $('.convo-container-' +userMessages.length)
+  let convoContainer = null;
+  if (index != null) {
+    convoContainer = $('.convo-container-' + index);
+    convoContainer.html('');
+  } else {
+    const chatContainer = document.getElementById("gpt-chat-container");
+    const bubbleContainer = document.createElement("div");
+    bubbleContainer.classList.add('chat-bubble-container', 'convo-container-' +userMessages.length);
+    chatContainer.appendChild(bubbleContainer);
+    convoContainer = $('.convo-container-' +userMessages.length);
+    convoContainer.data('index', userMessages.length);
+  }
 
 
   // 1. Start requesting: Clear Chatbox, Disable Button, Play Loading Animation
@@ -211,7 +205,11 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   let source_data = json.sources;
   let related_question_data = json.related_questions;
   $('#cheko-loading-bubble').remove();
-  assistantMessages.push(content_data.generated_text);
+  if (index != null) {
+    assistantMessages[index] = content_data.generated_text;
+  } else {
+    assistantMessages.push(content_data.generated_text);
+  }
   autoScroll();
   // -- Event Log --
   window.LOG_EVENTS.logSubmitPrompt(
@@ -227,28 +225,12 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
 
   // 4. Maintain a string record of the current dialogue between the user and the chatbot.
   currentDialogue = content_data.new_dialogue;
-  const titleContainer = document.createElement("div"); // Holds the title and icon
-  titleContainer.classList.add('pb-2')
-  titleContainer.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-align-left"></i> Answer </span>';
-  convoContainer.append(titleContainer);
-
-  // 5. Get response and add as a chat bubble:
-  const chekoResponse = content_data.generated_text
-    .split("\n")
-    .map((t) => `${t}`)
-    .join("");
-  convoContainer.append(createChatBubble(chekoResponse, "cheko"));
+  showAnswer(convoContainer, content_data.generated_text)
   autoScroll();
 
   showRelatedQuestions(convoContainer,related_question_data);
   relatedList.push({prompt: prompt, results: source_data});
   autoScroll();
-
-  setTimeout(() => {
-    run(url, prompt, chatContainer, relatedDiv);
-    setLoading(false); // loading animation
-    autoScroll();
-  }, 2000);
 
   document.querySelector("textarea#prompt").disabled=false;
 
@@ -256,76 +238,6 @@ const generateText = async (prompt, humanizeOrNot, citationOrNot) => {
   autoScroll();
 };
 
-async function fetchData(url) {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error("HTTP error " + response.status);
-  }
-  return response.json();
-}
-
-async function scrapeQuestion(url, prompt) {
-  try {
-    const data = await fetchData(url);
-    const results = data.items.slice(0, 4).map((item) => {
-      const title = item.title;
-      const link = item.link;
-      const faviconUrl = `https://www.google.com/s2/favicons?domain=${new URL(link).hostname}`;
-      return { title, link, faviconUrl };
-    });
-
-    sourceList.push({prompt: prompt, results: results});
-
-    const mainContainer = document.createElement("div"); // Holds the title and source boxes
-    const titleContainer = document.createElement("div"); // Holds the title and icon
-    const sourcesContainer = document.createElement("div"); // Holds the source boxes
-
-    mainContainer.classList.add('flex', 'flex-col', 'pb-4');
-    mainContainer.style.maxWidth = '75%';
-    titleContainer.classList.add('pt-4', 'pb-2');
-
-    titleContainer.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-list-ul" style="color: #ffffff;"></i> Sources </span>';
-    mainContainer.appendChild(titleContainer);
-
-    sourcesContainer.classList.add('flex', 'flex-row', 'justify-between');
-
-    results.forEach(result => {
-      const div = document.createElement("div");
-      div.classList.add('source-box')
-
-      const iconDiv = document.createElement("div");
-      iconDiv.classList.add('flex', 'flex-row');
-
-
-      const sourceImg = document.createElement("img");
-      const sourceLink = document.createElement("a");
-
-      sourceLink.classList.add('source-link');
-      sourceLink.href = result.link;
-      sourceLink.textContent = result.title;
-      sourceLink.setAttribute('target', '_blank');
-
-      sourceImg.src = result.faviconUrl;
-
-      sourceImg.classList.add('size-5');
-
-      iconDiv.appendChild(sourceImg);
-
-      div.appendChild(sourceLink);
-      div.appendChild(iconDiv);
-
-      sourcesContainer.appendChild(div);
-
-      updateConversation();
-    });
-
-    mainContainer.appendChild(sourcesContainer);
-    return mainContainer;
-
-  } catch (error) {
-    console.log("There was a problem fetching the data: " + error.message);
-  }
-}
 
 function checkForEmptyAndNotRelatedQuestion(response, prompt) {
   console.log(response);
@@ -344,16 +256,19 @@ function checkForEmptyAndNotRelatedQuestion(response, prompt) {
   return related_questions;
 }
 
-async function run(url, prompt, chatContainer, relatedDiv) {
-  scrapeQuestion(url, prompt).then(container => {
-    chatContainer.appendChild(container);
-  });
+function showAnswer(container_element, generated_text) {
+  const titleContainer = document.createElement("div"); // Holds the title and icon
+  titleContainer.classList.add('pb-2')
+  titleContainer.innerHTML = '<span class="title-header text-xl font-extrabold"><i class="fa-solid fa-align-left"></i> Answer </span>';
+  container_element.append(titleContainer);
 
-  setTimeout(() => {
-    chatContainer.appendChild(relatedDiv);
-  }, 1000);
-
-};
+  // 5. Get response and add as a chat bubble:
+  const chekoResponse = generated_text
+    .split("\n")
+    .map((t) => `${t}`)
+    .join("");
+  container_element.append(createChatBubble(chekoResponse, "cheko"));
+}
 
 function showLoadingBubble(container_element) {
   container_element.append('<div class="bg-new-cheko text-white border-0 text-md font-semibold" id="cheko-loading-bubble">\n' +
@@ -551,6 +466,19 @@ function addNewSideMenuConvoItem() {
   conversationListContainer.prepend(convoLink);
 }
 
+function rewritePrompt() {
+  let edit_prompt_container = $('.edit_prompt_container');
+  let prompt = edit_prompt_container.find('#edit-prompt').val();
+  let index = $('#edit_prompt_index_id').val();
+  generateText(prompt, index)
+  $('.edit_prompt_container').addClass('hidden');
+
+  setTimeout(() => {
+    edit_prompt_container.find('#edit-prompt').val('');
+    $('#edit_prompt_index_id').val(0);
+  }, 1500);
+}
+
 // -- Submit Event Listener --
 const promptArea = document.querySelector("textarea#prompt");
 
@@ -617,19 +545,19 @@ saveConversationBtn.addEventListener("click", function (e) {
 
 document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
-  generateText(document.querySelector("textarea#prompt").value, false);
+  generateText(document.querySelector("textarea#prompt").value);
 });
 
 // -- Sample Question Button --
 $('body').on('click', '.sample-question', function() {
   const divText = $(this).text();
-  generateText(divText, false);
+  generateText(divText);
 });
 
 // -- Related Question Button --
 $('body').on('click', '.related-question', function() {
   const divText = $(this).text();
-  generateText(divText, false);
+  generateText(divText);
 });
 
 // -- Humanize Button --
@@ -648,6 +576,40 @@ $('body').on('click', '.copy-btn', function() {
     console.error('Failed to copy');
     /* Rejected - text failed to copy to the clipboard */
   });
+});
+
+
+// -- Edit Button --
+$('body').on('click', '.edit-btn', function() {
+  let index = $(this).parent().parent().parent().parent().data('index');
+  let prompt = $(this).parent().parent().parent().parent().find('.chat-bubble-user').text();
+  let edit_prompt_container = $('.edit_prompt_container');
+  edit_prompt_container.find('#edit-prompt').val(prompt);
+  $('#edit_prompt_index_id').val(index);
+  $('.edit_prompt_container').removeClass('hidden');
+
+  edit_prompt_container.find('#edit-prompt').focus();
+});
+
+// -- Cancel Edit Button --
+$('body').on('click', '#edit_cancel_btn', function() {
+  let edit_prompt_container = $('.edit_prompt_container');
+  edit_prompt_container.find('#edit-prompt').val('');
+  $('#edit_prompt_index_id').val(0);
+  $('.edit_prompt_container').addClass('hidden');
+});
+
+// -- Save Edit Button / Enter Key --
+$('body').on('click', '#edit_save_btn', function() {
+  rewritePrompt();
+});
+$('body').on('keydown', '#edit-prompt', function(e) {
+  const keyCode = e.which || e.keyCode;
+
+  // 13 represents the Enter key
+  if (keyCode === 13 && !e.shiftKey) {
+    rewritePrompt();
+  }
 });
 
 // -- Citation Button --

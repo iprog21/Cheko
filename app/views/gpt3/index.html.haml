@@ -48,10 +48,19 @@
               %button.cheko-text-1.rounded-full.bg-content-cheko.border-1.cheko-border-color-1.px-2.py-1.sample-question
                 %i.fa-solid.fa-franc-sign.text-gray-600
                 What is the meaning of "bonjour"?
+            %div.edit_prompt_container.my-2.hidden
+              .flex.items-center.pr-3.rounded-full.bg-new-cheko.border-1.cheko-border-color-1
+                %textarea#edit-prompt.block.mx-4.w-full.text-sm.bg-new-cheko.cheko-text-1.rounded-full.resize-none.border-0.focus:ring-transparent.focus:border-0{class: "p-2.5", placeholder: "Ask Cheko AI..", rows: "1"}
+                %input#edit_prompt_index_id{name: "edit_prompt_index_id", type: "hidden"}/
+              .flex.justify-end.mt-2.gap-x-2
+                %button#edit_cancel_btn.inline-flex.justify-center.px-4.py-1.bg-gray-300.cheko-text-color-2.rounded-full.cursor-pointer.hover:bg-blue-100
+                  Cancel
+                %button#edit_save_btn.inline-flex.justify-center.px-4.py-1.bg-blue-300.cheko-text-color-2.rounded-full.cursor-pointer.hover:bg-blue-100
+                  Save
             - if @conversation.present?
               - assistant_messages = @conversation.assistant_messages
               - @conversation.user_messages.each_with_index do |user_message, index|
-                %div.chat-bubble-container{class: "convo-container-#{index}"}
+                %div.chat-bubble-container{class: "convo-container-#{index}", 'data-index': index}
                   .chat-bubble-user.bg-new-cheko.text-white.border-0.text-base.font-semibold
                     = user_message
                   - if assistant_messages && assistant_messages[index]
