@@ -163,13 +163,10 @@ Rails.application.routes.draw do
   end
   get '/cheko-ai' => 'gpt3#index'
   post '/gpt3/generate' => 'gpt3#generate'
-  post '/gpt3/generate_sources' => 'gpt3#generate_sources'
-  post '/gpt3/generate_related' => 'gpt3#generate_related'
+  post '/gpt3/rewrite' => 'gpt3#rewrite'
   post '/gpt3/humanize' => 'gpt3#humanize'
   post '/gpt3/update_title' => 'gpt3#update_title'
   post '/gpt3/update_conversation' => 'gpt3#update_conversation'
   post '/gpt3/save_conversation' => 'gpt3#save_conversation'
-  post '/gpt3/generate_v2' => 'gpt3#generate_v2'
-  post '/gpt3/generate_v3' => 'gpt3#generate_v3'
   get '/gpt3/render_better_answer_bubble' => 'gpt3#render_better_answer_bubble'
 end

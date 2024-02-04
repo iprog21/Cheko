@@ -3,110 +3,6 @@ require 'net/http'
 
 class Gpt3Controller < ApplicationController
 
-  def generate_sources
-    initialDialogue = [
-      { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
-      { role: "assistant", content: "Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!"},
-    ]
-
-    sample_format = '[{title: "How I\'m Stepping Out on a Limb and Branding With Bold Stickers", site_url: "https://www.nytimes.com", favicon_url: "https://www.nytimes.com/favicon.ico" site_name: "NY Times"}, {title: "How I\'m Stepping Out on a Limb and Branding With Bold Stickers", site_url: "https://www.nytimes.com", favicon_url: "https://www.nytimes.com/favicon.ico" site_name: "NY Times"}]'
-    prompt = {role: "user", content: "Can you give me 5 google search result not the same website wit this prompt: #{params[:prompt]} with json format name of site, url, favicon url and title. Here an example format: #{sample_format} "}
-
-    currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
-
-    response = Llm.go(prompts:currentDialogue,is_full_prompt: true)
-
-    generated_text = response.dig("choices", 0, "message", "content")
-    newDialogue = currentDialogue.concat([response.dig("choices", 0, "message")])
-
-    usage = {
-      completion_tokens: response.dig("usage", "completion_tokens"),
-      prompt_tokens: response.dig("usage", "prompt_tokens"),
-      total_tokens: response.dig("usage", "total_tokens"),
-      model: response.dig("model")
-    }
-
-    generated_text.split(/^.[\n\d\.]/)
-
-    render json: { generated_text: generated_text.split("\n\n"), new_dialogue: newDialogue, usage: usage}
-  end
-
-  def generate_related
-    initialDialogue = [
-      { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
-      { role: "assistant", content: "Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!"},
-    ]
-
-    prompt = {role: "user", content: params[:prompt]}
-
-    currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
-
-    response = Llm.go(prompts:currentDialogue,is_full_prompt: true)
-
-    generated_text = response.dig("choices", 0, "message", "content")
-    newDialogue = currentDialogue.concat([response.dig("choices", 0, "message")])
-
-    usage = {
-      completion_tokens: response.dig("usage", "completion_tokens"),
-      prompt_tokens: response.dig("usage", "prompt_tokens"),
-      total_tokens: response.dig("usage", "total_tokens"),
-      model: response.dig("model")
-    }
-
-    render json: { generated_text: generated_text, new_dialogue: newDialogue, usage: usage}
-  end
-
-  def generate
-
-    start_writing_prompt = "Generate a conversation with ChatGPT where a student seeks advice on completing homework efficiently. The conversation should cover time management techniques, effective study habits, and tips for staying focused. Include prompts for practical solutions and actionable steps that the student can implement to finish their homework quickly while maintaining academic integrity and understanding of the material. Show complete results"
-
-    # 1. Default
-    max_count_of_retries = 3
-    retry_count = 0
-    begin
-      initialDialogue = [
-        { role: "system", content: "The following is a conversation with an AI Writing Assistant called 'Cheko' that helps students do their homework, save time, and graduate. The assistant is helpful, creative, clever, informative, complete and very friendly. Cheko started in 2019 when a college student wanted to improve students’ lives." },
-        { role: "assistant", content: "Hello! I'm Cheko, an AI-powered writing assistant to help you finish your homework fast!"},
-        { role:"user", content:start_writing_prompt }
-      ]
-
-      section_content = Llm.go(prompts:initialDialogue)
-      initialDialogue.append({role:"assistant",content:section_content})
-
-      # 2. Turn prompt into a message object
-      prompt = {role: "user", content: params[:prompt]}
-      initialDialogue.append(prompt)
-
-      # 3. Initialize/Extend currentDialogue
-      # currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])
-
-      # 4. REQUEST via PERPLEXITY.AI API
-      response = Llm.go(prompts:initialDialogue,is_full_prompt: true)
-
-      # 5. Process OpenAI RESPONSE / PERLEXITY.AI RESPONSE
-      generated_text = response.dig("choices", 0, "message", "content")
-
-      newDialogue = initialDialogue.concat([response.dig("choices", 0, "message")])
-
-      raise StandardError if generated_text.include?('cheko') || generated_text.include?('Cheko')
-
-      usage = {
-        completion_tokens: response.dig("usage", "completion_tokens"),
-        prompt_tokens: response.dig("usage", "prompt_tokens"),
-        total_tokens: response.dig("usage", "total_tokens"),
-        model: response.dig("model")
-      }
-
-      render json: { generated_text: generated_text, new_dialogue: newDialogue, usage: usage}
-    rescue => e
-      puts e
-      retry_count += 1
-      if retry_count <= max_count_of_retries
-        retry
-      end
-    end
-  end
-
   def humanize
     if params[:prompt]
       start_writing_prompt = "Generate a conversation with ChatGPT where a student seeks advice on completing homework efficiently. The conversation should cover time management techniques, effective study habits, and tips for staying focused. Include prompts for practical solutions and actionable steps that the student can implement to finish their homework quickly while maintaining academic integrity and understanding of the material. Show complete results. Compose this reply adopting a writing style akin to that of a college student. Achieve a harmonious blend of relatability and sophistication to seamlessly integrate it into the tone of a college paper or assignment."
@@ -139,34 +35,14 @@ class Gpt3Controller < ApplicationController
     end
   end
 
-  def generate_v2
-    max_retry = 10
-    num_retry = 0
-    before_start_task_count_num = Octoparse.get_non_exported_data[:data_size]
-
-    begin
-      Octoparse.start_task(params[:prompt])
-      exported_data = Octoparse.get_non_exported_data
-      puts "generated_text:: #{exported_data[:text]}"
-      if exported_data[:data_size] > before_start_task_count_num
-        render json: { generated_text: exported_data[:text]}
-        return
-      else
-        raise StandardError.new("task is not finish")
-      end
-    rescue StandardError => e
-      num_retry +=1
-      if num_retry == max_retry
-        render json: { generated_text: "Server Timeout error."}
-        return
-      end
-      sleep 5
-      retry
-    end
+  def generate
+    content = generate_answer(params)
+    serp_results = Serp.search(params[:prompt])
+    render json: {content: content, sources: serp_results[0], related_questions: serp_results[1]}
   end
 
-  def generate_v3
-    content = generate_answer(params)
+  def rewrite
+    content = generate_answer(params, true)
     serp_results = Serp.search(params[:prompt])
     render json: {content: content, sources: serp_results[0], related_questions: serp_results[1]}
   end
@@ -267,7 +143,7 @@ class Gpt3Controller < ApplicationController
     end
   end
 
-  def generate_answer(params)
+  def generate_answer(params, rewrite=false)
 
     start_writing_prompt = "Generate a conversation with ChatGPT where a student seeks advice on completing homework efficiently. The conversation should cover time management techniques, effective study habits, and tips for staying focused. Include prompts for practical solutions and actionable steps that the student can implement to finish their homework quickly while maintaining academic integrity and understanding of the material. Show complete results"
 
@@ -287,6 +163,11 @@ class Gpt3Controller < ApplicationController
       # 2. Turn prompt into a message object
       prompt = {role: "user", content: params[:prompt]}
       initialDialogue.append(prompt)
+
+      if rewrite
+        initialDialogue.append({role:"assistant",content:params[:current_result]})
+        initialDialogue.append({role:"user",content:"please show different result for this prompt: #{params[:prompt]}"})
+      end
 
       # 3. Initialize/Extend currentDialogue
       # currentDialogue = params[:currentDialogue].nil? ? initialDialogue.concat([prompt]) : params[:currentDialogue].concat([prompt])

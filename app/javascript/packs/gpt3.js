@@ -149,7 +149,7 @@ const humanizeText = async(prompt, element) => {
   autoScroll();
 }
 
-const generateText = async (prompt, index) => {
+const generateText = async (prompt, index, is_rewrite, current_result) => {
 
   promptsCount++; // Increase prompt count
   autoScrollCount = 0;
@@ -185,14 +185,21 @@ const generateText = async (prompt, index) => {
 
   // 3. Send Prompt to Controller:
   let response;
+  let generate_url = '/gpt3/generate';
+  let generate_body = JSON.stringify({ prompt, currentDialogue });
+
+  if (is_rewrite) {
+    generate_url = '/gpt3/rewrite';
+    generate_body = JSON.stringify({ prompt, current_result, currentDialogue })
+  }
 
   try {
-    response = await fetch("/gpt3/generate_v3", {
+    response = await fetch(generate_url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt, currentDialogue }),
+      body: generate_body,
     });
 
   } catch (e) {
@@ -466,7 +473,7 @@ function addNewSideMenuConvoItem() {
   conversationListContainer.prepend(convoLink);
 }
 
-function rewritePrompt() {
+function updatePromptAndGenerateMessage() {
   let edit_prompt_container = $('.edit_prompt_container');
   let prompt = edit_prompt_container.find('#edit-prompt').val();
   let index = $('#edit_prompt_index_id').val();
@@ -578,6 +585,13 @@ $('body').on('click', '.copy-btn', function() {
   });
 });
 
+// -- Rewrite Button --
+$('body').on('click', '.rewrite-btn', function() {
+  let index = $(this).parent().parent().parent().parent().data('index');
+  let prompt = $(this).parent().parent().parent().parent().find('.chat-bubble-user').text();
+  let current_result = $(this).parent().parent().parent().parent().find('.chat-bubble-cheko').text();
+  generateText(prompt, index, true, current_result);
+});
 
 // -- Edit Button --
 $('body').on('click', '.edit-btn', function() {
@@ -601,14 +615,14 @@ $('body').on('click', '#edit_cancel_btn', function() {
 
 // -- Save Edit Button / Enter Key --
 $('body').on('click', '#edit_save_btn', function() {
-  rewritePrompt();
+  updatePromptAndGenerateMessage();
 });
 $('body').on('keydown', '#edit-prompt', function(e) {
   const keyCode = e.which || e.keyCode;
 
   // 13 represents the Enter key
   if (keyCode === 13 && !e.shiftKey) {
-    rewritePrompt();
+    updatePromptAndGenerateMessage();
   }
 });
 
