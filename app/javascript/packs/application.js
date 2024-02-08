@@ -26,6 +26,7 @@ import { Tooltip, Popover } from "bootstrap";
 // For ANALYTICS
 import "../src/firebase";
 
+
 // The stylesheet location we created earlier
 require("../stylesheets/application.scss");
 

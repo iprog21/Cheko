@@ -14,6 +14,8 @@ let autoScrollMaxCount = 30000;
  *
  * sender: "user" | "cheko"
  */
+import Typed from 'typed.js';
+
 function createChatBubble(content, sender) {
   const chatBubble = document.createElement("div");
   chatBubble.className =
@@ -279,8 +281,13 @@ function showAnswer(container_element, generated_text) {
 
 function showLoadingBubble(container_element) {
   container_element.append('<div class="bg-new-cheko text-white border-0 text-md font-semibold" id="cheko-loading-bubble">\n' +
-    '      <div class="loading-icon"><span></span><span></span><span></span></div>\n' +
-    '    </div>')
+    '      <div class="loading-text inline"></div>' +
+    '    </div>');
+  new Typed('.loading-text', {
+    strings: ["Searching web...", "Checking for sources...", "Looking for related questions...", "Summarizing answers..."],
+    typeSpeed: 50,
+    loop: true
+  });
 }
 
 function showSource(container_element, sources) {

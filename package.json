@@ -22,7 +22,8 @@
     "node-sass": "^8.0.0",
     "popper.js": "^1.16.1",
     "sweetalert2": "^11.4.18",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "typed.js": "^2.1.0"
   },
   "version": "0.1.0",
   "devDependencies": {
