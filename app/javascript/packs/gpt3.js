@@ -33,7 +33,7 @@ function createChatBubble(content, sender) {
     buttonsContainer.classList.add('flex', 'flex-row', 'justify-between');
 
     const rewriteHumanizeDiv = document.createElement("div");
-    const copyEditButton = document.createElement("dev");
+    const copyEditButton = document.createElement("div");
 
     const rewriteButton = document.createElement("button");
     rewriteButton.classList.add('chat-button', 'rewrite-btn');
@@ -45,8 +45,12 @@ function createChatBubble(content, sender) {
     humanizeButton.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="color: #ffffff;"></i> Humanize';
 
     const copyButton = document.createElement("button");
-    copyButton.classList.add('chat-button', 'cheko-text-1', 'copy-btn');
+    copyButton.classList.add('chat-button', 'cheko-text-1', 'coooooopy-btn');
+    copyButton.setAttribute('id','copy-btn');
+    copyButton.setAttribute('data-tooltip-target', 'copy-btn-tooltip');
+    copyButton.setAttribute('data-tooltip-trigger', 'click');
     copyButton.innerHTML = '<i class="fa-solid fa-copy cheko-text-1" ></i>';
+
 
     const editButton = document.createElement("button");
     editButton.classList.add('chat-button', 'pl-2', 'cheko-text-1', 'edit-btn');

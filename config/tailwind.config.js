@@ -1,6 +1,7 @@
 module.exports = {
   important: true,
   content: [
+    "./node_modules/flowbite/**/*.js",
     "./public/*.html",
     "./app/helpers/**/*.rb",
     "./app/javascript/**/*.js",
@@ -28,5 +29,6 @@ module.exports = {
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
+    require('flowbite/plugin'),
   ],
 };
