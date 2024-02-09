@@ -20,7 +20,7 @@ function createChatBubble(content, sender) {
   const chatBubble = document.createElement("div");
   chatBubble.className =
     sender === "user" ? "chat-bubble-user" : "chat-bubble-cheko";
-  chatBubble.classList.add("bg-new-cheko", "text-white", "border-0", "text-base", "font-semibold");
+  chatBubble.classList.add("bg-new-cheko", "text-white", "border-0", "text-base");
 
   sender === "user" ? chatBubble.innerHTML = content : typewriterEffect(chatBubble, content);
 
@@ -77,13 +77,16 @@ function autoScroll() {
 }
 
 function typewriterEffect(element, content, i = 0) {
-  element.innerHTML += content[i];
 
-  if (i === content.length - 1) {
-    return;
-  }
-
-  setTimeout(() => typewriterEffect(element, content, i + 1), 10);
+  new Typed(element, {
+    strings: [content],
+    typeSpeed: 10
+  });
+  // element.innerHTML += content[i];
+  // if (i === content.length - 1) {
+  //   return;
+  // }
+  // setTimeout(() => typewriterEffect(element, content, i + 1), 10);
 }
 
 const humanizeText = async(prompt, element) => {
@@ -234,7 +237,7 @@ const generateText = async (prompt, index, is_rewrite, current_result) => {
 
   // 4. Maintain a string record of the current dialogue between the user and the chatbot.
   currentDialogue = content_data.new_dialogue;
-  showAnswer(convoContainer, content_data.generated_text)
+  showAnswer(convoContainer, content_data.markdown_text)
   autoScroll();
 
   showRelatedQuestions(convoContainer,related_question_data);

@@ -61,7 +61,7 @@
               - assistant_messages = @conversation.assistant_messages
               - @conversation.user_messages.each_with_index do |user_message, index|
                 %div.chat-bubble-container{class: "convo-container-#{index}", 'data-index': index}
-                  .chat-bubble-user.bg-new-cheko.text-white.border-0.text-base.font-semibold
+                  .chat-bubble-user.bg-new-cheko.text-white.border-0.text-base
                     = user_message
                   - if assistant_messages && assistant_messages[index]
                     - source_list = @sources.where(prompt_title: user_message).first

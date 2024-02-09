@@ -31,7 +31,7 @@ class Gpt3Controller < ApplicationController
         model: response.dig("model")
       }
 
-      render json: { generated_text: generated_text, new_dialogue: newDialogue, usage: usage}
+      render json: {markdown_text: Conversation.markdown_to_html(generated_text), generated_text: generated_text, new_dialogue: newDialogue, usage: usage}
     end
   end
 
@@ -189,7 +189,7 @@ class Gpt3Controller < ApplicationController
         model: response.dig("model")
       }
 
-      return { generated_text: generated_text, new_dialogue: newDialogue, usage: usage}
+      return { markdown_text: Conversation.markdown_to_html(generated_text), generated_text: generated_text, new_dialogue: newDialogue, usage: usage}
     rescue => e
       puts e
       retry_count += 1
