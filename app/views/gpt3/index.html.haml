@@ -43,6 +43,10 @@
             %div
               %span.cheko-text-1 Try Cheko AI ->
               %button.cheko-text-1.rounded-full.bg-content-cheko.border-1.cheko-border-color-1.px-2.py-1.sample-question
+                %i.fa-solid.fa-newspaper.text-white
+                What is the biggest headline for
+                = "#{Time.now.strftime('%B %e, %Y')}?"
+              %button.cheko-text-1.rounded-full.bg-content-cheko.border-1.cheko-border-color-1.px-2.py-1.sample-question
                 %i.fa-solid.fa-apple-whole.text-red-600
                 Who invented gravity?
               %button.cheko-text-1.rounded-full.bg-content-cheko.border-1.cheko-border-color-1.px-2.py-1.sample-question
@@ -51,7 +55,7 @@
             %div.edit_prompt_container.my-2.hidden
               .flex.items-center.pr-3.rounded-full.bg-new-cheko.border-1.cheko-border-color-1
                 %textarea#edit-prompt.block.mx-4.w-full.text-sm.bg-new-cheko.cheko-text-1.rounded-full.resize-none.border-0.focus:ring-transparent.focus:border-0{class: "p-2.5", placeholder: "Ask Cheko AI..", rows: "1"}
-                %input#edit_prompt_index_id{name: "edit_prompt_index_id", type: "hidden"}/
+                %input#edit_pr ompt_index_id{name: "edit_prompt_index_id", type: "hidden"}/
               .flex.justify-end.mt-2.gap-x-2
                 %button#edit_cancel_btn.inline-flex.justify-center.px-4.py-1.bg-gray-300.cheko-text-color-2.rounded-full.cursor-pointer.hover:bg-blue-100
                   Cancel
@@ -72,8 +76,11 @@
                             %i.fa-solid.fa-list-ul{style: "color: #ffffff;"}
                             Sources
                         .flex.flex-row.justify-between.gap-x-2
-                          - source_list.result.each do |source|
-                            - if source['position'] >= 5
+                          - source_list.result.each_with_index do |source, index|
+                            - position = index+1
+                            - if source['position'].present?
+                              - position = source['position']
+                            - if position >= 5
                               - break
                             %a.rounded-md.flex.w-full.ring-borderMain.bg-new-cheko.text-white.p-2{href: source['link'], target: "_blank"}
                               .relative.z-10.flex.items.max-w-full.flex-col.justify-between.h-full.pointer-events-none.select-none.px-sm.pt-sm.pb-xs
@@ -84,12 +91,12 @@
                                   .flex.items-center.gap-x-xs.ring-borderMain.dark:ring-borderMainDark.bg-transparent{class: "border-borderMain/60 dark:border-borderMainDark/80 divide-borderMain/60 dark:divide-borderMainDark/80"}
                                     .relative.flex-none
                                       .rounded-full.overflow-hidden
-                                        %img.block{alt: "#{source['title']} favicon", height: "16", src: source['favicon'], width: "16"}/
+                                        %img.block{alt: "#{source['title']} favicon", height: "16", src: source['favicon'] || source['faviconUrl'], width: "16"}/
                                     .duration-300.transition-all.line-clamp-1.break-all.light.font-sans.text-xs.ml-1.font-medium.text-textOff.dark:text-textOffDark.selection:bg-superDuper.selection:text-textMain
                                       = ConversationSource.site_name(source['link'])
                                   %h2.text-gray-500.mx-1.light.font-display.text-lg.font-medium.text-textOff.dark:text-textOffDark.selection:bg-superDuper.selection:text-textMain ·
                                   .light.font-sans.text-xs.font-medium.text-textOff.dark:text-textOffDark.selection:bg-superDuper.selection:text-textMain
-                                    = source['position']
+                                    = position
                     .pb-2.chat-bubble-content
                       %span.title-header.text-xl.font-extrabold
                         %i.fa-solid.fa-align-left
@@ -122,7 +129,7 @@
                           - if index >= 3
                             - break
                           %a.related-question.cheko-border-color-1{href: related['link'], target: "_blank"}
-                            = related['question'] || related['title']
+                            = related['question'] || related['title'] || related
                             %i.fa-solid.fa-plus{style: "color: #ffffff;"}
 
           -# Loading animation (enabled/disabled when prompting)
