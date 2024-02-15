@@ -5,6 +5,60 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'roo'
+
+if ENV['prof_review'] == "true"
+  puts "\n --- PROF_REVIEW okay desuwa ---\n"
+  file_name = './db/cheko_prof5.xlsx'
+  excel = Roo::Spreadsheet.open(file_name, {:expand_merged_ranges => true})
+
+  sheets = excel.sheets
+  sheets.shift
+
+  prof_ids = []
+  sheets.each_with_index do |sheet, index|
+
+    parsed = excel.sheet(sheet).parse(headers: true)
+
+    parsed.each_with_index do |parse, index|
+      next if index == 0
+
+      if parse['professor_id'] == nil && parse['first_name'] != nil
+        if Professor.where(first_name: parse['first_name'])
+          prof = Professor.where(first_name: parse['first_name']).first
+          prof_ids.insert(0, prof.id)
+          puts "\n --- skip ---\n" 
+          next
+        end
+        
+        school = School.find_by(name: "Ateneo de Manila University")
+        puts "\n --- creating professor desuwa ---\n" 
+        Professor.create(['first_name' => parse['first_name'], 'last_name' => parse['last_name'], 'school_id' => school.id])
+      else
+        if ProfReview.where(content: parse['content']).first
+          rev = ProfReview.where(content: parse['content']).first
+          rev.update(user_initials: parse['user_id'])
+          prof_ids.insert(0, rev.professor_id)
+          puts "\n --- skip ---\n" 
+          next
+        end
+
+        puts "\n --- inserting prof review desuwa" + parse['professor_id'].to_s + " ---\n" 
+        parse.delete("Facebook link")
+        parse.delete("user_id")
+        parse.delete("subject/s")
+  
+        rev = ProfReview.create(parse)
+        prof_ids.insert(0, rev.professor_id)
+      end
+    end
+  end
+
+
+  Professor.all.each do |prof|
+    prof.update_grading
+  end
+end
 
 subjects = [
   {name: "English", status: 1},
@@ -77,4 +131,3 @@ if Admin.all.count == 0
   )
 end
 puts "\n --- admin seeder desuwa --- \n"
-

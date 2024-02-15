@@ -1,5 +1,5 @@
 class ProfReview < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :professor, optional: true
   belongs_to :school, optional: true
   

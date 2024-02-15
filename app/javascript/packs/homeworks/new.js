@@ -130,7 +130,7 @@ if ($('#homework_words').length){
     $('#testEstimate').html( '₱' + new_price )
   })
 } else {
-  var def_price = parseFloat(1000);
+  var def_price = parseFloat(500);
   new_price = def_price
   prio = ( .30 * def_price);
   $('#testEstimate').html( '₱' + new_price )

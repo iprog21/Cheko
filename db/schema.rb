@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 2024_01_27_222741) do
     t.string "subject"
     t.string "school_name"
     t.integer "additional_metric_grade"
+    t.string "user_initials"
   end
 
   create_table "professors", force: :cascade do |t|
